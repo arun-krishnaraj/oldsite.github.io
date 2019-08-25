@@ -3,7 +3,7 @@ main:
   - title: "About"
     url: /about/
   - title: "Data Science"
-    url: /datascience/
+    url: /data-science/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"

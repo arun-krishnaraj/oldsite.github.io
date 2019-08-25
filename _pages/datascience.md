@@ -1,4 +1,4 @@
 ---
 title: "Posts"
-permalink: /datascience/
+permalink: /data-science/
 ---
