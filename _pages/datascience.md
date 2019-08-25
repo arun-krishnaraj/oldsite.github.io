@@ -1,10 +1,9 @@
 ---
-layout: archives
+layout: archive
 permalink: /datascience/
-title: "Posts by Tags"
+title: "Data Science posts by tags"
 author_profile: true
 header:
-  image:
 ---
 
 {% include base_path %}
