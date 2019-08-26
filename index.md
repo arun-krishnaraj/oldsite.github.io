@@ -8,7 +8,7 @@ header:
   overlay_image: "/images/skyline.jpg"
   actions:
     - label: "Take a look around"
-      url: "https://github.com/mmistakes/minimal-mistakes/"
+      url: "/landing/"
 feature_row:
   - image_path: "/images/longhorn.jpg"
     alt: "placeholder image 1"
