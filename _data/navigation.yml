@@ -2,7 +2,7 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Data Science"
+  - title: "Posts"
     url: /machine-learning/
   # - title: "Sample Posts"
   #   url: /year-archive/

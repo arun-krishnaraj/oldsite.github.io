@@ -5,4 +5,10 @@ header:
   image:
 ---
 
-Blah blah
+I'm a junior at UT Austin studying Finance, Biology, and Math. This site is intended as a home for posts exploring a variety of topics, including statistics and data science, computational biology, and finance.
+
+### Course Work
+Below are some of the courses I've taken, organized by subject matter:
+* Multivariable Calculus, Probability I, Real Analysis
+* Biostatistics, Genetics, Evolution, Organic Chemistry I, Microbiology, Computational Biology I
+* Business Statistics, Statistics and Modeling for Finance, Business Finance, Investment Management, Financial Risk Management, Optimization Methods in Finance, Financial Analysis
