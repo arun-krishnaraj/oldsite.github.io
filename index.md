@@ -1,5 +1,5 @@
 ---
-title: Welcome to my site
+title: Welcome to the site
 layout: splash
 author_profile: true
 header:
@@ -7,19 +7,19 @@ header:
   overlay_filter: "0.5"
   overlay_image: "/images/skyline.jpg"
 feature_row:
-  - image_path: "/images/longhorn.jpg"
+  - image_path: "/images/bitcoin.jpg"
     alt: "placeholder image 1"
     title: "Posts"
     excerpt: "Digestible, educational, (hopefully) useful posts about data science and finance"
-  - image_path: "/images/longhorn.jpg"
+  - image_path: "/images/desk.jpg"
     alt: "placeholder image 2"
     title: "Open-Source"
-    excerpt: "I've made all code and data used available for use"
-  - image_path: "/images/longhorn.jpg"
+    excerpt: "Code is publicly available, data is available upon request"
+  - image_path: "/images/book.jpg"
     title: "Resources"
     excerpt: "Recommended material and content for further learning"
 ---
 
-### What can I look forward to?
+## What can I expect from this site?
 
 {% include feature_row %}
