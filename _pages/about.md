@@ -2,7 +2,7 @@
 title: "About"
 permalink: /about/
 header:
-  image: "/images/skyline"
+  image: "/images/skyline.jpg"
 ---
 
 I'm a junior at UT Austin studying Finance, Biology, and Math. This site is intended as a home for posts exploring a variety of topics, including statistics and data science, computational biology, and finance.
