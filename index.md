@@ -19,6 +19,7 @@ feature_row:
     title: "Resources"
     excerpt: "Recommended material and content for further learning"
 ---
-###What can I look forward to?
+
+### What can I look forward to?
 
 {% include feature_row %}
