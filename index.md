@@ -6,7 +6,6 @@ header:
   overlay_filter: "0.5"
   overlay_image: "/images/skyline.jpg"
   actions:
-    - label: "Download"
+    - label: "Download                                        "
       url: "https://github.com/mmistakes/minimal-mistakes/"
-  caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
