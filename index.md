@@ -32,3 +32,5 @@ feature_row:
 ## What's this site for?
 
 {% include feature_row %}
+
+### Pardon the dust, this site is being renovated :)a
