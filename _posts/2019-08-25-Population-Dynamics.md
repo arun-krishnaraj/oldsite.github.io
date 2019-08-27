@@ -2,6 +2,7 @@
 title: "Genetic Dynamics in Populations"
 date: 2019-08-18
 tags: [biology, evolution, excel]
+layout: single
 header:
   image: "/images/"
 excerpt: "Modeling gene frequency in populations"

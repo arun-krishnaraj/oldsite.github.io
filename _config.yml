@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "Arun Krishnaraj"
   avatar           : "/images/profile.jpg"
-  bio              : "A place for my thoughts"
+  bio              : "A personal site"
   location         : "Austin, TX"
   email            :
   links:
@@ -289,5 +289,5 @@ defaults:
       path: ""
       type: pages
     values:
-      layout: 
+      layout:
       author_profile: true

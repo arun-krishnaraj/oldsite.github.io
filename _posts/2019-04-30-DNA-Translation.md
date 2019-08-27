@@ -2,6 +2,7 @@
 title: "Computational Biology: Translation"
 date: 2019-04-30
 tags: [biology, python, applied data science]
+layout: single
 header:
   image: "/images/"
 excerpt: "Computational Biology, DNA Translation and Processing"
