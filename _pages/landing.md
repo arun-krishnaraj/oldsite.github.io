@@ -1,8 +1,8 @@
 ---
 title: "Home"
-layout: archive
+layout: splash
 permalink: "/landing/"
 author_profile: true
 header:
-  image: "/images/bridge.jpg"
+  overlay_image: "/images/bridge.jpg"
 ---
