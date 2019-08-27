@@ -277,7 +277,7 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: single
+      layout:
       author_profile: true
       read_time: true
       comments: # true
@@ -289,5 +289,5 @@ defaults:
       path: ""
       type: pages
     values:
-      layout: single
+      layout: 
       author_profile: true
