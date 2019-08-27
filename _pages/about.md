@@ -3,7 +3,7 @@ title: "About"
 permalink: /about/
 layout: splash
 header:
-  image: "/images/yy.jpg"
+  overlay_image: "/images/yy.jpg"
 
 ---
 
