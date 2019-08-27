@@ -21,3 +21,5 @@ feature_row:
 ---
 
 ## What can I expect from this site?
+
+{% include feature_row %}
