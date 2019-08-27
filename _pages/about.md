@@ -1,7 +1,8 @@
 ---
-title: "About"
+title: "Arun Krishnaraj- 
+About Me"
 permalink: /about/
-layout:
+layout: splash
 author_profile: true
 header:
   overlay_image: "/images/tt.jpg"
