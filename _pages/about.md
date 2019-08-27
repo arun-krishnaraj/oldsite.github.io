@@ -2,7 +2,7 @@
 title: "About"
 permalink: /about/
 header:
-  image: "/images/alt.jpg"
+  image: "/images/yy.jpg"
 
 ---
 
