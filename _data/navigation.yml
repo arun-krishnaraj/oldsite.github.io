@@ -4,6 +4,8 @@ main:
     url: /about/
   - title: "Posts"
     url: /landing/
+  - title: Resources
+    url: /reading/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
