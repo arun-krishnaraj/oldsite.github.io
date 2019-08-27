@@ -2,8 +2,6 @@
 main:
   - title: "About"
     url: /about/
-  - title: Resources
-    url: /reading-list/
   - title: "Posts"
     url: /landing/
   # - title: "Sample Posts"
