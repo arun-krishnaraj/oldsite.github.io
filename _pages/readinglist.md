@@ -1,6 +1,6 @@
 ---
 title: Resources
-permalink: /reading-list/
+permalink: /reading/
 layout: splash
   overlay_image: "/images/coffee.jpg"
 ---

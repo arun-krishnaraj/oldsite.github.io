@@ -24,7 +24,7 @@ feature_row:
   - image_path: "/images/book.jpg"
     title: "Resources"
     excerpt: "Recommended material and content for further learning"
-    url: /reading-list/
+    url: /reading/
     btn_label: "Resource list"
     btn_class: "btn--inverse"
 ---
@@ -33,4 +33,4 @@ feature_row:
 
 {% include feature_row %}
 
-### Pardon the dust, this site is being renovated :)a
+### Pardon the dust, this site is being renovated :)
