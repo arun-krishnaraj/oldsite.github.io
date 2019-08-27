@@ -11,7 +11,6 @@ feature_row:
     alt: "placeholder image 1"
     title: "Posts"
     excerpt: "Digestible, educational, (hopefully) useful posts about data science and finance"
-    {: .text-center}
     url: "/landing/"
     btn_label: "Read Posts"
     btn_class: "btn--inverse"
