@@ -3,7 +3,7 @@ title: "About"
 permalink: /about/
 layout: splash
 header:
-  overlay_image: "/images/skyline.jpg"
+  overlay_image: "/images/longhorn.jpg"
 ---
 
 I'm a junior at UT Austin studying Finance, Biology, and Math. This site is intended as a home for posts exploring my interests, including data science  and finance.
