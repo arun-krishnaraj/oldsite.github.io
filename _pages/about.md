@@ -1,11 +1,11 @@
 ---
-title: "Arun Krishnaraj- 
+title: "Arun Krishnaraj-
 About Me"
 permalink: /about/
 layout: splash
 author_profile: true
 header:
-  overlay_image: "/images/tt.jpg"
+  overlay_image: "/images/u.jpg"
 
 ---
 
