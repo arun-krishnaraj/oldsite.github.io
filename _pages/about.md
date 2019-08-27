@@ -1,9 +1,8 @@
 ---
 title: "About"
 permalink: /about/
-layout: splash
 header:
-  overlay_image: "/images/longhorn.jpg"
+  image: "/images/longhorn.jpg"
 
 ---
 
