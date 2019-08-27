@@ -1,7 +1,7 @@
 ---
 title: "About"
 permalink: /about/
-layout: splash
+layout:
 author_profile: true
 header:
   overlay_image: "/images/tt.jpg"
