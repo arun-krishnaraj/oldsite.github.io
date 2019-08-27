@@ -2,8 +2,9 @@
 title: "About"
 permalink: /about/
 layout: splash
+author_profile: true
 header:
-  overlay_image: "/images/yy.jpg"
+  overlay_image: "/images/tt.jpg"
 
 ---
 
