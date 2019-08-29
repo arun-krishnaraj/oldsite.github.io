@@ -81,7 +81,7 @@ By dividing each birth term by the sum of current birth terms, we can arrive at 
 
 By adding the stochastic term times the birth rate times the previous period's ending total population divided by 1000, we can find the stochastic birth change per genotype. Adding this term to the previous total population times the complex selection term times the corresponding allele probabilities gives us the starting genotype population for the next period.
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/gene7.JPG" alt="Genetic Drift">
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene7.JPG" alt="Genetic Drift" type = center>
 
 ##### Genetic Drift with Death
 The previous model ignored the stochastic death term, which will now be introduced. The same concept as the birth term can be used to model the death term in stochastic terms.
