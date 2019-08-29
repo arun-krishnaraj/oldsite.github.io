@@ -23,6 +23,8 @@ Finally, I'll use $$p$$ and $$q$$ as the percentage of dominant and recessive al
 
 Using initial conditions for $$p$$, $$q$$, and population, we can calculate the starting population and its genotype breakdown. Since $$p$$ and $$q$$ are the percentage of alleles of the total, we can use them as probabilities and treat each allele as an independent event: an allele has probability $$p$$ to be dominant and $$q$$ to be recessive, where $$p = 1 - q$$. From this we can see that there is $$p^2$$ probability to be AA, and $$q^2$$ probability to be aa. Since there are two orientations for heterozygotes (Aa and aA), the respective probability is $$2pq$$.
 
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene1.jpg" alt="">
+
 We can then use these probabilities, and multiply them by the initial condition to find the number of individuals with each genotype at $$t = 0$$.
 
 We can also work backwards from genotype counts to calculate $$p$$ and $$q$$ by finding the frequency of each allele. $$p = (AA + .5Aa)/Population$$, and $$q = (aa +.5Aa)/Population$$.
@@ -32,6 +34,8 @@ To incorporate birth and death rates, we can apply them to ending populations to
 Example: 100 birth rate, 90 death rate, population of 2000. The birth rate results in a change in population of $$100*(2000/1000) = 200$$, while the death rate results in a change in population of $$-90*(2000/1000) = 180$$.
 
 We can combine these into a net term: $$(BR - DR) * (Population/1000)$$. Adding this term to the previous total population gives the total population for the start of the next period. Using the previous period's $$p$$ and $$q$$ probabilities we can calculate counts for each genotype using the new population and the independent probabilities of alleles. By repeating this process we can project the population counts for any number of periods.
+
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene2.jpg" alt="">
 
 By playing around with the birth and death rate inputs, we can observe that the population growth or decay varies, eventually becoming 0 or growing in an exponential fashion. But the allele frequency remains constant through the prediction period. We can also adjust the starting allele frequencies, and observe the same effect. $$p'$$ and $$q'$$ remain the same as the initial conditions in this case. This special case is called [Hardy Weinberg Equilibrium](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2475721/), as described in simple algebraic terms by geneticists G. H Hardy and Wilhelm Weinberg. This equilibrium predicts that given the following assumptions, allele frequencies will remain the same regardless of initial conditions.
 
@@ -55,10 +59,14 @@ Simple selection incorporates a term for percentage survival for each genotype. 
 
 We can incorporate this easily by multiplying it by the output of the HW model. Multiplying the genotype counts by the corresponding survival rate gives the post birth-death population counts (in this example I've treated the genetic drift birth and death terms as "normal" effects due to life expectancy of the individuals in the population, and the selection rates as deaths attributed to external factors such as predation).
 
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene4.jpg" alt="">
+
 #### Complex Selection
 The parameters for simple selection can be difficult to estimate, making the previous model difficult to use in practice. The selection against genotypes is often immeasurable: genotype information requires DNA analysis, which is often difficult or impossible to perform until the individual has died. As a result we can use complex selection parameters, in which selection against alleles is estimated instead of selection against genotypes. Selection against alleles can be estimated by performing test crosses and observing lethality due to differences at the loci of interest.
 
 Replacing the survival rate term in the previous model with $$(1 - selection)$$ where selection represents the strength of adverse selection for the relevant allele, scaled from 0 to 1. Heterozygotes are selected against by the dominant selection term, since they express the dominant phenotype.
+
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene5.jpg" alt="">
 
 By playing around with these selection parameters, we can see that the allele frequencies can move to one extreme or remain in balance at a level corresponding to the initial conditions.
 
@@ -67,9 +75,13 @@ In all the previous models, we have applied the net change consistently across t
 
 We can model this fairly easily by using the *RAND()* function in excel. *RAND()* returns a number from a uniform distribution between 0 and 1, which can be combined with a probability term to represent the change to birth. We want the birth rates for each genotype to sum to 1, where each birth rate represents the proportion of the total period births we can attribute to the genotype. The number of births each genotype count receives should be proportional to the previous period count which can be modeled as shown below.
 
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene6.jpg" alt="">
+
 By dividing each birth term by the sum of current birth terms, we can arrive at the stochastic proportion of births attributed to each genotype. This stochastic term is nonuniformly distributed between 0 and 1. The distribution is no longer uniform like the *RAND()* function due to the level dependent rate terms we introduced, and the shape of this distribution changes with initial conditions and over time.
 
 By adding the stochastic term times the birth rate times the previous period's ending total population divided by 1000, we can find the stochastic birth change per genotype. Adding this term to the previous total population times the complex selection term times the corresponding allele probabilities gives us the starting genotype population for the next period.
+
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene7.jpg" alt="">
 
 ##### Genetic Drift with Death
 The previous model ignored the stochastic death term, which will now be introduced. The same concept as the birth term can be used to model the death term in stochastic terms.
@@ -80,6 +92,8 @@ Adding this random death term to the previous formula requires a bit more work t
 
 The intuition is fairly simple: If the count is less than or equal to 0, output 0, else output the count. The stochastic terms can also be changed to be 0 if the corresponding genotype count is 0; there's no need to calculate the births or deaths if the population is all dead. Lastly, to get the 0's to carry through the model we just wrap the previous model term with an *IF()* statement that produces a 0 if the $$t - 1$$ population count was 0. The corresponding formulas are shown below.
 
+<img src="{{ site.url }}{{ site.baseurl }}/images/gene8.jpg" alt="">
+
 ##### Recap
 I've built up to a simple model for modeling and simulating population genetics, including stochastic birth and death terms, simple and complex selection terms, and initial frequency parameters. This model requires nontrivial assumptions about the underlying behavior of the genes in question:
 
@@ -88,6 +102,8 @@ I've built up to a simple model for modeling and simulating population genetics,
 2. Random segregation of alleles. The model assumes that an allele at one position is independent of the opposing position. In reality this isn't always true: some alleles exhibit some degree of linkage or are likely to occur together.
 
 3. Death and birth timing. The model assumes that death and birth occur at the same time, and occur instantaneously. In reality birth and death occur randomly in continuous time. The issue of discrete time is a major limitation of the model developed here.
+
+The workbook I've made is available [*here*](), play around with the input parameters and observe how the model predictions respond.
 
 ###### A note on discrete time
 We've treated the population as stationary during the periods between the modeled periods. If we treat the time intervals as days, then our rates should correspondingly be daily births/deaths per 1000. By reducing the time interval we can approach a continuous process. I'll leave the transition to continuous time for a later post, in which I'll move away from Excel for development of a more robust model.
