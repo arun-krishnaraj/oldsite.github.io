@@ -1,6 +1,6 @@
 ---
 title: "Biology + Math + Finance?"
-date: 2019-04-28
+date: 2020-04-28
 tags: []
 header:
   image: "/images/"
