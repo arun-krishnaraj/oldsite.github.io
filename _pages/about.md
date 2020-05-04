@@ -8,7 +8,7 @@ header:
 
 ---
 
-My name's Arun, and I'm a rising Senior at UT Austin studying Computational Biology, Math, and Finance (this combo is admittedly quite odd, and is further explored here). After my time at UT, I plan on pursuing a graduate degree in Biology/Math (ie: computational Biology or a related degree).
+My name's Arun, and I'm a rising Senior at UT Austin studying Computational Biology, Math, and Finance (this combo is admittedly quite odd, and is further explored [here](https://arun-krishnaraj.github.io/Odd-Choices/)). After my time at UT, I plan on pursuing a graduate degree in Biology/Math (ie: computational Biology or a related degree).
 
 The original intent of this site was to further my own learning. I'm a firm believer that the easiest way to verify your own knowledge on a subject is to teach it to others. Lapses in understanding or clarity are spotted remarkably quick by the uninitiated (the student seems to also educate the teacher). Obviously I don't have an audience of students willing to learn every topic I find remotely interesting, so I made do by creating the perception of an audience. Thanks to the Internet, this site exposes my knowledge to the world (at least potentially), and I find myself exploring topics with a much finer comb.
 
