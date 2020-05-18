@@ -3,7 +3,7 @@ title: "Biology + Math + Finance?"
 date: 2020-04-28
 tags: []
 header:
-  image: "/images/"
+  image: "/images/clutter.jpg"
 excerpt: "Why do I have such an odd combo of majors?"
 ---
 
