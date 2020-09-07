@@ -8,13 +8,13 @@ header:
 
 ---
 
-My name's Arun, and I'm a rising Senior at UT Austin studying Computational Biology, Math, and Finance (this combo is admittedly quite odd, and is further explored [here](https://arun-krishnaraj.github.io/Odd-Choices/)). After my time at UT, I plan on pursuing a graduate degree in Biology/Math (ie: computational Biology or a related degree).
+My name's Arun, and I'm a rising Senior at UT Austin studying Computational Biology, Math, and Finance (this combo is admittedly quite odd, and is further explored [here](https://arun-krishnaraj.github.io/Odd-Choices/)). After my time at UT, I plan on pursuing a graduate degree and career in Computational Biology/Bioinformatics. This site serves a few important purposes:
 
-The original intent of this site was to further my own learning. I'm a firm believer that the easiest way to verify your own knowledge on a subject is to teach it to others. Lapses in understanding or clarity are spotted remarkably quick by the uninitiated (the student seems to also educate the teacher). Obviously I don't have an audience of students willing to learn every topic I find remotely interesting, so I made do by creating the perception of an audience. Thanks to the Internet, this site exposes my knowledge to the world (at least potentially), and I find myself exploring topics with a much finer comb.
+The original intent of this site was to further my own learning. I'm a firm believer that the easiest way to verify your own knowledge on a subject is to teach it to others; if you fully know a topic, then you should be able to clearly articulate that to a novice. Obviously I don't have an audience of students willing to learn every topic I find remotely interesting, so I made do by creating the perception of an audience. Thanks to the Internet, this site exposes my knowledge to the world (at least potentially), and I find myself exploring topics with a much finer comb.
 
-I quickly found that an additional use of this site is as a sort of repository for things I find interesting (a blog). I find that by crystallizing these things in words, I'm able to later reflect on them. So I use this site as a way to save snapshots of my stream of conscious, hopefully for my later use or simply mild amusement of my perceived audience.
+I quickly found that an additional use of this site is as a sort of repository for things I find interesting (essentially a blog). By crystallizing these things in words, I'm able to later reflect and build on them. So I use this site as a way to save snapshots of my stream of conscious, hopefully for my later use or simply mild amusement of my perceived audience.
 
-The last use of the site is straightforward: this site serves as a way to showcase my work, including academic writings, research projects, and other analysis (a digital CV if you will).
+The last use of the site is more straightforward: this site serves as a way to showcase my work, including academic writings, research projects, and other analysis (a digital CV or portfolio if you will).
 
 ### Personal
 In my free time I can usually be found in a coffee shop, at my desk, or outside. I'm quite fond of coffee and tea, but less so of their often tortuous treatment; not to slight those who enjoy meticulousness, but I prefer a mug of diner-style black coffee. I'm a big fan of video games of all types, and enjoy playing or watching other people play them. I also spend a good bit of time reading and building model kits. I enjoy anything that gets me outdoors, including running, hiking, and camping.
