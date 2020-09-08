@@ -9,22 +9,81 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+### Notes
+#### 8/26/2020
+- local differences, despite global similarity; exchange between homologous chromosomes: homologous recombination
+  - reciprocal exchange can be inferred using gene markers
+  - gene conversion can occur when one chromosome segment is replaces
+    - can occur with or without adjacent crossover; either parental configuration or novel position of flanking markers
+- during mitosis, only recombination is resulting from DNA damage
+- during meiosis, separation of haploid cells and creation of diploids contributes to diversity; some crossing over occurs between maternal and paternal chromosomes
+  - usually reciprocal exchange between 2 chromosomes during a 4 chromosome junction
+- fungi spores hold 4 distinct cells in each ascus:
+  - Saccharomyces (4:4 normal segregation), and (4:4) in Ascobolus 
+  
+#### 8/31/2020
+- Holliday Junction model for 4:4 aberrant segregation
+  - identical cuts are made on paired duplexes, 'x' bond created; branch migration and extension/displacement creates 2 symmetric heteroduplexes
+- Meselson-Radding model for 5:3 segregation
+  - single strand cut, strand invasion and D-loop creation; D-loop chewed out, donor strand repaired using complementary strand -> single heteroduplex and resolution of Holliday junction
+    - Holliday branch migration can also explain 4:4 aberrant segregation; can create symmetric heteroduplex based on Holliday junction migration direction
+    
+#### 9/2/2020
+- Holliday junction model is usually best for explaining 4:4 aberrant selection
+- Messelson is helpful for explaining 5:3, despite being less realistic; includes creation of Holliday junction and asymmetric heteroduplex to explain aberrant 4:4 selection as well
+- 6:2 abberant segregation: 
+  - Initial double strand cut, followed by rescetion in the 5' to 3' and 3' to 5' directions. 5' ends are chewed faster than the 3' ends, leading to 3' overhangs; paired duplex initiates recombination using complementary sequences
+  - Free 3' overhang invades paired duplex, forms D-loop; D-loop expansion and complementary synthesis; ligase reactions connect heteroduplex regions
+  - Formation of a double flanking Holliday junctions; results in 6:2 aberrant selection; Holliday junction migration directions can explain both 5:3 and 4:4 aberrant selection
+  - Most eukaryote germ cell recombination is initiated by double strand breaks; intentional damaging during germ cell formation contributes to genetic variation 
+- Double strand break recombination verified by observation of homologous proteins that perform necessary double strand break repair functions
+- Synthesis dependent strand annealing: variation of double strand gap repair; D-loop is resolved by a helicase unwinding the hybridized section, new 3' overhangs hybridize and continue complementary synthesis (6:2 in heteroduplex region) 
+- Single strand DNA annealing model: double strand cut repaired in a single duplex; repeat sequences in higher eukaryotes used to hybridize after chewing and repair using complementary synthesis. Usually results in deletions due to microhomology
+  - Multiple repeats can result in repeat contraction or deletion
+  
+#### Section 1 Reading
+Homologous Genetic Recombination  
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+- Recombination: process (almost uniform) of reshuffling
+- diploid organisms contain two copies of each chromosome (autosome)    
+  - sperm and egg pick up meiotic recombination and form new combinations  
+- Homolous recombination: exchange between partners with high sequence homology (contrasted to site-specific recombination)
+  - initiation, strand exchange, branch migration, heteroduplex creation and resolution
+- How does recombination occur in haploid bacteria?
+  - sister chromosomes can be created , but aren't useful for creating variation unless mutations are introduced
+    - useful for repair (double strand, or replication errors)
+  - use of intact chromosome during transformation; DNA from dead bacterium creates a diploid (merodiploid); DNA transfer by conjugation, transduction, and transformation can can create E. Coli Merodiploids
+- Linear duplex exchange results in linear molecules
+  - circular chromosomes exchange into a single large circle (or remain individual if partnered circular chromosomes)
+  - viable exchange between circular and linear molecules (bacterial chromosome and DNA segment) requires a minimum of 2 exchanges to result in desired homologous recombination
+- Reciprocal exchange involves local nonhomologous segments swapping between DNA partners during meiosis
+- Gene conversion occurs when an exchange event replaces a nonhomologous segment (unidirectional information transfer); markers flanking the transferred segment can remain or swap to generate parental or cross-over marker configurations
+- Saccharomyces & Ascobolus are useful for studying meiosis, since they pack products of meiosis into an ascus (sampling meitotis events vs tetrad analysis)
+  - following two homologous chromosomes replicating, and resolving exchanges, in Saccharyomyces the four duplexes are packaged into spores, then into a spore sack; each spore generates a colony
+  - following meitotic recombination in Ascobolus, the four duplexes replicate again to result in 8 total spores in the ascus (4 sister spore pairs)
+- Saccharoymyces segregation patterns:
+  - No exchange, 2 duplexes carry M, 2 carry m -> 2:2 normal segregation
+    - could result if additional events reverse exchanges 
+  - 2:2 aberrant, 1 M, 1 m, 2 half-sectored colonies -> 2:2 (aberrant)
+  - $2\frac{1}{2}$:$1\frac{1}{2}$, 2 M (or m), 1 m (or M), 1 half-sectored colony
+  - 3:1, 3 M (or m) colonies, 1 m (or M) colony
+- Ascobolus segregation patterns:
+  - 4:4, 4 M colonies, 4 m colonies
+  - 4:4 aberrant, 1 M, m sister pair, 2 non-identical sister pairs
+  - 5:3, single non-identical sister pair (m+M)
+  - 6:2, all identical sister spores, but 3 pairs of 1 phenotype with 1 pair of the other
+Models of Recombination
+- Holliday Junction model
+  -I Holliday Junction formation
+  -II Branch migration (right movement of 'x'), creation of symmetric heteroduplex
+  -III Same junction as II, shift from 'x' form to 'H' form, antiparallel geometry
+- Manipulation of the Holliday Junction
+  - junction 'x' is resolved by cutting crossed thin strands; creation of symmetric heteroduplexes with parental configurations (Ab, aB)
+  - junction type 'Y' is resolved by cutting crossed thick strands; creation of symmetric heteroduplex, crossed-over marker configurations
+- Meselson-Radding Model
+  - strand nick made in one duplex, which then invages the recipient 
+    - -> D-loop creation; heteroduplex extension & D-loop expansion; chewing away of D-loop and close of nicks, Holliday Junction at end of heteroduplex (heteroduplex is present on one duplex only)
+- Double Strand Gap Repair Model:
+  - recipient strands generate 3' extensions via unequal degradation; 3' extensions invade heteroduplex to create a D-loop
+    - creation of two Holliday Junctions; results in all-donor region, and two asymmetric heteroduplex on either side

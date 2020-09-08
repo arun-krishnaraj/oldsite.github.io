@@ -8,7 +8,375 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#### Notes
+### Notes
+
+#### Week 1 Lectures
+Intro Video 1
+
+- Chemistry: study of matter and changes in matter (chemical or physical)
+- focus on understanding the link between structure and function
+- macromolecules: protein, polysaccharide, nucleic acids, lipids
+
+```{r echo = F, layout="l-body-outset"}
+library(knitr)
+kable(data.frame("Macromolecule" = c("Nucleic Acid","Protein","Polysaccharide","Lipids"), "Monomer" = c("Nucleotides","Amino Acid","Monosaccharide","Fatty Acids"), "Linkage" = c("Phosphodiester","Peptide (amide)","Glycoside (ether)","Ester")))
+```
+
+Clutch Functional Groups
+
+- functional groups tend to be reactive and extend off carbon backbone; linkages used to link different kinds of molecules
+  ## insert images 
+- amino acids have amino and carboxyl groups
+- carbohydrates have many hydroxyl groups, and ether linkages
+- fatty acids typically have methyl groups
+- nucleotides have phosphodiester linkages
+- most useful for life are CHNOPS; trace elements are also required for life
+
+Water Video 2
+
+- weak bonds permit dynamic interactions; Brownian motion initiates biochemical interactions
+- IMF's aris from electrostatic interactions
+  - energy is given by $E = \frac{kq_1q_2}{Dr}$, where k is a scaling constant, $q_i$ are charges, $D$ is the dielectric constant, and $r$ is distance
+    - dielectric constant varies based on the medium (weaker interactions in water)
+- Hydrogen bonds including Nitrogen and Oxygen
+### insert bonding picture
+  - Hydrogen bonds are weaker (and longer distance) and can be disrupted by water
+- Hydrophobic effect: spontaneous self association of nonpolar molecules in aqueous solutions
+
+Clutch water
+
+- H$_2$O: polar molecule, 2 polar covalent bonds; bent with 2 lone pairs
+  - able to form up to 4 hydrogen bonds
+    - -> high boiling/melting point, heat capacity, heat of vaporization, high surface tension
+      - cohesion: intermolecular interactions
+      - adhesion: interaction with other non-water objects
+- solubility: ability of solute to dissolve in solvent
+  - water interacts with polar substances, dissolves electrolytes
+    - electrolytes dissociate to form ions in H$_2$O
+    - hydrated electrolytes have a hydration shell of H$_2$O molecules
+    - dielectric constant: ability of solvent to dissolve, dimish electrostatis interactions
+- water has similar weight, higher boiling/melting points, heat capacity, dielectric constant than methane; lower density as a solid 
+
+Clutch IMF
+
+- Intra vs inter molecular bonds for within or between molecules
+- ionic bond: opposite charge due to gain/loss of electrons
+- covalent bonds: two atons share a pair of electrons, equally or unequally based on electronegativity (polar or nonpolar)
+- H bonds: involve H and an electronegative atom
+- Dipole: shift in electron density due to electronegativity differences (dipole-dipole)
+- Van der Waals created by instantaneous dipoles
+
+Clutch Hydrophobic 
+
+- exclusion of hydrophobic substances by water (insoluble, form a separate phase)
+  - hydrophobic nonpolar substances have weak affinity for each other
+    - creation of hydration shells:
+      - 1) cannot participate in H bonding (normally)  
+      - 2) move slower; fewer, higher energy H bonds
+      - 3) more ordered, lower entropy
+    - -> it becomes thermodynamically favorable for hydration shells to merge (clumping reduces entropy, but offset by increased free H$_2$O entropy)
+- use of nonpolar R-groups in aqueous solution mediates folding (lower local entropy)
+  - phospholipids are put into a lower entropy state as nonpolar tails clump
+  
+pH & buffers video 2
+
+- pH: measure of concentration of [H$_3$O$^+$] in aqueous solution; pH = -log[H$_3$O$^+$]
+$$H_2O + H_2O bidirectionalarrow  OH^- + H_3O^+$$ (auto ionization)
+$$K_w=(concentration of hydronium times hydroxide) = [H_3O^+][OH^-] = 1x10^{-14}$$
+- weak acids create H$_3$O$^+$ and anion (mostly remain), shifts equilibrium 
+- cells utilize buffers to regulate pH (conjugate acid/base partners)
+  - acid: proton donor; base: proton acceptor
+- other cellular molecules can act like weak acids; change pH without buffer
+
+$$K_a = \frac{[A^-][H_3O^+]}{[HA]}$$
+$$pKa = -log(Ka)$$
+- when large amounts of acid and anion are present, can use the Henderson Hesselbach equation
+$$pH = pKa + log\frac{[OA_c^-]}{[HOA_c]}$$
+- when $[A^-] = [HA]$, then $pH=pKa$
+  - when $pH>pKa$, $[A^-]$ predominates; $pH<pKa$, $[HA]$ predominates
+  
+Clutch pH
+
+- $pH = -log[H^+] = log\frac{1}{[H^+]}$, measures proton concentration (indirectly measures [OH$^-$]); $K_W = [OH^-][H^+]$
+- pH ranges from 0 to 14, neutral of 7, basic greater, acidic lower
+  - base: [H$^+$] < [OH$^-$]
+  - acid: [H$^+$] > [OH$^-$]
+  
+Clutch $K_a$
+
+-$K_a$: acid dissociation constant, associated with hydrogen donors (acids), $K_{eq}$ for acid's dissociation; linear, positive measure of acid strength (ion constant)
+$$HA(conjugate acid) \rightarrow H^+ + A^- (conjugate base)$$
+  - polyprotic acid: multiple acidic H atoms that can dissociate, each has its own $K_a$
+- use ICE table to find [H$^+$] for pKa (equilibrium concentrations for pKa)
+- $pKa = -log(Ka)$, higher pKa is a weaker acid
+
+Clutch Henderson Hasselbach
+
+- strong acids have small pKa, tend to completely dissociate ([HCl]=[H$^+$]$_f$)
+- weak acids have high pKa, do not completely dissociate (most biological acids are weak acids)
+- HH equation used for finding final pH or conjugate base: conjugate acid ratio for weaker acids
+$$pH = pKa + log \frac{[conjugate base]_f}{[conjugate acid]_f}$$
+
+Clutch predominant species
+
+- conjugate base and acid are different forms of a molecule; pH of solution and pKa of acid determines the predominant species 
+
+```{r echo = F, layout="l-body-outset"}
+library(knitr)
+kable(data.frame("Compare pH to pKa" = c("pH = pKa","pH < pKa","pH > pKa"), "Predominant Species" = c("CB = CA","CB < CA","CB > CA"), "Protonated?" = c("50% 50%", "mostly protonated", "mostly deprotonated"), "HH equation" =c("pH = pKa +log(1)","pH = pKa +log(<1)","pH = pKa +log(>1)")))
+```
+
+Clutch titrations
+
+- titration: measure pH changes of acid/base solutions to determine pKa values
+  - solution of known concentration (titrant) added to solution of unknown concentration (analyte) until neutralization is reached (shown by color change)
+  - determines concentration of acid/base in solution; pKa of a weak acid
+- titration curve: analyte pH on y-axis, titrant added on x-axis
+  - equivalence point: point when mols analyte = mols titrant (always at pH = 7 for strong acid/strong base titration)
+-inflection point: when hald of acid is neutralized (pH = pKa for weak acids)
+  - -> pH = pKa, [CB] = [CA]
+- titration curves for polyprotic acids have multiple inflection and equivalence points, each indicating the pKa of a H$^+$
+
+Clutch Buffers
+
+- buffers: resist changes in pH, small amounts of strong acid/base
+  -can be prepared with the Henderson-Hasselbach equation
+- weak acids/bases + conjugates are the most effective buffers, centered around $\pm1$ of the pKa and inflection point
+- biological buffers use weak acids, can be inter or intra cellular buffer systems
+  - intracellular pH $\approx$ 7, intercellular pH $\approx$ 7.4
+
+1.1 Living Systems Require a limited variety of atoms and molecules
+
+- C, H, O contribute 98% of organic atoms
+- carbon's 4 bond ability and high bond strength make it crucial for organic chemistry
+
+1.2 4 classes of Biomolecules
+
+- proteins: constructed from 20 amino acids, linked with peptide bonds; serve a number of biochemical functions: receptors, signals, structure, catalysts
+- nucleic acids: store/transfer biological information; 4 nucleotides linked by phosphodiester bonds; DNA vs RNA (deoxyribose vs ribose sugar, 2 strand vs 1 strand, T vs U base); mRNA, tRNA used for cellular manufacturing
+- lipids: lower molecular weight, not polymers of repeat units; usually part hydrophilic/phobic; contributes to membrane structures and energy storage
+- carbohydrates: fuel sources; can be highly linked/branched, play roles in cell recognition
+
+1.3 Central dogma of Biological Information Transfer
+###insert image
+
+- selective expression determines ultimate cellular function
+  - translation: conversion of DNA to mRNA transcript; translation then creates a useable form from mRNA code
+  
+1.4 Cellular membranes
+
+- cells are differentiated by membrane bilayers; hydrophilic heads interact with the environment, while hydrophobic tials interact with each other
+  -eukaryotic cells are characterized by their membrane-enclosed compartments
+- barrier function of the plasma membrane is able to be rendered semipermeable 
+- cytoplasm: organized network of cytoskeleton network fibers, site of a number of processes
+- cell wall: constructed of cellulose, linear glucose polymer
+- nucleus: double membrane bound house of the genome, pores allow selective transportation
+- mitochrondria: outer and inner (invaginated) membranes, energy generation
+- chloroplast: site of photosynthesis, double membrane bound organelle
+- endoplasmic reticulum: has exterior surface and interior lumens; smooth and rough ER; smooth: exogenous chemical processing; rough: attached ribosomes synthesize proteins for insertion into cellular membranes or secreted
+- Golgi complex: post rough ER protein processing and sorting
+- secretory granule: vesicle intended for secretion buds off of Golgi Complex, eventually fuses with cellular membrane, releasing cargo
+  - endocytosis involves cell membrane invaginating and budding (can be phagocytosis depending on bud size)
+  - lysosomes: sent to fuse with endosomes and digest the material
+  - vacuoles: plant organelle holding water, ions, nutrients
+
+2.1 Thermal motions
+
+- thermal noise resulting in Brownian motion of particles, which facilitates interactions
+
+2.2 Aqueous Solutions
+
+- water mobilizes molecules, permits Brownian motion
+  - hydrogen bonds: intermolecular bonding resulting from $\delta^+$ on H and $\delta^-$ on another atom
+  - nonpolar (hydrophobic molecules) can't dissolve in water
+
+2.3 Weak interactions
+
+- ionic bonds occur between ions; water weakens ionic bonds by creating hydration shells
+- Hydrogen bonds occur when H is covalently bonded to an electronegative atom 
+  - water disrupts existing H bonds by forming new ones
+- Van der Waals: random partial charges can interact (results of transient assymetry)
+
+2.4 Hydrophobic molecules
+
+- nonpolar molecules are clustered (decreased entropy, which frees more H$_2$O molecules, overall increasing entropy)
+- amphipathic/philic: distinct chemical properties in a molecule
+
+2.5 pH
+
+- slight alterations in pH can impact electrostatic environment, and change bonding behaviors
+
+#### Week 2 Lectures
+
+Protonated vs Deprotonated Video 2
+
+- biochemical systems exist in aqueous environment, weak acids and buffer systems contribute to pH changes
+- amino acid groups become protonated or deprotonated dominant based on their equilibrium constants
+- zwitterionic form: amino group has a positive charge, carboxylic group is negatively charged; net charge is neutral
+- R functional groups can move from protonated to deprotonated based on pH; proteins are protonated at low pH, deprotonated at high pH and pick up an overall negative charge
+  - isoelectric point: point where number of protonated and deprotonated R groups is equal and molecular charge is 0 (pH = pI)
+- ampholytes contain both acidic and basic pK$_a$ values (includes many biologically relevant molecules)
+- for a simple molecule, the isoelectric point is the average of the two pK$_a$ values surrounding the isoelectric species
+
+Protein Structure Video 3
+
+- peptide bond formation through condensation reaction, carboxylic-amine functional group linkage
+- primary structure (I$^o$): sequence and direction of amino acids, written in amino terminal to carboxyl terminal end; amino acids referred to as residues
+  - peptide bonds are planar (no free rotation); caused by peptide resonance, which gives double bond character
+  - $\alpha$ carbon bonds do have free rotation: N-C$_\alpha$ ($\Phi$) and C$_\alpha$-carbonyl ($\Psi$) bonds
+    - the rotation of the $\Phi$ and $\Psi$ bonds (torsion angle) determines the path of polypeptide chain
+- secondary structure (II$^o$): stabilized by backbone H-bonding
+  - alpha helix bonding scheme stabilized by hydrogen bonding between amine group hydrogen and carbonyl group oxygen (4 amino acids down, formation of the right helix)
+  - beta sheet stabilized by hydrogen bonding between amine hydrogen and carbonyl oxygen; parallel or antiparallel based on direction of peptides (amine terminal to carbon terminal)
+  - reverse turns allow protein compaction; consist of carbonyl oxygen binding to amine group hydrogen
+- categories of proteins:
+  - fibrous: long extensions of secondary structure (don't use higher structures); includes collagen proteins, triple superhelical cables that contribute structural support
+  - globular: tend to be water soluble, separation of hydrophobic/philic regions; highly compact
+  - membrane
+- tertiary structure (III$^o$): involves how the protein folds on itself, stabilized by IMF between R groups
+  - motif: supersecondary structures; combinations of secondary structures found in many proteins 
+  - domains: two or more identical structures found in proteins
+- quaternary structure: only exists when multiple polypeptide chains are assembled into a single protein; composed of any number of subunits (like $\alpha_2 \beta_2$ tetramer of humanhemoglobin)
+- folding funnel: maximum entropy and minimum structure moves to low entropy and native structure state
+- Intrinsically disordered proteins (IDPs) do not have a defined structure (under physiological conditions) until they interact with other molecules
+
+Protein Purification Video 4
+
+- proteome: functional representation of the genome 
+- proteins can be purified based on chemical or physical properties
+
+3.1 Proteins are built from 20 amino acids
+
+- $\alpha$ amino acids consist of a central carbon, amino group, carboxylic group, and R groups
+  - $\alpha$ aminos are chiral (L and D isomers, only L amino acids are used in proteins)
+- free amino acids at neutral pH exist primarily as dipolar ions (zwitterions); the amino group is usually protonated (NH$^+_3$) and the carboxyl group is deprotonated (COO$^-$)
+
+3.2 Amino acids contain a wide array of functional groups
+
+- 20 kinds of side chain change the character of aminos (sometimes conferred by functional groups); can be classified by R groups
+  - Hydrophobic amino acids (nonpolar R groups); can usually pack closely together due to hydrophobic effect
+    - side chains consisting of hydrogen and carbon only are hydrophobic (glycine, alanine)
+    - aliphatic side chains are found in valine, leucine, isoleucine, methionine, proline (conformationally restrictive)
+    - aromatic side chains (phenylalanine, tryptophan)
+  - Polar amino acids (neutral overall, R groups with uneven charge due to electronegative atoms in the R group)
+    - serine, threonine, tyrosine contain hydroxyl groups ($\delta^-$ on oxygen); makes these more reactive than nonpolar counterparts alanine, valine, phenylalanine
+    - Cysteine contains a thiol (-SH) group instead of hydroxyl (more reactive than -OH)
+    - asparagine, glutamine both contain terminal carboxamide
+  - Positively charged amino acids (R groups hold positive charge at pH $\approx$ 7.4), highly hydrophilic
+    - Lysine, arginine: long side chains with positive charge groups
+    - histidine: aromatic ring with positive charge (can be uncharged or charged near neutral pH)
+  - Negatively charged amino acids (R groups hold negative charge at ph $\approx$ 7.4)
+  - acidic side chains are negatively charged: aspartic acid, glutamic acid
+- tyrosine, cysteine, arginine, lysine, histidine, aspartic and glutamic acids can form ionic bonds or donate/accept protons (acid-base catalysis)
+
+3.3 Essential amino acids
+
+- some aminos can't be synthesized by humans
+  
+4.1 Primary structure
+
+- protein 3d structure depends primarily on primary structure: linear polymers formed by sequence of amino acids (peptide or amide bond formation)
+  - polypeptides have polarity ($\alpha$ amino (N-terminal) and $\alpha$ carboxyl (C-terminal) groups)
+  - consists of a backbone (repeat carbonyl, amino groups) and unique side chains
+- protein amino acid sequences are uniquely specified by genes, determine structure and function; alterations can result in disease, capture evolutionary history
+  - peptide bonds are planar, due to double-bond character from resonance structures
+    - both the trans and cis configuration are possible (but almost all are trans)
+    - bonds between $\alpha$-carbon and amino and carbonyl groups are pure single bonds, can rotate freely (not all combinations are possible)
+
+4.2 Secondary structure
+
+- regulary folded segments are considered secondary structure
+- Alpha helix: rodlike structure with tightly coiled backbone, side chains extend outward; CO groups form hydrogen bonds with NH groupps that are four residues ahead
+  - tend to be right-handed due to steric clashes
+  - not all aminos are stable in an $\alpha$ helix
+- Beta sheets: composed of multiple $\beta$ strand that link through hydrogen bonds (can be parallel or antiparallel based on polypeptide polarity)
+  - sheets can be non-adjacent sections; can also be mixed, pure parallel or antiparallel sheets
+  - usually depicted as flat arrows pointing towards the C-terminal end
+- reverse turns and loops: common structural elements, increase compaction
+- fibrous proteins: simple 3d structure, mostly derived from secondary structure
+  - $\alpha$-Keratin contains two right handed alpha helices that form a left handed superhelix (coiled-coil protein)
+  - collagen has 3 helical chains, each stabilized by steric repulsion instead of hydrogen bonds
+    - formation of a triple stranded superhelical cable
+  
+4.3 Tertiary structure
+
+- refers to spatial arrangement arising from interactions between R groups
+- motifs (supersecondary structures): combinations of secondary structure commonly found
+  - domains are similarly folding units on a single polypeptide
+  
+4.4 Quaternary structure
+
+- refers to the arrangement of polypeptide subunits interacting to form a single functional protein
+  - dimers consist of two identical subunits: Cro found in $\lambda$ virus regulates gene expression
+  - vary in complexity; human hemoglobin $\alpha_2\beta_2$ tetramers
+
+4.5 Amino acid sequence determines 3d structure
+
+- randomly coiled polypeptides have no enyzymatic activity (denatured)
+  - denatured polypeptides spontaneously refold into a catalytically avtice form when denaturing agents are removed; information specifying catalytically active configuration is contained in the amino sequence itself (native structure is most thermodynamically stable)
+    - some proteins require special conditions or chaperone proteins to reestablish native configurations
+  - Levinthal's paradox: large difference between calculated and actual protein folding times 
+    - cumulative selection: partly correct intermediates are retained in future search steps
+    - folding funnel is used to visualize a decreasing entropy state moving towards native configuration
+- some proteins can exist in multiple conformations
+  - intrinsically disordered proteins (IDPs), no discrete structure; assume a defined structure when interacting with other proteins (can take on different biochemical functions)
+  - metamorphic proteins: exist in multiple forms at equilibrium; interactions with other molecules create unique functional complexes (mutually exclusive biochemical activities)
+  
+5.1 The proteome
+
+- encompasses functional information; interactions, types, functions of encoded proteins; doesn't exist in isolation since proteins can interact to change function
+
+5.2 Purification of proteins
+
+- assays can be used to identify if purification is working (uses unique identifier of the protein)
+  - specific activity: ratio of enyzyme activity to amount of protein present at each step
+- homogenate: mixture of cellular components created after cell membrane disruption; homogenate is centrifuged and enriched in an organelle, repeating with higher force (differential centrifugation)
+  - salting out: most proteins precipitate out of solution at high salinity (salts compete with proteins for solvent); dialysis is required to remove salt and restore protein activity
+  - molecular exclusion chromatography (gel-filtration chromatography): separation based on size, carbohydrate beads capture slow molecules; largest molecules exit filtration column first
+  - ion-exchange chromatography: separation by net charge using ion exhchange beads, then increasing salt in buffer to release proteins bound to beads
+  - affinity chromatography: uses protein specific chemical affinity
+  - high-pressure liquid chromatography (HPLC): enhances column techniques by using finer beads and pressurizing the column
+- distance and speed a molecule move in gel depends on its net charge and size; protein electrophoresis is vertical, pH is adjusted so all proteins are negatively charged
+  - small proteins move rapidly, and large proteins remain near application site; can be stained to identify most effective purification method (SDS-PAGE)
+- isoelectric focusing: apply electrophoresis in a pH gradient, once the protein stops it has reached pI
+  - can be combined with perpendicular SDS-PAGE in two dimensional electrophoresis; resolves many proteins at once with high precision
+- purification evaluation:
+  - total protein, total activity, specific activity, yield, purification level
+  
+5.3 Immunological purification
+
+- ultracentrifuges can separate small molecular complexes; rate of movement depends on mass, density, and shape: sedimentation coefficient 
+$$s=m(1-\bar{v}\rho)/f$$
+  - the smaller the $s$ value, the slower a molecule moves in centrifuge
+- gradient centrifugation can be used to assay protein movement; after the variable density tube is emptied, presence of protein can be determined by catalytic activity or other functional property
+- antibodies are synthesized in response to foreign substances; specific and high affinity for their antigens
+  - use antibody response to generate proteins after injecting antigens (centrifuge and isolation to produce antiserum); antibodies can be heterogeneous after isolation (polyclonal antibodies)
+- monoclonal antibodies can be created from multiple myeloma cancer cells; a plasma cell divides uncontrollably into a large number of cells of a single kind
+  - antibody tissue can be fused with a immortal myeloma cell; produces a specific monoclonal antibody 
+- antibodys can be pulled out of solution using their complementary binding molecule attached to insoluble beads
+- enzyme-linked immunosorbent assay (ELISA): uses enzymes that create a newly colored product when exposed to substrate; this enzyme is linked to an antibody
+  - if the antigen is present, it binds to the antibody-enzyme complex and frees the enzyme to generate color when substrate is added
+- western blotting: after running sample on SDS gel, individual proteins can be blotted using a current; specific antibody is added to bind to the antigen of interest
+  - a second antibody (either fluorescent or producing a colored product) that binds to the first is added
+  
+5.4 Primary structure determination
+
+- learning the primary structure of a protein can tell us about the eventual structure and function
+- peptides can be hydrolyzed, then separated and visualized using flourescent products; produces an unordered composition of amino acids
+  - Edman degradation can be used to remove one reside at a time from the N terminus (PTH reacts to break off amino acids by cyclizing them)
+    - cleavage is needed to create manageable polypeptides for sequencing; need to look at peptide overlap to reorder the segments 
+- Mass spectrometry: analyzes ionized forms of molecules in gas; measures acceleration by electric field to determine mass
+  - Matrix-assisted laser desorption-ionization (MALDI): combine peptide of interest with a compound absorbant of laser light
+    - multiple techniques need to be combined to deterine ultimate protein identity
+    - protein sequence can be found using mass spectrometry by analyzing smaller peptide chains created by bombardment with inert gas
+- amino acid sequence can provide information:
+  - compared with prior sequences to identify functional similarities
+  - can be used to establish evolutionary pathways based on individual sequence homologies
+  - internal repeats can reveal history of protein creation
+  - individual amino acids can signal protein destination or processing location
+  - allows molecular understanding of diseases resulting from mutations
+  - knowing protein structure can help understand functional gene regions
+
 ##### Week 2
 Lecture Video 1
 - It's important to remember the structure and function of amino acids in order to fully understand the function and behavior of proteins 
@@ -61,3 +429,8 @@ Clutch peptide bonds
 Clutch primary structure
 
 - amino acid composition and sequence of amino acid residues in a chain (N to C terminal)
+- primary structure determines shape, function (including all other levels of structure)
+
+Clutch altering primary structure
+
+- composition or sequence can be altered; slight amino acid changes can change shape and function (depends on property of replaced amino acid)

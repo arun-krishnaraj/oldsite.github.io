@@ -374,10 +374,23 @@ summary {
 <h4>Lecture 9/2/2020</h4>
 <ul>
 <li>Some introductory R programming review</li>
-<li>For every random variable <span class="math inline">\(X\)</span>, its cumulative distribution function is the function <span class="math inline">\(F_{x}: \mathbf{R} \rightarrow [0,1]\)</span> given by <span class="math inline">\(F_x (x) = \mathbf{P}[X \leq x]\)</span> for all <span class="math inline">\(x \space \epsilon \R\)</span></li>
+<li>For every random variable <span class="math inline">\(X\)</span>, its cumulative distribution function is the function <span class="math inline">\(F_{x}: \mathbf{R} \rightarrow [0,1]\)</span> given by <span class="math inline">\(F_x (x) = \mathbf{P}[X \leq x]\)</span> for all <span class="math inline">\(x \space \epsilon \mathbf{R}\)</span></li>
+</ul>
+</div>
+<div id="section" class="section level4">
+<h4>9/3/2020</h4>
+<ul>
+<li>The simplest discrete random variable is the Bernoulli trial: X~ 0 with probability 1-p(=q); 1 with probability p -Its probability mass function is: <span class="math inline">\(p_x(0) = \mathbb{P}[x=0]=1-p\)</span>, <span class="math inline">\(p_x(1) = \mathbb{P}[x=1]=p\)</span></li>
 </ul>
 </div>
 </div>
+<div id="x-0-1" class="section level2">
+<h2>|x |0 |1|</h2>
+<p>|<span class="math inline">\(p_x(x)\)</span>|1-p|p|</p>
+<ul>
+<li>Note: this is an example of a named distribution with a single parameter <span class="math inline">\(p\)</span> interpreted as the probability of success in a single trial</li>
+<li>What happens if you repeat a number n = # of trials = size, of independent Bernoulli trials each with the same parameter <span class="math inline">\(p\)</span>. Let <span class="math inline">\(X_1,...,X_n\)</span> be independent Bernoulli(p). Then your total # of successes will be <span class="math inline">\(S=X_1+X_2+...+X_n\)</span>, which results in Binomial(n,p). For the pmf: <span class="math inline">\(p_S(k)= choose(n k) p^k(1-p)^{n-k)\)</span> fro all k = 0…n.</li>
+</ul>
 <div id="labs-and-homeworks" class="section level3">
 <h3>Labs and Homeworks</h3>
 </div>
@@ -386,6 +399,7 @@ summary {
 </div>
 <div id="all-files" class="section level3">
 <h3>All Files</h3>
+</div>
 </div>
 
 

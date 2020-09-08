@@ -10,6 +10,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Notes
 
+#### Lab 1
+- 3 major experiments and 3 lab reports; read lab manual prior to lab section
+- review of common units, dilution and solution calculations
+- SI units:
+  - combine common prefixes with base units
+```{R}
+library(knitr)
+kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femto","atto"), "Factor base 10" = c(-1,-2,-3,-6,-9,-12,-15,-18), "symbol" = c("d","c","m","mu","n","p","f","a"), "Prefix" = c("deca","hecto","kilo","mega","giga","tera","peta","exa"), "Factor base 10" = c(1,2,3,6,9,12,15,18), "symbol" = c("da","h","k","M","G","T","P","E")))
+```
+
+#### Lab 2
+
+- goal of understanding water stress tolerance mechanisms in plants
+- abscisic acid (ABA) is involved in stress-response signalling pathways
+  - ABA is a terpene-based regulator, synthesized similarly to other steroids and lipids
+
 #### 9/2/2020 Lecture
 - Following a 2010 earthquake in Haiti, which caused massive amounts of destruction, several cases of Cholera popped up. Since Haiti had not had any lingering Cholera infections in the country, there was concern as cases seemed to crop up among a major waterway. Rapid sequence analysis revealed that the disease agent had come from Nepal with peacekeeping troops. Following accidental sewage system damage, Cholera was introduced to the watershed and spread further.
 - Isle Royale, small island somewhat near mainland; low number of wolves present with natural prey of moose. Tend to come on and off the island using ice bridges; as a result of general warming, ice bridges became less frequent. Wolf genetic diversity plummeted due to inbreeding, causing severe population decline; wolves brought in from distinct populations to improve fitness.

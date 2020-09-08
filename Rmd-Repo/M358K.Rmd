@@ -15,6 +15,22 @@ knitr::opts_chunk$set(echo = TRUE)
 - Some introductory R programming review
 - For every random variable $X$, its cumulative distribution function is the function $F_{x}: \mathbf{R} \rightarrow [0,1]$ given by $F_x (x) = \mathbf{P}[X \leq x]$ for all $x \space \epsilon \mathbf{R}$
 
+#### 9/3/2020
+- The simplest discrete random variable is the Bernoulli trial:
+X~ 0 with probability 1-p(=q); 1 with probability p
+-Its probability mass function is:
+  $p_x(0) = \mathbb{P}[x=0]=1-p$,
+  $p_x(1) = \mathbb{P}[x=1]=p$
+  
+|x       |0  |1|
+----------------
+|$p_x(x)$|1-p|p|
+
+- Note: this is an example of a named distribution with a single parameter $p$ interpreted as the probability of success in a single trial
+- What happens if you repeat a number n = # of trials = size, of independent Bernoulli trials each with the same parameter $p$.
+Let $X_1,...,X_n$ be independent Bernoulli(p). Then your total # of successes will be $S=X_1+X_2+...+X_n$, which results in Binomial(n,p). For the pmf: $p_S(k)= choose(n k) p^k(1-p)^{n-k)$ fro all k = 0...n.
+
+
 ### Labs and Homeworks
 
 ### Projects
