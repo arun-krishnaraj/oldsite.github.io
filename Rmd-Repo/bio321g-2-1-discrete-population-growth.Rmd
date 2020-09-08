@@ -134,6 +134,7 @@ which we can use to plot trajectories:
 
 ```{r}
 traj_r2 = logisticMapTrajectory(r=2, x0=0.01, tmax=15)
+head(traj_r2)
 gg = ggplot(
     traj_r2,       ## traj_r2 is a data.frame with columns t, x, and r
     aes(x=t, y=x)  ## put t column on x-axis, x column on y-axis
@@ -389,7 +390,7 @@ return to our favorite initial condition of $x_0=0.01$, run it for
 without worrying about the time indices $t$:
 
 ```{r}
-r4trajLong = logisticMapTrajectory(r=4, x0=0.01, tmax=10000)
+r4trajLong = logisticMapTrajectory(r=4, x0=0.01, tmax=50000)
  ## use ggplot to histogram this data:
 gg = ggplot(r4trajLong)
 gg = gg + geom_histogram(
@@ -424,7 +425,7 @@ library(VaRES)  ## has arcsine distribution functions
                 ## (we want darcsine,
                 ##  the probability *d*ensity function for *arcsin*)
  ## use stat_function to add the plot of a function to a ggplot object:
-gg = gg + stat_function(fun=darcsine, color="red")
+gg = gg + stat_function(fun=function(x){1/(pi*sqrt(x*(1-x)))}, color="red")
 print(gg)
 ```
 
