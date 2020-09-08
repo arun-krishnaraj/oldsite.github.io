@@ -1,0 +1,598 @@
+Introduction {#sec:introduction}
+============
+
+Data and code {#sec:data-and-code}
+-------------
+Computing generally consists of application of a discrete series of
+operations to input data hopefully resulting in some desired output.
+
+During a computation (at least the types we will be interested in),
+data is organized into chunks which our programming languages access
+through variable names.
+
+The operations we perform on this data are often similarly organized
+into named chunks which may be called functions, routines,
+subroutines, methods, subprograms, or (worst of all) "callable
+units." Depending on who is doing the talking, these terms may be
+given more specific meanings relating to the details of what sort of
+operations are being performed, but here I will ignore such
+distinctions and generally just use the word "function."
+
+Here is a simple computation in R:
+
+```{r}
+exp(1)
+```
+This applies the predefined function `exp` to the data defined by
+the expression `1` (which you may be mildly surprised to learn
+represents the real number 1 in R), and *returns* the result, in
+this case printing it to the R console.
+
+We can collect the result of this computation into a new variable
+using one of the *assignment* functions
+
+```{r}
+x = exp(1)   ## or, alternatively,
+x <- exp(1)
+```
+
+In case you find it odd to call `=` and `<-` functions, you can
+confirm that they are indeed such in R by applying the `class`
+function to them:
+
+```{r}
+class(`=`)
+```
+
+```{r}
+class(`<-`)
+```
+
+Because they are a special sort of function (binary operators), they
+must be surrounded by backticks to use them the way we would an
+ordinary (non-operator) function:
+
+```{r}
+`=`(x, exp(2))
+x
+```
+
+I will generally use `=` for assignment as opposed to `<-` from
+now on (and promise to use it in its normal binary operator infix
+syntax!).
+
+By passing the assigment operator as an argument to `class`, we have
+demonstrated an important feature of R ("functions are first-class
+objects"). In some cases it is useful to think of functions
+themselves as data!
+
+Primitive data types {#sec:primitive-data-types}
+--------------------
+Consider:
+
+```{r}
+class(1)
+```
+
+```{r}
+class(1L)       ## gotta put the L after the number to make an integer!
+```
+
+```{r}
+class(TRUE)
+```
+
+```{r}
+class("string")
+```
+
+These---`numeric`, `integer`, `logical`, and `character`---are
+the most common *primitive data types* we will deal with. Most
+variables we work with during our computations will be
+*composites* of these things.
+
+Vectors {#sec:vectors}
+-------
+The simplest form of composite object in R is a `vector`, here constructed
+with the aid of the function `c`:
+
+```{r}
+v = c(0, 2, 1)
+v
+```
+
+You can extract a "slice" of a vector using single-bracket notation:
+
+```{r}
+v[2:3]  ## use single brackets to extract 'slice' of vector
+```
+
+Or you can extract the individual elements composing the `vector`
+using double-bracket notation:
+
+```{r}
+v[[1]]  ## use double brackets to extract single element
+```
+
+```{r}
+v[[2]]
+```
+
+```{r}
+v[[3]]
+```
+
+All of the elements of a `vector` must be of the same `class`,
+which can be checked using
+
+```{r}
+class(v)
+```
+
+This is actually a reflection of an oddity about R: it doesn't
+distinguish between a single primitive object (i.e. a single number or
+string) and a `vector` containing only one such object. In many cases
+this is actually quite convenient, but there are some reasons why most
+other programming languages do consider these two cases as being
+fundamentally different!
+
+Lists {#sec:lists}
+-----
+A more flexible way to join things together in R is provided by
+`list`s:
+
+```{r}
+list(1, TRUE, "third element", c(0, 2, 1))
+```
+
+Notice that the fourth element of this list is itself a composite
+object (a `vector`). It could just as well have been a `list`; in
+fact, nested `list`s---`list`s containing some elements which are
+themselves `list`s---are both very useful and very common in R (and
+many other programming languages).
+
+Matrices {#sec:matrices}
+--------
+You've probably run across matrices---composites of $m \times n$
+numbers arranged into a tabular layout with $m$ rows and $n$
+columns---in a math class at some point. (If not, you'll be learning a
+bit about them in this class!)
+
+Because of their importance across statistics (and mathematics more
+generally), R includes the `matrix` as a fundamental data structure.
+
+```{r}
+m = matrix(1:12, nrow=3, ncol=4)
+m
+```
+
+You can extract slices and elements from a matrix:
+
+```{r}
+m[1, 2]       ## get element in first row, second column
+```
+
+```{r}
+m[1:2, 2:3]   ## submatrix w/first two rows, middle two columns of m
+```
+
+As with a `vector`, a `matrix` require that all of their elements
+have a common `class`, but for a `matrix` this is checked using
+the `mode` function:
+
+```{r}
+mode(m)
+```
+
+Compare this to
+
+```{r}
+class(m)
+```
+
+Data frames {#sec:data-frames}
+-----------
+
+Just like `list`s offer a more flexible alternative for making
+linear composites of objects, R has a special data type---the
+`data.frame`---which offers more flexible tabular data layouts:
+
+```{r}
+df = data.frame(A=1:3, B=c("walrus", "penguin", "cod"))
+df
+```
+
+A `data.frame` is actually a kind of `list`: a `list` of
+`vector`s, with each *column* of the `data.frame` being a
+`vector`:
+
+```{r}
+df$A       ## extract column named "A" from df
+```
+
+```{r}
+df$B
+```
+
+```{r}
+df[["B"]]  ## standard list-like syntax for column extraction
+```
+
+```{r}
+df[[2]]    ## can select columns by position as well!
+```
+
+Each column of a `matrix` is a `vector` as well, but
+unlike a `matrix`, a `data.frame` can contain both `numeric`
+columns and `character` columns (as does `df` here).
+
+Naming things
+-------------
+The `data.frame` we just looked at had *named* columns. This
+can be very useful, as it means we don't have to remember what number
+goes with which column---and also because the position of a column
+might change if we add or remove columns from the `data.frame`
+during our computations.
+
+This same logic frequently applies to elements of `vector`s or
+`list`s or to the rows and columns of a `matrix` as
+well. Conveniently, R offers the ability to handle names for indexing
+all of these objects:
+
+```{r}
+v = c(a=1, b=2)  ## named vector
+v[["b"]]         ## accessing vector element by name instead of position
+```
+
+```{r}
+names(v)         ## extract the names of the vector
+```
+
+```{r}
+names(v) = c("b", "a")  ## reset the names of v
+v[["b"]]         ## now it's the first element instead of second
+```
+
+A `list` works pretty much the same way as a `vector` with regard
+to names:
+
+```{r}
+things = list(a=1:5, b=c("string1", "string2"))
+things[["b"]]
+```
+
+```{r}
+names(things) = c("b", "a")
+things$b         ## OK, this one is different!
+```
+
+The last example above shows one difference between how names are
+handled for a `list` than for a `vector`: the weird dollar-sign
+syntax introduced for accessing the columns of a `data.frame` above
+is really `list` syntax inherited by `data.frame`s (since the
+class `data.frame` is a subclass of `list`).
+For a `matrix` it's usually easier to set the names after creation
+of the object:
+
+```{r}
+rownames(m) = letters[1:3]
+colnames(m) = LETTERS[1:4]
+m
+```
+
+```{r}
+m["b", "D"]
+```
+
+The `rownames` and `colnames` functions can be used to get or set
+the relevant names for a `data.frame` as well:
+
+```{r}
+rownames(df) = c("tusky", "beaky", "scaly")
+df
+```
+
+```{r}
+df[c("beaky", "scaly"), "B"]
+```
+
+Functions {#sec:functions}
+---------
+A `function` is a block of code grouping a series of operations to
+be performed in their own *scope*.
+
+The concept of scope is fundamental in programming, so I'll say a few
+words about it here. When we access data using a variable name, the
+computation has to resolve what actual data is being referenced by the
+indicated name. Given the number of different programs running on a
+computer---or even the number of different pieces involved in any one
+program---there is a very high chance that two different chunks of
+data might have been given the same name (for instance, the name `x`
+is an ever-popular choice for variables of all sorts).
+
+This is not really a problem specific to programming: you've probably
+met more than one person named Emily in your life, yet more likely
+than not this has never been much a problem for you because of scope:
+If you're having a conversation involving one particular Emily you can
+usually assume that if someone references an Emily they mean that
+specific Emily. If you replace the word "conversation" in the last
+sentence with the phrase "code block" (marked by curly braces in a
+`function` definition) you can get an intuitive feel for what scopes
+are in programming.
+
+Let's define a `function` in R:
+
+```{r}
+reverseLookup = function(x) {
+    out = names(x)
+    names(out) = x
+    return(out)
+}
+```
+
+`reverseLookup` takes a vector argument, assigns it the name `x`
+in the scope defined by the curly braces in its definition, and
+`return`s a new vector (assigned the name `out` within
+`reverseLookup`'s internal scope) whose elements are the names of
+`x` and whose names are the elements of `x`.
+
+Let's see an example of how to use this `function`:
+
+```{r}
+geneIdToName = c(
+    "ENSG00000244734" = "HBB",
+    "ENSG00000010610" = "CD4",
+    "ENSG00000177885" = "GRB2",
+    "ENSG00000141510" = "TP53"
+)
+geneNameToId = reverseLookup(geneIdToName)
+geneNameToId[["TP53"]]
+```
+
+When we used `reverseLookup`, we assigned the `return`ed value
+(which was born named `out` inside the scope of `reverseLookup`)
+the name `geneNameToId` in the so-called *global scope*. Thus
+when want to use this object to look up the (Ensembl) gene id
+corresponding to the gene name TP53, we access it via it's global
+scope name `geneNameToId`, not the name `out` which it was known
+by inside `reverseLookup`.
+
+Operators (including `%>%`) {#sec:operators}
+-------------------------------------
+I mentioned in the beginning of section [1.1](#sec:data-and-code) that
+the binary operators `=` and `<-` are really just R
+`function`s. This is equally true of those other popular binary
+operators `+`, `-`, `*`, and `/`:
+
+```{r}
+c(1, 3, 4) + c(-1, 8, 0)      ## + works elementwise on vectors in R
+```
+
+```{r}
+`+`(c(1, 3, 4), c(-1, 8, 0))  ## operator + is also function '+'
+```
+
+Note that `-`, `*`, and `/` also work elementwise on pairs of
+vectors in R.
+
+That operators are really functions is also true:
+
+-   of the logical and operator `&`:
+```{r}
+c(TRUE, TRUE, FALSE, FALSE) & c(TRUE, FALSE, TRUE, FALSE)
+```
+```{r}
+`&`(c(TRUE, TRUE, FALSE, FALSE), c(TRUE, FALSE, TRUE, FALSE))
+```
+
+-   of the logical or operator `|`:
+```{r}
+c(TRUE, TRUE, FALSE, FALSE) | c(TRUE, FALSE, TRUE, FALSE)
+```
+```{r}
+`|`(c(TRUE, TRUE, FALSE, FALSE), c(TRUE, FALSE, TRUE, FALSE))
+```
+
+-   as well as of the unary (only one argument) operator `!` (not):
+```{r}
+!c(TRUE, TRUE, FALSE, FALSE)
+```
+```{r}
+`!`(c(TRUE, TRUE, FALSE, FALSE))
+```
+
+While there are some occasions where the standard function syntax for
+such operators is useful, the operator syntax is preferred in most
+cases. Knowing the relationship between operators and functions is of
+more general use in that it allows us to define our own new
+operators:
+
+```{r}
+`%concatenate%` = function(x, y) {paste0(x, y)}
+"Bio" %concatenate% "informatics"
+```
+
+A couple of things to note:
+1.  The percentage signs on either side of the word concatenate in
+    the definition of `%concatenate%` above are required whenever
+    you want to define new operators in R; only the builtins (`+`,
+    `-`, `*`, `&`, etc.) get to omit these.
+2.  Unlike many (most?) other programming languages, R does not
+    provide a standard operator for string concatenation (`+` will not
+    do this unless you redefine it, which I'd advise against unless you
+    really know what you're doing!). Instead you can use `paste0` as
+    shown above; `paste` is similar, but by default puts a space
+    between the two strings `x` and `y` when joining them together.
+
+I won't use `%concatenate%` any more in these notes, but I do want
+to bring to your attention one non-base R operator of great import,
+`%>%` from the package `magrittr`:
+
+```{r}
+## install.packages("magrittr")  ## uncomment and run if necessary
+library(magrittr)
+"Bio" %>% paste0("informatics")
+```
+
+What does `%>%` (the so-called *pipe* operator) do? As used
+above, it simply substitutes its first argument---the expression
+immediately to the left of it, since it is a binary operator---into
+the function call made in its second argument (immediately to the
+right of `%>%`). Thus, the example above is equivalent to
+`paste0("Bio", "informatics")`.
+
+Admittedly, for just concatenating two character strings, this doesn't
+seem all that impressive, but consider the following slightly more
+long-winded example:
+
+```{r}
+"Bioinformatics" %>%
+    paste("is one") %>%
+    paste("of the rare words") %>%
+    paste("in English") %>%
+    paste("containing ioi.")
+```
+
+compared to
+
+```{r}
+paste(paste(paste(paste("Bioinformatics",
+                        "is one"),
+                  "of the rare words"),
+            "in English"),
+      "containing ioi.")
+```
+
+I would argue that the piped version of this bit of code---which we
+might call a *pipeline*---is more elegant, easier to read, and
+really just plain better than the non-piped version!
+Of course, in the case of R's `paste`, I should note that a better
+solution is to take advantage of its ability to take a variable number
+of arguments:
+
+```{r}
+paste("Bioinformatics",
+      "is one",
+      "of the rare words",
+      "in English",
+      "containing ioi.")
+```
+
+One last thing to note about the `x %>% fun(y)` syntax: it has a
+certain similarity to the `x.fun(y)` syntax common to
+object-oriented code in languages like C++, Java, and Python and
+can, in certain situations, offer some of the advantages of this
+ordering.
+
+Logical indexing {#sec:logical-indexing}
+----------------
+The logical operators `&`, `|`, and `!` are very useful in
+selecting sub`vector`s, sub`list`s, sub`data.frame`s, etc. using
+*logical indexing*. Here's an example:
+
+```{r}
+someIntegers = 1:10
+remainderAfterDividingBy2 = someIntegers %% 2
+ ## the %% operator yields the remainder of its first argument
+ ## when divided by its second argument;
+ ## here the 2 provided as second arg is recycled to match length of first
+remainderAfterDividingBy2
+```
+
+```{r}
+isEven = (remainderAfterDividingBy2 == 0)
+ ## the == operator tests equality of its first argument
+ ## with its second argument;
+ ## here the 0 provided as second arg is recycled just as above
+isEven
+```
+
+```{r}
+someIntegers[isEven]  ## index someIntegers by logical vector isEven
+```
+
+The expression `someIntegers[isEven]` here takes two `vector`s:
+`someIntegers` and `isEven`, the second of which (`isEven`) is a
+`logical vector`, and returns a new `vector` which consists of
+only those elements `someIntegers[[i]]` occurring at positions $i$
+where `isEven[[i]]` takes the value `TRUE`.
+
+By building up compound expressions using logical operators and
+comparison operators (like `==`, `<`, `<=`, `>=`, and `>`),
+we can select just those elements satisfying complex conditions. We
+will do this a lot.
+
+`if` statements {#sec:if-statements}
+---------------
+Logical values are also useful in R for conditionally controlling
+which operations described in a chunk of code get evaluated and which
+do not. This is most simply accomplished using `if` statements,
+such as:
+
+```{r}
+x = 7
+ ## if keyword should be followed by parenthesized statement which
+ ## evaluates to single TRUE or FALSE value:
+if (x %% 2 == 0) {   ## and then by code block surrounded by { and }:
+    cat("x is even.")  ## cat function prints text (without quotes)
+} else if (x %% 2 == 1) {
+    cat("x is odd.")
+} else {
+     ## no way to get here if x is an integer, since then
+     ## x %% 2 is either 0 or 1...
+    cat("x is not an integer.")
+}
+```
+
+Just as we used curly braces to group together a series of operations
+to be performed together when a `function` is called, we can also
+group together a series of operations `...` to run only if the
+`condition` specified in `if (condition) {...}` evaluates to
+`TRUE`.
+
+`while` and `for` loops {#sec:looping}
+-----------------------
+An `if` statement only executes the block of code under its control
+either once if the provided condition is `TRUE` or zero times if
+it is `FALSE`. By contrast, a `while` *loop* such as
+
+```{r}
+x = 296
+while (x %% 2 == 0) {
+    x = x / 2
+    cat("x is now", x, "\n")  ## "\n" is programming-speak for newline
+}
+```
+
+Of course, we have to be careful with `while` loops: Had we set
+`x=0` before running the loop shown above, it would keep running
+until we intervened to stop it, since `x` would be repeatedly reset
+to the same `0` value and the condition `x %% 2 == 0` would
+always evaluate to `TRUE`.
+
+The common situation in which one knows that a given block of code
+will need to be repeated for all values of a particular variable
+within a particular range has its own special construct, the `for`
+loop:
+
+```{r}
+for (power in 1:3) {
+    eToPower = exp(power)
+    cat("e to the", power, "is", eToPower, "\n")
+}
+```
+
+There's nothing special about the name `power` or the use of the
+colon-defined vector `1:3`:
+
+```{r}
+for (i in c(1, 2, 3)) {
+    cat("e to the", i, "is", exp(i), "\n")
+}
+```
+
+works just as well.
+
+(Note: if you think `i` should be the imaginary unit and that
+`exp(i)` should thus evaluate to some complex number, you might try
+running `exp(1i)`.)

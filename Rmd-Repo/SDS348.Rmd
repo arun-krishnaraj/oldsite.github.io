@@ -1,0 +1,28 @@
+---
+title: "SDS348-Computational Biology and Bioinformatics"
+author: "ArunK"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Notes
+#### 9/1/2020
+- General R review using [this intro document](C:/Users/arunk/Desktop/Site Rmd Repo/GettingStarted.R)
+
+#### 9/3/2020
+- Plotting in non-base R [here](C:/Users/arunk/Desktop/Site Rmd Repo/WS2.Rmd)
+
+### Labs and Homeworks
+- [Blank HW 1](C:/Users/arunk/Desktop/Site Rmd Repo/HW1.Rmd)
+- [Filled in HW 1](C:/Users/arunk/Desktop/Site Rmd Repo/HW1-Krishnaraj.Rmd)
+
+### Projects
+
+### All Files
+- [Getting Started](C:/Users/arunk/Desktop/Site Rmd Repo/GettingStarted.R)
+- [Worksheet 1](C:/Users/arunk/Desktop/Site Rmd Repo/WS1.Rmd)

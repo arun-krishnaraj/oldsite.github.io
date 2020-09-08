@@ -1,0 +1,15 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\raggedright
+\title{SDS348 (Computational Biology and Bioinformatics)}
+\author{Arun Krishnaraj}
+\maketitle
+<<>>=
+setwd("C:/Users/arunk/Desktop/School")
+@
+
+
+\end{document}

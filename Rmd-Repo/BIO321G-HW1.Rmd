@@ -1,0 +1,169 @@
+---
+title: "BIO321G-HW1"
+author: "ArunK"
+date: "9/2/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+### Q1 Combining with c
+
+A. Character  
+B. Character  
+C. List  
+D. Numeric  
+E. List  
+F. 8  
+G. 5  
+H. 4  
+I. 1. The method in part H returns a character object, while the method in part I returns a list object. Since we concatenated `list(wal)` and `rus`, what gets returned is a list where the first entry is a list of `wal` and the remaining list entries are those of `rus`. This means that when we index `c(list(wal),rus)` using `[]`, a list object is returned; when we index the list using `[[]]`, a character vector is instead returned. While both of these objects contain the entries of `wal`, R treats them differently when applying `length`. The `length` of a character vector returns the number of character elements, while applying `length` to a single list entry returns 1.
+
+---
+
+### Q2 Overlapping intervals
+
+A.  
+```{R}
+overlap <- function(g, h) {
+  (g[2] > h[1] & g[2] <= h[2]) | (h[2] > g[1] & h[2] <= g[2])
+}
+```
+
+B.  
+```{r}
+overlap(g=c(200,400), h=c(100,250))
+```
+`overlap` indicates that these genes are overlapping.
+
+C.  
+```{r}
+overlap(c(500,600), c(800,900))
+```
+`overlap` indicates these genes are not overlapping.
+
+---
+
+### Q3 Fun with functions
+
+```{R}
+f0 <- function(x){x+1}
+
+functionalPower <- function(f, power){
+  fRepeatedPowerTimes = function(x){
+    if (power == 0){
+      return(x)
+    } else {
+      for (i in 1:power){
+        x = f(x)
+      }
+    }
+    return(x)
+  }
+  return(fRepeatedPowerTimes)
+}
+```
+
+---
+
+### 3.1
+
+```{R}
+f1 <- function(x){
+  return(function(y){
+    f0_to_y = functionalPower(f0, y)
+    return(f0_to_y(x))
+  })
+}
+```
+
+A.  
+```{r}
+f1(2)(3)
+```
+`f1(2)(3)` is 5.
+
+B.  
+```{r}
+f1(3)(4)
+```
+`f1(3)(4)` is 7.
+
+C. 
+`f1(2)(y)` will return 2+y.  
+
+D. 
+```{R}
+`%op1%` = function(x, y){f1(x)(y)}
+```
+`%op1%` is a newly defined operator for the function `f1`; this means `x %op1% y` represents `f1(x)(y)` and will return $x+y$; the `f0` function is applied to x y times.
+
+---
+
+### 3.2
+```{R}
+f2 <- function(x){
+  return(function(y){
+    f1ofx_to_yminus1 = functionalPower(f1(x), y-1)
+    return(f1ofx_to_yminus1(x))
+  })
+}
+```
+
+A. 
+```{r}
+f2(2)(3)
+```
+`f2(2)(3)` is 6.
+
+B.  
+```{r}
+f2(3)(4)
+```
+`f2(3)(4)` is 12.
+
+C. 
+`f2(2)(y)` will return 2*y.  
+
+D.  
+```{R}
+`%op2%` = function(x,y){f2(x)(y)}
+```
+`%op2%` is a defined operator for the function `f2`; this means `x %op2% y` represents `f2(x)(y)` and will return $x*y$; y-1 power repetitions of `f1` are applied to x, each of which returns y power repetitions of `f0`.
+
+---
+### 3.3
+```{R}
+f3 <- function(x){
+  return(function(y){
+    f2ofx_to_yminus1 = functionalPower(f2(x), y-1)
+    return(f2ofx_to_yminus1(x))
+  })
+}
+```
+
+A.  
+```{r}
+f3(2)(3)
+```
+`f3(2)(3)` is 8.
+
+B.
+```{R}
+f3(3)(4)
+```
+`f3(3)(4)` is 81.
+
+C. 
+`f3(2)(y)` will return $2^y$ 
+
+D.  
+```{r}
+`%op3%` = function(x,y){f3(x)(y)}
+```
+`%op3` is a defined operator for the function `f3`; this means `x %op3% y` represents `f1(x)(y)` and returns $x^y$.
+

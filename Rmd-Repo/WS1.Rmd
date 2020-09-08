@@ -1,0 +1,159 @@
+---
+title: "Worksheet 1: Using R Markdown"
+author: "SDS348"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = "center", warning = F, message = F,
+                      R.options=list(max.print=100))
+```
+
+## R Markdown
+
+Much of the work in this class will be done via **R Markdown documents** like this one! R Markdown documents combine text (with easy formatting options, including typesetting equations), R code, and R output including figures. They are a great way to produce self-contained, reproducible, well-documented statistical analyses.
+
+In this first .Rmd worksheet, you will learn how to do some basic markdown editing. After you have made changes to the document, press "Knit HTML" in R Studio and see what results you get (it will complain if you do something wrong; troubleshooting is part of life)!
+
+---------------------------------------------
+
+When you click the **Knit** button (try it!) a document will be generated that includes both content as well as the output of any embedded R code chunks within the document (go ahead and try it if you want: you can always re-knit it later after making changes). **Knit early, Knit often** You can embed an R code chunk like this:
+
+```{r}
+# R code goes here
+x <- 5
+y <- 7
+z <- x * y
+z
+```
+
+## 1. Basic Markdown editing
+Try out basic R Markdown features, as described [here.](http://rmarkdown.rstudio.com/authoring_basics.html) Write some text that is bold, and some that is in italics. Make a numbered list and a bulleted list. Make a nested list. Try the block-quote feature.
+
+# For 
+## Example
+### These
+#### Are
+##### Different 
+###### Headers
+
+1. Here
+1. Are
+1. Four
+1. Things
+
+- bullet 1
+    - sub-bullet 1
+- bullet 2
+    - sub-bullet 2
+- bullet 3
+    - sub-bullet 3
+
+
+## 2. Embedding R code and referencing it from the text
+
+R code embedded in R chunks will be executed and the output will be shown. Note that you can run code in codeblocks *just like you would in a regular R script*. It will *all* be run when you knit your document, but let's just run this code piece by piece. You can also hit the play button on a codeblock to execute the entire thing.
+
+```{R}
+#descriptive statistics for both variables
+summary(cars)
+
+#view first bit of this dataset
+head(cars)
+
+#grab just third row
+cars[3,]
+
+#grab just second column
+cars[,2]
+
+#same as grabbing the column by name
+cars$dist
+
+#grab element in third row, second column
+cars[3,2]
+
+##return only rows where speed is over 10 mph
+cars[cars$speed>10,]
+
+#return even numbered rows
+cars[seq(0,50,by=2),]
+
+#return rows where the variable speed is an even number
+cars[cars$speed %in% c(2,4,6,8,10,12,14,16,18,20,22,24),]
+
+#more elegantly with modulo operator
+#(x %% y == 0 returns TRUE if x/y has a remainder of 0, FALSE otherwise)
+cars[cars$speed %% 2 ==0,]
+
+
+#mean of each variable
+mean(cars$speed)
+mean(cars$dist)
+
+#see if you can figure out how apply works
+apply(cars,2,mean)
+```
+
+
+You can include R code inline: use a single back-tick, followed by an r (case doesn't matter), followed by a space, followed by the R code you want to run. For example, you can run the code `2+2` (note that since back-ticks without the r use a generic `code-type` fixed-width font) and get the result inline like this: `r 2+2`.
+
+If you want to refer to variable or object created in another codeblock, that's fine: for example, `x, y, and z`'s values from above are `r x`, `r y`, `r z`. You can separate lines with semicolons if need be to include the all together: `r x; y; z`.
+
+## 3. Plots and other output
+
+You can easily embed plots too! For example
+
+```{R}
+plot(cars$speed, cars$dist, pch=16)
+```
+
+Let's say you want to compute the correlation coefficient for the above data, test whether it is significantly different from zero, and print all the results out into this document. Just include the following code.
+
+```{R}
+cor.test(cars$speed, cars$dist)
+```
+
+## 4. Typesetting equations
+
+You can inclue LaTeX code both inline (between single dollar-signs) and in blocks (between double dollar-signs). For example, below is the equation for the probability density function of a normal distribution with mean $\mu$ and standard deviation $\sigma$.
+
+$$ 
+p(x | \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+Here's one way to calculate the correlation between $x$ and $y$
+
+$$
+r=\frac{1}{N-1} \left( \sum_{i=1}^{N} \frac{x_i-\bar x}{s_x} \cdot \frac{y_i-\bar y}{s_y} \right)
+$$
+
+Let's use this formula to calculate the correlation between speed and stopping distance ourselves, just to check.
+
+```{R}
+1/(nrow(cars)-1)*sum(scale(cars$speed)*scale(cars$dist))
+```
+
+If we wanted to create our own correlation function, we could just wrap this code in a function syntax. Let's call it `myCor`.
+
+```{R}
+myCor<-function(x,y){
+1/(length(x)-1)*sum(scale(x)*scale(y)) 
+}
+
+myCor(cars$speed, cars$dist)
+
+#compare output with cor(cars$speed,cars$dist)
+```
+
+## 5. HTML hyperlinks, images etc
+
+
+[Here is a hyperlink to Canvas](https://canvas.utexas.edu)
+
+Here is an image from a URL (for local images, just specify the file path in place of the URL)
+
+![](https://utcorner.com/wp-content/uploads/2016/10/bevo.jpg)
+
+

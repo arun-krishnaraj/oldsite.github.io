@@ -1,0 +1,16 @@
+---
+title: "All RMarkdown Links"
+author: "ArunK"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+- [BIO321G - Principles of Computational Biology](C:/Users/arunk/Desktop/Site Rmd Repo/BIO321G.Rmd)
+- [SDS348 - Computational Biology and Bioinformatics](C:/Users/arunk/Desktop/Site Rmd Repo/SDS348.Rmd)
+- [M358K - Applied Statistics](C:/Users/arunk/Desktop/Site Rmd Repo/M358K.Rmd)
+- [BIO366 - Microbial Genetics](C:/Users/arunk/Desktop/Site Rmd Repo/BIO366.Rmd)
+- [BIO331L - Molecular Biology Lab](C:/Users/arunk/Desktop/Site Rmd Repo/BIO331L.Rmd)
+- [BCH369 - Introduction to Biochemistry](C:/Users/arunk/Desktop/Site Rmd Repo/BCH369.Rmd)

@@ -1,0 +1,15 @@
+---
+title: "BIO321G-HW1"
+site: bookdown::bookdown
+output:
+  bookdown::pdf_document2:
+    toc: yes
+author: "ArunK"
+date: "9/1/2020"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### 1 
+

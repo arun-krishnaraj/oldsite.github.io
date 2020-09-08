@@ -1,0 +1,35 @@
+---
+title: "BCH369 - Introduction to Biochemistry"
+author: "ArunK"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Notes
+##### Week 2
+Lecture Video 1
+- It's important to remember the structure and function of amino acids in order to fully understand the function and behavior of proteins 
+- Space filling model is usually more accurate than the ribbon model
+- All amino acids except one have a chiral center, only L isomers are found in proteins 
+- Amino acids can be separated into 4 groups based on the behavior of their R groups
+  - Hydrophobic amino acids
+  - Polar amino acids
+  - Positively charged amino acids
+  - Negatively charged amino acids
+- Some amino acids are essential, meaning that humans are incapable of synthesizing them and require them from food
+Clutch Amino Acid Groups
+- There are 20 standard amino acids, which differ by their R groups
+  - grouped together based on characteristics of R groups at physiological pH
+  - amino and carboxyl charge groups make backbones dipolar at physiological pH
+- Amino acids can be grouped by functional or structural groupings
+Clutch Amino Acid configuration
+- almost all $\alpha$ amino acids are chiral (except glycine), biochemistry uses S and R notation vs L and D configuration
+- use chiral group priorities to figure out configurations (R group is always priority #3 except in Cys)
+  - Standard Fisher Projection:
+    - Carboxyl on top, longest carbon chain vertical, L-amino acid group is on the left
+  - Non-standard Fisher Projection
+    - determine R and S configuration of the $\alpha$ carbon, pick S configuration for all except L-Cys
+- L Amino acids can be represented as Fischer projections, Amine down/wedge, R group down/dashed, R group up/wedge

@@ -1,0 +1,36 @@
+---
+title: "BIO331L - Microbial Biology Lab"
+author: "ArunK"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Notes
+
+#### 9/2/2020 Lecture
+- Following a 2010 earthquake in Haiti, which caused massive amounts of destruction, several cases of Cholera popped up. Since Haiti had not had any lingering Cholera infections in the country, there was concern as cases seemed to crop up among a major waterway. Rapid sequence analysis revealed that the disease agent had come from Nepal with peacekeeping troops. Following accidental sewage system damage, Cholera was introduced to the watershed and spread further.
+- Isle Royale, small island somewhat near mainland; low number of wolves present with natural prey of moose. Tend to come on and off the island using ice bridges; as a result of general warming, ice bridges became less frequent. Wolf genetic diversity plummeted due to inbreeding, causing severe population decline; wolves brought in from distinct populations to improve fitness.
+- Papaya ringspot virus was completely eradicated in Hawaii by making papaya highly resistant to the virus
+
+#### 9/2/2020 Lab
+- Abscisic acid (ABA): major plant hormone, used in gene expression, signalling pathways. Can circumvent gene expression to directly interact with biomolecule for faster cellular response: rapid interaction with guard cells to close them in response to water loss.
+- Arabinogalactan (AGP31 in Arabidopsis): glycoprotein in the cell wall. Use of Wild Type, AGP31 mutant, and AGP31 rescued Adabidopsis to see how plant response to Abscisic acid varied
+- RNA Purification:
+  - RNA experiment seeks to compare gene expression in wild type and two AGP31 altered transgenic lines when exposed to ABA in media
+  - Use of mechanical force to grind seedling samples
+  - Tissue lyser is used to rapidly grind sample material, kept at low temperature to avoid RNA degradation 
+  - AGP31 rescued line occurs when wild gene copies are transferred to the knockout 
+-Spectroscopic analysis of RNA samples
+  - MS grow playes used to germinate Arabidopsis seeds
+  - Nanodrop Spectrophotometer 
+  
+  LE 5 10
+  645.1 502.9
+  2.21 2.21
+  2.46 2.66
+
+mass = c*v
+then look for final volume

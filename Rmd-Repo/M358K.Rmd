@@ -1,0 +1,22 @@
+---
+title: "M358K-Applied Statistics"
+author: "ArunK"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Notes
+#### Lecture 9/2/2020
+- Some introductory R programming review
+- For every random variable $X$, its cumulative distribution function is the function $F_{x}: \mathbf{R} \rightarrow [0,1]$ given by $F_x (x) = \mathbf{P}[X \leq x]$ for all $x \space \epsilon \mathbf{R}$
+
+### Labs and Homeworks
+
+### Projects
+
+### All Files

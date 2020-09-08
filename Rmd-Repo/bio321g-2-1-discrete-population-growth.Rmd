@@ -1,0 +1,438 @@
+Modeling and Simulation {#sec:modeling-and-simulation}
+=======================
+Discrete Population growth
+--------------------------
+### Geometric growth {#sec:geometric-growth}
+Growth and reproduction---and the limits placed thereon by
+available food sources---were subject of one of the earliest
+quantitative models in biology (by Malthus in 1798):
+
+$$\label{eq:geometric-growth}
+  n(t+1) = r n(t)$$
+
+Eq [[eq:geometric-growth]](#eq:geometric-growth), which defines so-called
+*geometric growth*, says that the population at time $t+1$ is
+simply a multiple $r$ of the population at time $t$. Its solution is
+
+$$\label{eq:geometric}
+  n(t) = r^t n_0$$
+
+where $n_0$ is the population at time $t=0$.
+
+This is a good time to introduce `ggplot`, a popular data
+visualization package in R. First let's set up some data to visualize:
+
+```{r}
+t = 0:10  ## equivalent to t = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 10)
+growthData = data.frame(t=t, n=2^t)
+growthData
+```
+
+I want to emphasize a couple of points here:
+1.  When creating `growthData`, we use `t` as both a column
+    name in the `data.frame`---when it shows up on the left-hand side
+    of the equals sign of `t=t`---as well as as the variable `t`.
+    -   The variable `t` in fact shows up twice: once in the
+        right-hand side of `t=t` and once in the right hand side of
+        `n=2^t`.
+    
+2.  Just as with the other binary operators discussed in section
+    [1.9](#sec:operators), the binary operator `^` works
+    elementwise on its second argument (the vector `t`),
+    -   though here we supplied only a single number (`2`) as its
+        first argument: this number is *recycled* to be used with
+        each element of `t`.
+    
+
+Now, on to plotting!
+
+```{r}
+## install.packages("ggplot2")  ## uncomment and run if necessary
+library(ggplot2)
+theme_set(theme_bw())  ## tell ggplot to use white background
+gg = ggplot(
+    growthData,    ## first argument is data.frame to draw from
+    aes(x=t, y=n)  ## aes function maps x, y positions to column names
+)
+gg = gg + geom_point()   ## add points to plot
+gg = gg + geom_line()  ## add lines connecting points
+print(gg)
+```
+
+Note that `ggplot` builds up an R object---I named it
+`gg`---representing the plot which must specify the data set
+(contained in a `data.frame` object) to be visualized, the
+"mapping" (specified using `aes`) between things like x- and
+y-positions in the plot and the column names of the data set, and
+finally the `geom`etric objects (points, lines, etc.) to include in
+the plot. This building up is done using the `+` binary operator;
+remember that such operators are really just R functions with two
+arguments and can work differently depending on what types of objects
+are passed into them as arguments!
+
+### The logistic map {#sec:logistic-map}
+The rapid growth implied by Eq [[eq:geometric]](#eq:geometric) (as shown in the
+plot above) is not generally sustainable in a world of limited
+resources, however. As $n$ grows over time, at some point the rate of
+increase must slow down. There are many ways in which this might
+happen, but one simple modification to the geometric model that
+incorporates such effects is the *logistic map*:
+
+$$\label{eq:logistic-map}
+n(t+1) = r n(t) \left( 1-\frac{n(t)}{k} \right)$$
+
+Eq [[eq:logistic-map]](#eq:logistic-map) modifies Eq [[eq:geometric-growth]](#eq:geometric-growth) by
+multiplying by $(1-n(t)/k)$. This factor is approximately 1 for
+$n(t) \ll k$, so that growth looks geometric starting from very small
+numbers, but then slows down such that if
+
+$$\label{eq:logistic-map-fixed-point}
+n(t) = \frac{k (r-1)}{r} = n_{\text{*}}$$
+
+then $n(t+1)$ will also be equal to $n_{\text{*}}$, that is, there
+will be no continued growth at all! For $n(t) > n_{\text{*}}$, you
+will in fact obtain $n(t+1) < n(t)$; that is, the population shrinks
+instead of growing.
+
+We can simplify Eq [[eq:logistic-map]](#eq:logistic-map) a bit by
+*nondimensionalizing* it as follows: Define
+
+$$\label{eq:nondimensionalize-n-to-x}
+x(t) = \frac{n(t)}{k}$$
+
+so that, dividing both sides of Eq [[eq:logistic-map]](#eq:logistic-map) by $k$, we
+obtain:
+
+$$\label{eq:nondimensionalized-logistic-map}
+x(t+1) = r x(t) \left( 1 - x(t) \right)$$
+
+The nontrivial steady state value of $x$ is then
+
+$$\label{eq:nondimensionalized-fixed-point}
+x_{\text{*}} = \frac{r-1}{r}$$
+
+What does population growth under the logistic map look like? Let's define a function
+
+```{r}
+logisticMapTrajectory = function(r, x0, tmax) {
+    x = rep(x0, tmax+1)
+     ## note: above sets all (tmax+1) elements of vector x to x0;
+     ## these values will be replaced below with correct values
+    for (t in 1:tmax) {
+        x[[t+1]] = r * x[[t]] * (1-x[[t]])
+    }
+    return(data.frame(
+        t = 0:tmax,
+        x = x,
+        r = r  ## keep track of which r value was used:
+               ## r is recycled tmax+1 times here!
+    ))
+}
+```
+
+which we can use to plot trajectories:
+
+```{r}
+traj_r2 = logisticMapTrajectory(r=2, x0=0.01, tmax=15)
+gg = ggplot(
+    traj_r2,       ## traj_r2 is a data.frame with columns t, x, and r
+    aes(x=t, y=x)  ## put t column on x-axis, x column on y-axis
+) + geom_point() + geom_line()
+print(gg)
+```
+
+Here we see a trajectory which starts out looking like geometric growth with $r=2$ but then *saturates* at a population of $x_{\text{*}} = 0.5$.
+
+What do trajectories look like with other values of $r$?
+
+```{r}
+traj_r1 = logisticMapTrajectory(r=1, x0=0.01, tmax=25)
+traj_r2 = logisticMapTrajectory(r=2, x0=0.01, tmax=25)
+traj_r3 = logisticMapTrajectory(r=3, x0=0.01, tmax=25)
+all3trajectories = rbind(traj_r1, traj_r2, traj_r3)
+ ## rbind row binds together data.frames into one tall data.frame
+```
+
+Let's try plotting all of these together using `ggplot`:
+
+```{r}
+gg = ggplot(
+    all3trajectories,  ## pull from all 3 trajectories
+    aes(x=t, y=x, group=r, color=r)
+) + geom_point() + geom_line()
+gg = gg + scale_color_gradientn(colors=c("dodgerblue", "black", "red"))
+print(gg)
+```
+
+For $r \leq 1$, the trajectories just die off toward 0; this isn't so
+surprising since our nontrivial steady state $x_{\text{*}} =
+\frac{r-1}{r} \leq 0$ when $r \leq 1$.
+
+But what about $r=3$? In this case the trajectory looks almost
+periodic, though if you follow it long enough the amplitude of the
+fluctuations shrinks and the trajectory ultimately settles down to the
+stable value $x_{\text{*}}$.
+
+Things get more interesting for $r > 3$:
+
+```{r}
+traj_r3p5 = logisticMapTrajectory(r=3.5, x0=0.01, tmax=200)
+ggplot(traj_r3p5, aes(x=t, y=x)) + geom_line()
+```
+
+Here we see a trajectory which, after an initial transient period,
+settles into periodic behavior with a period of 4 time units. For
+reasons which will become apparent shortly, let's chop off the
+initial transient:
+
+```{r}
+traj_r3p5_last100 = traj_r3p5[traj_r3p5$t > 100, ]
+ ## - line above uses logical indexing to keep only rows of
+ ##   traj_r3p5 for which t-column has value > 100
+ ## - all columns (t, x, and r) are retained b/c nothing put
+ ##   between the comma and end-square-bracket
+ggplot(traj_r3p5_last100, aes(x=t, y=x)) + geom_point() + geom_line()
+```
+
+If we're only interested in this long-term behavior, we might collapse
+the whole trajectory by plotting the growth rate parameter $r$ on the
+$x$-axis instead of the time $t$ and omitting the lines connecting the
+points:
+
+```{r}
+ggplot(traj_r3p5_last100, aes(x=r, y=x)) + geom_point()
+```
+
+Keep in mind that there are 100 points in the plot above, but that
+since they take only 4 distinct values, and since we have removed any
+information about time $t$ from the plot, they get plotted on top of
+each other.
+
+We can keep at least a minimal amount of information of the order in
+which the points appear by keeping track of whether we're on an even
+or odd time point:
+
+```{r}
+timeIsEven = (traj_r3p5_last100$t %% 2 == 0)
+ ## %% operator returns remainder upon dividing by right-hand-side
+ ## even numbers are those with 0 remainder when dividing by 2
+traj_r3p5_last100$even = timeIsEven
+ ## now have column with value TRUE for even t and FALSE for odd t
+ ## in data.frame traj_r3p5_last100
+ggplot(traj_r3p5_last100, aes(x=r, y=x, color=even)) + geom_point()
+```
+
+This shows us that the period four trajectory bounces back and forth
+between higher values (at even times when starting from $x_0=0.01$) and
+lower values (at odd times), though the height of the higher values
+(and the depth of the lower values) varies from one period to the
+next!
+
+That lonely $x$-axis suggests we should include some other values of
+$r$ as well: let's do that...
+
+```{r}
+lotsOfTrajectories = list()  ## start with empty list
+for (r in seq(from=0, to=4, by=0.01)) {
+     ## seq function creates vector of values ranging from
+     ## the 'from' value to the 'to' value in steps of the 'by' value
+    lotsOfTrajectories[[length(lotsOfTrajectories)+1]] =
+            logisticMapTrajectory(r, x0=0.01, tmax=200)
+     ## note lack of anything to right of '=' sign two lines
+     ## above tells R to look at next line for value to assign
+}
+```
+
+Now we have long list of `data.frame`s we'd like to plot
+together. We used `rbind` to do this with 3 trajectories before, but
+that required specifying each `data.frame` as a separate argument to
+`rbind`. Don't want to write a function call to `rbind` by typing
+out hundreds of arguments! Luckily there's a way to to tell R to call
+a function with a whole `list` of arguments:
+
+```{r}
+rboundTrajectories = do.call(rbind, lotsOfTrajectories)
+ ## do.call says to call the function specified by first argument
+ ## - rbind in this case
+ ## with a provided list of arguments
+ ## - lotsOfTrajectories in this case
+ ## now rboundTrajectories is single data.frame containing
+ ## all of the trajectories
+ ## - perfect for ggplot!
+rboundTrajectories$even = (rboundTrajectories$t %% 2 == 0)
+ggplot(
+    rboundTrajectories[rboundTrajectories$t > 100, ],
+    aes(x=r, y=x, color=even)
+) + geom_point(size=0.1, shape=16)  ## shape=16 allows small points
+```
+
+Now we can see how the logistic map trajectories behave over a wide
+range of growth rates $r$ ([@may1976simple]):
+-   $r \leq 1$ : population dies away
+-   $1 < r \leq 3$ : population ultimately stabilizes at $x_{\text{*}}$
+-   $3 < r < 1+\sqrt{6}$ : oscillation with period 2
+-   $1+\sqrt{6} < r < 3.54409\ldots$ : oscillations with period 4
+-   $3.54409\ldots < r < 3.56995\ldots$ : period-doubling cascade
+-   $3.56995\ldots < r \leq 4$ : chaos!
+
+### Deterministic chaos {#sec:chaos}
+Both the geometric growth model and the logistic map are examples of
+*dynamical models*: models which describe the evolution of the
+state of a system over the course of time. Moreover, both of these
+models provide a rule which, in principle, allows one to determine
+exactly the state of the system at all future times given knowledge of
+the current system state. Such systems are referred to as
+*deterministic* systems (and can be contrasted with so-called
+*stochastic* systems, in which there is a random component to the
+rules for evolving the system forward in time).
+
+Deterministic dynamical systems have been heavily used in scientific
+modeling for a long time now, especially since Newton showed that a
+few simple physical laws can be used to derive deterministic models
+simultaneously leading to highly accurate predictions of both
+terrestrial and celestial phenomena. The ongoing success of these
+models over the following century, and then of similarly constructed
+deterministic differential equation models of electromagnetic fields,
+led to a widespread belief that deterministic modeling would
+ultimately allow for the prediction of the course of virtually all of
+nature's operations.
+
+However, starting in the late 19th century, certain limitations in
+this scientific program started to appear. While strictly speaking
+still deterministic, some differential equation models were found to
+exhibit "sensitivity to initial conditions" (colloquially known as
+the "butterfly effect"): Any small change to the state of the system
+at time $t$ will become exponentially magnified as time moves forward
+([@strogatz2015nonlinear]). Thus *any* imprecision in the
+measurement of the current state of such a system will render
+predictions in the relatively near future subject to very great
+uncertainty. This is the main ingredient in what is known as
+*deterministic chaos*.
+
+In section [2.1.2](#sec:logistic-map) I indicated that the logistic map
+model with $r$ at or just below 4 it will exhibit chaotic behavior. We
+can demonstrate this by considering three different $r=4$ logistic map
+trajectories starting from the very nearby initial conditions
+$x_0 {0.0099, 0.01, 0.0101}$:
+
+```{r}
+r4trajectories = list()
+for (initialCondition in seq(from=0.0099, to=0.0101, by=0.0001)) {
+    r4trajectories[[length(r4trajectories)+1]] =
+            logisticMapTrajectory(r=4, x0=initialCondition, tmax=25)
+     ## add column ic indicating what the initial condition was in
+     ## so that we can keep track of which simulation was which
+     ## after we rbind all of these trajectories together
+     ## into one data.frame:
+    r4trajectories[[length(r4trajectories)]]$ic = initialCondition
+     ## (since initialCondition is just a single number, the column
+     ##  ic will just end up being 201 copies of this same number)
+}
+ ## use do.call with rbind to reformat list into data.frame again;
+ ## this time we'll just redefine r4trajectories itself:
+r4trajectories = do.call(rbind, r4trajectories)
+```
+
+Having run the three simulations starting from the different initial
+conditions 0.0099, 0.01, and 0.0101 and packaged them up into a
+single `data.frame` object, we can use `ggplot` to visualize
+the three resulting trajectories:
+
+```{r}
+gg = ggplot(r4trajectories,
+            aes(x = t,
+                y = x,
+                group = ic,  ## group aesthetic tells geom_line
+                             ## to treat rows of r4trajectories
+                             ## with different ic values as part
+                             ## of separate lines
+                 ## now set color aesthetic to categorical,
+                 ## or factor, version of ic column
+                 ## (easier to deal with coloring small number of
+                 ##  values in ggplot if they are treated as discrete
+                 ##  values instead of continuous numbers):
+                color = factor(ic)))
+gg = gg + geom_line()
+gg = gg + scale_color_manual(
+    values = c("dodgerblue", "gray25", "orangered")
+)
+print(gg)
+```
+
+From the plot we can clearly see that an error in the 4th decimal in
+the estimation of the initial state of the logistic map trajectory
+leads to totally incorrect prediction of what the trajectory looks
+like after as few as 10 iterations!
+
+This certainly doesn't mean that there is nothing to be learned from
+modeling chaotic systems. For one thing, you can see that the
+immediate future is still predictable even if the present is subject
+to the inevitable measurement error: for the first few time steps the
+blue, gray, and orange trajectories move together just as one would
+expect given the similarity in their initial states. But beyond this,
+even if attempts to predict all of the local details of a particular
+trajectory of a chaotic system may be doomed, there are larger scale
+properties that may be understood.
+
+For instance, considering Eq
+[[eq:nondimensionalized-logistic-map]](#eq:nondimensionalized-logistic-map) with
+$0 \leq x(0)=x_0 \leq 1$ and $r=4$, it is not hard to see that it must
+also be true that $0 \leq x(1) \leq 1$, and thus by the same logic
+that $0 \leq x(2) \leq 1$, and so on---that is, a trajectory governed
+by Eq [[eq:nondimensionalized-logistic-map]](#eq:nondimensionalized-logistic-map) which starts with
+$x_0 \in [0, 1]$ will remain in that interval for all times. But for
+$r=4$ we can actually say something much more interesting about the
+trajectories constricted to this range: Most of them can be
+characterized *probabilistically*. To illustrate this, let's
+return to our favorite initial condition of $x_0=0.01$, run it for
+10,000 steps, and examine the resulting distribution of $x(t)$ values
+without worrying about the time indices $t$:
+
+```{r}
+r4trajLong = logisticMapTrajectory(r=4, x0=0.01, tmax=10000)
+ ## use ggplot to histogram this data:
+gg = ggplot(r4trajLong)
+gg = gg + geom_histogram(
+     ## can specify aes (aesthetic) mappings as argument to individual
+     ## geoms as well as in the initial ggplot function call:
+    aes(x=x, y=..density..),  ## y=..density.. here says to scale y-axis
+                              ## so that total *area* of all bars together
+                              ## sums to 1, like a probability distribution
+    bins = 50,
+    fill = "gray",        ## inner fill color of the histogram bars
+    color = "slategray"   ## the outline color of the bars
+)
+ ## set limits of y-axis to between 0 and 4:
+gg = gg + ylim(0, 4)
+print(gg)
+```
+
+Aside from a few exceptional cases like the trajectory $x(t)=0$ for
+all $t$, almost all trajectories of the $r=4$ version of the logistic
+map system will result in this exact same distribution of time spent
+visiting various different $x$ values over the long haul! The
+functional form of this distribution for $r=4$ turns out to be
+$\frac{1}{\pi \sqrt{x(1-x)}}$ ([@berliner1992statistics]),
+which is the probability density function associated with the
+arcsin distribution (so-named because if has *cumulative*
+distribution function proportional to arcsin, the functional inverse
+of sin):
+
+```{r}
+## install.packages("VaRES")  ## uncomment and run if necessary
+library(VaRES)  ## has arcsine distribution functions
+                ## (we want darcsine,
+                ##  the probability *d*ensity function for *arcsin*)
+ ## use stat_function to add the plot of a function to a ggplot object:
+gg = gg + stat_function(fun=darcsine, color="red")
+print(gg)
+```
+
+While this is not necessarily the only---or perhaps even most
+important---reason probabilistic modeling plays as important a role as
+it does in biological modeling, the fact that chaotic behavior is
+quite common in the type of models which seem most plausible for many
+biological phenomena is worth noting. It would seem to
+suggest that if we want to make quantitative predictions regarding
+the the response of such systems to experimental stimuli, we may
+often be limited to probabilistic statements.

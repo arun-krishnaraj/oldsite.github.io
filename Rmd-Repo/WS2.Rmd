@@ -1,0 +1,260 @@
+---
+title: "WS2"
+author: "SDS348 Fall 2019"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The easiest way to get ggplot2 is to install the whole tidyverse:
+
+```{R}
+# IF YOU ARE ON YOUR OWN LOCAL VERSION OF R, uncomment and run either of the lines below
+
+## install.packages("tidyverse")
+## Alternatively, install just ggplot2:
+## install.packages("ggplot2")
+
+library(ggplot2)
+```
+
+## If you are on the servers however, this is all you need
+
+```{R}
+# If you are on the servers, just run
+library(ggplot2)
+```
+
+```{R}
+#Load of data: just to keep things clean, make sure it's a data frame
+Loblolly <- as.data.frame(Loblolly) 
+
+#show the first 6 rows with head()
+head(Loblolly)
+```
+
+```{R}
+#str() gives lots of info about the dataframe
+str(Loblolly)
+dim(Loblolly) #gives just the shape (rows, columns)
+``` 
+
+Map `age` to the x-axis and `height` to the y-axis.
+To do this, fill in the blanks (replace ??? with dataset name and variable names)
+
+```{R}
+# Leave yourself comments as you go! Note when you make changes, etc.
+ggplot(data = Loblolly, aes(x = age, y = height))
+``` 
+
+Let's add a geometry layer to the empty plot. After the ggplot(), add + geom_point()
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height)) + geom_point()
+```
+
+Inside of geom_point(), set size to a specific value (integer)
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height)) + geom_point(size = 4)
+``` 
+
+Now let's color the points by seed
+Note you can put ggplot layer on a new line (be sure to end line with +)
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color=Seed)) + 
+  geom_point(size=3)
+```
+
+Set alpha value to change transparency of points. Fill in the blank (replace ??? with a number between 0 and 1)
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4, alpha = .5) 
+``` 
+
+Let's add another geometry layer: add + geom_line() after geom_point() 
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + geom_line()
+``` 
+
+Hmm, we get a warning and no lines... "group aesthetic"? We need to tell ggplot which points to connect. We want to connect points by Seed group, so let's map it
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_line(aes(group=Seed)) +
+  geom_point(size = 4) 
+``` 
+Notice the lines are on top of the points! Order matters! Try switching the positions of geom_point(...) and geom_line(...) by putting geom_line(...) first.
+
+
+Every geom has aesthetics that you can map to variables (or set to specific values)
+For example, if you want a different linetype for every Seed, map it in aes()
+
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + 
+  geom_line(aes(group=Seed, linetype=Seed))
+``` 
+
+You can make more than one modification to a geom, too! To globally increase the size of the line while still having a separate linetype for every Seed, set size to an integer (OUTSIDE OF AES, since you are not mapping to a variable)
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + 
+  geom_line(aes(group = Seed, linetype = Seed), size = 4)
+``` 
+
+We can also change the theme! For example, here is the minimal theme.
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + 
+  geom_line(aes(group=Seed, linetype=Seed)) +
+  theme_dark()
+``` 
+
+Try a different theme like theme_dark()!
+
+We can edit specific theme elements too. This can get advanced, but, for example, we can remove the legend using the following theme() layer:
+
+```{R}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size=4) + geom_line(aes(group=Seed)) + 
+  theme(legend.position="none")
+``` 
+
+At the end of the day, a ggplot is just an object (everything is an object in R!) and you can store it. Since the code is getting kind of long, let's save the previous plot as plot1.
+
+```{R}
+plot1<- ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size=4) + geom_line(aes(group=Seed)) + 
+  theme(legend.position="none")
+```
+
+Then, we can add stuff to it more easily. Like, let's change the title, y-axis label, and x-axis label:
+
+```{R}
+plot1 + ggtitle("Loblolly Pine Growth") + ylab("Height") + xlab("Age") 
+``` 
+
+Note that this doesn't save it. It just prints it out. Let's save these additions by overwritting plot1
+
+```{R}
+plot1 <- plot1 + ggtitle("Loblolly Pine Growth") + ylab("Height") + xlab("Age")
+
+plot1
+``` 
+
+Faceting is really cool! Let's take plot1 and create a separate subplot for each Seed, so that you can see its growth trajectory
+
+```{R}
+plot1+facet_wrap(~Seed)
+``` 
+
+```{R}
+head(Loblolly)
+
+str(Loblolly) #age is technically numeric
+``` 
+
+
+```{R}
+ggplot(Loblolly, aes(x=age, y=height))+geom_boxplot()
+``` 
+We can treat age as categorical (groups) and look at the distribution of tree heights for each.
+
+```{R}
+Loblolly$age <- as.factor(Loblolly$age) #coerce age to a factor variable
+ggplot(Loblolly, aes(x=age, y=height))+geom_boxplot()
+``` 
+
+We could also look at the distributions of height for each seed
+
+```{R}
+ggplot(Loblolly, aes(Seed, height))+geom_boxplot()
+```
+Let's go back to the dist'n at each time point. We can overlay the actual data and give it a random horizontal scatter with geom_jitter()
+
+```{R}
+ggplot(Loblolly, aes(x=age, y=height)) + geom_boxplot() + 
+  geom_jitter(alpha=.5) 
+```
+We can color them too!
+
+```{R}
+ggplot(Loblolly, aes(x=age, y=height)) + geom_boxplot() + 
+  geom_jitter(alpha=.5, aes(color=Seed)) 
+``` 
+How about a histogram?
+
+```{R}
+ggplot(Loblolly, aes(x=height)) + geom_histogram()
+``` 
+
+Notice the discrete clusters of points? Let's fill by age (and up the number of bins)
+
+```{R}
+ggplot(Loblolly, aes(x=height, fill=age)) + 
+  geom_histogram(bins=60) 
+``` 
+We can do cool stuff like specify the legend position explicitly:
+
+```{R}
+ggplot(Loblolly, aes(x=height, fill=age)) + geom_histogram(bins=60) +
+  theme(legend.position=c(.9,.7))
+``` 
+How about density plots instead?
+
+```{R}
+ggplot(Loblolly, aes(x=height, fill=age)) + theme(legend.position=c(.9,.7)) +
+  geom_density(alpha=.75) 
+``` 
+We can add a rug layer (showing each individual data point). Some people call these "raincloud plots"
+
+```{R}
+ggplot(Loblolly, aes(x=height, fill=age)) + theme(legend.position=c(.9,.7)) +
+  geom_density(alpha=.75) +
+  geom_rug()
+``` 
+Violin plots are a strange plot type that combines density plots with boxplots
+
+```{R}
+ggplot(Loblolly, aes(x=age, y=height, fill=age)) + 
+  geom_violin() 
+``` 
+
+```{R}
+ggplot(Loblolly, aes(x=age, y=height, fill=age)) + 
+  geom_violin(draw_quantiles=0:4/4, trim=F) 
+```
+
+
+---
+### Exercises!
+
+- There is a very similar dataset in R called `Orange`
+
+- Take a look at it using `head()`, `str()`, `?Orange`, etc.
+
+- What do the variables represent?
+
+- Recreate all of the above plots using `Orange` instead of `Loblolly`
+
+    - Instead of height, examine tree circumference
+
+- Essentially, you will swap out `Seed` for `Tree`, and `height` for `circumference`
+
+
+```{R}
+Orange<-as.data.frame(Orange)
+
+# make some plots!
+```
