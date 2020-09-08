@@ -13,13 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Notes
 
 #### 9/1/2020
-- General R review using [this intro file](C:/Users/arunk/Desktop/Site Rmd Repo/bio321g-1-introduction.Rmd)
-- Finished up prior R review, introduction to [discrete population growth](C:/Users/arunk/documents/github/arun-krishnaraj.github.io/Rmd-Repo/bio321g-2-1-discrete-population-growth.html)
+- General R review using [this intro file](https://arun-krishnaraj.github.io/Rmd-Repo/bio321g-1-introduction.html)
+- Finished up prior R review, introduction to [discrete population growth](https://arun-krishnaraj.github.io/Rmd-Repo/bio321g-2-1-discrete-population-growth.html)
 
 ### Labs and Homeworks
-- [Blank HW 1](C:/Users/arunk/Desktop/Site Rmd Repo/hw_assignment_1.pdf)
+- [Blank HW 1](https://arun-krishnaraj.github.io/Rmd-Repo/hw_assignment_1.pdf)
 
 ### Projects
 
 ### All Files
-- [Complete Lecture Notes](C:/Users/arunk/Desktop/Site Rmd Repo/bio321g-lecture-notes.pdf)
+- [Complete Lecture Notes](https://arun-krishnaraj.github.io/Rmd-Repo/bio321g-lecture-notes.pdf)
