@@ -8,6 +8,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[`r knitr::asis_output("\U1F332")`](https://arun-krishnaraj.github.io/evergreen)
+
 ### Notes
 
 #### Lab 1

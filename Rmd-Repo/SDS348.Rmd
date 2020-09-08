@@ -10,6 +10,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[`r knitr::asis_output("\U1F332")`](https://arun-krishnaraj.github.io/evergreen)
+
 ### Notes
 #### 9/1/2020
 - General R review using [this intro document](C:/Users/arunk/Desktop/Site Rmd Repo/GettingStarted.R)
