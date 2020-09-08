@@ -158,7 +158,7 @@ Clutch Buffers
 - carbohydrates: fuel sources; can be highly linked/branched, play roles in cell recognition
 
 1.3 Central dogma of Biological Information Transfer
-###insert image
+######insert image
 
 - selective expression determines ultimate cellular function
   - translation: conversion of DNA to mRNA transcript; translation then creates a useable form from mRNA code
@@ -251,6 +251,8 @@ Protein Purification Video 4
   - $\alpha$ aminos are chiral (L and D isomers, only L amino acids are used in proteins)
 - free amino acids at neutral pH exist primarily as dipolar ions (zwitterions); the amino group is usually protonated (NH$^+_3$) and the carboxyl group is deprotonated (COO$^-$)
 
+![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\charge-curve.JPG)
+
 3.2 Amino acids contain a wide array of functional groups
 
 - 20 kinds of side chain change the character of aminos (sometimes conferred by functional groups); can be classified by R groups
@@ -258,15 +260,27 @@ Protein Purification Video 4
     - side chains consisting of hydrogen and carbon only are hydrophobic (glycine, alanine)
     - aliphatic side chains are found in valine, leucine, isoleucine, methionine, proline (conformationally restrictive)
     - aromatic side chains (phenylalanine, tryptophan)
+    
+    ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\hydrophobic.JPG)
+    
   - Polar amino acids (neutral overall, R groups with uneven charge due to electronegative atoms in the R group)
     - serine, threonine, tyrosine contain hydroxyl groups ($\delta^-$ on oxygen); makes these more reactive than nonpolar counterparts alanine, valine, phenylalanine
     - Cysteine contains a thiol (-SH) group instead of hydroxyl (more reactive than -OH)
     - asparagine, glutamine both contain terminal carboxamide
+    
+    ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\polar.JPG)
+    
   - Positively charged amino acids (R groups hold positive charge at pH $\approx$ 7.4), highly hydrophilic
     - Lysine, arginine: long side chains with positive charge groups
     - histidine: aromatic ring with positive charge (can be uncharged or charged near neutral pH)
+    
+    ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\hydrophobic.JPG)
+    
   - Negatively charged amino acids (R groups hold negative charge at ph $\approx$ 7.4)
-  - acidic side chains are negatively charged: aspartic acid, glutamic acid
+   - acidic side chains are negatively charged: aspartic acid, glutamic acid
+   
+   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\negative.JPG)
+   
 - tyrosine, cysteine, arginine, lysine, histidine, aspartic and glutamic acids can form ionic bonds or donate/accept protons (acid-base catalysis)
 
 3.3 Essential amino acids
@@ -281,11 +295,13 @@ Protein Purification Video 4
 - protein amino acid sequences are uniquely specified by genes, determine structure and function; alterations can result in disease, capture evolutionary history
   - peptide bonds are planar, due to double-bond character from resonance structures
     - both the trans and cis configuration are possible (but almost all are trans)
+    
+    ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\planar.JPG)
     - bonds between $\alpha$-carbon and amino and carbonyl groups are pure single bonds, can rotate freely (not all combinations are possible)
 
 4.2 Secondary structure
 
-- regulary folded segments are considered secondary structure
+- regularly folded segments are considered secondary structure
 - Alpha helix: rodlike structure with tightly coiled backbone, side chains extend outward; CO groups form hydrogen bonds with NH groupps that are four residues ahead
   - tend to be right-handed due to steric clashes
   - not all aminos are stable in an $\alpha$ helix
@@ -329,7 +345,7 @@ Protein Purification Video 4
 5.2 Purification of proteins
 
 - assays can be used to identify if purification is working (uses unique identifier of the protein)
-  - specific activity: ratio of enyzyme activity to amount of protein present at each step
+  - specific activity: ratio of enzyme activity to amount of protein present at each step
 - homogenate: mixture of cellular components created after cell membrane disruption; homogenate is centrifuged and enriched in an organelle, repeating with higher force (differential centrifugation)
   - salting out: most proteins precipitate out of solution at high salinity (salts compete with proteins for solvent); dialysis is required to remove salt and restore protein activity
   - molecular exclusion chromatography (gel-filtration chromatography): separation based on size, carbohydrate beads capture slow molecules; largest molecules exit filtration column first
@@ -377,8 +393,9 @@ $$s=m(1-\bar{v}\rho)/f$$
   - allows molecular understanding of diseases resulting from mutations
   - knowing protein structure can help understand functional gene regions
 
-##### Week 2
+
 Lecture Video 1
+
 - It's important to remember the structure and function of amino acids in order to fully understand the function and behavior of proteins 
 - Space filling model is usually more accurate than the ribbon model
 - All amino acids except one have a chiral center, only L isomers are found in proteins 
