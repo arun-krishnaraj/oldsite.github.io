@@ -11,7 +11,7 @@ header:
 Here's a page with all my evergreen notes:
 
 ##### Fall 2020
-[BCH369 - Introduction to Biochemistry]("/notes/BCH369.html")
+[BCH369 - Introduction to Biochemistry](/notes/BCH369.html)
 
 [BIO321G - Principles of Computational Biology]("/notes/BIO321G.html")
 
