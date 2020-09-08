@@ -33,3 +33,31 @@ Clutch Amino Acid configuration
   - Non-standard Fisher Projection
     - determine R and S configuration of the $\alpha$ carbon, pick S configuration for all except L-Cys
 - L Amino acids can be represented as Fischer projections, Amine down/wedge, R group down/dashed, R group up/wedge
+
+Clutch Zwitterions
+
+- zwitterion: dipolar molecules with two groups of opposite charge (common protein backbone of free amino acids at physiological pH)
+- $pK_a$ is a measure of acidic hydrogen strength
+  - comparing individual $pK_a$ values to pH to determine predominant amino acid structure
+  - $\alpha$ amino and carboxyl groups have $pK_a$ of 9-10.5 and 2
+
+Clutch nonionizable R groups
+
+- R groups that are uncharged (only 2 $pK_a$ values for backbone); 13 non-ionizable amino acids
+
+Clutch isoelectric point
+
+- pH when molecule have no net charge, always the midpoint between 2 $pK_a$ values involving the neutral species
+
+Clutch isoelectric for ionizable R groups
+
+- need to pick 2 of 3 $pK_a$ values to average; pick the two that surround the region that makes the molecule net neutral charge
+
+Clutch peptide bonds
+
+- amide covalent linkages between amino acisd in a polypeptide chain; endergonic dehydration synthesis reactions
+  - hydrolysis is the opposite, used for peptide bond cleavage
+  
+Clutch primary structure
+
+- amino acid composition and sequence of amino acid residues in a chain (N to C terminal)
