@@ -45,10 +45,47 @@ kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femt
   - MS grow playes used to germinate Arabidopsis seeds
   - Nanodrop Spectrophotometer 
   
-  LE 5 10
-  645.1 502.9
-  2.21 2.21
-  2.46 2.66
+#### Lecture 9/9/2020
 
-mass = c*v
-then look for final volume
+- ABA is almost ubiquitous in plants, serves several signalling functions
+  - has also been found to play a role in signalling in some animal lineages
+- most ecosystems (terrestrial, freshwater, and marine) are changing genetically and shifting in response to anthropogenic climate change
+  - experiment conducted on Arabidopsis shows promise of dought modified plant lines
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\plant.JPG)
+  
+  - first ABA-pathway deficient Arabidopsis grows poorly even when properly watered
+- ABA pathway:
+  - ABAR (PYR/PYL) receptor located in cytoplasm; under cellular dehydration, there will be a higher concentration of ABA in the cell (can be synthesized within the cell or transported from elsewhere)
+    - PP2C: protein phosphatase (removed phospates from proteins), becomes bound to ABA ABAR complex
+    - SnRK2: usually without phosphate due to PP2C activity; active in the phosphorylated form
+      - adds phosphates to target proteins
+    - AB15: activated by SnRK2 phosphorylation
+    - SLAC1/anion transport group is also activated by SnRK2 phosphorylation
+    
+#### Lab 9/9/2020
+- What did we do last week?
+  - purified RNA from seedlings treated with ABA or control, then determine RNA quality using spectroscopic analysis and electrophoresis 
+- cDNA synthesis: use purified RNA in reverse transcription to produce complementary DNA
+  - thermostable DNA pol requires a DNA template to synthesize DNA; we use RNA to produce cDNA to make a template for synthesis
+    - we prepare samples that are both +RT and -RT (control samples)
+    - incubate with DNAse to reduce any contaminating genomic DNA still present; DNase is then inactivated
+      - DNase will not be 100% comoplete, some residual genomic DNA will be present and be used as a template for DNA; we need -RT samples to quantify this effect
+    - 
+- we need to determine with primers for Arabidopsis *OLE1* gene expression show acceptable properties for use in qPCR
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

@@ -33,6 +33,23 @@ X~ 0 with probability 1-p(=q); 1 with probability p
 Let $X_1,...,X_n$ be independent Bernoulli(p). Then your total # of successes will be $S=X_1+X_2+...+X_n$, which results in Binomial(n,p). For the pmf: $p_S(k)= choose(n k) p^k(1-p)^{n-k)$ fro all k = 0...n.
 
 
+#### Lecture 9/9/2020
+- What is statistics?
+  - Identify the broad population of interest about which you're trying to draw conclusions
+  - What are we trying to measure?
+  - The members of the population which you are trying to measure
+    - cases (observational units) should become private labels 
+    - variables can be quantitative (discrete or continuous) or qualitative (nominal or ordinal)
+  - focus on figuring out the relative likelihoods of different outcomes
+    - Probabilistic model:
+      - named distribution with input parameters:
+        - binomial(n,p); p is usually the parameter of interest 
+        - geometric(p)
+        - Poisson($\lambda$)
+        - Normal(mean = $\mu$, variance = $\sigma^2$)
+      - we are often interested in the behavior of non-named distributions 
+  - collect and analyze data: find appropriate shape of distribtion and/or values of interest
+    
 ### Labs and Homeworks
 
 ### Projects

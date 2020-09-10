@@ -1,0 +1,112 @@
+---
+title: "BIO325 - Genetics"
+author: "ArunK"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[`r knitr::asis_output("\U1F332")`](https://arun-krishnaraj.github.io/evergreen)
+
+### Condensed Notes
+
+#### Chapter 2: Mendel's Principles of Heredity
+##### 2.1 The Puzzle of Inheritance
+
+- artificial selection was the first example of application of genetic principles
+- Mendel chose and appropriate model organism, and observed discrete traits
+
+##### 2.2 Genetic Analysis according to Mendel
+
+- Monohybrid crosses result in uniform $F_1$ and a ratio of 3:1 in $F_2$ of yellow to green; indicates that yellow was dominant and green was recessive, different genes had varying alleles
+- law of segregation: each gamete receives a single parent allele and unite at random during fertilization
+  - Mendel's results illustrate sum and product rules
+- test crosses to homozygous recessive to determine genotype
+- law of independent assortment: alleles segregate independently of each other, shown by dihybrid crosses
+- molecular influence dtermines whether allels are dominant or recessive, as well as phenotypic effect
+
+##### 2.3 Mendelian Inheritance in Humans
+
+- Family history or pedigree is used by geneticists
+- can only be applied to single gene traits
+- vertical patterns indicate dominant, horizontal indicate recessive
+
+#### Chapter3: Extensions to Mendel's Laws
+
+##### 3.1 Extensions for single-gene Inheritance
+
+- incomplete dominance is when progeny looks like neither parent
+- co-dominance is when progeny looks like both parents
+- a gene may have many alleles, dominance is relative to second allele
+- mutations are the source of new alleles
+- wild type alleles (+) are the most common (>1%)
+  - other alleles are considered mutant
+  - polymorphic alles have multiple wild types 
+- a single fene contributing to many charcteristics is pleiotropy 
+- an allele that negatively impacts survival of homozygotes is a recessive lethal allele (AY mice)
+  - delayed onset of lethality can allow deleterious alleles to be passed on
+  
+##### 3.2 Extension to Mendel for Two-Gene Inheritance
+- certain genes can be additively controlled by two independently assorting genes
+- Epistasis: when one gene masks the effects of alleles at another gene
+  - Recessive epistasis: homozygous recessive masks both alleles of another gene (9:3:4)
+  - Reciprocal recessive epistasis: homozygous recessive of each gene masks the dominant allele of the other gene (9:7)
+  - Dominant epistasis I: dominant allele of one gene masks both alleles of another gene (12:3:1)
+  - Dominant epistasis II: dominant allele of one gene masks effects of dominant allele of other gene (13:3)
+  - Redundancy: one dominant allele at either of two genes is necessary for proper function (15:1)
+- locus heterogeneity: mutation in any of two or more genes results in the same phenotype
+- using complementation test, we can find if mutations reside in the same gene: isolate large number of independent mutants and cross
+
+##### 3.3 Extensions to Mendel for Multi-factorial Inheritance
+- penetrance: proportion of individuals with a genotype that shows expected phenotype
+- expressivity: the degree to which a phenotype is expressed (variable or unvarying)
+- modifier genes: alter phenotypes produced by alleles of other genes to a secondary degree
+- environmental influences can cause changes in phenotype
+  - conditional lethals can be activated by environmental factors
+  - phenocopy: change in phenotype as a result of environmental agents mimicking the effects of gene mutation
+  
+#### Chapter 4: The Chromosome Theory of Inheritance
+##### 4.1 The carriers of genes
+- Leeuwenhoek: observed spermatozoa, sperm and eggs are the only elements contributing equally to zygote formation
+- gametes and other single set: haploid vs zygotes and autosomes (diploid)
+- homologs: chromosomes that contain the same set of genes
+
+##### 4.2 Sex chromosomes and sex determination
+- sex chromosomes: two distinct chromosomes that provide the basis of sex determination
+  - in humans, the SRY gene determines maleness, confirmed by sex reversal studies
+- species vary in sex determination mechanisms (XY where female is homogametic, ZW where male is homogametic)
+
+##### 4.3 Mitosis: Cell division that preserves chromosom number
+- most of cell life: mass of chromatin in nuclear envelope
+- Interphase
+  - $G_1$, S (DNA synthesis and chromosomal replication), $G_2$
+- Mitosis
+  - prophase: chromosome condenses in nuclear envelope, sister chromatids are connected at their centromeres
+  - prometaphase: nuclear envelope breaks down, microtubules attach to chromatids
+    - mitotic spindle: kinetochore, polar and astral microtubules
+  - metaphase: chromosomes align on the metaphase plate with sister chromatids facing opposite poles
+  - anaphase: connection between centromeres is severed, chromatids move to opposite poles
+  - telophase: nuclear membranes re-form, spindle fibers disappear
+  - cytokinesis: contractile ring or cell plate divides the cells, can be delayed to create multi-nucleated animal cells (syncytium)
+- regulatory checkpoints ensure correct chromosome separation, duplication, alignment at metaphase plate
+
+##### 4.4 Meiosis: cell divisions that halve chromosome number
+- chromosomes replicate once but nucleus divides twice
+- Meiosis I (Reductional Division): homologs pair, chromosomes replicate, exchange parts
+  - Prophase I: chromatin condenses, pairing of homologous chromosomes
+    - Leptotene: long, thin chromosomes begin to thicken
+    - zygotene: each chromosome seeks its homolog and is connected through synapsis (using the protein synaptonemal complex)
+    - pachytene: recombination nodules exchange parts between nonsister chromatides
+    - diplotene: dissolution of synaptonemal complex and slight separation of homologous chromosomes, remain tightly merged along their chiasmata (cross over site)
+    - diakinesis: further condensation of the chromatids, the end of diakinesis is the same as prometaphase
+  - Metaphase I: paired homologs are attached by spindle poles at their kinetochore (random assortment)
+  - Anaphase I: homologs are separated, sister chromatids remain attached
+  - Telophase I: nuclear membranesform around separated chromosomes, cytokinesis
+  - Interkinesis I: decondensation then re-condensation without replication
+  
+
+

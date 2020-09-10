@@ -43,13 +43,24 @@ knitr::opts_chunk$set(echo = TRUE)
 - Single strand DNA annealing model: double strand cut repaired in a single duplex; repeat sequences in higher eukaryotes used to hybridize after chewing and repair using complementary synthesis. Usually results in deletions due to microhomology
   - Multiple repeats can result in repeat contraction or deletion
   
+#### 9/9/2020
+- Holliday junction resolution: 
+  - crossed phosphodiester bonds are severed, new ligases seal the nicks to produce parental configuration (same pair of strands used for exchange and resolution)
+  - non-crossed strands can be severed and crossed to create 2 crossed phosphodiester pairs to produce cross over configuration (different pairs of strands used for exchange and resolution)
+- double strand break repair creates 2 Holliday junctions which can resolve in the parental or cross-over configurations
+  - both junctions need to resolve in the same way (inner or outer resolving, creating parental or cross-over products) in order to result in parental flanking configuration; otherwise there is cross-over of flanking markers
+- X form Holliday junction can shift into isomeric H form
+  - repulsion of phosphodiester backbones can force the arms away from each other, results in a square planar junction
+    - we can then model resolution of parental and crossover configurations by cutting pairs of phosphodiester linkages
+    - certain proteins can bind to the square planar form of junction and shift the lengths of the arms to result in heteroduplex or homoduplex creation
+  
 #### Section 1 Reading
 Homologous Genetic Recombination  
 
 - Recombination: process (almost uniform) of reshuffling
 - diploid organisms contain two copies of each chromosome (autosome)    
   - sperm and egg pick up meiotic recombination and form new combinations  
-- Homolous recombination: exchange between partners with high sequence homology (contrasted to site-specific recombination)
+- Homologous recombination: exchange between partners with high sequence homology (contrasted to site-specific recombination)
   - initiation, strand exchange, branch migration, heteroduplex creation and resolution
 - How does recombination occur in haploid bacteria?
   - sister chromosomes can be created , but aren't useful for creating variation unless mutations are introduced
