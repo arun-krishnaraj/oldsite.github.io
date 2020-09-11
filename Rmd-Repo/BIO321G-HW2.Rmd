@@ -1,0 +1,123 @@
+---
+title: "BIO321G-HW2"
+author: "ArunK"
+date: "9/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+### Problem 1
+```{r}
+fibonacci <- function(n){
+  fibs <- rep(0, n+1)
+  names(fibs) = 0:n
+  fibs[2] = 1
+  for (i in 2:n+1) {
+    fibs[i] = fibs[i-1] + fibs[i-2]
+  }
+  return(fibs)
+}
+```
+
+### Problem 2
+```{r}
+fib10 = fibonacci(10)
+fib10diff = diff(fib10)
+fib10diff
+```
+
+A.
+`fib10diff`has length 10.
+
+B.
+`fib10diff` produces a shifted Fibonacci sequence with an extra starting term; we can see that `fib10diff[2:10]` is equivalent to `fib10[1:9]`, so we obtain a vector containing a Fibonacci sequence with 2 fewer terms.
+
+C.
+`diff` calculates the difference between each vector entry and the prior entry; these differences are then returned as a vector. `diff` drops entries without prior entries to difference, resulting in an output vector with length reduced by 1.
+
+### Problem 3
+```{r}
+fib10diffCumul = cumsum(fib10diff)
+fib10diffCumul
+length(fib10diffCumul)
+```
+
+A.
+`fib10diffCumul` has length 10.
+
+B.
+`fib10diffCumul` replicates the sequence produced by `fib10diff`, once again shifted 2 indices left; `fib10diffCumul` contains the Fibonacci sequence equivalent to `fib10diff[3:10]`.
+
+C.
+Extending the relationship between `fib10diff` and `fib10`, `fib10diffCumul` contains a sequence equivalent to `fib10[1:10]`; `fib10diffCumul` results in the Fibonacci sequence of `fib10`, shifted 1 index left.
+
+D. 
+`cumsum` returns the cumulative sum of vector entries to the left of a given index for each index; it outputs a vector of cumulative sums with length equal to the input vector.
+
+### Problem 4
+```{r}
+`%o%` = function(f,g){
+  composed = function(x){f(g(x))}
+  return(composed)
+}
+
+laggedRatio = exp %o% diff %o% log
+whatIsIt = laggedRatio(fib10)
+whatIsIt
+```
+
+A.
+`whatIsIt` has length 10.
+
+B.
+If we multiply each entry in `fib10` by the respective entry in `whatIsIt`, we get the next entry in `fib10`; that is, `fib10[["1"]] * whatIsIt[["2"]]` produces `fib10[["2"]]` and so forth. The first entry of `whatIsIt` is `Inf` since we are returning $\frac{1}{0}$.
+
+C.
+`laggedRatio` takes the natural log of each input vector entry, differences it with the prior entry, and finally exponentiates the result. So we have $e^{ln(F_n) - ln(F_{n-1})} = e^{ln(\frac{F_n}{F_{n-1}})} = \frac{F_n}{F_{n-1}}$ for the n$^{th}$ entry of `whatIsIt`, which explains why we can multiply the n$^{th}$ entry of `whatIsIt` and the n-1$^{th}$ entry of `fib10` to obtain the n$^{th}$ entry of `fib10`.
+
+D. 
+The later values of `whatIsIt` appear to approach a single value near 1.618.
+
+### Problem 5
+```{r}
+goldenRatio = (1+sqrt(5))/2
+fibVgeo = data.frame(
+  t = 0:10,
+  fib = fib10,
+  geo = goldenRatio^(0:10)/sqrt(5)
+)
+fibVgeo
+laggedRatio(fibVgeo$geo)
+```
+
+A.
+`laggedRatio(fibVgeo$geo)` returns a vector consisting of 1.618034 repeated 10 times.
+
+B.
+`fibVgeo$geo` represents geometric growth; each point is the product of the prior point and some fixed rate.
+
+```{r}
+library(ggplot2)
+theme_set(theme_bw())
+gg = ggplot(fibVgeo, aes(x=t,y=fib)) + geom_point() + geom_line()
+gg = gg + geom_line(aes(y=geo), color = "red")
+print(gg)
+```
+ 
+ C.
+The black line connects the Fibonacci numbers, while the red line plots the geometric growth curve represented by `fibVgeo$geo`; from **4D**, we know that as the Fibonacci sequence progresses the rate term approaches approximately 1.68. As the sequence continues we should expect the rate term to continue converging to the Golden Ratio, which would result in a decreasing residual to the red line; the lines should become increasingly identical.
+ 
+### Problem 6
+
+Considering a new species where individuals are able to give birth when at least one year old, we should expect to eventually see a higher number than our original species at some distant time. If 1 individual appears at time t=10, they will be one year old at t=11 and will reproduce; the resulting two individuals will be at least one year old at t=12 and will reproduce. It's clear that at any discrete time interval, all individuals alive will be at least one year old, and can thus reproduce to double the total population. This corresponds to a geometric growth curve with growth rate of 2; we should expect this new species to experience faster population growth acceleration than the initial species due to this growth rate. At some much later time, the new species will have exceeded the initial species.
+
+
+
+
+
+ 

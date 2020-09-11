@@ -18,6 +18,8 @@ knitr::opts_chunk$set(echo = TRUE)
 - General R review using [this intro file](https://arun-krishnaraj.github.io/Rmd-Repo/bio321g-1-introduction.html)
 - Finished up prior R review, introduction to [discrete population growth](https://arun-krishnaraj.github.io/Rmd-Repo/bio321g-2-1-discrete-population-growth.html)
 
+### 9/10/2020 
+- Continuous time models
 ### Labs and Homeworks
 - [Blank HW 1](https://arun-krishnaraj.github.io/Rmd-Repo/hw_assignment_1.pdf)
 

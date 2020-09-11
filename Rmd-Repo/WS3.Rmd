@@ -1,0 +1,309 @@
+---
+title: "WS3"
+author: "SDS348"
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Visualization II
+
+```{R}
+library(ggplot2) #the msleep dataset is part of the ggplot2 package
+
+head(msleep)
+str(msleep)
+
+#notice it displays differently... let's make it a dataframe for now
+
+msleep<-as.data.frame(msleep)
+``` 
+
+Make a scatterplot of sleep_total (y-axis) and sleep_rep (x-axis) with ggplot
+
+```{R}
+ggplot(msleep, aes(sleep_total,sleep_rem)) + geom_point()
+``` 
+
+Add a smoothing function to the previous plot with geom_smooth()
+
+```{R}
+ggplot(msleep, aes(sleep_total,sleep_rem)) + geom_point() + geom_smooth()
+``` 
+
+Make it a linear regression line instead of loess
+
+```{R}
+ggplot(msleep, aes(sleep_total,sleep_rem)) + geom_point() + geom_smooth(method="lm")
+``` 
+
+Go back to your original scatterplot. Now, in aes(), map vore onto color and bodywt onto size
+
+```{R}
+ggplot(msleep, aes(sleep_total,sleep_rem,size=bodywt, color=vore)) + geom_point()
+``` 
+
+Create a new dataset excluding rows where vore is NA
+
+```{R}
+msleep1<-msleep[!is.na(msleep$vore),] #remove rows where vore==NA
+ggplot(msleep1, aes(vore))+geom_bar(stat="count")
+``` 
+
+Can leave off stat="count" (it's the default behavior)
+
+```{R}
+ggplot(msleep1, aes(x = vore))+geom_bar() #leave off stat="count"
+``` 
+
+Create a new variable with `ifelse()` function
+
+```{R}
+#create a new variable with ifelse(test, yes, no)
+
+msleep1$size <- ifelse(msleep1$bodywt < median(msleep1$bodywt), "Small", "Large") 
+
+str(msleep1)
+
+``` 
+
+Map new size variable onto fill=
+
+```{R}
+ggplot(msleep1, aes(x = vore, fill=size)) + geom_bar()
+``` 
+
+Flip the factor levels manually to change ordering/coloring
+
+```{R}
+msleep1$size <- factor(msleep1$size, levels = c("Small","Large")) 
+
+ggplot(msleep1, aes(x = vore, fill=size)) + geom_bar()
+``` 
+
+Put bars side-by-side with position="dodge"
+
+```{R}
+ggplot(msleep1, aes(x = vore, fill=size))+
+  geom_bar(position="dodge") 
+``` 
+
+Make bars proportions of size for each vore category with position="fill"
+
+```{R}
+ggplot(msleep1, aes(x = vore, fill=size))+
+  geom_bar(position="fill") 
+``` 
+
+Make bars proportions of vore category for each size
+
+```{R}
+ggplot(msleep1, aes(x = size, fill=vore))+ 
+  geom_bar(position='fill') 
+```
+
+These are equivalet, but I like the first better
+
+```{R}
+ggplot(msleep1, aes(vore))+
+  geom_bar(stat="count")
+
+ggplot(msleep1, aes(vore))+
+  stat_count(geom="bar")
+``` 
+
+```{R}
+ggplot(msleep1, aes(x = vore))+
+  geom_bar(aes(y=sleep_total), stat="summary", fun=mean) 
+``` 
+
+Add standard error ($\frac{s}{\sqrt{n}}$) bars
+
+```{R}
+ggplot(msleep1, aes(x = vore, y = sleep_total))+
+  geom_bar(stat="summary",fun=mean)+
+  geom_errorbar(stat="summary", fun.data=mean_se) 
+
+#same as
+
+ggplot(msleep1, aes(x = vore, y = sleep_total))+
+  geom_bar(stat="summary")+
+  geom_errorbar(stat="summary") 
+``` 
+
+95% CI instead
+
+```{R}
+ggplot(msleep1, aes(x = vore, y = sleep_total))+
+  geom_bar(stat="summary",fun=mean)+
+  geom_errorbar(stat="summary", fun.data=mean_cl_normal) 
+``` 
+
+Standard error bars on a grouped bar plot (position="dodge")
+
+```{R}
+ggplot(msleep1, aes(x = vore, y = sleep_total, fill=size))+
+  geom_bar(stat="summary", fun=mean, position="dodge")+
+  geom_errorbar(stat="summary", fun.data=mean_se, position="dodge")
+``` 
+
+OK, let's make a bigger bar plot
+
+
+```{R}
+ggplot(msleep1, aes(order))+
+  geom_bar(aes(fill=order))
+```
+
+Yuck, too crowded in the x-axis! Let's rotate them and whack the legend
+
+```{R}
+ggplot(msleep1, aes(order)) +
+  geom_bar(aes(fill=order)) +
+  theme(axis.text.x = element_text(angle=45, hjust=1), 
+        legend.position="none") 
+```
+
+Alternatively, we could rotate this sucker with coord_flip()
+
+```{R}
+ggplot(msleep1, aes(order))+
+  geom_bar(aes(fill=order))+ 
+  coord_flip()+
+  theme(legend.position="none")
+
+``` 
+
+Average bodyweight for each order?
+
+```{R}
+ggplot(msleep1, aes(order))+
+  stat_summary(aes(y = bodywt, fill = order),geom = "bar", fun=mean) +
+  theme(axis.text.x  = element_text(angle=45, hjust = 1), legend.position="none")
+
+``` 
+
+
+Proportion of vore for each size again
+
+```{R}
+ggplot(msleep1, aes(x = size, fill=vore))+
+  geom_bar(position='fill') 
+``` 
+More tick marks? Set breaks argument manually
+
+```{R}
+ggplot(msleep1, aes(x = size, fill=vore))+
+  geom_bar(position='fill')+scale_y_continuous(breaks = seq(0,1,.1)) 
+```
+
+Label them as percentages rather than decimals
+
+```{R}
+ggplot(msleep1, aes(x = size, fill=vore))+
+  geom_bar(position='fill')+scale_y_continuous(breaks=seq(0,1,.1), labels=scales::percent) 
+``` 
+
+Label them nonsensically as dollar amounts
+
+```{R}
+ggplot(msleep1, aes(x = size, fill=vore))+
+  geom_bar(position='fill')+scale_y_continuous(labels=scales::dollar) 
+``` 
+
+Let's look at a plot of brain weight (y-axis) by body weight (x-axis)
+
+```{R}
+ggplot(msleep1, aes(bodywt, brainwt, color=vore))+geom_point() #note the warning! it is dropping missing values!
+``` 
+Who are the big daddys?
+
+```{R}
+msleep1[msleep1$bodywt>1000,] 
+``` 
+We can limit what is shown in our plot by manually setting x/y limits
+
+```{R}
+ggplot(msleep1, aes(bodywt, brainwt, color=vore))+geom_point()+
+  scale_x_continuous(lim=c(0,1000)) 
+``` 
+
+```{R}
+ggplot(msleep1, aes(bodywt, brainwt, color=vore))+geom_point()+
+  scale_x_continuous(lim=c(0,1000))+
+  scale_y_continuous(lim=c(0,2)) 
+``` 
+
+Same thing, but sometimes quicker
+
+```{R}
+ggplot(msleep1, aes(bodywt, brainwt, color=vore))+geom_point()+
+  xlim(0,1000)+ylim(0,2) 
+``` 
+Let's make the tick marks increase geometrically rather than linearly
+
+```{R}
+ggplot(msleep1, aes(bodywt, brainwt, color=vore))+geom_point()+
+  scale_x_log10()+scale_y_log10() 
+
+#interesting!
+```
+```{R}
+## increase threshold for scientific notation
+options(scipen = 999) 
+
+ggplot(msleep1, aes(bodywt, brainwt, color=vore))+geom_point()+
+  scale_x_log10()+scale_y_log10()
+``` 
+
+
+```{R}
+ggplot(msleep1, aes(bodywt, brainwt, color=vore))+geom_point()+
+  coord_trans(x="log10",y="log10")+scale_x_continuous(breaks=seq(0,10000,2500))+
+  theme(axis.text.x=element_text(angle=90, vjust=.5, hjust=1))
+``` 
+Change fill colors!
+
+```{R}
+ggplot(msleep1, aes(x = size, fill=vore))+
+  geom_bar(position='fill')+scale_y_continuous(labels=scales::percent)+
+  scale_fill_brewer() 
+```
+
+```{R fig.height=10}
+RColorBrewer::display.brewer.all()
+```
+
+Color points by a numeric/continuous variable 
+
+```{R}
+msleep1<-msleep[!is.na(msleep$brainwt),]
+
+ggplot(msleep1, aes(sleep_total,sleep_rem))+
+geom_point(aes(color=log10(brainwt)), size=3)
+
+``` 
+
+Map a different color onto the gradient with scale_color_gradient
+
+```{R}
+ggplot(msleep1, aes(sleep_total,sleep_rem))+
+geom_point(aes(color=log10(brainwt)), size=3)+
+  scale_color_gradient(low="yellow", high="red")
+```
+
+Make a two-dimensional density plot!
+
+```{R}
+# Run the same plot from before, but add +geom_density2d()
+
+ggplot(msleep1, aes(sleep_total, sleep_rem))+geom_density2d()
+
+## Why would we want this?
+
+```
+
+
