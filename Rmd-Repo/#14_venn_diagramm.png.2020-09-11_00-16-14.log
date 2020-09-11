@@ -1,0 +1,13 @@
+INFO [2020-09-11 00:16:14] $x
+INFO [2020-09-11 00:16:14] list(set1, set2, set3)
+INFO [2020-09-11 00:16:14] 
+INFO [2020-09-11 00:16:14] $category.names
+INFO [2020-09-11 00:16:14] c("Set 1", "Set 2 ", "Set 3")
+INFO [2020-09-11 00:16:14] 
+INFO [2020-09-11 00:16:14] $filename
+INFO [2020-09-11 00:16:14] [1] "#14_venn_diagramm.png"
+INFO [2020-09-11 00:16:14] 
+INFO [2020-09-11 00:16:14] $output
+INFO [2020-09-11 00:16:14] [1] TRUE
+INFO [2020-09-11 00:16:14] 
+ERROR [2020-09-11 00:19:37] Impossible: cross section area too large.
