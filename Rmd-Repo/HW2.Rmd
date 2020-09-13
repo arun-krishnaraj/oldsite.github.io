@@ -1,0 +1,155 @@
+---
+title: "HW 2"
+author: "SDS348 Fall 2020"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+---
+
+```{r global_options, include=FALSE}
+#DO NOT EDIT THIS CHUNK OR ANYTHING ABOVE IT!
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = "center", warning = F, message = F, tidy=T, tidy.opts=list(width.cutoff=50))
+```
+
+## Arun Krishnaraj - ak37738
+
+**This homework is due on Sep 13, 2020 at 11:59pm. Please submit as an HTML file on Canvas.**
+
+*For all questions, include the R commands/functions that you used to find your answer. Answers without supporting code will not receive credit.*
+
+> #### Review of how to submit this assignment
+>All homework assignments will be completed using R Markdown. These `.Rmd` files consist of >text/syntax (formatted using Markdown) alongside embedded R code. 
+>When you have completed the assignment (by adding R code inside codeblocks and supporting text outside of the codeblocks), create your document as follows:
+
+> - Click the arrow next to the "Knit" button (above) 
+> - Choose "Knit to HTML"
+> - Go to Files pane and put checkmark next to the correct HTML file
+> - Click on the blue gear icon ("More") and click Export
+> - Download the file and then upload to Canvas
+
+---
+
+### Question 1: (2 pts)
+
+##### The dataset `ChickWeight` contains information about the weights (in grams) of chicks on different diets over time (at 2-day intervals).
+
+```{R}
+ChickWeight <- as.data.frame(ChickWeight)
+head(ChickWeight,10)
+```
+
+##### How many distinct chicks are there? How many distinct time points? How many distinct diet conditions? How many chicks per diet condition at the start of the experiment (i.e., at Time 0)? For example, you could use some combination of `table()` and `length()` to answer these questions. *Do not forget to include the code you used to answer these questions!*
+
+```{R}
+length(table(ChickWeight$Chick))
+length(table(ChickWeight$Time))
+length(table(ChickWeight$Diet))
+for (i in 1:4) {
+  print(paste(nrow(ChickWeight[ChickWeight$Time == 0 & ChickWeight$Diet == i,]), "initial chicks in diet condition", i))
+}
+```
+
+There are 50 distinct chicks, 12 distinct time points, 4 distinct diet conditions. There is an average of 12.5 chicks per diet condition at the start of the experiment; there were 20 chicks in diet condition 1, and 10 chicks in each of diet condition 2, 3, and 4.
+
+### Question 2.1: (2 pts)
+
+##### Using the ggplot2 package, create a simple scatterplot showing chick `weight` (y-axis) as a function of `Time`. This time, relabel the axes more informatively and give the plot a title.
+
+```{R}
+library(ggplot2)
+ggplot(ChickWeight,aes(Time, weight)) + geom_point() + labs(x = "Time (days)", y = "Chick Weight (grams)", title = "Chick Weight over Time") 
+```
+
+
+### Question 2.2: (3 pts)
+
+##### Building upon the previous plot, map `Chick` to an aesthetic that assigns a color to each chick's data points. Add lines that connect each chick's points together. Finally, remove the legend.
+
+```{R}
+ggplot(ChickWeight,aes(Time, weight, color = Chick)) + geom_point() + labs(x = "Time since birth (days)", y = "Chick Weight (grams)", title = "Chick Weight over Time") + geom_line() + theme(legend.position = "none")
+```
+
+
+### Question 2.3: (2 pts)
+
+##### Take the plot you made in Question 3 and remove the color from the points only (leave the lines colored by chick, but make all of the points white). Put the points *on top of* the lines.
+
+```{R}
+ggplot(ChickWeight,aes(Time, weight)) + labs(x = "Time since birth (days)", y = "Chick Weight (grams)", title = "Chick Weight over Time") + geom_line(aes(group = Chick, color = Chick)) + geom_point(color = "white") + theme(legend.position = "none")
+```
+
+### Question 2.4: (2 pts)
+
+##### Now, facet by diet. Is it clearer from this plot which diet is the best? (No real right answer: Just show me you are thinking about it.)
+
+```{R}
+ggplot(ChickWeight,aes(Time, weight)) + labs(x = "Time (days)", y = "Chick Weight (grams)", title = "Chick Weight over Time") + geom_line(aes(group = Chick, color = Chick)) + geom_point(color = "white") + theme(legend.position = "none") + facet_wrap(~Diet)
+```
+
+This plot provides a clearer depiction of the effects of each diet on chick weight over time; none of the prior plots provide information on chick weight behavior for each diet, which makes it difficult to interpret the impact the diet has. Depending on what the goal of these diets is, we could easily choose the facet that visually reflects this.
+
+
+### Question 2.5: (2 pts)
+
+##### Go back to your plot from question 2.1 and fit a *linear regression line* (not the default *loess*!) to the chicks in each diet with `geom_smooth(...)`. There should be 4 separate straight lines, one for each diet, each a separate color. Now can you see more clearly which diet results in greater weight? Does the effect of diet on weight appear to depend on time?
+
+```{R}
+library(ggplot2)
+ggplot(ChickWeight,aes(Time, weight, color = Diet)) + geom_point() + geom_smooth(method = "lm", se = F) + labs(x = "Time (days)", y = "Chick Weight (grams)", title = "Chick Weight over Time") 
+```
+
+
+The linear regressions illustrate more clearly the effect each diet has on weight over time. While the effect of diet seems to only become apparently after some time, the chicks in diets 3 and 4 gained more weight per day than those in diet 1 and 2, as illustrated by the steeper regression slope.
+
+### Question 3.1: (2 pts)
+
+##### A scatterplot might not be the best way to visualize this data: It calls attention to the relationship between weight and time, but it can be hard to see the differences between diets. A more traditional approach for achieving this list desideratum would be to a barplot of group means with standard error bars showing +/- 1 standard error.
+
+##### Create a plot using `geom_bar` where each bar's height corresponds to the average chick weight for each of the four diet conditions. Rename the y-axis to include units (e.g., with scale_y_continuous(`name=`...), with ylab(...), with labs(...)) and make the major tick marks go from 0 to 150 by 25 (with `breaks=`).
+
+
+```{R}
+library(ggplot2)
+ggplot(ChickWeight, aes(x=Diet, y= weight)) + geom_bar(stat = "summary", fun=mean) + scale_y_continuous(breaks = seq(0,150,by=25), name = "Avg Chick Weight (grams)")
+```
+
+### 3.2 (3 pts)
+
+##### Add error bars showing $\pm 1\ SE$ using `geom_errorbar(stat="summary")`. Make the error-bars skinnier by adding a `width=` argument. Color the bars (not the error bars, but the bar chart bars) by diet and change from the default color scheme using a `scale_fill_` or a `scale_color_` 
+
+```{R}
+library(ggplot2)
+ggplot(ChickWeight, aes(x=Diet, y= weight)) + geom_bar(stat = "summary", aes(fill = Diet)) + scale_fill_brewer() +
+geom_errorbar(stat="summary", width = .5)  + scale_y_continuous(breaks = seq(0,150,by=25), name = "Avg Chick Weight (grams)") 
+```
+
+### 3.3 (2 pts)
+
+##### Take your code from 3.2 and replace geom_bar() with geom_point. Remove the `breaks=` argument from `scale_y_continuous`. Make the points larger and color them all red. Put them *on top of* the error bars.
+
+```{R}
+library(ggplot2)
+ggplot(ChickWeight, aes(x=Diet, y= weight)) + geom_errorbar(stat="summary", width = .5) +
+  geom_point(color = "red", size = 2) + scale_y_continuous( name = "Avg Chick Weight (grams)") 
+```
+
+
+### Bonus question (1 pt)
+
+##### Go back to your plot from question 2.1. Color the points by diet. Now, find a way (e.g., using `stat=summary` and `fun.y=mean`) to plot the mean chick weight at each time point, colored and grouped by diet (I would use either `geom_point` with a different shape/size than the rest of the points or, even better, `geom_step"`, but there are lots of other ways). Then, plot the *overall* mean chick weight at each time point (i.e., not by diet) on top, again using `stat_summary()` (make it a different color, size, or shape than the rest of the points).
+
+##### Note I won't be giving any hints here (it is purely for bonus)!
+
+```{R}
+library(ggplot2)
+ggplot(ChickWeight,aes(Time, weight)) + geom_point(aes(color = Diet), alpha =.6, size = 1.5, pch =1) + labs(x = "Time (days)", y = "Chick Weight (grams)", title = "Chick Weight over Time") + stat_summary(fun.y = mean, geom = "point", aes(group = Diet, color = Diet), size = 1.7) + theme_minimal() + scale_color_brewer(palette = "Dark2") + stat_summary(fun.y = mean, geom = "point", alpha = .9, size = 2) 
+```
+
+
+```{R, echo=F}
+## DO NOT DELETE OR MODIFY THIS CHUNK: IT MUST BE PRESENT TO RECEIVE CREDIT FOR THE ASSIGNMENT
+sessionInfo(); Sys.time(); Sys.info()
+```

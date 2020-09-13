@@ -453,3 +453,74 @@ Clutch primary structure
 Clutch altering primary structure
 
 - composition or sequence can be altered; slight amino acid changes can change shape and function (depends on property of replaced amino acid)
+
+#### Week 3 Lectures
+
+Enzymes Intro Video 1
+
+-assay: test for the presence of protein activity; used to check for protein purity
+  - used to measure how fast a chemical reaction occurs (rate of appearance of product or disappearance of a reactant)
+  - specific activity depends on the protein: can be enzymatic, binding, or transport
+- enzymes can sometimes catalyze both forward and reverse reactions; usually named descriptive to their impact on the substrate
+  - usually associated with a standard EC classification system, refers to the specific function and action of the enzyme
+  - some enzymes require cofactors for activity
+    - coenzyme or metal ion: coenzymes can be prosthetic groups or cosubstrates depending on if they stay bound to the enzyme
+    
+Free Energy Video 2
+
+- Free energy determines if a reaction is spontaneous; kinetics deals with how fast a change is 
+  - reaction are spontaneous if $\Delta G < 0$ (products have lower free energy than reactants, exergonic); non-spontaneous if $\Delta G > 0$ (products have a higher free energy than reactants, endergonic)
+    - equilibrium favors the lower free energy state
+    - some amount of activation energy is required to get reactants over the transition state
+    - enzymes are able to change the activation energy of the transition state, speeding up the reaction process; enzymes cannot change the $\Delta G$ of a reaction
+- lock and key model has the substrate and enzyme as unchanging pieces that fit together perfectly; induced fit included enzymatic structural changes when substrate enters
+  - binding energy is released, lowering the level of activation energy required for formation of the transition state
+
+Enzyme Kinematics Video 3
+
+- we can use reaction speed measurements to learn more about the mechanism
+  - rate law: relationship between reaction velocity and concentration of substrate, experimentally derived; many biochemical reactions have second-order rate equations
+    - can be written as pseudo-first order rate laws if the reaction rate doesn't change much based on the concentration of one of two substrates
+  - initial velocities can be found by varying starting substrate concentration; max velocity is the limit on initial speed, limited by enzyme 
+- Michaelis-Menten Equation: explains hyperbolic velocity vs initial concentration to understand the mechanism of enzymes
+$V_o = \frac{Vmax[S]}{[S]+K_m}$
+- review this
+
+Enzyme Kinematics Video 4 
+
+- we can also solve for the point-slope form (Lineweaver-Burk plot) $\frac{1}{V_o}=\frac{K_m}{V_{max}}\frac{1}{[S]}+\frac{1}{V_{max}}$
+- the best measure of catalytic efficiency is $\frac{k_{cat}}{K_M}$
+  - diffusion imposed limit is $10^8-10^9$ (mol/L)$^{-1}$s$^{-1}$, these enzymes are perfect
+- $k_m$ indicates the substrate concentration at which the reaction rate is half of the $V_{max}$
+- $k_{cat}$ measures the rate of catalytic process
+- sigmoidal rate curves signify allosteric enzymes; catalysts and information sensors, not just M-M enzymes
+  - allosteric enzymes can be regulated by products of their pathways; pathway rate depends on something besides the enzyme
+  - synthesis can be regulated by feedback inhibition
+  - concerted model can explain the sigmoidal pattern
+    - sequential models include intermediate changes induced by a single substrate binding, until the binding increases in speed
+- effectors can speed up or slow down an allosteric enzymatic reaction
+  
+Inhibitors Video 5
+
+- types of reversible inhibition
+  - competitive inhibition: inhibitor and substrate are similar; inhibitor prevents substrate from binding 
+    - change in $k_m$ but $V_{max}$ is the same; effect of inhibitor is reduced when substrate concentration is high
+  - uncompetitive inhibition: inhibitor binds to the enzyme-substrate complex
+    - inhibitor stops the product from being formed if binding; lower $V_{max}$ and $k_m$
+  - noncompetitive inhibition: inhibitor binds to enzyme or enzyme-substrate complex
+    - $k_m$ is the same, lower $V_{max}$
+- irreversible inhibitors bind tightly to enzymes, no kinetic products are formed
+
+Chymotrypsin Video 6
+
+- Common catalytic strategies
+  - covalent catalysis
+  - general acid-base catalysis
+  - metal ion catalysis
+  - catalysis by approximation and orientation
+- Hydrophobic pocket of Chymotrypsin accommodates a specific R group (acylation creates an tetrahedral intermediate, splits the peptide chain then attaches a hydroxide group)
+  - catalytic triad of chymotrypsin (Asp 102 hydrogen bonds to His 57, which hydrogen bonds to Ser 195; this enables the His oxygen to do its catalytic function)
+    - scissle bond is the carbonyl side peptide bond
+
+
+  

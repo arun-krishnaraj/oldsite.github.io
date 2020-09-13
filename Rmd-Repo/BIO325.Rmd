@@ -107,6 +107,36 @@ knitr::opts_chunk$set(echo = TRUE)
   - Anaphase I: homologs are separated, sister chromatids remain attached
   - Telophase I: nuclear membranesform around separated chromosomes, cytokinesis
   - Interkinesis I: decondensation then re-condensation without replication
+- Meiosis II (Equational Division): sister chromatids separate to produce haploid gametes
+  - Prophase II: chromosomes re-condense, nuclear envelope breaks down, spindle apparatus reforms
+  - Metaphase II: sister chromatid pairs align at metaphase place
+  - Anaphase II: junction of connection between sister centromeres is severed, sister chromatids move to poles
+  - Telophase II: nuclear membrane reforms, cytokinesis
+- segregational errors in meiosis produce defictive gametes, such as trisomy through nondisjunction
+- Meiosis contributes to genetic diversity: mixing of parental genes, genetic reshuffling
+
+##### 4.6 Validation of the Chromosome Theory
+- Mendel's laws correlate to chromosome behavior in meiosis
+- sex morphology is associated with inheritance of particular chromosomes
+- specific traits are transmitted on specific chromosomes
+  - traits can be sex linked (hemizygous) (eye color gene in flies)
+  - nondisjunction analysis validates chromosomal theory
+  
+##### 4.7 Sex-Linked and Sexually dimorphic traits in humans
+- X-linked recessive 
+  - appears in males more than females
+  - never passed from father to son
+  - affected males make carrier daughters
+  - often skips generation
+- X-linked dominant
+  - appears more in females than males
+  - all daughters but no sons of an affected male will be affected
+- Y-linked trait
+  - only seen in males
+  - all male descendants of an affected male will be affected
+- in XX, human females, one X chromosome is inactivated, and condenses into a Barr Body
+
+
   
 
 

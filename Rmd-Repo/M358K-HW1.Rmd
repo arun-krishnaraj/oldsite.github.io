@@ -40,7 +40,7 @@ w <- seq(from=1,length.out = 7)
 v*w
 ```
 
-`v*w` returns a vector composed of products for each element of `v` multiplied by the corresponding numbered element in `w`.
+`v*w` returns a vector composed of products of each element of `v` multiplied by the corresponding element in `w`.
 
 ## Problem 8
 ```{r}
@@ -48,24 +48,23 @@ successes <- rbinom(100,1,.2)
 successes
 sum(successes)/100
 ```
-The simulated batch of 100 trials has a proportion of success of .22.
+The simulated batch of 100 trials has a proportion of success of .2.
 
 ## Problem 9
 ```{r}
-library(ggplot2)
 successes <- rbinom(1000,100,.2)
 hist(successes)
 ```
 ## Problem 10
-For fair sided dice, the probability of any of the numbers 1 to 6 being rolled is $\frac{1}{6}$. We can consider the two dice to be independent, so the the probability of rolling a 6 on both is $\frac{1}{6}^2$; since the probability of rolling any number on a fair die is the same, the probability of rolling a 3 on both dice is also $\frac{1}{6}^2$. The second roll of dice is independent of the first, making the probability of rolling pairs of 6's twice in a row $\frac{1}{6}^4$; this is true for rolling pairs of 3's twice in a row as well, so both observed roll patterns are just as probable.
+For fair sided dice, the probability of any of the numbers 1 to 6 being rolled is $\frac{1}{6}$. We can consider the two dice to be independent, so the the probability of rolling a 6 on both is $\frac{1}{6}^2$; since the probability of rolling any number on a fair die is the same, the probability of rolling a 3 on both dice is also $\frac{1}{6}^2$. The second roll of dice is independent of the first, making the probability of rolling pairs of 6's twice in a row $\frac{1}{6}^4$; this is true for rolling pairs of 3's twice in a row as well, so both observed roll patterns have $\frac{1}{1296}$ probability, and are just as probable.
 
 ## Problem 11
-a. $0$, since the lowest outcome on each die is a roll of 1.
+a. $0$, since the lowest outcome on each die is a roll of 1; the sum of two dice can never be 1.
 b. A sum of 5 can be composed of the following ordered roll pairs $(1,4),(2,3),(3,2),(4,1)$. Each of these pairs occur with probability $\frac{1}{36}$, making the total probability of observing a sum of 5 $\frac{4}{36}=\frac{1}{9}$.
 c. A sum of 12 can only occur if both dice result in 6; this probability is thus $\frac{1}{6}^2 = \frac{1}{36}$.
 
 ## Problem 12
-a. No, since there are individuals who are in both categories
+a. No, since there are individuals who are in both categories; this makes the categories nondisjoint by definition.
 b.
 ```{r}
 library(VennDiagram)

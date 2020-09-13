@@ -32,7 +32,6 @@ X~ 0 with probability 1-p(=q); 1 with probability p
 - What happens if you repeat a number n = # of trials = size, of independent Bernoulli trials each with the same parameter $p$.
 Let $X_1,...,X_n$ be independent Bernoulli(p). Then your total # of successes will be $S=X_1+X_2+...+X_n$, which results in Binomial(n,p). For the pmf: $p_S(k)= choose(n k) p^k(1-p)^{n-k)$ fro all k = 0...n.
 
-
 #### Lecture 9/9/2020
 - What is statistics?
   - Identify the broad population of interest about which you're trying to draw conclusions
@@ -49,7 +48,19 @@ Let $X_1,...,X_n$ be independent Bernoulli(p). Then your total # of successes wi
         - Normal(mean = $\mu$, variance = $\sigma^2$)
       - we are often interested in the behavior of non-named distributions 
   - collect and analyze data: find appropriate shape of distribtion and/or values of interest
-    
+
+#### Lecture 9/11/2020
+- Using data sets pie-survey and titanic for some exploratory analysis
+
+```{r}
+pie <- read.csv("pie-survey-1.csv")
+pielist <- table(pie$What.is.your.favorite.kind.of.pie.)
+barplot(pielist)
+pie(pielist)
+```
+
+
+
 ### Labs and Homeworks
 
 ### Projects
