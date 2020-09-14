@@ -106,7 +106,178 @@ knitr::opts_chunk$set(echo = TRUE)
   - Metaphase I: paired homologs are attached by spindle poles at their kinetochore (random assortment)
   - Anaphase I: homologs are separated, sister chromatids remain attached
   - Telophase I: nuclear membranesform around separated chromosomes, cytokinesis
-  - Interkinesis I: decondensation then re-condensation without replication
-  
+  - Interkinesis: decondensation then re-condensation without replication
+- Meiosis II (Equational Division): sister chromatids separate to produce haploid gametes
+  - Prophase II: chromosomes re-condense, nuclear envelope breaks down, spindle apparatus reforms
+  - Metaphase II: sister chromatid pairs align at metaphase plate
+  - Anaphase II: junction of connection between sister centromeres is severed, sister chromatids move to poles
+  - Telophase II: nuclear membrane reforms, cytokinesis 
+- segregational errors in meiosis produce defective gametes, such as trisomy through nondisjunction
+- meiosis contributes to genetic diversity: mixing of parental genes, genetic reshuffling
 
+##### 4.6 Validation of the Chromosome Theory
+- Mendel's laws correlate to chromosome behavior in meiosis
+- sex morphology is associated with inheritance of particular chromosomes
+- specific traits are transmitted on specific chromosomes 
+  - traits can be sex linked (hemizygous; eye color gene in flies)
+  - nondisjunction analysis validates chromosomal theory
+  
+##### 4.7 Sex-Linked and Sexually dimorphic traits in humans
+- X-linked recessive 
+  - appears in males more than females
+  - never passed from father to son
+  - affected males make carrier daughters
+  - often skips generations
+- X-linked dominant
+  - appears in more females than males
+  - all daughters but no sons of an affected male will be affected
+- Y-linked trais
+  - only seen in males
+  - all male descendants of an affected male will be affected
+- in XX, human females, one X chromosome is inactivated, and condenses into a Barr Body
+
+#### Chapter 5: Linkage, Recombination, Mapping
+##### 5.1 Gene Linkage and Recombination
+- some genes on the same chromosome do not assort independently, instead they are linked
+  - linked genes will favor parental classes over recombinants
+- specific gene-pairs have degrees of linkage
+- test cross can be use to find linked genes
+
+##### 5.2 Recombination
+- as a result of crossing over, chromatids exchange information reciprocally
+- frequency of recombination increases with distance between genes
+  - recombination frequency can be 50% max in unlinked genes
+
+##### 5.3 Mapping
+- by using a linear form, gene order and distance can be found
+- due to limitations of two-point crosses, 3-point are generally more useful
+  - distance is percentage of recombinants, adding double cross recombinants twice
+- chromosomal interference, a crossover event reduces probability of additional crossovers
+- $\text{interference} = 1 - \text{Coefficient of incidence}$, where $\text{coefficient of incidence} = \frac{\text{observed}}{\text{expected}}$
+- RF underestimated crossover frequency: at some point distance no longer increases RF past 50%
+
+##### 5.4 The Chi-Squared Test
+- use $\chi^2$ for data significance 
+  - frame null hypothesis for refutation $\sum\frac{(O-E)^2}{E}$
+  - degrees of freedom is $\# \text{ of classes} -1$
+  
+#### Chapter 6: DNA Structure, Replication, Recombination
+##### 6.1 Experimental Evidence
+- DNA is nucleotides connected by phosphodiester bonds
+- DNA is the agent of transformation in the S.R bacteria studies
+- heavy P and S bacteriophage experiments confirm DNA as instructions for cellular propagation
+
+##### 6.2 Watson and Crick Double Helix Model
+- Nucleotides: deoxyribose, phosphate, nitrogenous base (purin or pyrimidine)
+- DNA is anti-parallel, and is mostly right-handed $\beta$-DNA, with major and minor grooves
+  - some occurs as $\zeta$ form DNA: left-handed spiral and zigzags in helix backbone
+- most nuclear chromosomes are long, linear, double strands, but some smaller chromosomes are circular (prokaryotes, organelles, viruses)
+- some viruses exhibit single-strandedness prior to replication and expression
+
+##### 6.3 Genetics Information in Nucleotide Sequences
+- most genetic information is read from unwound DNA, but some if accessible through the grooves
+- RNA uses ribose and Uracil instead of deoxyribose and thymine
+  - can fold upon itself in complex manners
+  
+##### 6.4 DNA replication
+- complementary base pairing ensures semi-conservative replication
+  - verified by heavy nitrogen experiments
+- DNA pol uses high energy bonds of dNTPs to form new phosphodiester bonds
+  - requires:
+    - 4 dNTPs
+    - single strand template, pol moves 5' - 3' 
+    - primer with free 3' OH, since DNA pol can only add to 3' end, a primer must establish the first link
+- Replication
+  - Initiation
+    - unwinding of double helix at origin (initiator protein, helicase), formation of replication forks; initiator protein attracts helicase, opening up Y regions (replication forks)
+    - DNA pol II adds nucleotides 5'-3' on top of primers laid by primase
+  - Elongation
+    - DNA pol III catalyzes the polymerization of nucleotides 
+    - leading strand continuously synthesized 5'-3'
+    - lagging strand synthesized discontinuously in Okazaki tragments initiated by RNA primers
+      - DNA pol I replaces RNA on lagging strand and ligase seals nicks
+    - in circular chromosomes (covalently closed), supercoiling resulting from local unwinding must be eased by topoisomerase
+  - Telomeres ensure accurate replication at ends of chromosome
+  - Genetic fidelity is ensured by redundancy, precision of cellular replication
+
+##### 6.5 Homologous Recombination
+- recombination is the reciprocal genetic exchange between homologs
+  - takes place at the 4-strand stage
+- molecular model of crossover
+  - 1) Double-strand break formation: SPO11 cleaves phosphodiester bonds
+  - 2) Resection: exonuclease degrades 5' ends on each side of the break
+  - 3) First strand invasion: Dmc1 helps strand invade to form a heteroduplex and D-loop
+  - 4) Formation of a double Holliday junction: DNA is added and ligated to rejoin strands
+  - 5) Branch migration: lengthening of the heteroduplex region
+  - 6) Resolution of the double Holliday Junction: nicks created by resolvase and ligation
+- DNA repair of heteroduplexes can result in gene conversion (one allele is double repair template)
+
+#### Chapter 7: Anatomy and Function of a Gene
+##### 7.1 Mutations
+- forward mutations: changes wild-type, can be dominant or recessive
+- reserve mutations reverse novel mutant to wild-type allele
+- mutations can be classified as substitutions (transition or transversion), deletion, or insertion
+- average mutation rate is low, but varies for each gene
+  - multi-cellular organisms have higher mutation rate than bacteria
+  - disruptive mutation is much more common than reversive
+  - most human mutation arises from sperm
+- mutation occurs by change: Luria-Delbrück fluctuation experiment
+
+##### 7.2 Molecular Mechanisms that Alter DNA sequence
+- there must be no repair of mistakes or damage for mutation to occur
+- depurination: hydrolysis of a purin base
+- deamination: conversion of cytosine to uracil
+- X-rays break DNA backbones, resulting in deletion
+- UV light: thymine dimers
+- oxidation: active oxidated base species mispairs (Pur-Pur/Pyr-Pyr)
+- mistakes in DNA replication cause mutations
+  - DNA pol uses 3'-5' exonuclease function to excise base mispairings
+    - can make mistakes due to base tautomerization (tautomeric form changes base pairings)
+  - unstable trinucleotides can expand or contract due to slipped pairings
+    - when DNA pol pauses at repeat sequences, one of the strands can slip
+- Mutagens can induce mutations
+  - base analogs (5-Bromouracil pairs to A or G)
+  - hydroxylating agents (C* pairs to A)
+  - Alylating agents (G* pairs to T)
+  - Deaminating agents (C $\rightarrow$ U, A $\rightarrow$ Hypoxanthine (pairs to C))
+  - Intercalcators: proflavin causes single insertions and deletions
+- Use of Ames test to determine carcinogenicity of mutagenic compounds and their metabolites
+  - tests HIS$^-$ mutant bacteria for recombination
+
+##### 7.3 DNA Repear Mechanisms
+- some DNA damage can be repaired (alkyl transferase, photolyase)
+- Damaged bases can be removed and replaced by using the other strand
+  - Base-excision repair: glycosylases remove altered bases, AP site is cut by endonuclease, exonucleases rescect site, pol fills gap, ligation
+  - nucleotide excision repair: UvrA + UvrB look for thymine dimers, UvrB + UvrC cut on either side, pol fills gap and ligation
+  - two methods of repairing double-strand breaks
+    - 1) Homologous Repair (HR): use of homolog or sister chromatid as template
+    - 2) Nonhomologous End Joining (NHEJ): protein protects ends and brings them together for ligation
+      - can result in large deletions or inversions if >1 double strand break exists
+      - often results in small additions or deletions at the broken ends
+  - methyl-directed mismatch repair: parental methyl tags are recognized by MutS and MutC to repair new strand
+- error-prone repair system
+  - SOS bacterial system: sloppy DNA pol inserts random nucleotides
+  - Microhomology mediated end joining (MMEJ): similar to NHEJ, but both sides of the break are resected prior to ligation, results in large deletions
+- mutation of DNA repair systems results in disease
+- DNA repair cannot be 100% efficient; mutation is the raw material of evolution
+
+##### 7.4 What mutation tells us about gene function
+- complementation testing reveals whether two mutations are in a single gene
+  - complementation occurs when an individual is heterozygous for mutations at 2 genes
+  - complementation group: mutations that do not complement each other
+- recombination within a gene can result in a wild type
+- use of E. Coli $(\lambda)$
+  - cannot be lysated (from plaque) by rII$^-$ mutants
+  - if two mutants recombine within a gene, $\lambda$ will form plaques
+  - $RF = \frac{2[\text{number of plaques on E. Coli K}(\lambda)]}{[\text{number of plaques on E. Coli B}]}$
+
+##### 7.5 Genes
+- a gene contains info for a specific enzyme: one gene, one enzyme hypothesis
+  - autotroph and prototroph experiments support one gene, one enzyme hypothesis
+- genes specify identity and order of amino acids in polypeptide chains
+  - 20 common amino acids
+  - first end synthesized is N terminus, last is C terminus
+  - mutations can alter amino acid sequences (missense mutation)
+- amino acid sequence dictates a protein's three-dimensional structure
+  - primary, secondary, tertiary, quaternary structures (multimeric proteins only, multiple subunits interact)
 
