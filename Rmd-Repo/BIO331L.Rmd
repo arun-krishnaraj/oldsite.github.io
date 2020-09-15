@@ -73,7 +73,7 @@ kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femt
     - 
 - we need to determine with primers for Arabidopsis *OLE1* gene expression show acceptable properties for use in qPCR
 
-  
+#### Lab manual 
   
   
   

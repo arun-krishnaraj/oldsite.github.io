@@ -59,7 +59,17 @@ barplot(pielist)
 pie(pielist)
 ```
 
-
+#### Lecture 9/14/2020
+```{r}
+cafe <- read.csv("cafedata-1.csv")
+plot(cafe$Wraps.Sold)
+wraps <- cafe$Wraps.Sold[cafe$Wraps.Sold != "na"]
+wraps <- as.numeric(wraps)
+hist(wraps)
+```
+- sample mean, and other sample statistics, serve as point estimations of a true population statistic
+  - data visualizations should be meaningful and accurate depictions; modality and skewedness
+  - variance is a non-standardized measure of spread from the mean; weighs larger deviations more heavily, removes signs from deviation calculations
 
 ### Labs and Homeworks
 

@@ -1,0 +1,32 @@
+---
+title: "BIO321G-HW2"
+author: "ArunK"
+date: "9/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+eulerIntegrate = function(f, x0, dt, tEnd){
+  out = data.frame(
+    t = seq(from=0, to=tEnd, by=dt),
+    x = x0
+  )
+  xNow = x0
+  for (step in 2:nrow(out)){
+    dx = f(xNow) * dt
+    xNow = xNow + dx
+    out[step, "x"] = xNow
+  }
+  return(out)
+}
+```
+
+### Problem 1
+```{r}
+fLogistic <- function(x, r, k)
+```
+

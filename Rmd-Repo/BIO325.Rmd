@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE)
   - Mendel's results illustrate sum and product rules
 - test crosses to homozygous recessive to determine genotype
 - law of independent assortment: alleles segregate independently of each other, shown by dihybrid crosses
-- molecular influence dtermines whether allels are dominant or recessive, as well as phenotypic effect
+- molecular influence dtermines whether alleles are dominant or recessive, as well as phenotypic effect
 
 ##### 2.3 Mendelian Inheritance in Humans
 

@@ -33,7 +33,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #### 9/2/2020
 - Holliday junction model is usually best for explaining 4:4 aberrant selection
 - Messelson is helpful for explaining 5:3, despite being less realistic; includes creation of Holliday junction and asymmetric heteroduplex to explain aberrant 4:4 selection as well
-- 6:2 abberant segregation: 
+- 6:2 aberrant segregation: 
   - Initial double strand cut, followed by rescetion in the 5' to 3' and 3' to 5' directions. 5' ends are chewed faster than the 3' ends, leading to 3' overhangs; paired duplex initiates recombination using complementary sequences
   - Free 3' overhang invades paired duplex, forms D-loop; D-loop expansion and complementary synthesis; ligase reactions connect heteroduplex regions
   - Formation of a double flanking Holliday junctions; results in 6:2 aberrant selection; Holliday junction migration directions can explain both 5:3 and 4:4 aberrant selection
@@ -54,6 +54,19 @@ knitr::opts_chunk$set(echo = TRUE)
     - we can then model resolution of parental and crossover configurations by cutting pairs of phosphodiester linkages
     - certain proteins can bind to the square planar form of junction and shift the lengths of the arms to result in heteroduplex or homoduplex creation
   
+#### 9/14/2020
+- site specific recombination involves specific DNA regions, usually short sequence runs 
+  - minimal homology requirements
+  - 4 subunits of recombinase proteins carry out the reaction
+  - accessory proteins may be involved
+  - no exogenous energy source required
+  - DNA strands are broken and joined by transesterification chemistry
+  - no degradation of DNA
+- families of site-specific recombinases (mostly found in prokaryotes, except yeast: holds recombinase genes on plasmid)
+  - Tyrosine family, Serine family (both side chains have hydroxyl groups), requires 4 subunits
+- most site specific recombinations include 3-4 turns of DNA flanked by recombinase binding elements
+  - recombinase binding elements are pallindromic, recombination target site is not; this asymmetry is used to generate a left to right notation
+
 #### Section 1 Reading
 Homologous Genetic Recombination  
 

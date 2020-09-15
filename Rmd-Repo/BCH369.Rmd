@@ -458,11 +458,18 @@ Clutch altering primary structure
 
 Enzymes Intro Video 1
 
--assay: test for the presence of protein activity; used to check for protein purity
+- assay: test for the presence of protein activity; used to check for protein purity
   - used to measure how fast a chemical reaction occurs (rate of appearance of product or disappearance of a reactant)
   - specific activity depends on the protein: can be enzymatic, binding, or transport
 - enzymes can sometimes catalyze both forward and reverse reactions; usually named descriptive to their impact on the substrate
+  - catalysis occurs at the active site, usually substrate binding is enzyme specific
   - usually associated with a standard EC classification system, refers to the specific function and action of the enzyme
+    - Oxidoreductases: transfer electrons between molecules; catalyze oxidation–reduction reactions
+    - Transferases: transfer functional groups between molecules
+    - Hydrolyases: cleaves molecules by the addition of water
+    - Lyases: adds atoms or functional groups to a double bond or removes them to form double bonds
+    - Isomerases: move functional groups within a molecule
+    - Ligases: join two molecules in a reaction powered by ATP hydrolysis
   - some enzymes require cofactors for activity
     - coenzyme or metal ion: coenzymes can be prosthetic groups or cosubstrates depending on if they stay bound to the enzyme
     
@@ -522,5 +529,37 @@ Chymotrypsin Video 6
   - catalytic triad of chymotrypsin (Asp 102 hydrogen bonds to His 57, which hydrogen bonds to Ser 195; this enables the His oxygen to do its catalytic function)
     - scissle bond is the carbonyl side peptide bond
 
+#### Chapter 6 
+##### 6.1 Enzymes are Powerful adn highly specific catalysts
+- most biological reactions do not occur at perceptible rates without enzymes
+  - enzymes are specific in the reactions and substrates they are involved with
 
+##### 6.2 Many Enzymes Require Cofactors for Activity
+- some enzymes depend on small molecules
+  - apoenzyme: enzyme without cofactor; holoenzyme: catalytically active, complete enzyme
+  - cofactors can be coenzymes or metal ions
+    - coenzymes can be prosthetic or cosubstrates
+
+6.3 Gibbs Free Energy
+- free energy determines if a reaction can take place
+  - only negative $\Delta G$ reactions are spontaneous (exergonic)
+    - posititive $\Delat G$ reactions are endergonic
+  - independent of any molecular mechanism or rate of reaction
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\form-gibbs.JPG)
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\gibbs2.JPG)
+
+6.4 Enzymes and transition state
+- enzymes reduce activation energy for transition states
+  - active sites are 3d crevices with unique microstructures
+  - substrates are bound to enzymes by weak interactions 
+
+#### Chapter 7
+7.1 Kinetics
+- reaction velocity changes with concentrations of substrate, rate equations have exponents of reactant coefficients 
+
+7.2 Michaelis-Menten
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\mm1.JPG)
+- $K_M$ is the substrate concentration when the reaction velocity is half the maximum
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\linew.JPG)
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\linew2.JPG)
   
