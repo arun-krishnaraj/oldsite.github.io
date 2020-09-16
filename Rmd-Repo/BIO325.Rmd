@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - can only be applied to single gene traits
 - vertical patterns indicate dominant, horizontal indicate recessive
 
-#### Chapter3: Extensions to Mendel's Laws
+#### Chapter 3: Extensions to Mendel's Laws
 
 ##### 3.1 Extensions for single-gene Inheritance
 
@@ -106,7 +106,6 @@ knitr::opts_chunk$set(echo = TRUE)
   - Metaphase I: paired homologs are attached by spindle poles at their kinetochore (random assortment)
   - Anaphase I: homologs are separated, sister chromatids remain attached
   - Telophase I: nuclear membranesform around separated chromosomes, cytokinesis
-<<<<<<< HEAD
   - Interkinesis I: decondensation then re-condensation without replication
 - Meiosis II (Equational Division): sister chromatids separate to produce haploid gametes
   - Prophase II: chromosomes re-condense, nuclear envelope breaks down, spindle apparatus reforms
@@ -115,7 +114,6 @@ knitr::opts_chunk$set(echo = TRUE)
   - Telophase II: nuclear membrane reforms, cytokinesis
 - segregational errors in meiosis produce defictive gametes, such as trisomy through nondisjunction
 - Meiosis contributes to genetic diversity: mixing of parental genes, genetic reshuffling
-=======
   - Interkinesis: decondensation then re-condensation without replication
 - Meiosis II (Equational Division): sister chromatids separate to produce haploid gametes
   - Prophase II: chromosomes re-condense, nuclear envelope breaks down, spindle apparatus reforms
@@ -124,18 +122,14 @@ knitr::opts_chunk$set(echo = TRUE)
   - Telophase II: nuclear membrane reforms, cytokinesis 
 - segregational errors in meiosis produce defective gametes, such as trisomy through nondisjunction
 - meiosis contributes to genetic diversity: mixing of parental genes, genetic reshuffling
->>>>>>> c1945ccddd5181cd3d7a51ff39a5473ec94ede96
 
 ##### 4.6 Validation of the Chromosome Theory
 - Mendel's laws correlate to chromosome behavior in meiosis
 - sex morphology is associated with inheritance of particular chromosomes
-<<<<<<< HEAD
 - specific traits are transmitted on specific chromosomes
   - traits can be sex linked (hemizygous) (eye color gene in flies)
-=======
 - specific traits are transmitted on specific chromosomes 
   - traits can be sex linked (hemizygous; eye color gene in flies)
->>>>>>> c1945ccddd5181cd3d7a51ff39a5473ec94ede96
   - nondisjunction analysis validates chromosomal theory
   
 ##### 4.7 Sex-Linked and Sexually dimorphic traits in humans
@@ -143,26 +137,20 @@ knitr::opts_chunk$set(echo = TRUE)
   - appears in males more than females
   - never passed from father to son
   - affected males make carrier daughters
-<<<<<<< HEAD
   - often skips generation
 - X-linked dominant
   - appears more in females than males
   - all daughters but no sons of an affected male will be affected
 - Y-linked trait
-=======
   - often skips generations
 - X-linked dominant
   - appears in more females than males
   - all daughters but no sons of an affected male will be affected
-- Y-linked trais
->>>>>>> c1945ccddd5181cd3d7a51ff39a5473ec94ede96
+- Y-linked traits
   - only seen in males
   - all male descendants of an affected male will be affected
 - in XX, human females, one X chromosome is inactivated, and condenses into a Barr Body
 
-<<<<<<< HEAD
-
-=======
 #### Chapter 5: Linkage, Recombination, Mapping
 ##### 5.1 Gene Linkage and Recombination
 - some genes on the same chromosome do not assort independently, instead they are linked
@@ -205,7 +193,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - most genetic information is read from unwound DNA, but some if accessible through the grooves
 - RNA uses ribose and Uracil instead of deoxyribose and thymine
   - can fold upon itself in complex manners
->>>>>>> c1945ccddd5181cd3d7a51ff39a5473ec94ede96
+
   
 ##### 6.4 DNA replication
 - complementary base pairing ensures semi-conservative replication
@@ -309,3 +297,302 @@ knitr::opts_chunk$set(echo = TRUE)
 - amino acid sequence dictates a protein's three-dimensional structure
   - primary, secondary, tertiary, quaternary structures (multimeric proteins only, multiple subunits interact)
 
+#### Chapter 8: Gene Expression
+##### 8.1 Intro
+- triplet codons of nucleotides represent amino acids
+- nucleotide sequences are co-linear to amino acid sequence of the encoded polypeptide
+- each nucleotide is part of only one codon
+- 5' to 3' corresponds to N to C terminus
+- nonsense mutations change an amino to a stop
+- use of genetic code varying in organisms
+
+##### 8.2 Transcription
+- Initiation: RNA pol recognizes and binds to promoters, in bacteria RNA pol consists of a core enzyme + $\sigma$ subunit which increases its affinity for RNA, formation of a closed promoter complex. RNA pol unwinds double helix, making an open promoter complex, $\sigma$ subunit is released (marks end of Initiation)
+- Elongation: core RNA pol moves along chromosome, extending mRNA in the 5'-3' direction, while moving in the 3'-5' direction on the template strand; at the end of the replication bubble, DNA reforms behind it, displacing RNA into a free 5' mRNA tail
+- Termination: intrinsic terminators (hair loop termination signals) or Rho-dependent (extrinsic), RNA pol and mRNA released
+  - in eukaryotes, promoters are more complex and enhancer sequences can be far from initiation point; 3 types of RNA pol are used for different gene classes
+  - in eukaryotes, RNA processing produces mature mRNA
+    - 5$^*$ methylated cap: reverse G is connected through a triphosphate linkage with a capping enzyme, methyl transferases then methylate the reverse G cap
+    - 3' poly A tail: 100-200 A, ribonuclease cleaves the transcript, then poly-A polymerase adds As to exposed 3' tail
+    - Exons are found in both DNA and mature RNA, while introns are separated and only present in DNA
+    - 5' and 3' UTR are located before poly-A and after methylated cap
+      - cells remove introns by RNA splicing, 3 regions: splice donors and acceptors, branch sites
+      - mRNA is spliced by spliceosome (4 small nuclear ribonucleoproteins (SnRNPs) each containing 1-2 small nuclear ribonucleic acids (SnRNAs))
+      - splicing can be controlled to producwe alternative mRNAs from one transcript
+
+##### 8.3 Translation: from mRNA to protein
+- tRNA is short RNA molecules that carry anticodons
+- Aminoacyl-tRNA synthetases: connect tRNA to corresponding amino acids
+- wobble: a single tRNA can recognize more than one codon for the amino acid they carry
+- ribosome: large and small parts (large: EPA, peptidyl transferase)
+- Initiation: signalindicates start of translation by 5' cap or Shine-Dalgarno box, 5'AUG3' gets f-met in prokaryotes (starts in P site)
+- Elongation: elongation factors add tRNA to the mRNA in the N-C terminus 
+- Termination: ribosomes release completed polypeptide when nonsense codon is reached, relase factor binds, halting polypeptide synthesis
+- Polypeptides can be post-translationally modified
+
+##### 8.4 Differences in Gene Expression Between Prokaryotes and Eukaryotes
+- differs due to nuclear membrane, promoters and method of initiation, and post transcript processing 
+  - nuclear membrane prevenets simultaneous transcription and translation
+  - enhancer sequences and interactions with chromatin impact Eukaryotic promoters
+  - Prokaryotes and Eukaryotes initiate translation differently (poly vs monocistronic), initiation by AUG or Shine-Dalgarno Box
+  - Eukaryotic mRNAs require splicing and modifications (poly-A, methyl cap)
+  
+##### 8.5 Effects of mutation on Gene Expression
+- mutations can alter a gene product
+  - silent, missense (conservative or non-conservatie), nonsense, frame shift 
+  - mutations outside coding sequence can impact intron gene expression
+- most genes that affect gene expression reduce function
+  - recessive loss of function: amorphic or hypomorphic
+  - incompletely dominant loss-of-function: haploinsufficiency causes dosage-effects
+  - dominant loss of function: one gene copy is not enough
+  - gain of function: enhance or change expression
+    - hypermorphic: more protein product or a more efficient mutant protein
+    - neomorphic: novel phenotype created (ectopic expression, wrong time and place)
+    - antimorphic: makes proteins that don't function at wild rate, and prevent normal protein from funnctioning
+- mutation of gene expression machinery can be lethal
+  - nonsense suppressor mutations can arise in tRNA
+  
+#### Chapter 9: Digital Analysis of DNA
+##### 9.1 Fragmenting DNA
+- restriction enzymes recognize specific sequences and cuts two PdE bonds (digestion)
+- exhibit palindromic symmetry between two strands, can make sticky or blunt ends (overhand)
+  - longer recognition sites on average produce larger fragments
+- mechanical shearing can break DNA at random locations
+
+##### 9.2 Cloning DNA fragments
+- molecular cloning: isolation and replication of a single DNA fragment
+  - ligation of fragments into cloning vectors to produce recombinant DNA with selection markers
+    - choice of vectors: plasmid, artificial chromosomes
+  - Host cells take up and amplify recombinant DNA
+    - DNA libraries are collections of cloned fragments (genomic library)
+
+##### 9.3 Sequencing DNA
+- Sanger Sequencing
+  - denature double helix and add oligionucleotide primer to hybridize with template strand
+  - use of fluorescently tagged ddNTPs and nested array to determine order
+
+##### 9.4 Sequencing Genomes
+- Whole genome shotgun strategy: random pieces, look for overlap to assemble
+  - hierarchical strategy divides genome before tiling and sequencing 
+  - paired-end sequencing facilitates whole-genome approach
+
+#### Chapter 10: Genome Annotation
+##### 10.1 Finding the Genes in Genomes
+- long ORF's help locate protein coding regions
+- by comparing genomes, conserved elements can be found
+  - when homologs of a DNA sequence are found in many species, it is conserved
+- most direct method to find genes is to locate transcribed regions
+- cDNA libraries synthesize cDNA using mRNA as a template and reverse transcriptase
+- a single gene can produce many proteins by alternative splicing
+
+#### Chapter 11: Analyzing Genomic Variation
+##### 11.1 Variation among Genomes
+- extensive DNA variation within a species (polymorphisms)
+  - most polymorphisms don't influence phenotype
+- genetic variance can occur in different ways
+  - SNP: most common, biallelic, derived vs ancestral allele
+  - DIP: less common, probability decreases with length
+  - SSR: 1-10 bp repeat, less common, slipped mispairing 
+  - CNV: 10 bp - 1Mb, least common, product of unequal crossover
+  
+##### 11.2 Genotyping a known disease-causing mutation
+- PCR can amplify a known region between two constructed primers
+  - genotyping by sequence or by sizing, can be used to genotype polymorphisms
+
+##### 11.3 Sampling DNA variation in a Genome
+- DNA fingerprinting examines multiple SSR loci
+- DNA microarrays genotype millions of SNPs
+  - SNPs cause less stable hybridization
+  - light shines in either A or C regions, showing which base is present
+
+#### Chapter 12: the Eukaryotic Chromosome
+##### 12.1 Chromosomal DNA and proteins 
+- each chromosome is a single long molecule of DNA
+  - includes SSRs and transposable elements concentrated in centromere and telomeres
+- chromatin requires histone and nonhistone proteins to fold
+  - histones: small positive proteins; 4 of the types are the core histones, form core of nucleosome
+  - nonhistones: play structural roles, or aid in replication and segregation
+
+##### 12.2 Chromosome structure and compaction
+- nucleosome: core unit of chromatin wrapped around histone core
+- higher order packaging condenses chromosomes further
+  - supercoiling: superhelix of 300 $\dot{A}$, 6 nucleosomes per turn
+  - radial-loop-scaffold model: loops and compression into a rosette
+- Giemsa staining reveals reproducible G-bonding on chromosomes
+- FISH: denature DNA, use fluorescent probe to identify complementary regions (SKY)
+
+##### 12.3 Chromosomal Packing and Gene Expression
+- transcription requires changes in chromatin structure and nucleosome position
+  - more compact = less frequently transcribed 
+  - promoters must be moved from nucleosomes for transcription
+- heterochromatin regions: tightly packed, silence chromatin (flanking centromere), stains darker
+- euchromatin: lightly packed chromatin, stains lighter
+  - constitutive heterochromatin: always condensed, SSRs, transposable elements
+- heterochromatin can be spread linearly to silence adjacent euchromatin (PEV), stopped by barrier elements
+- histone N tails can be modified
+  - acetylation favors expression, methylation can open or close
+- heterochromatin formation inactivates X chromosome
+  - Xist inactivated 1 chromosome, formation of Barr Body
+  
+##### 12.4 Replication of Eukaryotic Chromosomes
+- chromosomal DNA replication begins at specific origins (many and proceeds bidirectionally)
+- new nucleosomes must be formed during replication (semiconservative)
+- telomeres protect the ends of linear chromosomes
+  - telomerase: ribonucleoprotein that limits shortening of telomeres by utilizing repeats, elongates telomeres in the 5'-3' direction
+  - most somatic cells do not express telomerase
+  - sheltrin complex folds telomerse into a protective shell
+  
+##### 12.5 Chromosomal Segregation
+- special DNA sequences allow for centromere formation (2 conserved elements separated by AT-rich elements)(satellite DNAs)
+- kinetochores govern attachment of chromosomes to spindle
+  - CENP-A replaces histone H$_3$ to allow kinetochore to connect 
+- cohesin complexes hold sister chromatids together
+  - in meiosis, Shugoshin protects centromeric cohesion during first division
+
+#### Chapter 13: Chromosomal Rearrangements and changes in Chromosome number
+##### 13.1 Rearrangements of Chromosomal DNA
+- deletions, duplication, inversion, translocation
+- rearrangements are caused by DNA breakage or aberrant recombination
+  - crossovers between repeats of a sequence can cause deletion, inversion, duplication, or translocation
+- FISH can detect chromosomal rearrangements
+- PCR can be used to find rearrangement 
+
+##### 13.2 The effects of rearrangements
+- deletions
+  - homozygosity is often lethal
+  - heterozygosity is detrimental: haploinsufficiency, vulnerability to mutation, uncovers recessive mutant alleles
+- duplication (tandem or non-tandem)
+  - rarely cause phenotypic changes unless large segments are affected
+  - unequal crossing over creates mutant alleles
+- inversions (pericentric: includes centromere, else paracentric)
+  - loss of function if breakpoints are within genes
+  - inversion loops in heterozygotes cause reduced fertility
+    - pericentric: recombination with duplication and deletion + normal and inversion gamete
+    - paracentric: broken, deleted dicentric products + normal and inversion gamete
+- Translocation
+  - can create oncogenes
+  - heterozygotes exhibit reduced fertility 
+    - only Alternate (T1+T2/N1+N2) progeny survive, not Adjacent 1 (T1+N2/N1+T2) or (rare) Adjacent 2 (T1+N1/T2+N2)
+- translocation crux: form genes near break points, exhbiit pseudolinkage
+- Robertsonian translocations: break near centromeres of two acrocentric chromosomes, generates a large and small chromosome
+  - can produce Down Syndrome
+  - Adjacent 1 produces an unbalanced chromosome that leads to Down Syndrome
+    - others are lethal except Alternate (1/2 carrier 1/2 normal)
+
+##### 13.3 Transposable elements
+- tranposition: movement of small segments of DNA within the genome 
+- transposable elements are classified based on how they move
+  - retrotransposons: uses reverse transcriptase of RNA
+  - Transposons: move directly
+  - 1/2 of human genome is TE
+- Retrotransposons use RNA to integrate using reverse pol
+  - SINEs, LINEs, HERVs
+- transposons move by tranposase enzymes
+  - ends are inverted repeats
+    - code for transposase, transposon p element can move or stay
+- Genomes can contain defective copies of transposable elements
+  - non-autonomous elements cannot move by themselves (only LINEs and SINEs can move in humans)
+- TEs can disrupt genes and alter genomes
+  - can cause mutation due to gene proximity, or cause instability by interrupting a gene, or by flanking a region/rearranging
+  - TEs are fought against by various mechanisms
+
+#### Chapter 16: Gene regulation in Prokaryotes 
+##### 16.1 The elements of prokaryotic gene expression
+- RNA pol with a $\sigma$ subunit initiates transcription
+- translation and transcription occur simultaneously (polycistronic)
+- regulation of gene expression can occur: transcription, initiation, elongation, termination, mRNA stability, translocation initiation, protein stability or activity
+
+##### 16.2 Regulation of transcription initiation via DNA-binding proteins
+- catabolic pathways require inducible regulation
+- anabolic pathways require repressible regulation
+- E. Coli utilization of lactose models gene regulation
+  - in X-gal, cells with $\beta$-galactosidase are blue
+  - repressor, promotor, operator, lacZ, lacY, lacA
+    - repression: LacI codes repressor protein which binds to operator
+    - induction: LacI codes repressor protein, which bidns to inducer (allolactose) to allow expression 
+  - operator mutants: LacI$^-$ cannot bind with repressor or O$^c$
+  - superrepressor (LacI$^s$): inducer cannot bidn to repressor
+    - LacI$^+$ dominant to LacI$^-$
+    - LacI$^s$ dominant to LacI$^+$
+    - O$^c$ and O$^+$ act in cis
+- Lac repressor consists of helix-turn-helix, inducer-binding domain, and multinerization domain
+  - repressor bound DNA segment is protected from DNAase I
+  - negative regulators prevent RNA pol from binding
+  
+##### 16.3 RNA-Mediated Mechanisms of gene regulation
+- RNA leaders act in cis to regulaate gene expression
+  - attenuators form alternate stem-loop forms (terminator or anti-terminator)
+    - trp RNA leader makes transcription occur only when trp is absent
+  - Riboswitch
+    - allosteric RNA leaders that bind to small molecules to control gene expression
+      - presence fo effector stops transcription or translation
+- SRNAs can act in trans to regulate translation
+  - inhibited whenever RBS is covered by non-ribosome
+- genes are regulated by antisense RNAs
+
+#### Chapter 17: Gene Regulation in Eukaryotes
+##### 17.1 Overview
+- additional levels of regulation are possible and necessary for eukaryotes
+  - transcript processing
+  - export of mRNA
+  - stability of mRNA
+  - localization of protein
+  - protein modification
+  - protein stability
+
+##### 17.2 Control of Transcription through enhancers
+- promoters and enhancers are the major cis-acting regulatory elements
+  - enhancers can be on either side of transcribed region
+  - use of GFP to test for enhancers
+- proteins are trans elements that influence transcription
+  - basal factors and activators/repressors: transcription factors
+    - basal factors assist in binding of RNA pol II to promoter
+    - mediator bridges RNA pol II and enhancer
+    - activators can directly or indirectly increase transcription
+      - can recruit basal factors
+      - can also recruit co-activators to open chromatin
+      - DNA-binding motifs: helix-turn-helix, zinc-finger
+      - dimerication domains: leucine zipper, Jun-Jun or Jun-Fos
+    - repressors block RNA pol from binding to promoter
+      - or recruit corepressor to close chromatin
+      - indirect repressors interfere with function of activators
+  - Allosteric interaction: hormone binding changes receptor protein shape to increase binding
+  - transcription factors can be changed with phosphorylation
+    - insulators control enhancer/promoter interactions by looping
+##### 17.3 Epigenetics
+- DNA methylation: methyl addition of C 5 to 5' CPG 3' (epigenetic)
+- DNA methylation at CPG islands silences gene expression
+- sex specific DNA methylation is responsible for genomic imprinting
+  - insulator mechanism: unmethylated C leads to insulation
+  - ncRNA mechanism: unmethylated allowed for Air antisense
+
+#### Chapter 18: Manipulating the Genomes of Eukaryotes
+##### 18.1 Creating Transgenic Organisms
+- transgenic organisms contain a gene from another individual
+- transgenes must be introduced to developing organisms
+  - for mice, pronuclear injection of DNA
+  - for flies, recombinant p element plasmid can be injected into embryos
+  - Agrobacterium T: plasmids create plant transgenes
+
+##### 18.2 Uses of Transgenetic Organisms
+- transgenes assign genes to phenotypes
+- transgenes create tools for analyzing gene expression
+- transgenetic cells can make protein: pharming, plant vaccine production
+- model animals can show human gain-of-function genetic diseases
+
+##### 18.3 Targeted Mutagenisis 
+- knockout mice have loss-of-function mutations in specific genes
+  - insert with selectable market and gene of interest into ES and select then impregnate
+  - essential genes can be explored using conditional knockouts
+    - Cre and LoxP are used to activate
+- Knockins can introduce specific mutations in transcript 
+- CRISPR and CAS9 allow for targeted genome editing, causes NHEJ, can be a knockout or knockin
+
+##### 18.4 Human Gene Therapy
+- therapeutic genes must be chosen based on nature of disease
+- can be used in or ex vivo
+  - retroviral vectors can cause cancer or mutation
+  - AAV vectors must be re-administered periodically 
+
+
+      

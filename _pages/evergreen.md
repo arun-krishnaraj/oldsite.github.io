@@ -22,3 +22,6 @@ Here's a page with all my evergreen notes:
 [SDS348 - Introduction to Computational Biology and Bioinformatics](https://arun-krishnaraj.github.io/Rmd-Repo/SDS348.html)
 
 [M358K - Applied Statistics](https://arun-krishnaraj.github.io/Rmd-Repo/M358K.html)
+
+##### Older Courses
+[BIO325 - Genetics](https://arun-krishnaraj.github.io/Rmd-Repo/BIO325.html)

@@ -1,5 +1,5 @@
 ---
-title: "BIO331L - Microbial Biology Lab"
+title: "BIO331L - Molecular Biology Lab"
 author: "ArunK"
 output: html_document
 ---
@@ -73,6 +73,9 @@ kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femt
     - 
 - we need to determine with primers for Arabidopsis *OLE1* gene expression show acceptable properties for use in qPCR
 
+#### Lab 9/16/2020
+- 3.3 is the number of cycles for 2 starting molecules to equate with 10 starting molecules
+
 #### Lab manual 
 
 Lab 2
@@ -90,6 +93,7 @@ Lab 2
   
   
 ```{r}
+#primer standardization curve should be aggregate
 m <- matrix(c(200,100,10,23.344,24.519,26.942,23.604,23.997,27.501,23.496,23.944,27.217), nrow = 3)
 m
 m[,1] <- log(m[,1], base = 10)
@@ -97,6 +101,8 @@ m
 colnames(m) <- c("x","y1","y2","y3")
 m <- data.frame(m)
 m
+m$y <- (m$y1+m$y2+m$y3)/3
+
 lm(y1~x, data  = m)
 
 library(ggplot2)
@@ -113,18 +119,18 @@ three <- lm(y3~x, data = m)
 
 summary(three)
 
+ggplot(m, aes(x=x)) + geom_point(aes(y=y), col = "dodgerblue") + geom_smooth(aes(y=y), method = "lm",se= F, col = "dodgerblue") +
+  xlab("Log 10 [cDNA] (nanograms)") + ylab(expression('C'[T])) + xlim(1,2.5) + ggtitle("Standard Curve for Primers") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+fin <- lm(y~x, data = m)
+summary(fin)
 ```
 
-<div align="center"><span style="color:blue">Primer 4 </span></div>
-$$y = -2.679x+29.670$$ 
-$$\text{R}^2 =  0.9788$$
-  
-<div align="center"><span style="color:red">Primer 5 </span></div>    
-$$y = -3.1231x+30.5525$$
-$$\text{R}^2 =  0.9658$$
-<div align="center"><span style="color:green">Primer 4 </span></div>
-$$y = -2.9637x+30.1226$$
-$$\text{R}^2 =  0.9749$$
+<div align="center"><span style="color:blue">Primer </span></div>
+$$y = -2.9221x+30.1149$$ 
+$$\text{R}^2 = 0.9943$$
   
   
   
