@@ -29,17 +29,26 @@ so we could have any nonnegative solution to this
 average winnings of $.12 during the 100 rounds
 
 ```{r}
-gambler <- function(start, stop){
-  cash <- c(start)
-  if (cash[length(cash)] > 0 & cash[length(cash)] < stop) {
-    match <- sum(sample(1:6,3,replace=TRUE) == sample(1:6,1,replace=TRUE))
-    if (match == 0) {
-      cash <- c(cash, cash[length(cash)] - 1)
-    } else cash <- c(cash, cash[length(cash)] + match)
+gamble <- function(incash,outcash) {
+cash <- c(incash)
+while (cash[length(cash)] > 0 & cash[length(cash)] < outcash) {
+  samp <- sum(sample(1:6,3,replace = T) == sample(1:6,1,replace = T))
+  if (samp == 0) {
+    cash <- c(cash, cash[length(cash)]-1)
+  }
+  if (samp == 1) {
+    cash <- c(cash, cash[length(cash)]+1)
+  }
+  if (samp == 2) {
+    cash <- c(cash, cash[length(cash)]+2)
+  }
+  if (samp == 3) {
+    cash <- c(cash, cash[length(cash)]+3)
+  }
   } 
-  return(cash)
+return(cash)
 }
 
-gambler(1,4)
+replicate(gamble(1,4),n =20)
 ```
 

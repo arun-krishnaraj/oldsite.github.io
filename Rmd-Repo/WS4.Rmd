@@ -1,0 +1,353 @@
+---
+title: "WS4"
+author: "SDS348"
+output: html_document
+---
+
+```{r setup,  include = FALSE}
+knitr::opts_chunk$set(echo  =  TRUE)
+```
+
+## WS4
+
+Try to simulate rolling a fair die 5000 times using sample()
+
+```{R}
+set.seed(348) #this makes sure we get the same numbers!
+
+#your code here
+```
+
+#### Exercise
+
+Let's roll! Roll a 10-sided,  100-sided,  1000-sided die
+
+Note stat="identity" makes the maps the bars height to the y-axis variable!
+
+```{R fig.width=30}
+library(ggplot2)
+data10  <-  data.frame(roll = 1:10,  prob = 1/10)
+head(data10)
+
+ggplot(data10,  aes(roll, prob)) + geom_bar(stat = "identity") + 
+  scale_x_continuous(breaks = 1:10)
+
+data100 <- data.frame(roll = 1:100,  prob = 1/100)
+
+ggplot(data100,  aes(roll, prob)) + geom_bar(stat = "identity") + 
+  scale_x_continuous(breaks=1:100,minor_breaks = NULL)
+
+data1000 <- data.frame(roll = 1:1000,  prob = 1/1000)
+
+ggplot(data1000,  aes(roll, prob))  +  geom_bar(stat = "identity") +  
+  scale_x_continuous(breaks=1:1000, minor_breaks = NULL, labels=NULL)
+```
+
+
+Write some code that computes the density of standard normal at x=.4 
+
+Here is the formula in math form (click inside the expression to see it) . Just implement that using R functions (you'll need `sqrt()`, `pi`,`exp()`,`^2`; watch your order of operations)!
+
+$\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$
+
+
+```{R}
+x <- .4
+1/sqrt(2*pi)*exp(-x^2/2)
+
+```
+
+Now, let's make it a function so we can use it for whatever x values we want
+
+```{R}
+stdnorm <-  function(x){
+  1/sqrt(2*pi)*exp(-x^2/2)
+}
+stdnorm(.4)
+```
+
+
+```{R}
+stdnorm(.4)
+
+dnorm(.4) #height of standard normal at x=.4 with built-in function
+
+x <- seq(-4, 4, by = .01) #sequence of x values
+
+px <- dnorm(x) #height of standard normal distribution (y) at each x
+
+df <- data.frame(x, px) #make into a dataframe
+
+ggplot(df) + geom_line(aes(x, px), stat = "identity")
+```  
+
+
+```{R}
+x <- seq(-5, 5, by = .1)
+pd_norm <- dnorm(x)
+pd_t <- dt(x, df = 5)
+
+df1 <- data.frame(x, pd_norm,  pd_t)
+
+ggplot(df1) + geom_line(aes(x, pd_norm)) + 
+  geom_line(aes(x, pd_t), color = 'red')
+```   
+
+Overlay two densities with stat="function"
+
+```{R}
+ggplot(data.frame(x = c(-5, 5)), aes(x)) + 
+  geom_line(stat="function", fun = dnorm, args = list(mean = 0, sd = 1)) + 
+  geom_line(stat="function", fun = dt, args = list(df = 5),  color = "red")
+```   
+
+Another way
+
+```{R}
+ggplot(data.frame(x = c(-5, 5)), aes(x)) + 
+  geom_line(stat="function", fun = function(x) dnorm(x,mean = 0, sd = 1)) + 
+  geom_line(stat="function", fun = function(x) dt(x, df = 5),  color = "red")
+```   
+
+### Visualizing CDF of a standard normal distribution 
+
+```{R}
+pnorm(q  =  0,  mean  =  0,  sd  =  1) #what is this telling us? Let's visualize it.
+
+ggplot(data.frame(x = c(-5, 5)),  aes(x))  +  
+  geom_line(stat="function", fun = dnorm) + 
+  geom_area(stat="function", fun = dnorm, xlim = c(-5, 0)) + 
+#stuff below just adds the point/lines/labels etc.
+  geom_point(x = 0, y = dnorm(0), size = 3, color = "red") + 
+  annotate("text", x = -3, y = .3, label = "P( X < 0 )  =  0.5",  size = 6) + 
+  annotate("text", x = -.8, y = .15, label = "0.5", size = 7, color = "white") + 
+  ggtitle("Area under PDF")
+
+
+ggplot(data.frame(x = c(-5, 5)),  aes(x)) + 
+  geom_line(stat="function", fun = pnorm) + 
+#stuff below just adds the point/lines/labels etc. 
+  ylab("p(X < x)") + 
+  geom_point(x = 0, y = pnorm(0), size = 3, color = "red") + 
+  geom_segment(x = 0, xend = 0, y = 0, yend = pnorm(0),  lty = 3) + 
+  geom_segment(x = 0, xend = -6, y = pnorm(0), yend = pnorm(0),  lty = 3) + 
+  ggtitle("CDF: pnorm(0)")
+```   
+
+
+```{R}
+pnorm(2, mean=0, sd=1) #what is this telling us? Let's visualize it.
+
+ggplot(data.frame(x = c(-5, 5)),  aes(x)) + 
+  geom_line(stat="function", fun = dnorm) + 
+  geom_area(stat="function", fun = dnorm, xlim = c(-5, 2)) + 
+#stuff below just adds the point/lines/labels etc.  
+  geom_point(x = 2, y = dnorm(2), size = 3, color = "red") + 
+  annotate("text", x = -3, y = .3, label = "P( X < 2 )  =  0.977", size = 6) + 
+  scale_x_continuous(breaks = c(-5, -2.5, 0, 2, 2.5, 5)) + 
+  annotate("text", x = 0, y = .2, label = ".977", size = 7, color = "white") + 
+  ggtitle("Area under PDF")
+
+
+ggplot(data.frame(x = c(-5, 5)),  aes(x)) + 
+  geom_line(stat="function", fun = pnorm) + 
+  ylab("p(X < x)") + 
+#stuff below just adds the point/lines/labels etc.  
+  geom_point(x = 2, y = pnorm(2), size = 3, color = "red") + 
+  geom_segment(x = 2, xend = 2, y = 0, yend = pnorm(2),  lty = 3) + 
+  geom_segment(x = 2, xend = -6, y = pnorm(2), yend = pnorm(2),  lty = 3) + 
+  scale_y_continuous(breaks  =  c(0, .25, .5, .75, .977, 1)) + 
+  scale_x_continuous(breaks  =  c(-5, -2.5, 0, 2, 2.5, 5)) + 
+  ggtitle("CDF: pnorm(2)")
+```   
+
+```{R}
+qnorm(p = .5,  mean = 0,  sd = 1) #what is this telling us? Let's visualize it.
+
+ggplot(data.frame(x = c(-5, 5)),  aes(x)) + 
+  geom_line(stat="function", fun = dnorm) + 
+  geom_area(stat="function", fun = dnorm,  geom = "area",  xlim = c(-5, 0)) +
+#stuff below just adds the point/lines/labels etc.  
+  geom_point(x = 0, y = dnorm(0), size = 3, color = "red") + 
+  annotate("text", x = -3, y = .3, label = "P( X < 0 )  =  0.5",  size = 6) + 
+  ggtitle("Area under PDF")
+
+ggplot(data.frame(x = c(0, 1)),  aes(x)) + 
+  geom_line(stat="function", fun = qnorm) +
+#stuff below just adds the point/lines/labels etc. 
+  xlab("p(X < q)") + ylab("q") + 
+  geom_point(x = .5, y = qnorm(.5), size = 3, color = "red") + 
+  geom_segment(x = .5, xend = .5, y = -5, yend = qnorm(.5),  lty = 3) + 
+  geom_segment(x = -6, xend = .5, y = qnorm(.5), yend = qnorm(.5),  lty = 3) + 
+  ggtitle("Inverse CDF: qnorm(p = .5)")
+```   
+
+```{R}
+#what score cuts off 25% below it in a standard normal dist'n (mean 0, sd 1)?
+qnorm(p = .25,  mean = 0,  sd = 1) #Let's visualize it!
+
+ggplot(data.frame(x = c(-5, 5)),  aes(x)) + 
+  geom_line(stat="function", fun = dnorm) + 
+  geom_area(stat="function", fun = dnorm,  xlim = c(-5, -.67)) + 
+#stuff below just adds the point/lines etc. 
+  geom_point(x = qnorm(.25), y = dnorm(-.67), size = 3, color = "red") + 
+  annotate("text", x = -3, y = .3, label = "P( X < q )  =  0.25,  \n q  =  -.6745", size = 6) + 
+  scale_x_continuous(breaks  =  c(-5, -2.5, -.675, 2.5, 5)) + 
+  annotate("text", x = -1.25, y = .075, label = ".25", size = 7, color = "white") + 
+  ggtitle("Area under PDF")
+
+
+ggplot(data.frame(x = c(0, 1)),  aes(x)) + 
+  geom_line(stat="function", fun = qnorm) +
+#stuff below just adds the point/lines etc. 
+  xlab("p(X < q)") + ylab("q") + 
+  geom_point(x = .25, y = qnorm(.25), size = 3, color = "red") + 
+  geom_segment(x = .25, xend = .25, y = -3, yend = qnorm(.25),  lty = 3) + 
+  geom_segment(x = -1, xend = .25, y = qnorm(.25), yend = qnorm(.25),  lty = 3) + 
+  scale_y_continuous(breaks = c(-2, -1, 0, -.675, 1, 2)) + 
+  ggtitle("Inverse CDF: qnorm(.25)")
+```   
+
+```{R}
+#compare with
+pnorm(q = -.6744898,  mean = 0,  sd = 1)
+
+ggplot(data.frame(x = c(-5, 5)),  aes(x)) + 
+  geom_line(stat="function", fun = dnorm) + 
+  geom_area(stat="function", fun = dnorm,  xlim = c(-5, 1)) + 
+#stuff below just adds the point/lines etc. 
+  geom_point(x = 1, y = dnorm(1), size = 3, color = "red") + 
+  scale_x_continuous(breaks  =  c(-5, -2.5, 0, 1, 2.5, 5)) + 
+  scale_y_continuous(breaks = c(0, .1, .2, .242, .3, .4)) + 
+  geom_segment(x = 1, xend = 1, y = -5, yend = dnorm(1),  lty = 3, color = "red") + 
+  geom_segment(x = -6, xend = 1, y = dnorm(1), yend = dnorm(1),  lty = 3, color = "red") + 
+  annotate("text", x = -.1, y = .18, label = "pnorm(x)", size = 7, color = "white") + ylab("dnorm(x)") + xlab("x  =  qnorm( pnorm(x) )") + ggtitle("Summing up: dnorm,  pnorm,  qnorm")
+```   
+
+#### SUMMARY
+
+```{R}
+dnorm(x = 1, mean=0, sd=1) #y-axis/height of a standard normal distribution at x=1
+
+pnorm(q = 1, mean=0, sd=1) #area under the standard  normal distribution below x=1
+
+qnorm(p = .8413447, mean=0, sd=1) #x-axis/value of a standard normal variable that cuts of 84.13% below it
+```   
+
+
+#### Something BESIDES standard normal
+
+Scores on the SAT are approximately normally distributed with a mean of 1060 and a sd of 210
+
+```{R}
+#Three ways to plot this probability density function
+
+ggplot(data.frame(score= c(400,1600)), aes(score))+ #define domain of function
+  geom_line(stat="function", fun=function(x)dnorm(x, mean=1060,sd=210))
+
+ggplot(data.frame(score= c(400,1600)), aes(score))+ #define domain of function
+  geom_line(stat="function", fun=dnorm, args=list(mean=1060, sd=210))
+
+#Using stat="identity"
+
+df <- data.frame( score = seq(400, 1600), density = dnorm(seq(400,1600), mean=1060, sd=210))
+ggplot(df, aes(score,density))+geom_line(stat="identity")
+```
+
+### IMPORTANT EXERCISES!
+
+```{R}
+#using qnorm(), what score puts you at the 90th percentile for SAT score?
+
+qnorm(.9, mean =1060, sd=210)
+
+#use pnorm() to find the probability that a randomly selected test-taker scored below 950
+
+pnorm(950, mean = 1060, sd = 210)
+
+#here's a plot
+ggplot(data.frame(score=c(400,1600)), aes(score))+
+  geom_line(stat="function", fun=dnorm, args=list(mean=1060, sd=210))+
+  geom_area(stat="function", fun=dnorm, args=list(mean=1060, sd=210), xlim=c(400,950))
+
+
+#use pnorm() to find the probability that a randomly selected test-taker scored below 1450
+
+1-pnorm(1450, mean = 1060, sd = 210)
+
+#here's a plot
+ggplot(data.frame(score=c(400,1600)), aes(score))+
+  geom_line(stat="function", fun=dnorm, args=list(mean=1060, sd=210))+
+  geom_area(stat="function", fun=dnorm, args=list(mean=1060, sd=210), xlim=c(1450,1600))
+```
+
+
+```{R}
+#use pnorm() TWICE to find the probability that a randomly selected test-taker scored between 900 and 1100 (plot has a hint)
+
+ggplot(data.frame(score=c(400,1600)), aes(score))+
+  geom_line(stat="function", fun=dnorm, args=list(mean=1060, sd=210))+
+  geom_area(stat="function", fun=dnorm, args=list(mean=1060, sd=210), xlim=c(400,1100), alpha=.5, fill="blue")+
+  geom_area(stat="function", fun=dnorm, args=list(mean=1060, sd=210), xlim=c(400,900), alpha=.5, fill="red")
+```
+
+
+Generate random draws from any distribution!
+
+```{R}
+df <- data.frame(norms = rnorm(5000), unifs = runif(5000))
+
+head(df)
+
+ggplot(df, aes(df))  +  geom_histogram(aes(x= norms, y = ..density..), fill = "blue", alpha = .5) + 
+               geom_histogram(aes(x= unifs, y = ..density..), fill = "red", alpha = .5) + 
+               geom_line(stat="function", data = data.frame(x = c(-3.5, 3.5)), aes(x),  fun = "dnorm", color = "blue", size = 2) + 
+               geom_line(stat="function", data = data.frame(x = c(-3.5, 3.5)), aes(x), fun = "dunif", color = "red", size = 2)
+
+```  
+
+Density plots
+
+```{R}
+ggplot(df, aes(norms)) + geom_density(fill = "blue", alpha = .5) + 
+  geom_density(aes(unifs), fill = "red", alpha = .5, bw = .1)
+```   
+Emprical CDF
+
+```{R}
+ggplot(df) + geom_line(aes(norms), stat = "ecdf", col = "red", alpha = .5) + geom_rug(aes(norms), col = "red", alpha = .5) + 
+  geom_line(aes(unifs), stat = "ecdf", col = "blue", alpha = .5, , bw = .1) + geom_rug(aes(unifs), col = "blue", alpha = .5) + 
+  ylab("P(X < x)") + xlab("x")
+```   
+
+```{R}
+library(ggExtra)
+
+p <- ggplot(df, aes(unifs, norms)) + geom_point(alpha = 0) + geom_bin2d(bins = 15) + 
+  theme(legend.position = "bottom")
+
+ggMarginal(p, type  =  'densigram')
+
+
+ggplot(data.frame(x = c(0, 1)),  aes(x)) + 
+  stat_function(fun = qnorm) + 
+  xlab("p(X < q)") + ylab("q") + 
+  geom_point(x = .339, y = qnorm(.339), size = 3, color = "red") + 
+  geom_segment(x = .339, xend = .339, y = -3, yend = qnorm(.339), arrow  =  arrow(type = "closed"), lty = 2) + 
+  geom_segment(xend = -.04, x = .339, y = qnorm(.339), yend = qnorm(.339),  lty = 2, arrow  =  arrow(type = "closed")) + 
+  scale_y_continuous(breaks = c(-2, -1, -.415, 0, 1, 2)) + 
+  scale_x_continuous(breaks = c(0, .339, .5, .75, 1))
+
+
+
+ y <- runif(1000)
+ 
+ ggplot() + geom_histogram(aes(qnorm(y)))
+ ggplot() + geom_histogram(aes(qt(y, df = 5)))
+ ggplot() + geom_histogram(aes(qchisq(y, df = 5)))
+ ggplot() + geom_histogram(aes(qexp(y)))
+ ggplot() + geom_histogram(aes(qbeta(y, 2, 1)))
+ ggplot() + geom_histogram(aes(qpois(y,  lambda = 1)))
+ 
+```  
+

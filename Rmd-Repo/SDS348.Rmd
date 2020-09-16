@@ -22,9 +22,12 @@ knitr::opts_chunk$set(echo = TRUE)
 #### 9/8/2020
 - Continuing to plot in ggplot [here](https://arun-krishnaraj.github.io)
 
-#### 9/10/20
+#### 9/10/2020
 - Finish ggplot features
 - Introduction to probability distributions and simulation
+
+#### 9/15/2020
+- Continue distribution lecture (here)[https://arun-krishnaraj.github.io/Rmd-Repo/WS4.html]
 
 ### Labs and Homeworks
 - [Blank HW 1](C:/Users/arunk/Desktop/Site Rmd Repo/HW1.Rmd)
