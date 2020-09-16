@@ -74,15 +74,57 @@ kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femt
 - we need to determine with primers for Arabidopsis *OLE1* gene expression show acceptable properties for use in qPCR
 
 #### Lab manual 
+
+Lab 2
+
+- drought historically has limited ecosystems, agriculture
+  - drying trends have increased due to anthropogenic climate change
+  - understanding water stress tolerance mechanisms in plants helps mitigate damage
+- stresses elicit tolerance responses in plants, often involve abscisic acid; ABA regulates normal developmental processes 
+- ABA is a terpene based regulator, serves diverse functions in plants and higher sponges and animals
+  - in plants, ABA can originate intra or extra cellularly; synthesized in chloroplast, in a carotene pathway
+  - continuing research on the primary ABA receptor in higher mammals; thought to be the C-like 2 cellular membrane protein
+- RNA experiment wants to compare gene expression in wild type and two AGP31 altered lines
+  - RNA is less stable than DNA and more prone to hydrolysis
+    - mechanical disruption: grind plant tissue with liquid N$_2$
   
   
+```{r}
+m <- matrix(c(200,100,10,23.344,24.519,26.942,23.604,23.997,27.501,23.496,23.944,27.217), nrow = 3)
+m
+m[,1] <- log(m[,1], base = 10)
+m
+colnames(m) <- c("x","y1","y2","y3")
+m <- data.frame(m)
+m
+lm(y1~x, data  = m)
+
+library(ggplot2)
+ggplot(m, aes(x=x)) + geom_point(aes(y=y1), col = "dodgerblue") + geom_point(aes(y=y2), col = "deeppink2") + 
+  geom_point(aes(y=y3), col = "chartreuse2") + geom_smooth(aes(y=y1), method = "lm",se= F, col = "dodgerblue") +
+  geom_smooth(aes(y=y2), col = "deeppink2", method = "lm",se= F) + geom_smooth(aes(y=y3), method = "lm",se= F,, col = "chartreuse2") +
+  xlab("Log 10 RNA (nanograms)") + ylab(expression('C'[T])) + xlim(1,2.5) + ggtitle("Standard Curve for Primers") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+one <- lm(y1~x, data = m)
+two <- lm(y2~x, data = m)
+three <- lm(y3~x, data = m)
+
+summary(three)
+
+```
+
+<div align="center"><span style="color:blue">Primer 4 </span></div>
+$$y = -2.679x+29.670$$ 
+$$\text{R}^2 =  0.9788$$
   
-  
-  
-  
-  
-  
-  
+<div align="center"><span style="color:red">Primer 5 </span></div>    
+$$y = -3.1231x+30.5525$$
+$$\text{R}^2 =  0.9658$$
+<div align="center"><span style="color:green">Primer 4 </span></div>
+$$y = -2.9637x+30.1226$$
+$$\text{R}^2 =  0.9749$$
   
   
   

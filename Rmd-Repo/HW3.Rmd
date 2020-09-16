@@ -1,0 +1,148 @@
+---
+title: "HW 3"
+author: "SDS348 Fall 2020"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+---
+
+```{r global_options, include=FALSE}
+#DO NOT EDIT THIS CHUNK OR ANYTHING ABOVE IT!
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = "center", warning = F, message = F, tidy=T, tidy.opts=list(width.cutoff=50))
+```
+
+## Arun Krishnaraj - ak37738
+
+**This homework is due on Sep 20, 2020 at 11:59pm. Please submit as an HTML file on Canvas.**
+
+*For all questions, include the R commands/functions that you used to find your answer. Answers without supporting code will not receive credit.*
+
+> #### Review of how to submit this assignment
+>All homework assignments will be completed using R Markdown. These `.Rmd` files consist of >text/syntax (formatted using Markdown) alongside embedded R code. 
+>When you have completed the assignment (by adding R code inside codeblocks and supporting text outside of the codeblocks), create your document as follows:
+
+> - Click the arrow next to the "Knit" button (above) 
+> - Choose "Knit to HTML"
+> - Go to Files pane and put checkmark next to the correct HTML file
+> - Click on the blue gear icon ("More") and click Export
+> - Download the file and then upload to Canvas
+
+---
+
+### Question 1:
+
+##### 1.1 (1 pt) Assume diastolic blood pressure is normally distributed in a certain population, with a mean of 68 mmHg and a standard deviation 14 mmHg. What proportion of this population has a diastolic blood pressure less than 60 mmHg (i.e., what is the probability that a person in this population has a diastolic blood pressure less than 60)?
+
+```{R}
+pnorm(60, mean = 68, sd = 14)
+```
+
+There's a .284 probability that a person in this population has a diastolic blood pressure less than 60 mmHg.
+
+##### 1.2 (1 pt) What diastolic blood pressure would put an individual from this population at the 95th percentile?
+
+```{R}
+qnorm(.95, mean = 68, sd = 14)
+```
+
+A blood pressure of 91.028 mmHg would put an individual at the 95th percentile for diastolic blood pressure.
+
+##### 1.3 (1 pt) What is the probability that a random individual from this population will have a diastolic blood pressure higher than 80? (Equivalently, what proportion of the population has a diastolic BP greater than 80 mmHg?)
+
+```{R}
+1 - pnorm(80, mean = 68, sd = 14)
+```
+
+There's a .196 probability that a random individual from this population will have a diastolic blood pressure greater than 80 mmHg.
+
+
+##### 1.4 (1 pt) What proportion of the population has a diastolic blood pressure bewteen 65 and 75?
+
+```{R}
+pnorm(75, mean = 68, sd = 14) - pnorm(65, mean = 68, sd = 14)
+```
+
+.276 of the population has a diastolic blood pressure between 65 and 75 mmHg.
+
+##### 1.5 (1 pt) Assume this distribution of diastolic blood pressure is for a healthy population. Say we observe someone (from an unknown population) with a diastolic BP of 88 mmHg. What's the probability of observing someone with a diastolic BP this extreme (*in either direction of the mean*) in the healthy population (normal, mean of 68, standard deviation of 14). Think back to two-tailed tests from Biostats or the equivalent.
+
+```{R}
+2*(1 - pnorm(88,mean = 68, sd = 14))
+```
+
+There is a .153 probability of observing a diastolic BP this extreme; since we're working with a normal distribution, we can find the probability of someone having a BP at least as large as 88 mmHg and double it to account for the other tail.
+
+### Question 2
+
+Now, set the seed to 348 with `set.seed()`. Then, with `rnorm` take a sample of size 10000 (ten thousand) from a normal distribution with a mean of 68 and a standard deviation of 14.
+
+##### 2.1 (3 pts) Using mean() on a logical vector, what proportion of the total draws are less than 60? What proportion are greater than 80? What value in your sample represents the 95th percentile?
+
+
+```{R}
+set.seed(348)
+samp <- rnorm(10000, mean = 68, sd = 14)
+mean(samp < 60)
+mean(samp > 80)
+quantile(samp, .95)
+```
+
+There is a .2973 proportion of total draws that are less than 60; there is a .1925 proportion greater than 80. The 95th percentile of this sample set is 91.14229. 
+
+##### 2.2 (2 pts) What proportion of your sample is between 65 and 75? What proportion is less than 48 *and* greater than 88?
+
+```{R}
+mean(samp > 65 & samp < 75)
+mean(samp < 48 & samp > 88)
+```
+
+There is a .267 proportion of total draws that are between 65 and 75; there proportion of the sample that is both less than 48 and greater than 88 is 0.
+
+##### 2.3 (1 pts) Why are your answers to question 2 close to those in question 1? Why are they not exactly the same?
+
+Since we're using simulation to build the distribution, we know that as the number of simulations increases we get a closer approximation to the distribution itself; its a shitty version of law of large numbers.
+---
+
+##### 2.4 (4 pts) Make your sample from question 2 into a dataframe and, using ggplot2, make a histogram of the sample by mapping the sample to the x-axis in the main `ggplot()` function and then adding `geom_histogram(aes(y=..density..))`. Then, overlay an density plot with `geom_density()`. Using `geom_vline(xintercept=)`, add solid vertical lines corresponding to the 2.5th and the 97.5th percentile of the sample (i.e., using `quantile`). Next overlay a normal distribution with a mean of 68 and a standard deviation of 14 using `geom_line()` with `dnorm()` and `stat="function"`. Make it a different color to differentiate it from the empirical/sample density. Finally, using `geom_vline(xintercept=)`, add dashed vertical lines of the same new color corresponding to the 2.5th and the 97.5th percentile of the actual normal distribution (the healthy population; i.e., using `qnorm`).
+
+```{R}
+library(ggplot2)
+df <- data.frame(samp) #makes your sample a column of a dataframe called df
+
+```
+
+### Question 3
+
+##### 3.1 (2 pt) Using `dplyr` functions (filter, summarize; do not use any [] or $) and the `quakes` dataset, What is the mean of the variable `mag` when `depth` is *greater than* the median depth? What is the mean of the variable `mag` when `depth` is *less than* the median depth?
+
+```{R}
+library(dplyr)
+# your code here
+```
+
+##### 3.2 (1 pt) Using `dplyr` and the `quakes` dataset, create a new variable called `depth_m` that gives `depth` in meters rather than kilometers. Use `mutate()` *only once* to achieve this! Do not use any [] or $.
+
+```{R}
+# your code here
+```
+
+##### 3.3 (1 pt) Finally, using ggplot, take the quakes dataset and make a scatterplot of `long` (x-axis) and `lat` (y-axis) and color the points by `depth`. Add `coord_map()` to scale axes with mercator projection (if this doesn't work, use coord_fixed to make x- and y-axis scales the same). Optionally, add the extra code below to overlay world map data for this region using the code provided below.
+
+```{R}
+library(maps) #install.packages("maps") if not on the servers
+world <- map_data("world")
+
+# your code here
+
+#if you want to overlay a map, uncomment/add the following code to your plot:
+#+geom_polygon(aes(long, lat, group=group), data = world, fill = "red") + xlim(150,200)+ylim(-50,0)
+```
+
+
+```{R, echo=F}
+## DO NOT DELETE OR MODIFY THIS CHUNK: IT MUST BE PRESENT TO RECEIVE CREDIT FOR THE ASSIGNMENT
+sessionInfo(); Sys.time(); Sys.info()
+```
