@@ -68,6 +68,8 @@ knitr::opts_chunk$set(echo = TRUE)
   - recombinase binding elements are pallindromic, recombination target site is not; this asymmetry is used to generate a left to right notation
 
 #### 9/16/2020
+- Tyrosine recombination results in antiparallel configuration: H junction formation, direct antiparallel form
+  - Serine recombination is parallel: direct X crossover and resolution
 
 #### Section 1 Reading
 Homologous Genetic Recombination  
