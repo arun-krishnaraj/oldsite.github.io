@@ -67,6 +67,8 @@ knitr::opts_chunk$set(echo = TRUE)
 - most site specific recombinations include 3-4 turns of DNA flanked by recombinase binding elements
   - recombinase binding elements are pallindromic, recombination target site is not; this asymmetry is used to generate a left to right notation
 
+#### 9/16/2020
+
 #### Section 1 Reading
 Homologous Genetic Recombination  
 

@@ -99,19 +99,20 @@ mean(samp > 65 & samp < 75)
 mean(samp < 48 & samp > 88)
 ```
 
-There is a .267 proportion of total draws that are between 65 and 75; there proportion of the sample that is both less than 48 and greater than 88 is 0.
+There is a .267 proportion of total draws that are between 65 and 75; the proportion of the sample that is both less than 48 and greater than 88 is 0.
 
 ##### 2.3 (1 pts) Why are your answers to question 2 close to those in question 1? Why are they not exactly the same?
 
-Since we're using simulation to build the distribution, we know that as the number of simulations increases we get a closer approximation to the distribution itself; its a shitty version of law of large numbers.
----
+Since we're using simulation to build the distribution, we know that as the number of simulations increases we get a closer approximation to the distribution itself; as a result of the Law of Large Numbers, we should expect there to be a decreasing difference between the sample average and true distribution as the sample size increases.
 
 ##### 2.4 (4 pts) Make your sample from question 2 into a dataframe and, using ggplot2, make a histogram of the sample by mapping the sample to the x-axis in the main `ggplot()` function and then adding `geom_histogram(aes(y=..density..))`. Then, overlay an density plot with `geom_density()`. Using `geom_vline(xintercept=)`, add solid vertical lines corresponding to the 2.5th and the 97.5th percentile of the sample (i.e., using `quantile`). Next overlay a normal distribution with a mean of 68 and a standard deviation of 14 using `geom_line()` with `dnorm()` and `stat="function"`. Make it a different color to differentiate it from the empirical/sample density. Finally, using `geom_vline(xintercept=)`, add dashed vertical lines of the same new color corresponding to the 2.5th and the 97.5th percentile of the actual normal distribution (the healthy population; i.e., using `qnorm`).
 
 ```{R}
 library(ggplot2)
 df <- data.frame(samp) #makes your sample a column of a dataframe called df
-
+ggplot(df, aes(x = samp)) + geom_histogram(aes(y=..density..)) + geom_density() + geom_vline(xintercept = quantile(df$samp,.025)) + geom_vline(xintercept = quantile(df$samp,.975)) +
+  stat_function(geom = "line", fun = dnorm, args = list(mean = 68, sd = 14), color = "dodgerblue") + geom_vline(xintercept = qnorm(.025, mean = 68, sd = 14), color = "dodgerblue", linetype = "dashed") +
+geom_vline(xintercept = qnorm(.975, mean = 68, sd = 14), color = "dodgerblue", linetype = "dashed")
 ```
 
 ### Question 3
@@ -120,13 +121,15 @@ df <- data.frame(samp) #makes your sample a column of a dataframe called df
 
 ```{R}
 library(dplyr)
-# your code here
+quakes %>% filter(depth > median(depth)) %>% summarize(mean(mag))
+quakes %>% filter(depth < median(depth)) %>% summarize(mean(mag))
 ```
+The mean of `mag` is 4.52 when `depth` is greater than the median depth, and 4.72 when `depth` is less than the median depth.
 
 ##### 3.2 (1 pt) Using `dplyr` and the `quakes` dataset, create a new variable called `depth_m` that gives `depth` in meters rather than kilometers. Use `mutate()` *only once* to achieve this! Do not use any [] or $.
 
 ```{R}
-# your code here
+quakes <- quakes %>% mutate(depth_m = depth * 1000) #assigned to new variable to suppress print
 ```
 
 ##### 3.3 (1 pt) Finally, using ggplot, take the quakes dataset and make a scatterplot of `long` (x-axis) and `lat` (y-axis) and color the points by `depth`. Add `coord_map()` to scale axes with mercator projection (if this doesn't work, use coord_fixed to make x- and y-axis scales the same). Optionally, add the extra code below to overlay world map data for this region using the code provided below.
@@ -135,10 +138,9 @@ library(dplyr)
 library(maps) #install.packages("maps") if not on the servers
 world <- map_data("world")
 
-# your code here
+ggplot(quakes, aes(x= long, y = lat)) + geom_point(aes(color = depth)) + coord_map() + geom_polygon(aes(long, lat, group = group), data = world, fill = "red") + 
+  xlim(150,200) + ylim(-50,0) 
 
-#if you want to overlay a map, uncomment/add the following code to your plot:
-#+geom_polygon(aes(long, lat, group=group), data = world, fill = "red") + xlim(150,200)+ylim(-50,0)
 ```
 
 

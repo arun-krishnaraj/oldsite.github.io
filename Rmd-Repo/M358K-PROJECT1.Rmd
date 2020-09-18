@@ -2,53 +2,90 @@
 title: "M358K-Project1"
 author: "ArunK"
 date: "9/15/2020"
-output: html_document
+output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r echo=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  fig.align="center",
+  fig.pos="t",
+  strip.white = TRUE
+)
 ```
 
-```{r}
-chuck <- replicate(sum(sample(1:6,1,replace = TRUE) == sample(1:6,3,replace = TRUE)), n =100)
-chuck_dol <- ifelse(chuck == 0, -1, ifelse(chuck == 1, 1, ifelse(chuck == 2,2,ifelse(chuck==3,3,0))))
-mean(chuck_dol)
-```
 #### Problem 1.1 
-The probability of winning is 1 minus the probability of losing. Losing corresponds to the event where no dice land on the gambler's number, so $ \frac{5}{6}^3= \frac{125}{216}$, and the probability of winning is $1-\frac{125}{216} = \frac{91}{216}$
+The probability of the gambler winning is 1 minus the probability of losing. Losing a round of Chuck-a-Luck corresponds to the event where no dice land on the gambler's number; fair 6-sided dice have a $\frac{5}{6}^3= \frac{125}{216}$ probability of not showing at least one of the gambler's number, so the probability of winning is $1-\frac{125}{216} = \frac{91}{216}$.
 
 #### Problem 1.2 
-The house has a long run advantage, since the probability of the gambler winning is less than half.
+The house has a long run advantage, since the probability of the gambler winning is less than half. There is a $\frac{125}{216}$ probability of no dice returning the gambler's number, a $\frac{75}{216}$ probability of one die matching, a $\frac{15}{216}$ probability of two dice matching, and a $\frac{1}{216}$ probability of three dice matching. From this we obtain a long-run dollar advantage of $\frac{125}{216}\ \$ 1 - ( \frac{75}{216}\ \$ 1 + \frac{15}{216}\ \$2 + \frac{1}{216}\ \$3)= \frac{17}{216}$, so we should expect the house to win near $7.87$ cents on the dollar in the long run average. 
 
 #### Problem 1.3 
-We're interested in making the game fair by adjusting the winnings.
-$\frac{125}{216}*\$1 = \frac{1}{216}\$b +\frac{15}{216}\$a+\frac{75}{216}\$1 \rightarrow \$50 = \$b + \$15a$
-so we could have any nonnegative solution to this 
+We're interested in making the game fair by adjusting the winnings; this corresponds to making the long-run dollar payoffs for the house and the gambler equal.
+$\frac{125}{216}\ \$1 = \frac{1}{216}\ \$b +\frac{15}{216}\ \$a+\frac{75}{216}\ \$1 \rightarrow \$50 = \$b + \$15a$, which indicates that any combination of `a` and `b` payoffs for two and three matching dice satisfying $50 =b+15a$ would make the game fair.
 
 #### Problem 1.4
-average winnings of $.12 during the 100 rounds
+```{r}
+set.seed(12269)
+chuck <- replicate(sum(sample(1:6,1,replace = TRUE) == sample(1:6,3,replace = TRUE)),n =100)
+chuck_dol <- ifelse(chuck == 0, -1, chuck)
+mean(chuck_dol)
+```
+With 100 independent simulated rounds of Chuck-a-Luck, there is an average winning of -$0.08 per round; this is similar to the theoretical long-run dollar advantage the house has.
+
+#### Problem 1.5
+We expect the long run average winnings per round to be $7.87$ cents; the Law of Large Numbers states that as an experiment is repeated, the average of independent results will converge to the expected value. We can observe that the sample average for a large sample in problem 1.4 is close the expected value found in problem 1.2; we should expect the sample average to continue to converge to the expected value as the sample size is increased further. 
+
+
+#### Problem 1.6
+We can simulate a gambler's wealth given starting and ending wealth condition with the following:
 
 ```{r}
 gamble <- function(incash,outcash) {
 cash <- c(incash)
 while (cash[length(cash)] > 0 & cash[length(cash)] < outcash) {
   samp <- sum(sample(1:6,3,replace = T) == sample(1:6,1,replace = T))
-  if (samp == 0) {
-    cash <- c(cash, cash[length(cash)]-1)
-  }
-  if (samp == 1) {
-    cash <- c(cash, cash[length(cash)]+1)
-  }
-  if (samp == 2) {
-    cash <- c(cash, cash[length(cash)]+2)
-  }
-  if (samp == 3) {
-    cash <- c(cash, cash[length(cash)]+3)
-  }
-  } 
+  if (samp == 0) {cash <- c(cash, cash[length(cash)]-1)} 
+  if (samp == 1) {cash <- c(cash, cash[length(cash)]+1)}
+  if (samp == 2) {cash <- c(cash, cash[length(cash)]+2)}
+  if (samp == 3) {cash <- c(cash, cash[length(cash)]+3)}
+} 
 return(cash)
 }
 
-replicate(gamble(1,4),n =20)
+library(ggplot2)
+df_run <- data.frame(gamble(2,4))
+df_run$t <- 0:(nrow(df_run)-1)
+ggplot(df_run, aes(x=t,y=gamble.2..4.)) + geom_line() + 
+  scale_x_continuous(name = "Chuck-a-Luck Round", breaks = seq(0,10,1)) +
+  scale_y_continuous(name = "Gambler's Cash", breaks = seq(0,10,1)) + 
+  labs(title = "Gambler's wealth over time")
+
 ```
 
+#### Problem 1.7
+Using the function `gamble`, we can replicate as many independent runs as desired and extract their run length and outcome: 
+
+```{r, fig.height = 3}
+gamblers <- replicate(gamble(2,4),n=100)
+gamblers_rounds <- c(); gamblers_win <- c()
+
+for (i in 1:length(gamblers)) {
+  gamblers_rounds <- c(gamblers_rounds,(length(gamblers[[i]])))
+}
+for (i in 1:length(gamblers)) {
+  gamblers_win <- c(gamblers_win,(tail(gamblers[[i]],1) >= 4))
+}
+gambler_outcome <- data.frame("rounds" = gamblers_rounds, "win" = gamblers_win)
+
+mean(gambler_outcome$rounds)
+mean(gambler_outcome$win)
+
+hist(gambler_outcome$rounds[gambler_outcome$win == 0], breaks = 7, 
+     xlab = "Rounds Played", main  = "Distribution of Rounds Played to Bankruptcy")
+hist(gambler_outcome$rounds[gambler_outcome$win != 0], breaks = 9, 
+     xlab = "Rounds Played", main  = "Distribution of Rounds Played to Win")
+hist(gambler_outcome$rounds, breaks = 7, xlab = "Rounds Played", 
+     main  = "Distribution of Rounds Played")
+```
+The 100 gamblers played an average of 4.3 rounds, and 52% of gamblers finished their games with at least $\$4$.

@@ -562,4 +562,39 @@ Chymotrypsin Video 6
 - $K_M$ is the substrate concentration when the reaction velocity is half the maximum
   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\linew.JPG)
   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\linew2.JPG)
+
+#### Week 4 Lectures
+
+Ligand Bonding Proteins Video 1
+- myoglobin is a globular protein, consists of multiple subunits and a prosthetic group
+  - Heme: prosthetic group, tetrapyrrole rings; holds charged Iron within center of Heme
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\heme.JPG)
+    - held in place by proximal histidine N residue; oxygen held in 6th Fe coordination is stabilized by distal histidine nitrogen group
+      - distal histidine also protects free Iron from oxidation
+    ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\heme2.JPG))
+- dissociation constant: measures rate of protein-ligand complex dissociation
+
+$$K_D = \frac{[P][L]}{[PL]} $$
+  - fractional saturation (Y): proportion of myoglobin bound to O$_2$; $Y=\frac{[MbO_2]}{[Mb]+[{MbO_2}]}$
+  - myoglobin binds in a hyperbolic trend $Y = \frac{pO_2}{K+ pO_2}$
+  - $K_D$ is inversely related to the affinity of the ligand for its protein
+- myoglobin has a higher affinity for O$_2$ than hemoglobin
+  - hemoglobin binding is sigmodial $\rightarrow$ allosteric
+    - rate effect of ligand concentration (Hill coefficient) can range from 1 to the number of subunits in the protein
+  - similar in secondary and tertiary structures
+- oxygen binding reduces Iron electron cloud size, allows it to be pulled flatter into the porphyrin
+  - causes conformational changes in Hb structure; T $\rightarrow$ R state, smaller central region
+
+Allosteric Effectors Video 2
+- oxygen binds cooperatively to hemoglobin (allosteric, function increases with binding)
+  - high oxygen concentration in the lungs increases hemoglobin affinity
+  - low oxygen concentration in lung tissue, myoglobin binds and transports it after hemoglobin drops it off
+- binding curve of pure hemoglobin looks more like myoglobin; 2,3-BPG influences the affinity of hemoglobin for oxygen
+  - fits into center hold of deoxyhemoglobin; stabilization of T state and creation of allosteric properties
+- carbon dioxide and H$^+$ enhance oxygen release by hemoglobin; Bohr effect
+  
+  
+  
+  
+  
   

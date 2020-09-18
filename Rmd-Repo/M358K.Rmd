@@ -71,6 +71,13 @@ hist(wraps)
   - data visualizations should be meaningful and accurate depictions; modality and skewedness
   - variance is a non-standardized measure of spread from the mean; weighs larger deviations more heavily, removes signs from deviation calculations
 
+#### Lecture 9/16/2020
+- median is the value that splits the data in half when ordered (mean of two medians if there are even observations)
+  - IQR is the range between Q3 and Q1 (75th and 25th percentiles) and contains 50% of the sample data
+    - add or subtract 1.5 times the IQR to Q3 or Q1 for whiskers 
+  - more robust than mean to large outliers or deviations; good for highly skewed distributions
+- highly skewed data can be transformed to be better (common log transform)
+- exploratory base stats in the diamond dataset
 ### Labs and Homeworks
 
 ### Projects

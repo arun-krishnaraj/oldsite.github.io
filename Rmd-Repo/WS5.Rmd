@@ -1,0 +1,378 @@
+---
+title: "WS5"
+author: "SDS348"
+output: html_document
+---
+
+# Review
+
+Let's review dnorm(), pnorm(), qnorm()
+
+```{R}
+#review
+ggplot()+geom_line(aes(x=c(-4,4)),
+stat = "function", fun = dnorm)+xlab("z")
+```
+
+Random sampling functions!
+
+```{R}
+norms <- rnorm(5000) #5000 draws from a standard normal
+unifs <- runif(5000) #5000 draws from a uniform(0,1)
+
+hist(norms)
+hist(unifs)
+```
+
+Use uniform samples to generate random samples from ANY DISTRIBUTION!
+
+```{R}
+hist(unifs) #they appear uniform
+
+hist(qnorm(unifs)) #give these to qnorm, it will spit out z-scores cutting off each "probability"! 
+
+#This should look roughly the same as hist(norms)
+```
+
+
+# Data Wrangling!
+
+Let's do some wrangling!
+
+Take a look at the `txhousing` dataset, built in to the ggplot2 package
+
+```{R}
+library(tidyverse) #IMPORTANT: YOU MUST RUN THIS FIRST!
+data(txhousing)
+
+#glimpse() is a dplyr function similar to str() and head()
+glimpse(txhousing) 
+```
+
+## Filter
+
+Using `filter()` to grab the ROWS you want
+
+```{R}
+txhousing %>% filter(city=="Austin")
+
+txhousing %>% filter(sales<=100 & month==1) 
+
+txhousing %>% filter(sales<=100 | month==1)
+
+txhousing %>% filter(city %in% c("Austin","San Antonio")) # same as filter(city=="Austin | city=="San Antonio")
+
+txhousing %>% filter(between(sales,900,1000)) #same as filter(sales >= 900 & sales <= 1000)
+
+txhousing %>% filter(str_detect(city, "Fort")) #return all rows that have "Fort" in the city name
+``` 
+
+Using `slice()` to grab specific row numbers
+
+```{R}
+txhousing %>% slice(1,n()) #n() is shorthand for the last row number
+
+txhousing %>% slice(1:3)
+
+txhousing %>% slice()
+``` 
+
+### YOU TRY!
+
+Return rows of the `txhousing` dataset where the city is "Austin" AND the year is the maximum
+
+Note that just as in `ggplot`, you don't need to use $ or [] for anything!
+
+```{R}
+txhousing %>% filter(city == "Austin" & year == max(year))
+
+```
+
+Return rows of `txhousing` where the city contains the word "County" OR where `sales` are less than 100
+
+```{R}
+txhousing %>% filter(str_detect(city, "County") | sales < 100)
+```
+
+
+## Arrange
+
+Using `arrange()` to sort the dataset
+
+```{R}
+txhousing %>% arrange(median) #default is ascending (least to greatest)
+
+txhousing %>% arrange(desc(median)) #desc gives descending (greatest to least)
+
+txhousing %>% arrange(-median) #minus sign gives you this behavior also
+
+txhousing %>% arrange(desc(city), desc(year), month) #sorting multiple variables: order matters!
+
+``` 
+
+### Practice
+
+`inventory` tells you the time it would take (months) to sell all current listings at current pace 
+
+Sort dataset by `inventory` from least-to-greatest 
+
+```{R}
+txhousing %>% arrange(inventory)
+
+```
+
+
+## Select
+
+Select COLUMNS with `select()`
+
+```{R}
+#dont need c() or ""
+txhousing %>% select(city, year, inventory)
+
+txhousing %>% select(1,2,8)
+
+#use - to drop
+txhousing %>% select(-city,-year,-inventory)
+
+#use everything() to keep everything else in the same order
+
+#move median and inventory to the front, keep all other columns in same order
+txhousing %>% select(median, inventory, everything())
+``` 
+
+Grab columns whose names begin/end with or contain certain strings using `select()`
+
+```{R}
+txhousing %>% select(starts_with("m"))
+
+txhousing %>% select(ends_with("s"))
+
+txhousing %>% select(contains("in"))
+```
+
+
+Using `select()` and `rename()` to rename columns
+
+```{R}
+#syntax is always NewName=OldName
+
+#if you want spaces in column names (which I would avoid), you must quote the string
+
+txhousing %>% select(Location=city, "Calendar Year"=year, "Total Listings"=listings)
+
+#note that select only brings back the three columns you renamed
+
+#to return all columns and rename three of them, use rename instead
+
+txhousing %>% rename(Location=city, "Calendar Year"=year, "Total Listings"=listings)
+``` 
+
+## Select versus Pull
+
+Try selecting one column and saving it. What type of data is it?
+
+```{R}
+sales_df<- txhousing %>% select(sales)
+class(sales_df)
+``` 
+
+Now, instead of selecting, use `pull()`
+
+```{R}
+sales_vec<- txhousing %>% pull(sales)
+class(sales_vec)
+```
+
+Why is this important?
+
+```{R}
+mean(sales_df,na.rm=T) # cant take mean of a dataframe!
+mean(sales_vec,na.rm=T) # you CAN take mean of a vector
+``` 
+
+### Practice
+
+Select the variable `city` and select variables ending with "s"
+
+```{R}
+txhousing %>% select(city, ends_with("s"))
+```
+
+Select the variables with names **not** containing the letter "a"
+
+```{R}
+#try it!
+
+```
+
+
+## Chaining functions together with pipes
+
+```{R}
+txhousing %>% filter(year==2015, month==7) %>% select(city, median) %>% arrange(desc(median))
+
+#or, more elegantly (note you must end the line with a pipe)
+
+txhousing %>% 
+  filter(year==2015, month==7) %>% 
+  select(city, median) %>% 
+  arrange(desc(median))
+```
+
+### Practice
+
+Filter to get January 2009, select everything but `date`, sort by `volume` descending, and SAVE IT as chain1
+
+```{R}
+chain1 <- txhousing %>% filter(year == 2009, month ==1) %>% select(-date) %>% arrange(desc(volume))
+
+```
+
+Now, we can plot the first ten rows by piping to ggplot
+
+```{R}
+chain1 %>% slice(1:10) %>%
+  ggplot(aes(city,volume))+geom_bar(stat="identity")+coord_flip()
+``` 
+
+Sort the bars/cities by volume with reorder()
+
+```{R}
+chain1 %>% slice(1:10) %>%
+  ggplot(aes(x=reorder(city,volume), y=volume))+geom_bar(stat="identity")+coord_flip()
+
+``` 
+
+## Create new columns with `mutate()`
+
+Mutate creates new columns, often by modifying old ones!
+
+```{R}
+#create a column called state and put TX in every cell
+txhousing %>% mutate(state="TX") 
+
+#create an average home price variable
+txhousing %>% mutate(average=volume/sales)
+
+head(txhousing) #where is our new variable? We didn't save it!
+
+txhousing <- txhousing %>% mutate(average=volume/sales)
+
+head(txhousing)
+``` 
+
+
+```{R}
+txhousing %>% mutate(`sales_pctile`=ntile(sales,100))
+``` 
+
+
+```{R}
+#recode numeric data to character data (ascending order)
+txhousing <- txhousing %>%
+  mutate(month2 = recode(month,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"))
+
+head(txhousing)
+
+#recode character data to character data
+txhousing %>% mutate(month2=recode(month2, Jan="Enero", Feb="Febrero"))
+
+``` 
+Modifying text in cells with str_replace
+
+```{R}
+txhousing %>% 
+  filter(city == "Fort Worth") %>%
+  mutate(city = str_replace(city, "Fort", "Ft"))
+```
+
+```{R}
+txhousing %>% 
+  mutate(city= tolower(city))
+```
+
+Using lag to create a percent-increase variable
+
+```{R}
+txhousing %>% 
+  filter(city=="Austin") %>%
+  arrange(year, month) %>% #make sure it's in chronological order 
+  mutate(pct_change = (sales-lag(sales)) / lag(sales)) #compute percent change from previous month 
+
+
+#note mutate adds new columns after the last column in the dataset!
+``` 
+
+
+## Practice
+
+- Create a new variable that tells you what *quartile* each month is in for inventory using `ntile()`
+- Name it inventory4tile (or whatever you want)
+
+```{R}
+#try it!
+
+```
+
+Mutate doesn't really make sense for summary statistics
+
+```{R}
+#create a new column with the average volume, bring it to the front
+txhousing %>% mutate(meanvol=mean(volume)) %>% select(meanvol, everything())
+
+#uh oh, nothing but NAs!
+``` 
+
+
+```{R}
+#we can tell the mean() function to ignore NAs by adding na.rm=T
+
+txhousing %>% mutate(meanvol=mean(volume, na.rm=T)) %>% select(meanvol, everything()) 
+``` 
+
+## Summarize with `summarize()`
+
+`summarize()` computes summary statistics like mean, sd, etc.
+
+```{R}
+txhousing %>% summarize(mean(volume, na.rm=T))
+
+txhousing %>% summarize(n()) #number of rows
+
+txhousing %>% summarize(n_distinct(city)) #number of distinct cities
+
+#can do more than one at once!
+txhousing %>% summarize(mean(volume, na.rm=T), n(), n_distinct(city))
+
+#can give them new names
+txhousing %>% summarize(mean_vol = mean(volume, na.rm=T), n_rows=n(), n_cities= n_distinct(city))
+```
+
+
+Use filter and summarize together
+
+```{R}
+#find mean volume and listings for year 2015 (averaging across all cities)
+
+txhousing %>% filter(year==2015) %>% 
+  summarize(mean(volume,na.rm=T))
+
+#find mean volume and listings for year 2015 in Austin specifically
+
+txhousing %>% filter(year==2015, city=="Austin") %>% 
+  summarize(mean(volume, na.rm=T))
+```
+
+## Practice!
+
+How would you find the standard deviation of volume when the number of sales is above average?
+
+```{R}
+#you try!
+```
+
+
+
+## group_by()
+

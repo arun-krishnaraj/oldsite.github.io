@@ -29,6 +29,9 @@ knitr::opts_chunk$set(echo = TRUE)
 #### 9/15/2020
 - Continue distribution lecture (here)[https://arun-krishnaraj.github.io/Rmd-Repo/WS4.html]
 
+#### 9/17/2020
+- finish distributions and intro to dpylr (here)[https://arun-krishnaraj.github.io/Rmd-Repo/WS5.html]
+
 ### Labs and Homeworks
 - [Blank HW 1](C:/Users/arunk/Desktop/Site Rmd Repo/HW1.Rmd)
 - [Filled in HW 1](C:/Users/arunk/Desktop/Site Rmd Repo/HW1-Krishnaraj.Rmd)
