@@ -591,10 +591,17 @@ Allosteric Effectors Video 2
   - low oxygen concentration in lung tissue, myoglobin binds and transports it after hemoglobin drops it off
 - binding curve of pure hemoglobin looks more like myoglobin; 2,3-BPG influences the affinity of hemoglobin for oxygen
   - fits into center hold of deoxyhemoglobin; stabilization of T state and creation of allosteric properties
-- carbon dioxide and H$^+$ enhance oxygen release by hemoglobin; Bohr effect
+- carbon dioxide and H$^+$ enhance oxygen release by hemoglobin; Bohr effect (negative effectors)
+  - diffusion of carbon dioxide into red blood cells reaction of carbon dioxide and water to form carbonic acid; increases proton concentration as a result of cellular respiration 
+- hemoglobin has a lower affinity for oxygen at lower pH across all O$_2$ partial pressures; results in increased oxygen offloading 
+    - carbon dioxide also reduces hemoglobin binding affinity; reacts with terminal amino groups to form charged carbamate groups, stabilizes T state
+  - result in oxygen acquisition the lungs and release in tissue
+- HbA: normal adult hemoglobin, 2 $\alpha$ and 2 $\beta$ subunits
+  - HbS: sickle hemoglobin, point mutation on $\beta$ chain; causes precipitation due to hemoglobin polyerization 
+  - deoxy T state has Phe 85, Leu 88, Val 6 exposed: creation of sticky site and hemoglobin aggregates 
+  - HbF: fetal hemoglobin, usually all converted to HbA
+- carbon monoxide binds to a single heme site, and increases other subunit's binding affinity (oxygen is no longer released into tissue)
   
-  
-  
-  
-  
-  
+Carbohydrates Video 4
+- monosaccharides are aldehydes or ketones with two or more alcohol groups (D saccharides are biologicaly active, hydroxyl on right)
+  - many isomeric forms of carbohydrates
