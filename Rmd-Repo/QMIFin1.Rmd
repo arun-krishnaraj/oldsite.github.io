@@ -1,0 +1,34 @@
+---
+title: "QMIFin HW 1"
+author: "ArunK"
+date: "9/18/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+This homework is partly recap from last year, but has a few open-ended questions/things we haven't covered :)
+
+#### Problem 1
+What's the difference between a future and an option? What parameters are important for pricing an option? What is the classical option pricing model?
+
+#### Problem 2
+Using the model identified in P1, price a European Call option on AMGN with strike price $\$260$, expiry in exactly 1 year. Pull daily price info for the last 6 months  [here](https://finance.yahoo.com/quote/AMGN/history?p=AMGN), and use the annualized 5-year Treasury rate as the risk free rate [here](https://www.treasury.gov/resource-center/data-chart-center/interest-rates/pages/textview.aspx?data=yield). Please show all work (feel free to check the option chain [here](https://finance.yahoo.com/quote/AMGN/options/) as a sanity check)
+
+#### Problem 3
+Explain these concepts in 4-5 sentences: CAL, efficient frontier, minimum variance portfolio, indifference curve, optimal complete portfolio. (Feel free to include graphics)
+
+#### Problem 4
+Considering your answers to P1-P3, how well do you feel market behavior fits our established theoretical framework? Give an empirical example in support of your answer.
+
+#### Problem 5
+What's a KPI you feel has gained importance since February 2020 (any answer related to Google Trends is not allowed)? Is this KPI industry-specific or general? Why do you think this KPI was previously not as important? Ideas to capitalize on this?
+
+#### Problem 6
+Identify and describe specific quantitative factors that can be used to measure the following: equity liquidity, equity volatility, balance sheet health, debt quality, short-seller involvement, and momentum. Please include relevant equations and links – try to be as specific as possible and understand there are multiple right answers
+
+#### Problem 7
+This past April, WTI Futures settled in Cushing, OK traded at -$37 per barrel. Explain what this implied.
