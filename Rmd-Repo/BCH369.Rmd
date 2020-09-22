@@ -566,6 +566,7 @@ Chymotrypsin Video 6
 #### Week 4 Lectures
 
 Ligand Bonding Proteins Video 1
+
 - myoglobin is a globular protein, consists of multiple subunits and a prosthetic group
   - Heme: prosthetic group, tetrapyrrole rings; holds charged Iron within center of Heme
   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\heme.JPG)
@@ -575,6 +576,7 @@ Ligand Bonding Proteins Video 1
 - dissociation constant: measures rate of protein-ligand complex dissociation
 
 $$K_D = \frac{[P][L]}{[PL]} $$
+ 
   - fractional saturation (Y): proportion of myoglobin bound to O$_2$; $Y=\frac{[MbO_2]}{[Mb]+[{MbO_2}]}$
   - myoglobin binds in a hyperbolic trend $Y = \frac{pO_2}{K+ pO_2}$
   - $K_D$ is inversely related to the affinity of the ligand for its protein
@@ -586,6 +588,7 @@ $$K_D = \frac{[P][L]}{[PL]} $$
   - causes conformational changes in Hb structure; T $\rightarrow$ R state, smaller central region
 
 Allosteric Effectors Video 2
+
 - oxygen binds cooperatively to hemoglobin (allosteric, function increases with binding)
   - high oxygen concentration in the lungs increases hemoglobin affinity
   - low oxygen concentration in lung tissue, myoglobin binds and transports it after hemoglobin drops it off
@@ -603,6 +606,7 @@ Allosteric Effectors Video 2
 - carbon monoxide binds to a single heme site, and increases other subunit's binding affinity (oxygen is no longer released into tissue)
   
 Carbohydrates Video 3
+
 - monosaccharides are aldehydes or ketones with two or more alcohol groups (D saccharides are biologicaly active, hydroxyl on right)
   - many isomeric forms of carbohydrates
   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\carb-isomers.JPG)
@@ -619,6 +623,7 @@ Carbohydrates Video 3
 - linkage is normally to nitrogen in asparagine R group, or oxygen in serine or threonine R groups
 
 Lipids Video 4
+
 - Fatty acids: carboxylate joined with hydrocarbon chain
   - referred to by number of carbons and double bonds present 
   - Omega or Delta nomenclature can be used to convey position of double bonds (from ending or from starting carbons)
@@ -633,11 +638,13 @@ Lipids Video 4
   - steroids: built on tetracyclic platform: cholesterol maintains membrane fluidity and is a precursor to hormonal steroids 
   
 Clutch Protein Ligand
+
 - ligand: any small substance that can reversibly bind with a larger biomolecule
 - the higher the rate constant, the reaction is likely faster
   - ligands have rates of association and dissociation $k_a, k_d$ for forming PL and breaking PL
 
 Clutch Ligand Equilibrium 
+
 - association and dissociation rate constants $(K_a, K_d)$
   - the greater the $K_a$, the stronger the affinity for ligand
   - $K_a$ has units of $M^{-1}$ and is the reciprocal of $K_d$; $K_a = \frac{[PL]}{[P][L]} = \frac{k_a}{k_d} = \frac{1}{K_d}$
@@ -645,6 +652,7 @@ Clutch Ligand Equilibrium
   - $K_d = [L]$ allows half of the binding sites to be occupied
 
 Clutch fractional saturation
+
 - Y: fraction of occupied ligand binding sites
   - saturation curves plot $\theta$ against $[L]$, we can use this to find the $K_d$
     - $\theta  = \frac{[L]}{[L]+K_d}$
@@ -652,33 +660,40 @@ Clutch fractional saturation
 Chapter 9
 
 9.1 Hemoglobin displays cooperative behavior 
+
 - hemoglobin exhibits cooperative effect characteristic of allosteric enzymes; allows full saturation in the lungs and transport to tissue
 
 9.2 Myoglobin and Hemoglobin bind oxygen in Heme groups
+
 - both myoglobin and hemoglobin rely on prosthetic heme group to bind to oxygen; central Iron is stabilized by 4 charged nitrogens, as well as histidine residue;
   - the last Iron coordination site remains open to bind to oxygen; tightens Iron electron cloud to flatten porphyrin ring
   
 9.3 Hemoglobin binds oxygen cooperatively 
+
 - heme consists of 2$ \alpha$ and 2 $\beta$ subunits, similar to those of myoglobin
   - oxygenation results in a T to R conversion, central pore is held tighter
   
 9.4 An allosteric regulator determines the oxygen affinity of hemoglobin
+
 - 2,3-BPG reduces hemoglobin oxygen affinity to increase delivery to tissues
   - fits in the central pore of T hemoglobin, leads to release of oxygen and T form stabilization
   
 9.5 Protons and carbon dioxide promote the release of oxygen
+
 - hydrogen ions and carbon dioxide, byproducts of metabolism, enhance oxygen release 
   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\heme_ion.JPG)
   - creation of stabilizing salt bridges and carbamate reduce oxygen affinity 
     ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\heme_co2.JPG)
 
 9.6 Heme subunit mutation can lead to disease 
+
 - point mutations decreases solubility of deoxygenated hemoglobin, results in a high concentration of deoxygenated Hb
   - sickles nearby cells by reducing oxygen concentration in narrow blood vessels 
   
 Chapter 10
 
 10.1 Monosaccharides are the simplest carb
+
 - aldehydes or ketones with at least two hydroxyl groups
   - can be a ketose or aldose (if they have a keto or aldehyde group)
 - carbs occur in a large number of isomeric forms; chiral centers contribute diastereoisomers
@@ -688,6 +703,7 @@ Chapter 10
   - N-glycosidic: bond between anomeric carbon of glucose and nitrogen of amine
   
 10.2 Monosaccharides are linked to form complex carbs
+
 - oligosaccharides are built by linkage of two or more monosaccharides by O-glycosidic bonds
   - actual bond chemistry depends on type of ring configuration and carbon position
 - glycogen and starch are storage forms of glucose
@@ -697,6 +713,7 @@ Chapter 10
   - straight chain form can't be digested by mammals (still improves digestion)
   
 10.3 Carbs are attached to proteins to form glycoproteins 
+
 - sugars are attached to amide nitrogen in asparagine, or hydroxyl oxygen in serine or threonine (largely protein by weight)
 - proteoglycans: more carb by weight, function as lubricants and structural components, mediate cellular adhesion
   - human blood groups are based on glycosylation patterns
@@ -704,6 +721,7 @@ Chapter 10
 Chapter 11 Lipids
 
 11.1 Fatty Acids
+
 - chains of hydrocarbons with terminal carboxylic acid groups
   - act as fuel and building blocks for membrane lipids
   - formal name is based on parent hydrocarbon name
