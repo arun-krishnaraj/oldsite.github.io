@@ -15,20 +15,34 @@ This homework is partly recap from last year, but has a few open-ended questions
 #### Problem 1
 What's the difference between a future and an option? What parameters are important for pricing an option? What is the classical option pricing model?
 
+*Hint: Think about what action is taken at expiry of each instrument. What terms are usually specified by option pricing models or are included in any of the greeks? Merton is unfortunately colloquially left off of the model, despite applying rigorous logic to formalize it.*
+
 #### Problem 2
 Using the model identified in P1, price a European Call option on AMGN with strike price $\$260$, expiry in exactly 1 year. Pull daily price info for the last 6 months  [here](https://finance.yahoo.com/quote/AMGN/history?p=AMGN), and use the annualized 5-year Treasury rate as the risk free rate [here](https://www.treasury.gov/resource-center/data-chart-center/interest-rates/pages/textview.aspx?data=yield). Please show all work (feel free to check the option chain [here](https://finance.yahoo.com/quote/AMGN/options/) as a sanity check)
+
+*Hint: Remember we can price a European call with the BSM model; the input parameters are time to expiry (needs to match in duration to the rate used), strike price (given), risk-free rate of return (given, make sure to use the annualized 5-year rate). The only other things you'll need are the standard deviation (you should know to use daily adjusted close prices) calculated with the last 6 months of data, and the current stock price (you can use open, close, or adjusted close depending on when you do the homework). What type of standard deviation should you use?*
 
 #### Problem 3
 Explain these concepts in 4-5 sentences: CAL, efficient frontier, minimum variance portfolio, indifference curve, optimal complete portfolio. (Feel free to include graphics)
 
+*Hint: Remember that these terms all have to do with Modern Portfolio Theory and the trade-off between portfolio risk and expected return. How does an investor combine multiple assets into a better portfolio? What effect does holding varying proportions of risk-free asset in a portfolio have? Are there certain portfolios that are strictly better than others?*
+
 #### Problem 4
 Considering your answers to P1-P3, how well do you feel market behavior fits our established theoretical framework? Give an empirical example in support of your answer.
+
+*Hint: Maybe take a look at option pricing chains, factors that might not be included in the BSM model, variations between MPT and actual institutional/investor behavior. Data for this can be found almost anywhere (feel free to use index behavior as a proxy for markets if that's something you're interested in).*
 
 #### Problem 5
 What's a KPI you feel has gained importance since February 2020 (any answer related to Google Trends is not allowed)? Is this KPI industry-specific or general? Why do you think this KPI was previously not as important? Ideas to capitalize on this?
 
+*Hint: What company characteristics do investors usually reward? Is there anything that's changed in consumer behavior or industry landscapes that make one of these characteristics more valuable? What do expectations for the next 6-12 months look like? Any actions undertaken that firms usually try to avoid?*
+
 #### Problem 6
 Identify and describe specific quantitative factors that can be used to measure the following: equity liquidity, equity volatility, balance sheet health, debt quality, short-seller involvement, and momentum. Please include relevant equations and links – try to be as specific as possible and understand there are multiple right answers
 
+*Hint: Think accounting ratios, capital structure, market participant behavior, and price trends! We're less interested in seeing niche technical indicators, instead try to develop intuition on ways investors can quantify financial success and behavior.*
+
 #### Problem 7
 This past April, WTI Futures settled in Cushing, OK traded at -$37 per barrel. Explain what this implied.
+
+*Hint: What does it mean to purchase a future? When is capital exchanged? When is delivery taken? How do market expectations influence the ways commodities and their derivatives behave?*

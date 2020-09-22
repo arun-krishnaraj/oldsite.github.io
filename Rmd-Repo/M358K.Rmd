@@ -78,6 +78,16 @@ hist(wraps)
   - more robust than mean to large outliers or deviations; good for highly skewed distributions
 - highly skewed data can be transformed to be better (common log transform)
 - exploratory base stats in the diamond dataset
+
+#### Lecture 9/21/2020
+- randomized response includes a randomized question and response to generate honest samples 
+- observational studies: data is collected indirectly from the data arising 
+  - prospective vs retrospective: identifies data prior or after events have taken place
+- random sampling techniques:
+  - simple: every sample is equally likely
+  - stratified: split groups to better capture proportion
+  - cluster: works if subsets of sample are alike 
+
 ### Labs and Homeworks
 
 ### Projects
