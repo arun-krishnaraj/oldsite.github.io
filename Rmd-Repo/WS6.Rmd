@@ -1,0 +1,464 @@
+---
+title: "WS5"
+author: "SDS348"
+output: html_document
+---
+
+
+# Data Wrangling!
+
+Let's do some wrangling!
+
+Recall the `txhousing` dataset, built in to the ggplot2 package
+
+```{R}
+library(tidyverse) #IMPORTANT: YOU MUST RUN THIS FIRST IN JUST ABOUT EVERY ASSIGNMENT!
+data(txhousing)
+
+#glimpse() is a dplyr function similar to str() and head()
+glimpse(txhousing) 
+```
+
+
+
+## Create new columns with `mutate()`
+
+Mutate creates new columns, often by modifying old ones!
+
+```{R}
+#create a column called state and put TX in every cell
+txhousing %>% mutate(state="TX") 
+
+#create an average home price variable
+txhousing %>% mutate(average=volume/sales)
+
+head(txhousing) #where is our new variable? We didn't save it!
+
+txhousing <- txhousing %>% mutate(average=volume/sales)
+
+head(txhousing)
+``` 
+
+
+```{R}
+txhousing %>% mutate(`sales_pctile`=ntile(sales,100))
+``` 
+
+
+## Practice
+
+- Create a new variable that tells you what *quartile* each month is in for inventory using `ntile()`
+- Name it inventory4tile (or whatever you want)
+
+```{R}
+txhousing = txhousing %>% mutate(inventory4tile = ntile(inventory,4))
+
+```
+
+
+```{R}
+#recode numeric data to character data (ascending order)
+txhousing <- txhousing %>%
+  mutate(month2 = recode(month,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"))
+
+head(txhousing)
+
+#recode character data to character data
+txhousing %>% mutate(month2=recode(month2, Jan="Enero", Feb="Febrero"))
+``` 
+
+Modifying text in cells with str_replace(). This can be very handy for text cleaning!
+
+```{R}
+txhousing %>% 
+  filter(city == "Fort Worth") %>%
+  mutate(city = str_replace(city, "Fort", "Ft"))
+```
+
+```{R}
+txhousing %>% 
+  mutate(city= tolower(city))
+```
+
+Using lag to create a percent-increase variable
+
+```{R}
+txhousing %>% 
+  filter(city=="Austin") %>%
+  arrange(year, month) %>% #make sure it's in chronological order 
+  mutate(pct_change = (sales-lag(sales)) / lag(sales)) #compute percent change from previous month 
+
+
+#note mutate adds new columns after the last column in the dataset!
+``` 
+
+Use case_when() to create categories from a numeric variable
+
+Here, we want a column that says "high" if listings are over 2000, "med" if between 500 and 2000, "low" otherwise.
+
+Keeps you from having to daisychain ifelse statements
+
+```{R}
+#could use a chain of ifelse, but this is confusing
+txhousing%>%
+  mutate(listings_cat = ifelse(listings>2000, "high", 
+                        ifelse(listings<=2000 & 500<=listings, "med", "low")))
+
+
+#easier to see and write:
+
+txhousing%>%mutate(listings_cat = case_when(listings>2000 ~ "high",
+                                            listings<=2000 & 500<=listings ~ "med",
+                                            listings<500 ~ "low"))
+```
+
+## Practice!
+
+Make a new variable using mutate() called logVolume that is the base10 log of the volume variable: Then pipe the output into ggplot() and make a histogram!
+
+```{R}
+txhousing %>% mutate(logVolume=log10(volume)) %>% ggplot()+geom_histogram(aes(logVolume))
+```
+
+
+Mutate doesn't really make sense for summary statistics...
+
+```{R}
+#create a new column with the average volume, bring it to the front
+txhousing %>% mutate(meanvol=mean(volume)) %>% select(meanvol, everything())
+
+#uh oh, nothing but NAs!
+``` 
+
+
+```{R}
+#we can tell the mean() function to ignore NAs by adding na.rm=T
+
+txhousing %>% mutate(meanvol=mean(volume, na.rm=T)) %>% select(meanvol, everything()) 
+``` 
+
+It puts the same value on every row!
+
+
+## Summarize with `summarize()`
+
+`summarize()` computes summary statistics like mean, sd, etc.
+
+```{R}
+txhousing %>% summarize(mean(volume, na.rm=T))
+
+txhousing %>% summarize(n()) #number of rows
+
+txhousing %>% summarize(n_distinct(city)) #number of distinct cities
+
+#can do more than one at once!
+txhousing %>% summarize(mean(volume, na.rm=T), n(), n_distinct(city))
+
+#can give them new names
+txhousing %>% summarize(mean_vol = mean(volume, na.rm=T), n_rows=n(), n_cities= n_distinct(city))
+```
+
+
+
+## Group with `group_by()`
+
+We can take the data, group it by city, and compute the mean and sd of volume like
+
+```{R}
+txhousing %>% group_by(city) %>% 
+  summarize(mean_vol=mean(volume,na.rm=T), sd_vol=sd(volume, na.rm=T))
+``` 
+
+## Practice!
+
+Group by month (or month2) and find the mean sales per month. 
+
+Use the result to create a plot of mean sales by month!
+
+```{R}
+txhousing %>% group_by(month2) %>% summarize(`average sales`=mean(sales,na.rm = T)) %>% ggplot(aes(month2, `average sales`))+
+  geom_bar(stat = "identity")
+```
+
+
+Group by year, compute the sales-to-listings ratio, and take the mean of this new variable!
+Create a plot of mean sales-to-listing ratio by year
+
+```{R}
+#try it!
+```
+
+
+## Grouping by multiple variables
+
+Mean volume for every city in each year (i.e., averaging across month).
+
+```{R}
+txhousing %>% group_by(city,year) %>% summarize(mean_vol=mean(volume, na.rm=T))
+``` 
+
+
+## Important Practice!
+
+Let's make a barchart of means with standard error bars MANUALLY
+
+Group by year and month, then summarize to find the mean, sd, and count `n=n()` of volume.
+
+Mutate the result to create a column for the standard error (divide sd by sqrt(n)). Name it se
+
+Now, manually build a barchart of mean volume per month with stat="identity", faceted by year
+
+Once you have that plot working, try adding manual +/- 1SE bars
+
+Use the syntax `geom_errorbar(aes(y=mean, ymin=mean-se, ymax=mean+se))`
+
+```{R}
+txhousing %>% group_by(year,month) %>% summarize(mean = mean(volume, na.rm = T), sd = sd(volume, na.rm=T), n=n(), se = sd/sqrt(n)) %>% ggplot(aes(month, mean))+geom_bar(stat = "identity") +facet_wrap(~year) + geom_errorbar(aes(y=mean,ymin=mean-se, ymax=mean+se))
+```
+
+
+Compare your output with the equivalent ggplot plot using `stat="summary"`
+
+```{R}
+txhousing %>% ggplot(aes(month,volume)) + facet_wrap(~year) + 
+                geom_bar(stat="summary", fun=mean) + geom_errorbar(stat="summary", fun.data=mean_se)
+```
+
+
+
+
+```{R}
+library(ggridges)
+txhousing %>% filter(year==2000) %>% ggplot(aes(volume,y=month2)) +
+  geom_density_ridges(quantile_lines = TRUE, quantiles = 2) + scale_x_log10()
+
+txhousing %>% ggplot(aes(volume,y=month2))+geom_density_ridges(quantile_lines = TRUE, quantiles = 2)+scale_x_log10()+facet_wrap(~year)
+``` 
+
+## Summarize twice and ungroup()
+
+Do all years have the same number of observations per city (i.e., 12, one for each month?)
+
+Let's group by year and city, collapsing across months, and count the number of months for each city-year combination.
+
+```{R}
+txhousing %>% group_by(year,city) %>% summarize(count=n())
+
+txhousing %>% group_by(year,city) %>% summarize(count=n()) %>% summarize(n_distinct(count))
+
+#still grouped by year...
+
+#let's fix this with ungroup()
+
+txhousing %>% group_by(year,city) %>% summarize(count=n()) %>% 
+  ungroup() %>% summarize(n_distinct(count)) 
+
+#now it tells us there are two distinct values in for month counts!
+``` 
+
+## Advanced practice
+
+- In 2014, are there any cities where the median price is higher than the average price?
+- Recall that we can find average house price by dividing volume by sales
+
+```{R}
+# try it!
+
+#my solution uses filter, group_by, mutate, summarize, and then filter again
+```
+
+## Handling NAs!
+
+
+```{R}
+txhousing %>% dim()
+
+#drop rows with NAs for volume!
+txhousing %>% filter(!is.na(volume))
+
+#how many rows were NA for volume?
+
+#filter with is.finite() and is.nan() for Infs and NaNs if applicable
+#try 0/0 and 1/0 in the console to see what I mean
+```
+
+
+Here's how you remove ALL NAs (do be careful with these)!
+
+```{R}
+### These drop all rows that have ANY NAs AT ALL!
+
+txhousing %>% na.omit()
+
+txhousing %>% filter(complete.cases(txhousing))
+
+txhousing %>% drop_na() #this one is from the tidyr package
+``` 
+
+
+## Using summarize_all
+
+Apply the same summary function to every column! 
+
+For example, n_distinct tells you how many distinct elements are in a column
+
+We can apply it to EVERY column
+
+```{R}
+txhousing %>% summarize_all(n_distinct)
+``` 
+
+
+Do this with any function, including one you wrote yourself!
+
+Here is a quickie function that counts NAs
+
+```{R}
+txhousing %>% summarize_all(function(x)sum(is.na(x)))
+
+#or equivalently, just define/name your function explicitly!
+
+countNA <- function(z)sum(is.na(z))
+
+txhousing %>% summarize_all(countNA) #then you can run it more easily
+``` 
+
+## Using summarize_at
+
+This function lets you compute summarize stats for a specific subsest of columns
+
+```{R}
+txhousing %>% summarize_at(c("year","month", "sales"), mean, na.rm=T)
+
+## All equivalent
+
+txhousing %>% summarize_at(c("year","month", "sales"), mean, na.rm=T)
+
+txhousing %>% summarize_at(2:4, mean, na.rm=T)
+
+txhousing %>% summarize_at(vars(year:sales), mean, na.rm=T)
+
+## Or select first and summarize_all
+
+txhousing %>% select(year, month, sales) %>% summarize_all(mean, na.rm=T)
+
+
+``` 
+
+## Using summarize_if
+
+What if you try to apply the mean function to all columns with summarize_all?
+
+```{R}
+txhousing %>% summarize_all(mean,na.rm=T)
+``` 
+
+Instead, use summarize_if(test, function, ...)
+
+```{R}
+txhousing %>% summarize_if(is.numeric, mean, na.rm=T)
+```
+
+
+```{R}
+txhousing %>% summarize_if(is.numeric, list(min=min,max=max), na.rm=T)
+
+txhousing %>% summarize_if(is.numeric, list(Q3=quantile), probs=.75, na.rm=T)
+
+txhousing %>% summarize_if(is.character, n_distinct)
+``` 
+
+## Handling duplicate rows
+
+Let's say we accidentally duplicated our dataset, like so
+
+```{R}
+#duplicate the dataset by sticking it on top of itself! (Just to create duplicate rows.)
+
+txhousing %>% bind_rows(txhousing) %>% arrange(city,year,month)
+``` 
+
+We can get rid of them with `distinct()`
+
+```{R}
+#get rid of duplicate rows
+
+txhousing %>% bind_rows(txhousing) %>% arrange(city,year,month) %>% distinct()
+``` 
+
+## Specialized filter/select/slice functions
+
+
+```{R}
+#grab 5 random rows
+txhousing %>% sample_n(5)
+``` 
+
+```{R}
+#grab a random 10% of the dataset: 8602*.1 = 860.2, so it rounds and gives us 860
+txhousing %>% sample_frac(.1)
+```
+
+```{R}
+#get five random rows for each month
+txhousing %>% group_by(month)%>%sample_n(5)
+``` 
+
+```{R}
+#choose the 3 rows with the highest median home price
+
+txhousing %>% top_n(3, median)
+``` 
+
+
+## Using transmute()
+
+transmute is like mutate but only gives you the columns you create (not super useful)
+
+```{R}
+txhousing %>% transmute(avg=volume/sales)
+``` 
+
+
+## Mutate has _if, _at, and _all versions too!
+
+Here's a common use-case. We can force very column to be categorical 
+
+```{R}
+#coerce all variables into categorical/character
+txhousing %>% mutate_all(as.character)
+
+#make all character variables factors
+txhousing %>% mutate_if(is.character, as.factor)
+
+#make all character variables lowercase and remove leading/trailing whitespace
+txhousing %>% mutate_if(is.character,tolower) %>% mutate_if(is.character, str_trim)
+
+#make all character variables lowercase and remove (check to see that it works)
+txhousing %>% mutate_if(is.character,str_replace," ", "") %>% filter(city=="FortWorth")
+``` 
+
+```{R}
+#calculate z-score for all variables from sales to inventory and overwrite
+
+zscore <- function(x) (x-mean(x, na.rm=T)) / sd(x, na.rm=T)
+
+txhousing %>% mutate_at(vars(sales:inventory),zscore)
+``` 
+
+
+```{R}
+#calculte z-score for specific variables and overwrite
+txhousing %>% mutate_at(c("sales","volume"),zscore)
+``` 
+
+
+```{R}
+#avoid overwriting the existing columns by giving function a name
+txhousing %>% mutate_at(c("sales","volume"), list(z=scale))
+```
+
+
+
+
+

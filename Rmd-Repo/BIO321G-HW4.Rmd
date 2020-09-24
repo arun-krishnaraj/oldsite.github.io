@@ -1,0 +1,74 @@
+---
+title: "BIO321G-HW4"
+author: "ArunK"
+date: "9/17/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+### Problem 1
+
+```{r}
+fixedSizeStepper <- function(nSteps){
+  sample(c(-1, +1), nSteps, replace = TRUE)
+}
+
+uniformStepper <- function(nSteps){
+  sqrt(12) * (runif(nSteps) - 1/2)
+}
+
+randomWalk <- function(nSteps, stepper){
+  steps <- stepper(nSteps)
+  return(c(0, cumsum(steps)))
+}
+
+randomWalk(12, uniformStepper)
+```
+
+### Problem 2
+```{r}
+randomWalks <- function(nSteps, stepper = fixedSizeStepper, nWalks = 100000){
+  lapply(1:nWalks,function(i){randomWalk(nSteps, stepper)})
+}
+
+fixedStepWalks <- randomWalks(nSteps = 100, stepper = fixedSizeStepper)
+
+unifWalks <- randomWalks(nSteps = 100, stepper = uniformStepper)
+
+gaussianWalks <- randomWalks(nSteps = 100, stepper = rnorm)
+
+```
+
+### Problem 3
+
+```{r}
+positionsAtStepT = function(walks, t){
+  unlist(lapply(walks, function(rw){rw[[t+1]]}))
+}
+class(positionsAtStepT(unifWalks, 5))
+
+```
+
+Its currently a numeric vector, if we didn't include the `unlist` it would return a list. Since we start off at time 0 at position 0, and r starts indexing at 1 we need to adjust to actually be at position.
+
+```{r}
+plotData = lapply(c(1,2,5,10), function(nSteps){
+  rbind(
+    data.frame(stepper = "+/-1",
+               t = nSteps,
+               x = positionsAtStepT(fixedStepWalks, nSteps)),
+    data.frame(stepper = "uniform",
+               t = nSteps,
+               x = positionsAtStepT(unifWalks, nSteps)),
+    data.frame(stepper = "gaussian", 
+               t = nSteps,
+               x = positionsAtStepT(gaussianWalks, nSteps))
+  )
+})
+
+```
+The first argument to `lapply` is a vector of length 4.
