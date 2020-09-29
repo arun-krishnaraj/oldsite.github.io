@@ -17,20 +17,17 @@ knitr::opts_chunk$set(echo = TRUE)
 - Some introductory R programming review
 - For every random variable $X$, its cumulative distribution function is the function $F_{x}: \mathbf{R} \rightarrow [0,1]$ given by $F_x (x) = \mathbf{P}[X \leq x]$ for all $x \space \epsilon \mathbf{R}$
 
-#### 9/3/2020
+#### 9/4/2020
 - The simplest discrete random variable is the Bernoulli trial:
 X~ 0 with probability 1-p(=q); 1 with probability p
 -Its probability mass function is:
   $p_x(0) = \mathbb{P}[x=0]=1-p$,
-  $p_x(1) = \mathbb{P}[x=1]=p$
   
-|x       |0  |1|
-----------------
-|$p_x(x)$|1-p|p|
+  $p_x(1) = \mathbb{P}[x=1]=p$
 
 - Note: this is an example of a named distribution with a single parameter $p$ interpreted as the probability of success in a single trial
 - What happens if you repeat a number n = # of trials = size, of independent Bernoulli trials each with the same parameter $p$.
-Let $X_1,...,X_n$ be independent Bernoulli(p). Then your total # of successes will be $S=X_1+X_2+...+X_n$, which results in Binomial(n,p). For the pmf: $p_S(k)= choose(n k) p^k(1-p)^{n-k)$ fro all k = 0...n.
+Let $X_1,...,X_n$ be independent Bernoulli(p). Then your total # of successes will be $S=X_1+X_2+...+X_n$, which results in Binomial(n,p). For the pmf: $p_S(k)= choose(n k) p^k(1-p)^{n-k})$ fro all k = 0...n.
 
 #### Lecture 9/9/2020
 - What is statistics?
@@ -67,6 +64,7 @@ wraps <- cafe$Wraps.Sold[cafe$Wraps.Sold != "na"]
 wraps <- as.numeric(wraps)
 hist(wraps)
 ```
+
 - sample mean, and other sample statistics, serve as point estimations of a true population statistic
   - data visualizations should be meaningful and accurate depictions; modality and skewedness
   - variance is a non-standardized measure of spread from the mean; weighs larger deviations more heavily, removes signs from deviation calculations
@@ -88,8 +86,59 @@ hist(wraps)
   - stratified: split groups to better capture proportion
   - cluster: works if subsets of sample are alike 
 
-### Labs and Homeworks
+### Reading notes
 
-### Projects
+Section 4.3 
+- binomial distribution is used to describe the number of successes in a fixed number of trials 
+  - describes the probability of exactly k successes in n independent Bernoulli trials with probability of success p
+  $(n \text{ choose } k)\ p^k(1-p)^{n-k}, (n \text{ choose } k) = \frac{n!}{k!(n-k)!}$
+- the normal distribution can be used to approximate the binomial distribution when the sample size is large
+  - requires estimation of a large range of counts, or else performs poorly
+  
+Section 2.1.3
+- plotting individual points can be bad for larger samples, instead bin and display counts in histogram
+  - provide clear depiction of data density and distribution
+  - skew occurs when tails occur in the direction of choice; roughly equal tails are symmetric 
+  - mode: prominent peak in distribution, can have one, two or many modes
+  
+Section 1.2.1
+- observations or cases appear as rows in data, with columns of variables
 
-### All Files
+Section 1.2.2
+- variables can be numeric, categorical, and continuous or discrete and nominal or ordinal
+
+Section 2.2.1
+- contingency tables summary count data for two categorical variables; individual groups, row, column and grand totals
+
+Section 2.2.5
+- pie charts present proportional information on categories
+
+Section 2.1.2
+- dot plot is a one variable scatterplot; the mean is the average, common way to measure the center of a distribution
+
+Section 2.1.4
+- deviance measures the distance from the mean, the mean of the squared deviation is the variance; sqrt of variance is sd
+
+Section 2.1.5
+- box plots summarize outliers, median, Q1 and Q3, upper and lower whiskers and outliers
+- median is the observation splitting the data in 5 by counts; whiskers can only reach up to 1.5 times the IQR, never more
+
+Section 2.1.6
+- median and IQR are robust since extreme observations have little effect on them, compared to sd and mean
+
+Section 1.2.3
+- variables with some connection to each other are called associated, and can be called dependent
+  - association can be positive or negative; otherwise they are independent
+  
+Section 1.3 Sampling principles and strategies
+- research questions refer to individual target populations, of which a sample is taken to represent the average population member 
+- anecdotal evidence is single cases used to draw general conclusions
+- randomly selected samples are best
+  - simple random sample is equivalent to raffle
+  - non-response rate can influence sample composition
+  - convenience sample: easily accessible people are more likely to be included in the sample 
+- observational data occurs when no treatment is explicitly applied 
+  - prospective studies identify individuals and collect data as it arises, compared to retrospective studies that collect data after events have taken place
+- stratified sampling divides samples into similar cases then samples from each one
+  - useful when stratum cases are similar in outcome of interest
+- cluster sample has population broken into many clusters, with a fixed number of clusters being selected to generate the sample; multistage sampling can apply simple sampling to chosen clusters

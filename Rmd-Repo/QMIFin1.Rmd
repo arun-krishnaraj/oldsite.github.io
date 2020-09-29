@@ -3,8 +3,8 @@ title: "QMIFin HW 1"
 author: "ArunK"
 date: "9/18/2020"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -15,34 +15,43 @@ This homework is partly recap from last year, but has a few open-ended questions
 #### Problem 1
 What's the difference between a future and an option? What parameters are important for pricing an option? What is the classical option pricing model?
 
-*Hint: Think about what action is taken at expiry of each instrument. What terms are usually specified by option pricing models or are included in any of the greeks? Merton is unfortunately colloquially left off of the model, despite applying rigorous logic to formalize it.*
+Futures are exchange-traded contracts that specify an underlying to transact upon at a given price, an exchange date, and relevant counterparties and holding parties; a future represents an obligation to deliver or purchase something for an established price at some future date. Futures are also marked to market daily, resulting in the daily margin and balance adjustments. An option is a contract between two parties (can be private) for the right to purchase or sell underlying at some future time at an established price. The buyer of the option maintains the option to exercise, while the seller must deliver on their word if called upon. 
+
+Some of the numerous parameters that might contribute to an option's price: stock price, strike price, option type (includes exercise type, not really a parameter but I'll count it), time to expiration, interest rate(s), volatility. If you look at any of the greeks, they're all quantifications of these parameters (we've only talked about the first order effects these parameters have in the basic greeks lectures).
+
+The classical option pricing model is the Black Scholes Merton Model:
+$$c = S_0\ \text{N}(d_1)-Ke^{-rT}\ \text{N}(d_2) \\ p = Ke^{-rT}\ \text{N}(-d_2)-S_0\ \text{N}(-d_1) \\ \text{where }\  d_1 = \frac{\text{ln}(\frac{S_0}{K})+(r+\frac{\sigma^2}{2})\ T}{\sigma\ \sqrt{T}} \\ d_2 = \frac{\text{ln}(\frac{S_0}{K})+(r-\frac{\sigma^2}{2})\ T}{\sigma\ \sqrt{T}} = d_1 - \sigma T$$
+
 
 #### Problem 2
 Using the model identified in P1, price a European Call option on AMGN with strike price $\$260$, expiry in exactly 1 year. Pull daily price info for the last 6 months  [here](https://finance.yahoo.com/quote/AMGN/history?p=AMGN), and use the annualized 5-year Treasury rate as the risk free rate [here](https://www.treasury.gov/resource-center/data-chart-center/interest-rates/pages/textview.aspx?data=yield). Please show all work (feel free to check the option chain [here](https://finance.yahoo.com/quote/AMGN/options/) as a sanity check)
 
-*Hint: Remember we can price a European call with the BSM model; the input parameters are time to expiry (needs to match in duration to the rate used), strike price (given), risk-free rate of return (given, make sure to use the annualized 5-year rate). The only other things you'll need are the standard deviation (you should know to use daily adjusted close prices) calculated with the last 6 months of data, and the current stock price (you can use open, close, or adjusted close depending on when you do the homework). What type of standard deviation should you use?*
+Using adjusted close, natural log returns for the last 6 months of data, .026% annual risk-free rate, I priced a 1 Year Euro call @ 260 at $22.89. Taking a look at the options chain for June 18, 2021 (approximately 9/12 months until the original expiry), we see a call @260 is trading for \$0.21. This seems weird! We know that option value increases with time to expiry, but why is this option price so wrong? Hint: this question was supposed to give you a unfeasible answer.
+
+Markets rarely treat historical sample variation as indicative of future behaviors, so they individually price based on their models, intuitions, or bets, and collectively contribute to the implied volatility. Implied volatility is the 'plug' to the Black-Scholes equation that causes the theoretical price to equal the current trading price; it can be understood a forward-looking perspective on price variability.
+
+Secondly, what's up with rates? The current 5 year Treasury rate is 0.26%, which should strike you as weird. Rates are at a low in an attempt to kickstart economic recover in light of global slowdowns. (Normally we should use market returns (something like the SP500) as risk free return, but there's wonky business going on there too.)
 
 #### Problem 3
 Explain these concepts in 4-5 sentences: CAL, efficient frontier, minimum variance portfolio, indifference curve, optimal complete portfolio. (Feel free to include graphics)
 
-*Hint: Remember that these terms all have to do with Modern Portfolio Theory and the trade-off between portfolio risk and expected return. How does an investor combine multiple assets into a better portfolio? What effect does holding varying proportions of risk-free asset in a portfolio have? Are there certain portfolios that are strictly better than others?*
+The capital allocation line plots the risk and reward of all combinations of risky and riskless assets (including those requiring debt). When looking at the plot of risk and reward, the efficient frontier emerges by joining together all assets that provide maximum return at their risk level. The minimum variance portfolio is the variance dominant portfolio created by combining individual assets until no further reduction in variance can be obtained. 
 
 #### Problem 4
 Considering your answers to P1-P3, how well do you feel market behavior fits our established theoretical framework? Give an empirical example in support of your answer.
 
-*Hint: Maybe take a look at option pricing chains, factors that might not be included in the BSM model, variations between MPT and actual institutional/investor behavior. Data for this can be found almost anywhere (feel free to use index behavior as a proxy for markets if that's something you're interested in).*
+Plenty of potential answers to this one. Options prices can be shown to trade at wildly varying implied volatility values; if we graph the distribution of all implied volatilities incremented by price and maturity date, what do we see? Hint: it should make you smile.
 
 #### Problem 5
 What's a KPI you feel has gained importance since February 2020 (any answer related to Google Trends is not allowed)? Is this KPI industry-specific or general? Why do you think this KPI was previously not as important? Ideas to capitalize on this?
 
-*Hint: What company characteristics do investors usually reward? Is there anything that's changed in consumer behavior or industry landscapes that make one of these characteristics more valuable? What do expectations for the next 6-12 months look like? Any actions undertaken that firms usually try to avoid?*
+Open-ended.
 
 #### Problem 6
 Identify and describe specific quantitative factors that can be used to measure the following: equity liquidity, equity volatility, balance sheet health, debt quality, short-seller involvement, and momentum. Please include relevant equations and links – try to be as specific as possible and understand there are multiple right answers
 
-*Hint: Think accounting ratios, capital structure, market participant behavior, and price trends! We're less interested in seeing niche technical indicators, instead try to develop intuition on ways investors can quantify financial success and behavior.*
+Lots of answers here: current ratio, quick ratio, cash coverage ratio, debt rating (Fitch, Moody's), volume, price standard deviation, price volatility, short-term price momentum, short interest, etc.
 
 #### Problem 7
-This past April, WTI Futures settled in Cushing, OK traded at -$37 per barrel. Explain what this implied.
+This past April, WTI Futures settled in Cushing, OK traded at -\$37 per barrel. Explain what this implied.
 
-*Hint: What does it mean to purchase a future? When is capital exchanged? When is delivery taken? How do market expectations influence the ways commodities and their derivatives behave?*

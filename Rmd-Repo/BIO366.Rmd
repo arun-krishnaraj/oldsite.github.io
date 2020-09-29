@@ -68,9 +68,42 @@ knitr::opts_chunk$set(echo = TRUE)
   - recombinase binding elements are pallindromic, recombination target site is not; this asymmetry is used to generate a left to right notation
 
 #### 9/16/2020
-- Tyrosine recombination results in antiparallel configuration: H junction formation, direct antiparallel form
+- Tyrosine recombination has antiparallel configuration: H junction formation, direct antiparallel form
   - Serine recombination is parallel: direct X crossover and resolution
-
+- site specific recombination can trigger certain developmental pathways
+- hydrolysis uses water to break phosphate in phosphodiester backbone
+  - creates 3' hydroxyl and 5' phosphate ending segments
+- recombinase uses hydroxyl group of serine or tyrosine as nucleophile; no loss of energy occurs 
+  - creates a 3' hydroxyl and 5' phosphate esterified to serine
+  - tyrosine creates a 3' phosphate esterified to tyrosine and 5' hydroxyl
+- 4 serine recombinase subunits make 2 concerted breaks, rotate to bring opposing strands into alignment, then hydroxyl groups knock subunits off to complete recombination
+  - 3 binding sites for serine dimers force the catalytic region into proper parallel orientation; II and III are regulatory for I unit 
+- tyrosine recombinase creates a Holliday junction (antiparallel geometry), resolved by outer cuts
+  
+#### 9/23/2020
+- recombination can occur between 2 linear or circular strands
+- intramolecular reactions
+  - tail head repeat segments result in excision of central region, creates a repaired sequence (excision/deletion/resolution)
+- inversion occurs when a head-head sequence is resolved with cutting, flipping, and ligation
+- recombinases have no way of telling head-head or head-tail configuration
+  - they recognize specific sites and as a result modify global structure (depending on if deletion or inversion occur)
+    - site orientation determines outcome: head-tail $\rightarrow$ deletion, head-head $\rightarrow$ inversion
+      - head-tail: Tyrosine requires n (crossings) zero or even, Serine requires n odd
+      - head-head: Tyrosine requires n odd, Serine requires n zero or even
+- $\lambda$ phage is able to integrate into E. Coli using tyrosine recombinase
+  - core site + arm sites are the target for the phage
+  - lysis and excision is a direct reversal of the initial integration (controlled by Xis, determines which direction is undertaken)
+  
+#### 9/28/2020
+- intramolecular recombination: HIN, results in inversion by site-specific recombination
+  - H segment inverted in Salmonella (adjusts flagellum expression, avoids host immune response), consists of a promoter region that is used to swap between flagellum types
+- Gin recombinase: modifies tail fiber to adjust infection capabilities; inversion results in slight changes to the variable invertible region (codes for 2 types of receptor recognition)  
+- transposon resolution: free to jump in and out of genomes, can cointegrate and add an extra copy of the coding region
+  - XerC: ensures that chromosomal copies are properly segregated and resolved to form two circular genomes
+- yeast carries a specific plasmid; resides in nucleus, neutral to host, carries 40-60 copies without any detrimental effects
+  - optimized to use specific host replication machinery to generate progeny 
+  - FLP recombination site (tyrosine recombinase), results in crossover following bidirectional replication initiation 
+  
 #### Section 1 Reading
 Homologous Genetic Recombination  
 

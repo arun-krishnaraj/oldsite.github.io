@@ -27,7 +27,6 @@ kable(data.frame("Macromolecule" = c("Nucleic Acid","Protein","Polysaccharide","
 Clutch Functional Groups
 
 - functional groups tend to be reactive and extend off carbon backbone; linkages used to link different kinds of molecules
-  ## insert images 
 - amino acids have amino and carboxyl groups
 - carbohydrates have many hydroxyl groups, and ether linkages
 - fatty acids typically have methyl groups
@@ -37,11 +36,10 @@ Clutch Functional Groups
 Water Video 2
 
 - weak bonds permit dynamic interactions; Brownian motion initiates biochemical interactions
-- IMF's aris from electrostatic interactions
+- IMF's arise from electrostatic interactions
   - energy is given by $E = \frac{kq_1q_2}{Dr}$, where k is a scaling constant, $q_i$ are charges, $D$ is the dielectric constant, and $r$ is distance
     - dielectric constant varies based on the medium (weaker interactions in water)
 - Hydrogen bonds including Nitrogen and Oxygen
-### insert bonding picture
   - Hydrogen bonds are weaker (and longer distance) and can be disrupted by water
 - Hydrophobic effect: spontaneous self association of nonpolar molecules in aqueous solutions
 
@@ -56,14 +54,14 @@ Clutch water
   - water interacts with polar substances, dissolves electrolytes
     - electrolytes dissociate to form ions in H$_2$O
     - hydrated electrolytes have a hydration shell of H$_2$O molecules
-    - dielectric constant: ability of solvent to dissolve, dimish electrostatis interactions
+    - dielectric constant: ability of solvent to dissolve, diminish electrostatic interactions
 - water has similar weight, higher boiling/melting points, heat capacity, dielectric constant than methane; lower density as a solid 
 
 Clutch IMF
 
 - Intra vs inter molecular bonds for within or between molecules
 - ionic bond: opposite charge due to gain/loss of electrons
-- covalent bonds: two atons share a pair of electrons, equally or unequally based on electronegativity (polar or nonpolar)
+- covalent bonds: two atoms share a pair of electrons, equally or unequally based on electronegativity (polar or nonpolar)
 - H bonds: involve H and an electronegative atom
 - Dipole: shift in electron density due to electronegativity differences (dipole-dipole)
 - Van der Waals created by instantaneous dipoles
@@ -83,8 +81,8 @@ Clutch Hydrophobic
 pH & buffers video 2
 
 - pH: measure of concentration of [H$_3$O$^+$] in aqueous solution; pH = -log[H$_3$O$^+$]
-$$H_2O + H_2O bidirectionalarrow  OH^- + H_3O^+$$ (auto ionization)
-$$K_w=(concentration of hydronium times hydroxide) = [H_3O^+][OH^-] = 1x10^{-14}$$
+$$H_2O + H_2O \leftrightarrow  OH^- + H_3O^+$$ (auto ionization)
+$$K_w= [H_3O^+][OH^-] = 1*10^{-14}$$
 - weak acids create H$_3$O$^+$ and anion (mostly remain), shifts equilibrium 
 - cells utilize buffers to regulate pH (conjugate acid/base partners)
   - acid: proton donor; base: proton acceptor
@@ -107,8 +105,9 @@ Clutch pH
 Clutch $K_a$
 
 -$K_a$: acid dissociation constant, associated with hydrogen donors (acids), $K_{eq}$ for acid's dissociation; linear, positive measure of acid strength (ion constant)
-$$HA(conjugate acid) \rightarrow H^+ + A^- (conjugate base)$$
+$$HA \text{ (conjugate acid)} \rightarrow H^+ + A^- \text{ (conjugate base)}$$
   - polyprotic acid: multiple acidic H atoms that can dissociate, each has its own $K_a$
+  
 - use ICE table to find [H$^+$] for pKa (equilibrium concentrations for pKa)
 - $pKa = -log(Ka)$, higher pKa is a weaker acid
 
@@ -117,7 +116,7 @@ Clutch Henderson Hasselbach
 - strong acids have small pKa, tend to completely dissociate ([HCl]=[H$^+$]$_f$)
 - weak acids have high pKa, do not completely dissociate (most biological acids are weak acids)
 - HH equation used for finding final pH or conjugate base: conjugate acid ratio for weaker acids
-$$pH = pKa + log \frac{[conjugate base]_f}{[conjugate acid]_f}$$
+$$pH = pKa + log \frac{\text{[conjugate base]}_f}{\text{[conjugate acid]}_f}$$
 
 Clutch predominant species
 
@@ -135,14 +134,14 @@ Clutch titrations
   - determines concentration of acid/base in solution; pKa of a weak acid
 - titration curve: analyte pH on y-axis, titrant added on x-axis
   - equivalence point: point when mols analyte = mols titrant (always at pH = 7 for strong acid/strong base titration)
--inflection point: when hald of acid is neutralized (pH = pKa for weak acids)
+- inflection point: when half of acid is neutralized (pH = pKa for weak acids)
   - -> pH = pKa, [CB] = [CA]
 - titration curves for polyprotic acids have multiple inflection and equivalence points, each indicating the pKa of a H$^+$
 
 Clutch Buffers
 
 - buffers: resist changes in pH, small amounts of strong acid/base
-  -can be prepared with the Henderson-Hasselbach equation
+  - can be prepared with the Henderson-Hasselbach equation
 - weak acids/bases + conjugates are the most effective buffers, centered around $\pm1$ of the pKa and inflection point
 - biological buffers use weak acids, can be inter or intra cellular buffer systems
   - intracellular pH $\approx$ 7, intercellular pH $\approx$ 7.4
@@ -160,15 +159,14 @@ Clutch Buffers
 - carbohydrates: fuel sources; can be highly linked/branched, play roles in cell recognition
 
 1.3 Central dogma of Biological Information Transfer
-######insert image
 
 - selective expression determines ultimate cellular function
   - translation: conversion of DNA to mRNA transcript; translation then creates a useable form from mRNA code
   
 1.4 Cellular membranes
 
-- cells are differentiated by membrane bilayers; hydrophilic heads interact with the environment, while hydrophobic tials interact with each other
-  -eukaryotic cells are characterized by their membrane-enclosed compartments
+- cells are differentiated by membrane bilayers; hydrophilic heads interact with the environment, while hydrophobic tails interact with each other
+  - eukaryotic cells are characterized by their membrane-enclosed compartments
 - barrier function of the plasma membrane is able to be rendered semipermeable 
 - cytoplasm: organized network of cytoskeleton network fibers, site of a number of processes
 - cell wall: constructed of cellulose, linear glucose polymer
@@ -238,7 +236,7 @@ Protein Structure Video 3
 - tertiary structure (III$^o$): involves how the protein folds on itself, stabilized by IMF between R groups
   - motif: supersecondary structures; combinations of secondary structures found in many proteins 
   - domains: two or more identical structures found in proteins
-- quaternary structure: only exists when multiple polypeptide chains are assembled into a single protein; composed of any number of subunits (like $\alpha_2 \beta_2$ tetramer of humanhemoglobin)
+- quaternary structure: only exists when multiple polypeptide chains are assembled into a single protein; composed of any number of subunits (like $\alpha_2 \beta_2$ tetramer of human hemoglobin)
 - folding funnel: maximum entropy and minimum structure moves to low entropy and native structure state
 - Intrinsically disordered proteins (IDPs) do not have a defined structure (under physiological conditions) until they interact with other molecules
 
@@ -407,11 +405,13 @@ Lecture Video 1
   - Positively charged amino acids
   - Negatively charged amino acids
 - Some amino acids are essential, meaning that humans are incapable of synthesizing them and require them from food
+
 Clutch Amino Acid Groups
 - There are 20 standard amino acids, which differ by their R groups
   - grouped together based on characteristics of R groups at physiological pH
   - amino and carboxyl charge groups make backbones dipolar at physiological pH
 - Amino acids can be grouped by functional or structural groupings
+
 Clutch Amino Acid configuration
 - almost all $\alpha$ amino acids are chiral (except glycine), biochemistry uses S and R notation vs L and D configuration
 - use chiral group priorities to figure out configurations (R group is always priority #3 except in Cys)
@@ -442,7 +442,7 @@ Clutch isoelectric for ionizable R groups
 
 Clutch peptide bonds
 
-- amide covalent linkages between amino acisd in a polypeptide chain; endergonic dehydration synthesis reactions
+- amide covalent linkages between amino acids in a polypeptide chain; endergonic dehydration synthesis reactions
   - hydrolysis is the opposite, used for peptide bond cleavage
   
 Clutch primary structure
@@ -530,7 +530,7 @@ Chymotrypsin Video 6
     - scissle bond is the carbonyl side peptide bond
 
 #### Chapter 6 
-##### 6.1 Enzymes are Powerful adn highly specific catalysts
+##### 6.1 Enzymes are Powerful and highly specific catalysts
 - most biological reactions do not occur at perceptible rates without enzymes
   - enzymes are specific in the reactions and substrates they are involved with
 
@@ -541,20 +541,23 @@ Chymotrypsin Video 6
     - coenzymes can be prosthetic or cosubstrates
 
 6.3 Gibbs Free Energy
+
 - free energy determines if a reaction can take place
   - only negative $\Delta G$ reactions are spontaneous (exergonic)
-    - posititive $\Delat G$ reactions are endergonic
+    - posititive $\Delta G$ reactions are endergonic
   - independent of any molecular mechanism or rate of reaction
   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\form-gibbs.JPG)
   ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\gibbs2.JPG)
 
 6.4 Enzymes and transition state
+
 - enzymes reduce activation energy for transition states
   - active sites are 3d crevices with unique microstructures
   - substrates are bound to enzymes by weak interactions 
 
 #### Chapter 7
 7.1 Kinetics
+
 - reaction velocity changes with concentrations of substrate, rate equations have exponents of reactant coefficients 
 
 7.2 Michaelis-Menten
@@ -600,7 +603,7 @@ Allosteric Effectors Video 2
     - carbon dioxide also reduces hemoglobin binding affinity; reacts with terminal amino groups to form charged carbamate groups, stabilizes T state
   - result in oxygen acquisition the lungs and release in tissue
 - HbA: normal adult hemoglobin, 2 $\alpha$ and 2 $\beta$ subunits
-  - HbS: sickle hemoglobin, point mutation on $\beta$ chain; causes precipitation due to hemoglobin polyerization 
+  - HbS: sickle hemoglobin, point mutation on $\beta$ chain; causes precipitation due to hemoglobin polymerization 
   - deoxy T state has Phe 85, Leu 88, Val 6 exposed: creation of sticky site and hemoglobin aggregates 
   - HbF: fetal hemoglobin, usually all converted to HbA
 - carbon monoxide binds to a single heme site, and increases other subunit's binding affinity (oxygen is no longer released into tissue)
@@ -670,7 +673,7 @@ Chapter 9
   
 9.3 Hemoglobin binds oxygen cooperatively 
 
-- heme consists of 2$ \alpha$ and 2 $\beta$ subunits, similar to those of myoglobin
+- heme consists of 2 $\alpha$ and 2 $\beta$ subunits, similar to those of myoglobin
   - oxygenation results in a T to R conversion, central pore is held tighter
   
 9.4 An allosteric regulator determines the oxygen affinity of hemoglobin

@@ -1,0 +1,189 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={QMIFin HW 1},
+  pdfauthor={ArunK},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{QMIFin HW 1}
+\author{ArunK}
+\date{9/18/2020}
+
+\begin{document}
+\maketitle
+
+This homework is partly recap from last year, but has a few open-ended
+questions/things we haven't covered :)
+
+\hypertarget{problem-1}{%
+\paragraph{Problem 1}\label{problem-1}}
+
+What's the difference between a future and an option? What parameters
+are important for pricing an option? What is the classical option
+pricing model?
+
+Futures are exchange-traded contracts that specify an underlying to
+transact upon at a given price, an exchange date, and relevant
+counterparties and holding parties; a future represents an obligation to
+deliver or purchase something for an established price at some future
+date. Futures are also marked to market daily, resulting in the daily
+margin and balance adjustments. An option is a contract between two
+parties (can be private) for the right to purchase or sell underlying at
+some future time at an established price. The buyer of the option
+maintains the option to exercise, while the seller must deliver on their
+word if called upon.
+
+Some of the numerous parameters that might contribute to an option's
+price: stock price, strike price, option type (includes exercise type,
+not really a parameter but I'll count it), time to expiration, interest
+rate(s), volatility. If you look at any of the greeks, they're all
+quantifications of these parameters (we've only talked about the first
+order effects these parameters have in the basic greeks lectures).
+
+The classical option pricing model is the Black Scholes Merton Model:
+\[c = S_0\ \text{N}(d_1)-Ke^{-rT}\ \text{N}(d_2) \\ p = Ke^{-rT}\ \text{N}(-d_2)-S_0\ \text{N}(-d_1) \\ \text{where }\  d_1 = \frac{\text{ln}(\frac{S_0}{K})+(r+\frac{\sigma^2}{2})\ T}{\sigma\ \sqrt{T}} \\ d_2 = \frac{\text{ln}(\frac{S_0}{K})+(r-\frac{\sigma^2}{2})\ T}{\sigma\ \sqrt{T}} = d_1 - \sigma T\]
+
+\hypertarget{problem-2}{%
+\paragraph{Problem 2}\label{problem-2}}
+
+Using the model identified in P1, price a European Call option on AMGN
+with strike price \(\$260\), expiry in exactly 1 year. Pull daily price
+info for the last 6 months
+\href{https://finance.yahoo.com/quote/AMGN/history?p=AMGN}{here}, and
+use the annualized 5-year Treasury rate as the risk free rate
+\href{https://www.treasury.gov/resource-center/data-chart-center/interest-rates/pages/textview.aspx?data=yield}{here}.
+Please show all work (feel free to check the option chain
+\href{https://finance.yahoo.com/quote/AMGN/options/}{here} as a sanity
+check)
+
+\emph{Hint: Remember we can price a European call with the BSM model;
+the input parameters are time to expiry (needs to match in duration to
+the rate used), strike price (given), risk-free rate of return (given,
+make sure to use the annualized 5-year rate). The only other things
+you'll need are the standard deviation (you should know to use daily
+adjusted close prices) calculated with the last 6 months of data, and
+the current stock price (you can use open, close, or adjusted close
+depending on when you do the homework). What type of standard deviation
+should you use?}
+
+\hypertarget{problem-3}{%
+\paragraph{Problem 3}\label{problem-3}}
+
+Explain these concepts in 4-5 sentences: CAL, efficient frontier,
+minimum variance portfolio, indifference curve, optimal complete
+portfolio. (Feel free to include graphics)
+
+\emph{Hint: Remember that these terms all have to do with Modern
+Portfolio Theory and the trade-off between portfolio risk and expected
+return. How does an investor combine multiple assets into a better
+portfolio? What effect does holding varying proportions of risk-free
+asset in a portfolio have? Are there certain portfolios that are
+strictly better than others?}
+
+\hypertarget{problem-4}{%
+\paragraph{Problem 4}\label{problem-4}}
+
+Considering your answers to P1-P3, how well do you feel market behavior
+fits our established theoretical framework? Give an empirical example in
+support of your answer.
+
+\emph{Hint: Maybe take a look at option pricing chains, factors that
+might not be included in the BSM model, variations between MPT and
+actual institutional/investor behavior. Data for this can be found
+almost anywhere (feel free to use index behavior as a proxy for markets
+if that's something you're interested in).}
+
+\hypertarget{problem-5}{%
+\paragraph{Problem 5}\label{problem-5}}
+
+What's a KPI you feel has gained importance since February 2020 (any
+answer related to Google Trends is not allowed)? Is this KPI
+industry-specific or general? Why do you think this KPI was previously
+not as important? Ideas to capitalize on this?
+
+\emph{Hint: What company characteristics do investors usually reward? Is
+there anything that's changed in consumer behavior or industry
+landscapes that make one of these characteristics more valuable? What do
+expectations for the next 6-12 months look like? Any actions undertaken
+that firms usually try to avoid?}
+
+\hypertarget{problem-6}{%
+\paragraph{Problem 6}\label{problem-6}}
+
+Identify and describe specific quantitative factors that can be used to
+measure the following: equity liquidity, equity volatility, balance
+sheet health, debt quality, short-seller involvement, and momentum.
+Please include relevant equations and links -- try to be as specific as
+possible and understand there are multiple right answers
+
+\emph{Hint: Think accounting ratios, capital structure, market
+participant behavior, and price trends! We're less interested in seeing
+niche technical indicators, instead try to develop intuition on ways
+investors can quantify financial success and behavior.}
+
+\hypertarget{problem-7}{%
+\paragraph{Problem 7}\label{problem-7}}
+
+This past April, WTI Futures settled in Cushing, OK traded at -\$37 per
+barrel. Explain what this implied.
+
+\emph{Hint: What does it mean to purchase a future? When is capital
+exchanged? When is delivery taken? How do market expectations influence
+the ways commodities and their derivatives behave?}
+
+\end{document}

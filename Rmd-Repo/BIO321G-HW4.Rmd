@@ -1,7 +1,7 @@
 ---
 title: "BIO321G-HW4"
 author: "ArunK"
-date: "9/17/2020"
+date: "9/24/2020"
 output: html_document
 ---
 
@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ---
 ### Problem 1
-
 ```{r}
 fixedSizeStepper <- function(nSteps){
   sample(c(-1, +1), nSteps, replace = TRUE)
@@ -20,19 +19,18 @@ fixedSizeStepper <- function(nSteps){
 uniformStepper <- function(nSteps){
   sqrt(12) * (runif(nSteps) - 1/2)
 }
+rnorm <- rnorm
 
 randomWalk <- function(nSteps, stepper){
   steps <- stepper(nSteps)
   return(c(0, cumsum(steps)))
 }
-
-randomWalk(12, uniformStepper)
 ```
 
 ### Problem 2
 ```{r}
 randomWalks <- function(nSteps, stepper = fixedSizeStepper, nWalks = 100000){
-  lapply(1:nWalks,function(i){randomWalk(nSteps, stepper)})
+  lapply(1:nWalks, function(i){randomWalk(nSteps, stepper)})
 }
 
 fixedStepWalks <- randomWalks(nSteps = 100, stepper = fixedSizeStepper)
@@ -40,21 +38,20 @@ fixedStepWalks <- randomWalks(nSteps = 100, stepper = fixedSizeStepper)
 unifWalks <- randomWalks(nSteps = 100, stepper = uniformStepper)
 
 gaussianWalks <- randomWalks(nSteps = 100, stepper = rnorm)
-
 ```
 
 ### Problem 3
-
 ```{r}
 positionsAtStepT = function(walks, t){
-  unlist(lapply(walks, function(rw){rw[[t+1]]}))
+  unlist(lapply(walks, function(rw) {rw[[t+1]]}))
 }
-class(positionsAtStepT(unifWalks, 5))
-
 ```
 
-Its currently a numeric vector, if we didn't include the `unlist` it would return a list. Since we start off at time 0 at position 0, and r starts indexing at 1 we need to adjust to actually be at position.
+A. The object returned by `positionsAtStepT` is a numeric vector.  
+B. If we didn't include `unlist`, the function would instead return a list object.  
+C. Since R indexes objects starting at 1, we need to take this into consideration when trying to return the stepper position at a certain time. `t=0` corresponds to time zero, when the stepper is at `0`, and R considers this to be index 1 of the vector; by including `[[t+1]]` we effectively convert the time index `t` into the appropriate vector index.  
 
+### Problem 4
 ```{r}
 plotData = lapply(c(1,2,5,10), function(nSteps){
   rbind(
@@ -70,5 +67,35 @@ plotData = lapply(c(1,2,5,10), function(nSteps){
   )
 })
 
+length(plotData)
 ```
-The first argument to `lapply` is a vector of length 4.
+A. The first argument to `lapply` is a vector of length 4.  
+B. `## recycled` means that R is internally reusing these assignments; these lines assign the appropriate stepper name into the `stepper` column of `plotData`'s data frames, and the appropriate `nSteps` argument into the `t` column of the data frames. While both of these assignments have length 1, R is able to reuse it since they are integer divisors of the number of rows.   
+C. `plotData` is a list.    
+D. `plotData` has length 4, containing 4 data frames corresponding to each of the entries to the vector passed in as `nSteps`.  
+
+```{r}
+plotData <- do.call(rbind, plotData)
+class(plotData)
+dim(plotData)
+```
+
+E. `plotData` is now a data frame.   
+F. `plotData` has 3 columns and 1200000 rows; this is a result of row binding 4 individual data frames, each with 3 columns and 300000 rows.
+
+### Problem 5 
+```{r}
+library(ggplot2); theme_set(theme_bw())
+gg = ggplot(plotData, aes(x=x)) + facet_grid(stepper ~ t, scales ="free_x") + 
+  geom_histogram(center = 0, fill = "darkgray", color ="darkslategrey")
+print(gg)
+```
+
+A. Yes, both `uniformStepper` and `gaussianStepper` steppers will have distributions well approximated by a normal distribution after a large number of steps. Each of the walks can be understood as independent samples, and we know that sampling from any population distribution a large number of times will generate a normal sample distribution. All of the steppers exhibit changes in distribution as the number of steps increases, suggesting that they can all be approximated by a normal distribution.    
+B. If we look at the position vector of the stepper for a large number of steps, we can tell whether the `fixedSizeStepper` was used or not. If non-integer values appear in the step output, we can be sure that `fixedSizeStepper` was not used, since it is only capable of generating integer positions as a result of its starting position and increment values. If only integer values appear in the step output, we can be sure that `fixedSizeStepper` was used, since the probability of the other steppers generating only integer increments for a large number of steps is essentially zero. Practically speaking, we could apply a modulo 1 to the vector of positions, and sum the result; any non-zero result would indicate a stepper other than `fixedSizeStepper`.
+
+```{r}
+sum(fixedStepWalks[[30]] %% 1)
+sum(unifWalks[[30]] %% 1)
+```
+C. The CLT says the sum of independent random variables approaches a normal distribution even if the original values are not normally distributed. Only the `gaussianStepper` had random variables that were normally distributed; despite not all being normally distributed, the steppers all result in normally distributed sums. This is why the stepper position, the cumulative sum of independent variables, forms an approximately normal distribution after a large number of steps.  
