@@ -86,6 +86,32 @@ hist(wraps)
   - stratified: split groups to better capture proportion
   - cluster: works if subsets of sample are alike 
 
+#### Lecture 9/30/2020
+- we use sample statistics as point estimates for the population parameter; we should also include a margin of error in the point estimate
+- sample proportions will be normally distributed with mean p and standard error $= \sqrt{\frac{p(1-p)}{n}}$
+  - require at least 10 expected successes and failures; independence of observations, and sample less than 10% of the population
+  - becomes well approximated by a normal distribution $N(\mu, SE = \frac{\sigma}{\sqrt{n}})$
+
+#### Lecture 10/02/2020
+- continuous distributions: we can define the cdf of any random variable x as $F_x(x) = \mathbb{P}[X \leq x] \text{ for all } x \in \mathbb{R}$ 
+  - if the cdf is:
+    - continuous at all points
+    - differentiable everywhere except at countably many points
+  - then we can say that x is a continuous random variable 
+- the function $f_x$ defined as $f_x(x) = F_{x}^{'}(x)$ wherever the derivative exists, is called the probability density function 
+  - sufficient to provide the pdf to completely specify the distribution of a continuous random variable
+  $$\mathbb{P}[a < X \leq b] = \mathbb{P}[X \leq b] - \mathbb{P}[x \leq a] = F_x(b) - F_x(a) = \int_{a}^{b} f_{x}(x)dx$$
+- standard normal distribution: let the random variable Z have the density of this form $\phi(z) = \frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}} \text{ for } z \in \mathbb{R}$
+  - we then say that $z$ has the standard normal distribution
+  - the cdf: $\Phi(x) = \int_{-\infty}^x \phi(z)dz = \int_{-\infty}^x\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}}dz$
+    - we don't have an analytic solution for this, so we use software or standard normal tables 
+    - mean of $z$ is 0, and variance is 1
+  - we use the parameterization of the mean and the variance to represent the normal distribution
+  
+#### Lecture 10/05/2020
+- working through problem set during class 
+- any normal random variable can be written as a linear transform of the standard normal distribution (conversion to Z scores)
+
 ### Reading notes
 
 Section 4.3 

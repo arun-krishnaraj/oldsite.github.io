@@ -1,0 +1,74 @@
+---
+title: "BIO321G-HW5"
+author: "ArunK"
+date: "9/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+### Problem 1
+
+```{r}
+seqs = c(
+  seq1 = "CATACT",
+  seq2 = "GGGGAAAGGGGAAAA"
+)
+
+writeFasta <- function(s,m){
+  out <- c()
+  for (i in 1:length(s)) {
+    q <- s[i]
+    a <- (paste0(">", names(q), "\n", paste0(strsplit(q, paste0("(?<=.{", m, "})"), perl = TRUE)[[1]], collapse = "\n")))
+    out <- paste0(out, a, sep = "\n")
+  } 
+  return(out)
+}
+```
+
+### Problem 2
+```{r}
+fastaized = writeFasta(s = seqs, m = 7)
+fastaized
+
+cat(fastaized)
+```
+
+### Problem 3
+
+```{r}
+condProbs = rbind(
+c(0.300, 0.205, 0.285, 0.210),
+c(0.322, 0.298, 0.078, 0.302),
+c(0.248, 0.246, 0.298, 0.208),
+c(0.177, 0.239, 0.292, 0.292)
+)
+
+bases = c("A", "C", "G", "T")
+dimnames(condProbs) = list(b=bases, "b'"=bases)
+condProbs
+
+margProbs = Re(eigen(t(condProbs))$vectors[ , 1])
+margProbs = margProbs / sum(margProbs)
+names(margProbs) = colnames(condProbs)
+margProbs
+
+jointProbs = margProbs * condProbs
+jointProbs
+```
+
+### Problem 4
+```{r}
+sum(jointProbs)
+```
+
+### Problem 5
+```{r}
+(jointProbs* 520525)["C","G"]
+```
+
+We should expect to see 10,000 CG dinucleotides.

@@ -76,7 +76,16 @@ kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femt
 #### Lab 9/16/2020
 - 3.3 is the number of cycles for 2 starting molecules to equate with 10 starting molecules
 
+#### Lecture 9/30/2020
+- use of ABA and ethanol treatments during incubation
+  - can isolate any handling stress related, or media derived effects
+- we know RD29B and RAB18 (well known ABA marker genes) show less increase in 6134 than WT Ler-0; interested in seeing if oleosin genes show lower increase in mRNA levels   
+  
+#### Lab 9/30/2020
+  
 #### Lab manual 
+- primer design with IDT, refer to pdf guide
+  - realtime qpcr assay entry with arabidopsis gene site
 
 Lab 2
 
@@ -132,7 +141,7 @@ summary(fin)
 $$y = -2.9221x+30.1149$$ 
 $$\text{R}^2 = 0.9943$$
   
-  
+###  
   
   
   

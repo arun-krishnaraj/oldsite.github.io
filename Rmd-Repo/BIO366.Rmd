@@ -103,6 +103,14 @@ knitr::opts_chunk$set(echo = TRUE)
 - yeast carries a specific plasmid; resides in nucleus, neutral to host, carries 40-60 copies without any detrimental effects
   - optimized to use specific host replication machinery to generate progeny 
   - FLP recombination site (tyrosine recombinase), results in crossover following bidirectional replication initiation 
+
+#### 9/30/2020
+- site specific combination usually uses Flp and Cre; versatile, can result in excision or insertion depending on site orientation
+  - GFP is used to generate recombinant chromosomes with promoter, target site, and GFP gene
+  - recombination sites can be used to excise genes of interest and observe traits; can also be used to turn on promoter regions to test genes
+    - transcription terminator can be removed to result in complete promoter gene region
+- recombination sites require complementary base pair recombinant sites (native-native or altered-altered recombination)
+  - we can modify Flp and Cre to recognize desired recombination sites by generating mutants; can then select for desired Flp mutants with galactosidase coloring of E Coli in X gal medium (looking for red Flp variant colonies)
   
 #### Section 1 Reading
 Homologous Genetic Recombination  

@@ -1,0 +1,108 @@
+---
+title: "BIO321G-HW6"
+author: "ArunK"
+date: "9/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+```{r}
+ecoliGenomeFile = "Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.dna.toplevel.fa.gz"
+ecoliGenomeLink = paste0(
+"ftp://ftp.ensemblgenomes.org/pub/bacteria/release-48/",
+"fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655/dna/",
+ecoliGenomeFile
+)
+download.file(ecoliGenomeLink, ecoliGenomeFile)
+ecoliAnnotationFile = "Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.46.gff3.gz"
+ecoliAnnotationLink = paste0(
+"ftp://ftp.ensemblgenomes.org/pub/bacteria/release-48/",
+"gff3/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655/",
+ecoliAnnotationFile
+)
+download.file(ecoliAnnotationLink, ecoliAnnotationFile)
+```
+
+```{r}
+source("suffix_array_binary_search_utils.R")
+```
+
+### Problem 1
+
+```{r}
+library(seqinr)
+library(ggplot2)
+seqAsString = toupper(read.fasta(ecoliGenomeFile, as.string=TRUE)[[1]])
+seqAsString = paste0(seqAsString, "$")
+sa = as.integer(readLines("ecoli_suffix_array.txt.gz"))
+
+lengths(regmatches(seqAsString, gregexpr("[CG]", seqAsString)))/lengths(regmatches(seqAsString, gregexpr("[CGAT]", seqAsString)))
+```
+
+The **E. Coli** genome has a 0.508 proportion of either C or G bases.
+
+### Problem 2
+```{r}
+sdPwm
+```
+
+A.   
+The hexamer AGGAGG would be the best match to `sdPwm`.
+
+B.  
+```{r}
+pwmProbScore(sdPwm, bestKmer(sdPwm))
+```
+The best match has a PWM probability score of 0.1176.
+
+C.  
+```{r}
+enumerateKmers(sdPwm, pwmProbScore(sdPwm, bestKmer(sdPwm))*.1) -> sdKmers
+length(sdKmers)
+```
+There are 19 hexamers which are good matches to the Shine-Dalgarno PWM within 10% of the best match.
+
+### Problem 3
+```{r}
+names(sdKmers) = sdKmers
+hitsForward = lapply(
+  sdKmers,
+  function(km) {findKmer(km, seqAsString, sa)}
+  )
+
+length(hitsForward)
+length(unlist(hitsForward))
+```
+A.  
+`hitsForward` is a list with length 19.
+
+B.
+`length(unlist(hitsForward))` returns 13,336.
+
+### Problem 4
+```{r}
+source("load_ensembl_gff3.R")
+genes = loadEnsemblGff3(ecoliAnnotationFile)
+
+genesForward <- genes[genes$strand != "-",]
+nrow(genesForward)
+```
+`genesForward` has 2012 rows.
+
+### Problem 5
+```{r}
+distToStart = -30:30
+names(distToStart) = distToStart
+nHitsAtDistFromStart = unlist(lapply(distToStart, function(d) {
+sum((genesForward$start + d) %in% unlist(hitsForward))
+}))
+
+qplot(x = distToStart, y = nHitsAtDistFromStart)
+```
+
+Its somewhat consistent, though its a bit earlier than the 8 base pairs cited on the link.

@@ -530,11 +530,13 @@ Chymotrypsin Video 6
     - scissle bond is the carbonyl side peptide bond
 
 #### Chapter 6 
-##### 6.1 Enzymes are Powerful and highly specific catalysts
+6.1 Enzymes are Powerful and highly specific catalysts
+
 - most biological reactions do not occur at perceptible rates without enzymes
   - enzymes are specific in the reactions and substrates they are involved with
 
-##### 6.2 Many Enzymes Require Cofactors for Activity
+6.2 Many Enzymes Require Cofactors for Activity
+
 - some enzymes depend on small molecules
   - apoenzyme: enzyme without cofactor; holoenzyme: catalytically active, complete enzyme
   - cofactors can be coenzymes or metal ions
@@ -734,3 +736,96 @@ Chapter 11 Lipids
   - unsaturated fats have lower melting points than saturated ones
     - chain interaction (van der Whaal) is made more difficult when chains aren't straight
   - shorter chains also have lower melting points
+
+#### Week 5 Lectures
+
+U2W5V1
+
+- higher protein membrane content than commonly portrayed (25% - 80%), spontaneous membrane formation is driven by hydrophobic effect
+  - carb side chains of glycolipids are usually outward facing
+  - integral and peripheral membrane proteins
+- cholesterol disrupts straight chain bonding; can also form complexes with lipids and proteins (lipid raft to speed up chemical processes)
+- proteins have been shown to diffuse across the membrane; lipids can diffuse laterally or transverse (fast vs slow)
+  - phospholipids are usually asymmetrically distributed across the bilayer
+- integral proteins cross the bilayer; peripheral proteins are somehow attached to a single side
+  - bacteriorhodopsin: series of alpha helices spanning membrane (most common motif)
+    - bilayers are generally very thin (10 nm, about 66 amino acid long alpha helices)
+  - bacterial porin: beta strands form a central pore (transmembrane barrel), less selective transport
+  - peripheral proteins can contribute to binding of signalling enzymes (prostaglandin requires a fatty acid to become activated)
+- membrane transport processes
+  - nonmediated transport: diffusion across a membrane, can be fast for hydrophobic or polar (fast or very slow respectively)
+    - movement from higher to lower gradient, no energy input required
+  - facilitated (passive) transport: diffusion of solutes is accelerated by transporter proteins (pores, channels, carriers)
+  - active transport requires energy to transport molecules against their gradient 
+- uniport: one molecule moving
+- symport: two different molecules moving in the same direction
+- antiport: two differenet molecules moving in opposite directions 
+- channel vs pump
+  - with vs against gradient
+  - potassium channel selects against sodium: carbonyl interior forces potassium to peel away from hydration shell, sodium isn't large enough to form bonds with carbonyls 
+  
+U2W5V2
+
+- we can use free energy calculations to determine if molecules will move across a bilayer
+  - $\Delta G^o$ is 0 for diffusion across a semi-permeable membrane $\rightarrow \Delta G = R \ T \ ln(Q)$, where $Q = \frac{Final}{Initial}$
+- membrane potential: associated change in free energy as charged species cross potential gradient
+????????????????????????? need to review this $$\Delta G _t = RT ln(C_2/C_1) + Z F \Delta \Psi$$
+  - most cells have more anions inside the cell, creates a voltage (charge buildup across bilayer)
+
+U2W5V3
+
+- refer to net change in free energy to determine if a symport or antiport transport process is spontaneous 
+- secondary transport: nonspontaneous transport mediated by an active transporter establishing a gradient 
+- sodium potassium antiporter: requires external energy, for every ATP used 3 sodium are pumped out and 2 potassium are pumped in (both against their concentration gradients)
+   - hydrolysis of ATP has a large negative free energy change: spreading out of negative charges, increased entropy, more stable inorganic phosphate form due to resonance
+   - chemical energy from energy is transferred into mechanical energy (phosphate drives a conformationsl change in the pump protein)
+   - 1. ATP binds to the ATP binding site, allowing sodium to enter the pump
+   - 2. phosphate remains bound to aspartate residue, ADP release causes pump to open outside
+   - 3. Sodium is released and potassium enters the pump
+   - 4. ATP binds and knocks off phosphate
+   - 5. inside opens and potassium enters
+
+#### Week 6 Lectures
+
+U2W6V1
+
+- primary messengers can generate intracellular secondary messenger, which can then activate a signal cascade until signal ceases
+  - hormones: chemical messengers, cannot easily pass through membrane (except steroids)
+  - photons: signalling proteins can pick up light via conformational changes
+  - neurotransmitters: small molecule transmitting nerve signals
+- transmembrane receptor protein changes conformation to transfer signal
+  - 7 transmembrane-helix receptor: consists of 7 alpha helices, activates a G protein (GTP or GDP bound) when signaled; causes activation of an interior protein kinase
+    - subunits separate from GDP, GTP replaces it; GTP subunit binds to adenylate cyclase to generate cyclic AMP and turn on kinase (phosphorylate another substrate)
+    - Adenylate cyclase is turned off by phosphorylating GTP to GDP, which forces subunit reassociation and freeing from adenylate cyclase
+    - cAMP also resets the kinase as it's spontaneously converted back to AMP
+    - as concentration of primary messenger decreases, it spontaneously dissociates and switches off the receptor 
+  
+U2W6V2
+
+- Dimeric membrane receptors that recruit protein kinases
+  - quaternary structural change instead of tertiary drives mechanism
+  - receptor dimerizes once signal factor binds; cross phosphorylation results in activation of kinase, enables further phosphorylation 
+- dimeric protein receptors that are protein kinases 
+  - single integral protein has both receptor and kinase function; receptor brings entire subunits together, phosphorylates and activates another signaling G protein 
+  
+U2W6V3
+
+- digestion: set of biochemical reactions to convert food into biologically useful building blocks
+  - begins in mouth, food is chewed and mixed with saliva (water + mucoproteins, alpha amylase and ions)
+  - stomach pump uses energy to create acidic environment, denatures consumed proteins
+    - peptide backboen is more exposed, can be more easily hydrolysed into oligopeptides
+  - stimulates reduction of acidic conditions by pancreas so other enzymes can enter; gallbladder releases bile to digest lipids
+    - gastric and pancreatic enzymes hang out as zymogens until activated by proper conditions 
+  - digestion of proteins
+    - oligopeptides are broken into amino acids, absorbed into intestinal cells and pushed through antiport into blood
+  - monosaccharide digestion
+    - Galactose + Glucose symport transport with sodium, Fructose uniport into intestinal cell; uniport into blood stream
+  - lipid digestion
+    - need to account for hydrophobicity; bile makes lipids more soluble through detergent activity 
+    - cholesterol as precursor for bile, use of fiber to reduce cholesterol levels
+    - micelle formation, transport to intestinal cells and lymph systems 
+
+
+
+
+

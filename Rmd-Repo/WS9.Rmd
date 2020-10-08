@@ -1,0 +1,380 @@
+---
+title: "WS8"
+output: html_document
+---
+
+
+```{R}
+library(tidyverse) #always
+```  
+
+
+Create a dataframe by selecting only the numeric columns of `msleep` and then removing all of the NAs
+
+Save it as an object called df. How many rows does it have? How many columns? Should be $30 \times 6$
+
+```{R}
+df <- msleep %>% select_if(is.numeric)
+
+```
+
+
+Now, pipe that dataset directly into the function `cor` to generate a correlation matrix. Save it as an object called cormat
+
+```{R}
+cormat <- cor(df, use = "pair")
+cormat
+```
+
+What kind of object is the correlation matrix? How could we get this into a format that ggplot would like by reshaping it? What if we wanted the correlations all to be in a single column, and then have two additional columns containing the pairs of variables that have those correlations!
+
+Convert cormat to a dataframe with `cormat %>% as.data.frame`. Notice that the first "column" isn't really a column: it doesn't have a column name or anything. It merely gives the "row names", something a bit old-fashioned that matricies can have. You can convert this to a column by piping it into the function `rownames_to_column`.  Change the name from the default "rowname" to "var1" by doing `rownames_to_column("var1")`. Try it!
+
+```{R}
+cormat %>% as.data.frame() %>% rownames_to_column("var1") %>% pivot_longer(-1, "var2", values_to = "correlation") -> df_long
+```
+Now then, we are ready to pivot_longer! Take your result from above (with the var1 column added): We want to keep this new column of variable names as-is, but pivot the names of the correlation columns into their own column (names_to="var2") and the values to a column called correlation (values_to="correlation"). Give it a go! You should end up with two columns containing variable names and a third column that contains correlations for each pair of variables. 
+
+```{R}
+# your code here
+```
+
+Take this dataset and send it to ggplot! Inside aes(), map var1 to the x-axis, var2 to the y-axis, and correlation to the fill. Then add `geom_tile()`. This is rudimentary correlation heatmap!
+
+```{R}
+df_long %>% ggplot(aes(x = var1, y = var2, fill = correlation)) + geom_tile()
+```
+
+We can spruce the heatmap up further by changing the colors, adding the actual correlation values onto the squares, etc. Try adding the following layers and 
+
+```{R}
+df_long %>% ggplot(aes(x = var1, y = var2, fill = correlation)) + geom_tile() +
+scale_fill_gradient2(low="red",mid="white",high="blue")+ #makes colors!
+geom_text(aes(label=round(correlation,2)),color = "black", size = 4)+ #overlays correlation values
+theme(axis.text.x = element_text(angle = 90, hjust = 1))+ #flips the x-axis labels
+coord_fixed()
+```
+
+
+## Extra practice with heatmaps
+
+Do the same thing with the diamonds dataset! Select the numeric variables first. Compute the correlation matrix. Pull rownames into a column with `rownames_to_column("var1")`. Pivot all variables except var1 longer, names_to="var2", values_to="correlation". Then pipe the result into ggplot and make a heatmap with geom_tile() like in the above example!
+
+## Matricies
+
+For the rest of the worksheet, we will be doing a matrix-focused code-along! As you saw above, matrix format arises a lot in base R, and knowing how to work with them is important.
+
+```{r}
+## matrix code here!
+
+#here's how you can generate matrices from vectors, e.g., c(1,2,3,4)
+
+m1 <- matrix(c(1,2,3,4), nrow=2) #notice how it fills one column at a time
+m1
+#equivalently, array(c(1,2,3,4),dim=c(2,2))
+
+m2 <- matrix(c(1,2,3,4), nrow=2, byrow = T) #to fill it by row, specify byrow=T
+m2
+
+v1 <- c(1,3)
+v2 <- c(2,4)
+
+cbind(v1,v2) #bind vectors together as columns 
+
+rbind(v1,v2) #bind vectors together as rows
+
+#make the vector into a column vector
+matrix(v1)
+
+#make the vector into a row vector
+matrix(v2, nrow=1)
+```
+
+You can generate "matrices" with more than two dimensions (really, "multi-dimensional arrays" or "tensors"). For a three-dimensional array, you can think of it as a vector of matrices
+
+```{R}
+array(c(m1,m2),dim=c(2,2,2)) #syntax is dim(nrow, ncol, n3dim, n4dim, ...)
+
+threeD <- array(c(1,2,3,4,5,6,7,8), dim=c(2,2,2))
+
+#you index vectors with the same convention
+
+threeD[1,2,2] #grab element in the 1st row, 2nd column of 2nd matrix
+threeD[,,1] #grab just the second matrix (all rows and columns)
+```
+
+
+## Matrix opperations 
+
+Vectorized operations are elementwise and include `+, -, *, /, etc`
+
+```{R}
+m2 #recall this matrix
+
+#scalar arithmetic (applies the operation to each element)
+m2*2
+3*m2
+1-m2
+```
+
+We can also add/subtract/multiple/divide etc two matrix objects together (elementwise), but the objects must have the same dimensions
+
+```{R}
+m1+m2
+m1-m2
+m1/m2
+
+m1/v1 #doesn't work: not same dimensions
+```
+
+## Matrix-matrix multiplication
+
+If you haven't seen this before, it takes a bit of getting-used-to. For all rows $i$ and columns $j$, Each element of the $i^{th}$ ROW of the left matrix get multiplied element-wise with each element of the $j^{th}$ COLUMN of the right matrix, and the sum of these products is put in the $i,j$ cell of the new matrix. 
+
+The resulting matrix will have as many rows as the first (lefthand) matrix and as many columns as the second (righthand) matrix
+
+For example, click in the below block to render the $\LaTeX$ equivalent
+
+$$
+\begin{bmatrix}
+a&b \\ 
+c&d 
+\end{bmatrix} 
+\begin{bmatrix} 
+e&f \\ 
+g&h  
+\end{bmatrix} 
+= 
+\begin{bmatrix} 
+ae+bg& af+bh \\ 
+ce+dg&cf+dh 
+\end{bmatrix}
+$$
+In R, we do with with the `%*%` operator
+
+```{R}
+A <- matrix(c(1,2,3,4),ncol=2, byrow=T)
+B <- matrix(c(5,6,7,8), ncol=2, byrow=T)
+
+A
+B
+
+A %*% B
+B %*% A #different! doesn't commute like regular multiplication
+
+## it is distributive and associative though!
+
+C <- matrix(c(9,10,11,12), ncol=2, byrow=T)
+
+
+A%*%(B+C)
+A%*%B + A%*%C #same
+
+(A %*% B) %*% C
+A %*% (B %*% C) #same
+
+## Can do matrix-matrix multiply any time the number of COLUMNS of lefthand matrix equal number of ROWS of righthand matrix
+
+col1 <- matrix(v1) #3x1 matrix (3 rows, 1 column)
+row1 <- matrix(v1,nrow=1) #1x3 matrix (1 row, 3 columns)
+
+row1 %*% A #works since 1x3 compatible with 3x3
+A %*% col1 #works since 3x3 compatible with 3x1
+
+col1 %*% A #does not work
+A %*% row1 #does not work
+
+## A matrix that is just a single row (like row1) is often called a row vector
+## A matrix that is just a single column (like col1) is often called a column vector
+```
+
+## Transposing a matrix
+
+This just means switching the rows and columns (so row1 becomes col1, row2 becomes col2, etc.). Equivalently, this the same as switching the indices of every element (element at 2,3 goes to 3,2 etc). This means elements on the main diagonal (at 1,1 at 2,2 at 3,3 etc) thus are not affected). You can also thing about it as reflecting/rotating the matrix about the main diagonal. In R, we use `t()` to do this
+
+```{R}
+A
+t(A) #rows and columns switched
+B
+t(B)
+
+col1
+t(col1) #transposing a single column makes it a row and vice versa
+```
+
+## Vector products (matrix-matrix multiplication with vectors)
+
+Recall that matrix-matrix multiplication requires the number of columns on the left to be equal to the number of rows on the right. 
+
+If we have a single column, we can multiply it by its transpose like
+
+```{R}
+col1 %*% t(col1) #we call this an "outer product" 
+```
+
+Here the dimensions of the lefthand side are 3x1 and the dimensions of the right are 1x3. So the number of cols on the left (1) equals the number of columns on the right (1), and the result is a 3x3. What happens if we switch the order. If we multiply a 1x3 with a 3x1, the result, now the result is a 1x1
+
+```{R}
+t(col1) %*% col1 # we call this an "inner product"
+```
+
+For two vectors, the inner product is commutative!
+
+```{R}
+col2 <- matrix(v2)
+
+t(col1) %*% col2
+t(col2) %*% col1 #same!
+```
+
+## Applying a matrix
+
+We "apply a matrix A" to something when we multiply by matrix A on the left
+
+The identity matrix is a matrix I such that when you apply it, it has no effect (kind of like multiply a real number by 1). It is always a matrix that has 1s on the main diagonal, 0s everywhere else
+
+```{R}
+I <- matrix(c(1,0,0,1), byrow=T, nrow=2) #identity matrix
+
+I
+A
+I %*% A
+```
+
+## Inversion and Matrix "division"
+
+The inverse of a matrix is another matrix such that, when when you multiply them together, you get the identity matrix.
+
+```{R}
+AInv <- matrix(c(-2,1,1.5,-.5),byrow=T, ncol=2)
+
+A%*%AInv #inverse
+
+# Find the inverse, if it exists, with solve()
+
+solve(A)
+solve(I)
+
+# Some matrices don't have an inverse (they are "singular")
+Nope <- matrix(c(1,2,2,4),nrow=2)
+solve(Nope)
+# Here, this is because the columns are multiples of each other
+```
+
+# Why do we care about matrices in a stats class?
+
+Solve this system of equations:
+
+$$
+\begin{bmatrix}
+1 & 2\\
+3 & 4\\
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+5\\
+6\\
+\end{bmatrix}
+$$
+Tedious to solve by hand. However! if $\mathbf{Ax=b}$, then apply the inverse of A to both sides, we find that $\mathbf{x=A^{-1}b}$
+
+```{R}
+A
+b<-matrix(c(5,6))
+
+#to find x1 and x2, all you need is
+solve(A)%*%b
+```
+
+### Example
+
+Find x such that $\mathbf{Dx=e}$
+
+```{R}
+D <- matrix(c(7,2,1,0,3,-1,-3,4,-2),byrow=T,ncol=3)
+e <- matrix(1,2,3)
+
+D
+e
+```
+
+
+## Distances!
+
+Distances quantify how far two observations are in terms of a set of variables/dimensions
+
+```{R}
+library(ggplot2)
+mat1<-msleep%>%filter(name%in%c("Cow","Dog"))%>%select(sleep_total,brainwt,bodywt)
+mat1
+```
+
+```{R}
+mat1%>%summarize(euclidean = sqrt(diff(sleep_total)^2 + diff(brainwt)^2 + diff(bodywt)^2),
+                 manhattan = abs(diff(sleep_total)) + abs(diff(brainwt)) + abs(diff(bodywt)),
+                 maximum = max( abs(diff(sleep_total)), abs(diff(brainwt)), abs(diff(bodywt))))
+```
+
+But don't need to do this by hand!
+
+```{R}
+dist(mat1,method = "euclidean")
+dist(mat1,method = "manhattan")
+dist(mat1,method = "maximum")
+```
+
+You can make interactive 3d plots if you want!
+
+```{R}
+library(plotly)
+plot_ly(mat1,x= ~sleep_total,  y = ~brainwt, z = ~bodywt, 
+        type = "scatter3d", mode = "lines+markers")
+```
+
+Compute ALL pariwise (euclidean) distances 
+
+```{R}
+msleep %>% select(name, sleep_total, brainwt, bodywt) %>% column_to_rownames("name") %>%
+  na.omit %>% dist %>% as.matrix %>% head
+```
+
+Practice: How many rows does this matrix have? How many columns? Make it tidy! Convert it to a dataframe and pivot_longer (see correlation matrix example above)
+
+```{R}
+# try it!
+```
+
+
+Compute ALL pariwise (euclidean) distances of standardized data
+
+```{R}
+msleep %>% select(name, sleep_total, brainwt, bodywt) %>% mutate_if(is.numeric, scale) %>% column_to_rownames("name") %>% na.omit %>% dist %>% as.matrix -> distmat
+```
+
+## Gower's dissimilarity
+
+Allows you to cluster using categorical variables too!
+
+```{R}
+dat<-data.frame(animal=c("cat","dog","cat"),score=c(1,4,2))
+dat
+```
+
+```{R}
+library(cluster)
+daisy(dat, "gower")
+```
+
+```{R}
+iris
+
+## Let's start by clustering on just two variables
+clust_dat<-iris%>%select(Sepal.Length,Petal.Width)
+```
+
+## Clustering!
+

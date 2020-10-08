@@ -478,6 +478,35 @@ hist(wraps)</code></pre>
 </ul></li>
 </ul>
 </div>
+<div id="lecture-9302020" class="section level4">
+<h4>Lecture 9/30/2020</h4>
+<ul>
+<li>we use sample statistics as point estimates for the population parameter; we should also include a margin of error in the point estimate</li>
+<li>sample proportions will be normally distributed with mean p and standard error <span class="math inline">\(= \sqrt{\frac{p(1-p)}{n}}\)</span>
+<ul>
+<li>require at least 10 expected successes and failures; independence of observations, and sample less than 10% of the population</li>
+<li>becomes well approximated by a normal distribution <span class="math inline">\(N(\mu, SE = \frac{\sigma}{\sqrt{n}})\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="lecture-10022020" class="section level4">
+<h4>Lecture 10/02/2020</h4>
+<ul>
+<li>continuous distributions: we can define the cdf of any random variable x as <span class="math inline">\(F_x(x) = \mathbb{P}[X \leq x] \text{ for all } x \in \mathbb{R}\)</span>
+<ul>
+<li>if the cdf is:
+<ul>
+<li>continuous at all points</li>
+<li>differentiable everywhere except at countably many points</li>
+</ul></li>
+<li>then we can say that x is a continuous random variable</li>
+</ul></li>
+<li>the function <span class="math inline">\(f_x\)</span> defined as <span class="math inline">\(f_x(x) = F_{x}^{&#39;}(x)\)</span> wherever the derivative exists, is called the probability density function
+<ul>
+<li>sufficient to provide the pdf to completely specify the distribution of a continuous random variable <span class="math display">\[\mathbb{P}[a &lt; X \leq b] = \mathbb{P}[X \leq b] - \mathbb{P}[x \leq a] = F_x(b) - F_x(a) = \int_{a}^{b} f_{x}(x)dx\]</span></li>
+</ul></li>
+</ul>
+</div>
 </div>
 <div id="reading-notes" class="section level3">
 <h3>Reading notes</h3>
