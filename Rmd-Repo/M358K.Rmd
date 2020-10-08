@@ -112,6 +112,16 @@ hist(wraps)
 - working through problem set during class 
 - any normal random variable can be written as a linear transform of the standard normal distribution (conversion to Z scores)
 
+#### Lecture 10/07/2020
+- for any X and Y normally distributed random variables and any constants $\alpha$ and $\beta$, $\alpha X + \beta Y$ is a random variable which is also normally distributed 
+  - linear combination of any normal random variables is normal
+  - we can treat random samples as a set of n objects, which are independent and randomly distributed
+    - define the sample mean as the average of observations, point estimator statistic
+  $$\mathbb{E}[\bar{X}] = \mathbb{E}[\frac{1}{n}(X_1 + X_2 + ... +X_n)]= \frac{1}{n} (\mathbb{E}[X]*n) = \mathbb{E}[X]$$
+  $$ Var[\bar{X}] = Var[\frac{1}{n}(X_1 + X_2 + ... +X_n)] = \frac{1}{n^2} Var[X_1 + X_2 + ... +X_n] = \frac{1}{n^2} Var[X]*n = \frac{Var[X]}{n}$$
+  $$\rightarrow SD[\bar{X}] = \frac{SD[X]}{\sqrt{n}}$$
+  - this gives us all the information we need to convert to Z-scores
+  $\frac{\bar{X}- \mu_X}{\frac{\sigma_X}{\sqrt{n}}}$
 ### Reading notes
 
 Section 4.3 
