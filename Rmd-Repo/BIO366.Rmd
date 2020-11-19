@@ -13,7 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Notes
 #### 8/26/2020
-- local differences, despite global similarity; exchange between homologous chromosomes: homologous recombination
   - reciprocal exchange can be inferred using gene markers
   - gene conversion can occur when one chromosome segment is replaces
     - can occur with or without adjacent crossover; either parental configuration or novel position of flanking markers
@@ -53,6 +52,53 @@ knitr::opts_chunk$set(echo = TRUE)
   - repulsion of phosphodiester backbones can force the arms away from each other, results in a square planar junction
     - we can then model resolution of parental and crossover configurations by cutting pairs of phosphodiester linkages
     - certain proteins can bind to the square planar form of junction and shift the lengths of the arms to result in heteroduplex or homoduplex creation
+
+#### Section 1 Reading
+Homologous Genetic Recombination  
+
+- Recombination: process (almost uniform) of reshuffling
+- diploid organisms contain two copies of each chromosome (autosome)    
+  - sperm and egg pick up meiotic recombination and form new combinations  
+- Homologous recombination: exchange between partners with high sequence homology (contrasted to site-specific recombination)
+  - initiation, strand exchange, branch migration, heteroduplex creation and resolution
+- How does recombination occur in haploid bacteria?
+  - sister chromosomes can be created , but aren't useful for creating variation unless mutations are introduced
+    - useful for repair (double strand, or replication errors)
+  - use of intact chromosome during transformation; DNA from dead bacterium creates a diploid (merodiploid); DNA transfer by conjugation, transduction, and transformation can can create E. Coli Merodiploids
+- Linear duplex exchange results in linear molecules
+  - circular chromosomes exchange into a single large circle (or remain individual if partnered circular chromosomes)
+  - viable exchange between circular and linear molecules (bacterial chromosome and DNA segment) requires a minimum of 2 exchanges to result in desired homologous recombination
+- Reciprocal exchange involves local nonhomologous segments swapping between DNA partners during meiosis
+- Gene conversion occurs when an exchange event replaces a nonhomologous segment (unidirectional information transfer); markers flanking the transferred segment can remain or swap to generate parental or cross-over marker configurations
+- Saccharomyces & Ascobolus are useful for studying meiosis, since they pack products of meiosis into an ascus (sampling meitotis events vs tetrad analysis)
+  - following two homologous chromosomes replicating, and resolving exchanges, in Saccharyomyces the four duplexes are packaged into spores, then into a spore sack; each spore generates a colony
+  - following meitotic recombination in Ascobolus, the four duplexes replicate again to result in 8 total spores in the ascus (4 sister spore pairs)
+- Saccharoymyces segregation patterns:
+  - No exchange, 2 duplexes carry M, 2 carry m -> 2:2 normal segregation
+    - could result if additional events reverse exchanges 
+  - 2:2 aberrant, 1 M, 1 m, 2 half-sectored colonies -> 2:2 (aberrant)
+  - $2\frac{1}{2}$:$1\frac{1}{2}$, 2 M (or m), 1 m (or M), 1 half-sectored colony
+  - 3:1, 3 M (or m) colonies, 1 m (or M) colony
+- Ascobolus segregation patterns:
+  - 4:4, 4 M colonies, 4 m colonies
+  - 4:4 aberrant, 1 M, m sister pair, 2 non-identical sister pairs
+  - 5:3, single non-identical sister pair (m+M)
+  - 6:2, all identical sister spores, but 3 pairs of 1 phenotype with 1 pair of the other
+Models of Recombination
+- Holliday Junction model
+  -I Holliday Junction formation
+  -II Branch migration (right movement of 'x'), creation of symmetric heteroduplex
+  -III Same junction as II, shift from 'x' form to 'H' form, antiparallel geometry
+- Manipulation of the Holliday Junction
+  - junction 'x' is resolved by cutting crossed thin strands; creation of symmetric heteroduplexes with parental configurations (Ab, aB)
+  - junction type 'Y' is resolved by cutting crossed thick strands; creation of symmetric heteroduplex, crossed-over marker configurations
+- Meselson-Radding Model
+  - strand nick made in one duplex, which then invages the recipient 
+    - -> D-loop creation; heteroduplex extension & D-loop expansion; chewing away of D-loop and close of nicks, Holliday Junction at end of heteroduplex (heteroduplex is present on one duplex only)
+- Double Strand Gap Repair Model:
+  - recipient strands generate 3' extensions via unequal degradation; 3' extensions invade heteroduplex to create a D-loop
+    - creation of two Holliday Junctions; results in all-donor region, and two asymmetric heteroduplex on either side
+
   
 #### 9/14/2020
 - site specific recombination involves specific DNA regions, usually short sequence runs 
@@ -112,48 +158,282 @@ knitr::opts_chunk$set(echo = TRUE)
 - recombination sites require complementary base pair recombinant sites (native-native or altered-altered recombination)
   - we can modify Flp and Cre to recognize desired recombination sites by generating mutants; can then select for desired Flp mutants with galactosidase coloring of E Coli in X gal medium (looking for red Flp variant colonies)
   
-#### Section 1 Reading
-Homologous Genetic Recombination  
+#### MT2 Review
+- homologous recombination requires stretches of homology, while site-specific recombination requires minimal
+- site specific recombination results in no change to target sites, but rearrangements to flanking DNA
+  - conservative site specific recombination works through transesterification to active subunits, and as a result requires no input of energy
+- phosphodiester bonds in DNA can undergo nucelophilic attack by serine, tyrosine or water
+- phosphodiester hydrolysis can result in two products depending on the location of the break (3' OH or 5' OH)
+- serine recombination is parallel strand orientation, while tyrosine recombination is antiparallel orientation
+- 4 subunits of recombinase carry out reaction; potentially includes accessory proteins
+  - no degradation or synthesis of new DNA
+- tyrosine recombinase family   
+  - $\lambda$ integrase, Flp, Cre, XerC/XerD
+  - uses 4 monomers, two per site; (two-step) single strand cleavage, transesterification and Holliday junction formation, resolution and exchange
+  - alignment state crossings 0 or even: deletion; odd: inversion
+- serine recombinase family
+  - Hin invertase, Tn3 resolvase, Gin invertase
+  - uses 2 dimers, creates double strand breaks and covalent linkage to subunits; complex rotates and resolves with hydroxyl acting as a nucleophile
+  - alignment state crossings odd: deletion; 0 or even: inversion
+- head-tail sites generate excision, head-head sites generate inversion
+- integration and excision of strands can occur reversibly with the same recombinase
+- phase variation utilizes inversion recombination to avoid host immune detection
+  - variable expression of 2 flagellum tail proteins 
+- selfish yeast plasmid: maintains number of copies per daughter cell via amplification
+  - bifurcated rolling circle spin-off mechanism to reach 60 copies per cell
+  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\plasmid_amp.JPG)
+    
+#### Section 2 Reading
+Site-specific recombination
 
-- Recombination: process (almost uniform) of reshuffling
-- diploid organisms contain two copies of each chromosome (autosome)    
-  - sperm and egg pick up meiotic recombination and form new combinations  
-- Homologous recombination: exchange between partners with high sequence homology (contrasted to site-specific recombination)
-  - initiation, strand exchange, branch migration, heteroduplex creation and resolution
-- How does recombination occur in haploid bacteria?
-  - sister chromosomes can be created , but aren't useful for creating variation unless mutations are introduced
-    - useful for repair (double strand, or replication errors)
-  - use of intact chromosome during transformation; DNA from dead bacterium creates a diploid (merodiploid); DNA transfer by conjugation, transduction, and transformation can can create E. Coli Merodiploids
-- Linear duplex exchange results in linear molecules
-  - circular chromosomes exchange into a single large circle (or remain individual if partnered circular chromosomes)
-  - viable exchange between circular and linear molecules (bacterial chromosome and DNA segment) requires a minimum of 2 exchanges to result in desired homologous recombination
-- Reciprocal exchange involves local nonhomologous segments swapping between DNA partners during meiosis
-- Gene conversion occurs when an exchange event replaces a nonhomologous segment (unidirectional information transfer); markers flanking the transferred segment can remain or swap to generate parental or cross-over marker configurations
-- Saccharomyces & Ascobolus are useful for studying meiosis, since they pack products of meiosis into an ascus (sampling meitotis events vs tetrad analysis)
-  - following two homologous chromosomes replicating, and resolving exchanges, in Saccharyomyces the four duplexes are packaged into spores, then into a spore sack; each spore generates a colony
-  - following meitotic recombination in Ascobolus, the four duplexes replicate again to result in 8 total spores in the ascus (4 sister spore pairs)
-- Saccharoymyces segregation patterns:
-  - No exchange, 2 duplexes carry M, 2 carry m -> 2:2 normal segregation
-    - could result if additional events reverse exchanges 
-  - 2:2 aberrant, 1 M, 1 m, 2 half-sectored colonies -> 2:2 (aberrant)
-  - $2\frac{1}{2}$:$1\frac{1}{2}$, 2 M (or m), 1 m (or M), 1 half-sectored colony
-  - 3:1, 3 M (or m) colonies, 1 m (or M) colony
-- Ascobolus segregation patterns:
-  - 4:4, 4 M colonies, 4 m colonies
-  - 4:4 aberrant, 1 M, m sister pair, 2 non-identical sister pairs
-  - 5:3, single non-identical sister pair (m+M)
-  - 6:2, all identical sister spores, but 3 pairs of 1 phenotype with 1 pair of the other
-Models of Recombination
-- Holliday Junction model
-  -I Holliday Junction formation
-  -II Branch migration (right movement of 'x'), creation of symmetric heteroduplex
-  -III Same junction as II, shift from 'x' form to 'H' form, antiparallel geometry
-- Manipulation of the Holliday Junction
-  - junction 'x' is resolved by cutting crossed thin strands; creation of symmetric heteroduplexes with parental configurations (Ab, aB)
-  - junction type 'Y' is resolved by cutting crossed thick strands; creation of symmetric heteroduplex, crossed-over marker configurations
-- Meselson-Radding Model
-  - strand nick made in one duplex, which then invages the recipient 
-    - -> D-loop creation; heteroduplex extension & D-loop expansion; chewing away of D-loop and close of nicks, Holliday Junction at end of heteroduplex (heteroduplex is present on one duplex only)
-- Double Strand Gap Repair Model:
-  - recipient strands generate 3' extensions via unequal degradation; 3' extensions invade heteroduplex to create a D-loop
-    - creation of two Holliday Junctions; results in all-donor region, and two asymmetric heteroduplex on either side
+- targets shorter DNA sites than homologous recombination
+  - also usually carried out by a small number of proteins 
+- conservative site-specific recombination retains the high energy held in the bonds, by using a transesterification mechanism; present almost exclusively in prokaryotes
+  - invertase family (serine family): name based on mediation DNA inversion or resolution
+    - aligns target sites in parallel geometry, double strand cuts sites and become covalently linked; subunit rotation and resolution
+    ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\invertase.JPG)
+    - resolvase target site has 3 sub-sites, 2 of which are used to pull one site into proper conformation
+  - lambda integrase family (tyrosine family): name based on mediation genome integration
+    - creates single strand breaks, forms intermediate Holliday junction; antiparallel arrangement of segments
+      ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\tyrosine.JPG)
+  - both use two subunits flanking each site (head-head)
+
+Structural support of Recombination Mechanism
+
+  - intermediate of resolvase recombination suggests resolvase must undergo substantial conformational change to recombine strands
+  - tyrosine recombination involves only 2 of 4 active sites at once (causes exchange to occur in two separate steps; Holliday formation, junction isomerization and resolution)
+
+Biological consequences of site-specific recombination
+
+- site-specific recombination can occur between sites on two separate DNA molecules, or sites on a single DNA molecule
+- recombination between direct sites results in excision; recombination between inverted sites will result in DNA inversion (both only act on sites on a single DNA molecule)
+- lambda can integrate and excise using the same tyrosine recombinase in conjuction with host IHF and Fis; determines whether phage remains lysogenic or enters lytic phase
+      ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\lambda.JPG)
+- Salmonella uses site-specific recombination to avoid host antibodies attacking flagellum
+  - phase variation: switching between flagellin subunit displayed
+  - mediated by serine recombinase switching on and off repressor segments
+- transposons can move within locations in a genome or between genomes
+  - Tn3 is a replicative transposon: duplicates itself when excised
+- Flp recombinase is used to amplify yeast plasmids; restores stable number of plasmid in daughter cells via amplication
+
+Applications of site-specific recombination
+
+- DNA recombination can be utilized to generate integration, excision or inversion of DNA - Cre and Flp are commonly used for gene editing
+- cell lineage can be monitored using Flp and fluorescent protein-coding regions 
+- Flp can be used to remove a gene by flanking it with binding sites
+- genes can be turned on using non-functional orientation of promoter regions or by excising a terminator site between promoter and gene regions
+- we can generate altered binding site recombinases that are not cross-reactive
+
+#### 10/05/2020
+- mutant recombinases can be used to generate multiple recombinant genomes; difficult to screen enough colonies + time consuming to identify mutants
+  - use of fluorescent proteins instead to quickly sort recombinants; tyrosine recombination results in inversion and shift from yellow to green fluorescent proteins 
+- directed genome editing can be used to introduce native genomes to repair targeted mutations
+- zinc fingers: first discovered as a transcription factor, recognizes 3 base pairs (5'-3') at residues 2, 3, 6
+  - consists of two $\beta$ sheets, 2 loops, and $\alpha$ helix
+  - can use multiple ZnFs in a single module to increase specificity, reduced odds of the same sequence occurring by chance 
+  - addition of nuclease (restriction enzyme based) to zinc finger to cause double strand break; split recognition specificity into two zinc + nuclease modules
+  
+#### 10/07/2020
+- TALE: transcription activator like effector, bind to promoters and activate/repress gene products to establish infection
+  - recognizes a single base pair, unlike zinc finger
+  - consists of dual $\alpha$ helix repeats, specific region repeat codes for nucleotide binding motifs
+  - recognizes N to C 5'-3', opposite of Zinc finger recognition arrangement
+  
+#### 10/14/2020
+- generate a series of 3 unit zinc finger modules with altered middle finger specificity; enables sufficient binding to target site
+ - recognition of sites is determined by individual fingers, overall strength is determined by number of fingers used
+- phage display: engineered proteins can be displayed on phage coat, then selected and enriched in subsequent infections 
+- use of biotin affinity tag to pull oligonucleotide to streptavidin 
+- use wild type oligio as competitor, originally unlinked without biotin; wild oligo competes for phage binding, and oligo of interest are pulled out of solution by avidin
+  - repeated enrichment furthers specificity and affinity; first removes wild, next removes unwanted trinucleotide binding phages (15), then once again with 64 random trinucleotide primers (64)
+- CRISPR: form of prokaryotic adaptive immune memory, defense against foreign nucleic acids (invading DNAs)
+  - target DNA is cut to trigger degradation
+
+#### 10/19/2020
+- almost all prokaryotes contain a CRISPR system for adaptive immune memory; protects against foreign nucleic acids, using an RNA based interference complex
+- there are multiple types of CRISPR systems, depending on the target for degradation;  general locus is leader-repeat-spacer-repeat-spacer-repeat-spacer-repeat
+  - class I uses multiple Cas proteins, while class II uses a single Cas protein; we focus on class II
+  - spacer sequence cut from invading nucleic acid and contributes to immune memory; acquisition -> CRIPSR RNA biogenesis -> interference 
+    - CRISPR RNA associates with future infecting nucleic acids, and Cas proteins destroy the complex 
+    - repeat segments are used to excise spacers by site-specific recombination
+  - Cas3 has helicase-DNase activity, moving along single stranded DNA paired to CRISPR RNA
+  - Type 1 CRISPR systems utilize Cas 1, 2 to acquire spacer segments (canonical PAM AAG-TTC); cut protospacer sequence following the PAM, inserted into the CRISPR locus near the leader sequence 
+  - repeat segments are symmetric, RNA forms stem-loops; each crRNA differs only at the spacer sequence, then form cascade complex to recognize target RNA
+    - spacers bind to complementary invading DNA, forms D-loop which is then excised 
+- Type II CRISPR system: use a single Cas9 protein, with multiple RNAs (crRNA and tracrRNA)
+  - crRNA and tracrRNA can be fused to form a single guide RNA (sgRNA)
+  - PAM sequence can vary based on sequence and Type of system (3' side of protospacer, cut 2 from the PAM instead of 5' and immediately after PAM in Type I)
+  - tracrRNA hybridizes to repeat sequences in crRNA, RNase III splits individual crRNAs
+    - tracrRNA remains hybridized to repeat sequence to form final interference RNA in Cas9 system
+    - spacer binds to complementary PAM strand, Cas9 double-strand cuts 2 bases from the PAM site; can then be used for recombination and repair 
+
+#### 10/21/2020
+- Type III CRISPR systems can target DNA and RNAs, without targeting of PAM sequences during acquisition or deletion targeting; Csm complex targets DNA, while Cmr complex targets RNA
+  - coupled with transcription of invading nucleic acid
+  - CRISPR array is transcribed then processed by Cas9 to form crRNAs; then assembled into Csm/Cmr and matured at the 3' repeat end
+    - repeat hybridizes to RNA transcribed from invading sequence; once hybridized, complex can degrade RNA being produced or looped out DNA
+  - flanking sequence is used to differentiate between self and non-self sequences (protospacer adjacent spacer sequence, does not bind to target strands)
+- acquisition phase for CRISPR is well conserved
+  - Cas1 and Cas2: catalytic activity, DNA transposase and accessory protein respectively (4:2)
+    - other proteins like Csn2 and Cas9 may also play a role in targeting 
+  - protospacer is cut without PAM, then joined to leader-repeat junction and repeat-spacer junction (result in leader-repeat-spacer-repeat-spacer)
+  - protospacer uses two free 3' hydroxyls in two nucleophilic attacks to fully integrate; gaps are then filled in, duplication of disrupted spacer sequence 
+- sgRNA forms tetraloop to generate immunity complex for disruption step 
+  
+#### 10/26/2020
+- CRISPR Type II structure
+  - target DNA hybridizes to guide sequence in sgRNA (tetraloop consisting of loops and antirepeats)
+  - we are interested in supressing NHEJ in repair of CRISPR-induced double strand breaks
+- traffic light reporter system: shows how much of repair is HDR vs NHEJ
+  - uses red and green reporters to detect NHEJ or HDR and cell sorter
+  - alternative reading frames resulting from insertions or deletions remove GFP expression; frameshift removes stop codon, allowing transcription of RFP
+  - default reporter created by inserting target sequence to shift reading frame, no GFP or RFP
+
+#### Section 3 Readings
+
+Zinc Finger Nucleases
+
+- directed genome editing takes advantage of existing repair mechanisms to solve induced damage
+- Zinc fingers are restriction enzymes used to restrict invasion of nucleic acids; specific 4-6 bp sequences are recognized, and double strand breaks are made
+  - large number of susceptible sites in a genome 
+  - Fokl: restriction enzyme which cuts at a distance from the binding site, with separate DNA binding and cleaving domains
+  - Zinc finger domains: individual zinc fingers recognize 3 nucleotides, sequence range is made of 3 finger subunits; two sets of zinc fingers must be used, making the binding specific to an 18-mer
+    - ZFNs have high specificity, low chance of off-site recognition
+  - selection schemes:
+    - phage display: Zinc finger peptides are cloned into bacteriophage, which is then amplified in a bacterial host; use oligionucleotides of the target motif to isolate phages (biotin streptavidin interaction); control oligionucleotides are included to reduce random binding 
+  - Fokl monomers require ZFNs with binding sites spaced 5 to 6 bp apart
+
+TALENs (Transcription Activator-Like Effector Nucleases)
+
+- TALEs are derived from plant pathogen Xanthomonas genera; proteins bind to promoters in host genome to regulare transcription, useful for establishing infection
+  - host can also utilize effector proteins to initiate immune response
+  - nucleotides 12 and 13 vary in effector protein modules, represent specific recognition of individual base pairs
+  - TALE repeat modules have right-handed chirality, and can make contact in the major DNA groove; alignment N-C with 5'-3' of contact DNA
+  - two TALEN subunits are engineered to have recognition sites separated enough for Fokl nuclease to dimerize 
+
+Specificity Selection 
+
+- use of 3 zinc fingers per module, two modules which recognize opposing strands of DNA (6-10 bp separation enables Fokl dimerization)
+  - specificity can be generated from base zinc fingers `5'GNN3'`,`5'ANN3'`,`5'CNN3'` and `5'TNN3'`
+  - after mutagenesis, we perform competitive selection with parental motif, alterative 15 trinucleotides, and random 64 trinucleotides 
+  
+Traffic Light Reporter
+
+- CHYSEL: cis-acting hydrolase element, transcribed by ribosome but does not form a peptide bond (ribosome skipping mechanism produces two separate proteins)
+  - inserted between GFP and RFP, if unread produces GFP with stop codon
+  - if in correct reading frame, GFP is gibberish, and RFP is transcribed as a separate protein
+  - GFP(+1) + T2A(+1) + RFP(+1): +1 ORF produces functional GFP and RFP, and CHYSEL splits them to produce cells expressing both
+  - GFP(+1) + TG + T2A(+3) + RFP(+3): +1 ORF produces GFP, followed by a stop codon; T2A and RFP are not transcribed and green fluorescence is observed (HDR)
+    - +3 ORF produces no GFP, T2A is in frame and splits to produce active RFP, which is also in frame
+  - GFP(+1) - NN + T2A(+3) + RFP(+1): reading frame for GFP moves from +1 to +3, producing inactive GFP, active T2A and RFP
+  - NHEJ (either deletion or insertion) results in RFP, while HDR generates GFP only
+  - experimental reporter:
+    - GFP + Target Site + GFP + TG + T2A + RFP
+      - produces no protein without strand break due to stop codon 
+      - HDR: using GFP repair template, target site is removed by gapping; repaired reporter is GFP(+1) + CHYSEL(+3) + RFP(+3) in ORF +1
+      - NHEJ: partial deletion, produces GFP(+1 to +3) + CHYSEL(+3) + RFP(+3) in ORF +3
+- general ORF shifting rules
+  - insertion of n: n steps down (ins1 = +1 -> +3)
+  - deletion of n: n steps up (del2 = +1 -> +3), middle deletions result in partial ORFs (mdel2 = +1 -> +1:+3)
+  
+CRISPR
+
+- originally bacterial adaptive immune systems, defense against invading nucleic acids
+  - detected by base-pairing with crRNA and bound proteins 
+  - thought to control expansion of genome by foreign DNA, could explain difference in presence of nonfunctional DNA in eukaryotic vs prokaryotic genomes
+- protospacer sequence is excised from invading nucleic acid, and inserted into the CRISPR locus
+  - recognition by PAM motifs, which are removed prior to integration
+  - integration duplicates flanking repeat segments, mediates the total number of spacers able to be held
+- CRISPR locus is transcribed then processed into smaller crRNAs (complementary to spacers), with partially modified repeat segments
+  - Type I has PAM proximal to 5' end of looped-out DNA
+    - crRNAs generated by Cas6 endonuclease activity
+    - crRNA forms a complex, then recognizes foreign DNA; Cas3 (helicase-nuclease) is recruited, cleaves the sDNA; DNA-RNA duplex is unwound
+  - Type II has PAM proximal to 3' end of looped-out DNA
+    - crRNAs generated by trans-acting RNA tracrRNA
+    - single protein assocates with crRNA, Cas9 associates with dual heteroduplex RNA (tracrRNA + crRNA)
+  - Type III
+    - crRNA forms either Csm or Cmr complexes to target invading DNA or viral RNA respectively
+- CRISPR-Cas9 for genome editing
+  - crRNA can be selected for any DNA sequence of interest, tracrRNA can be produced along with Cas9
+    - double strand break is caused at the target locus, repair can be NHEJ or HDR
+- Spacer acquisition 
+  - Cas1 and Cas2 form a complex (4:2), invading protospacer is excised, 3' hydroxyl serves a nucleophile at the spacer nearest to the leader sequence; resolution occurs as 3' hydroxyl acts a nucleophile
+    - insertion of spacer and ligation creates duplicate flanking repeats
+  
+#### 10/28/2020
+- Jiang et al. paper
+  - uses Pneumococcus as experimental organism
+    - high frequency of homologous recombination and transformation (also used in Avery-Griffith experiment)
+  - experimental design
+    - insert CRISPR component gene, and the target DNA into another chromosomal locus; thus investigating the mechanistic basis for CRISPR action in bacteria 
+    - target site may mutate to become a poor target for CRISPR binding, use of KanR marker to ensure genetic transfer 
+  - we expect to only see colonies if the target is not susceptible (CRISPR cannot kill the strain without a proper binding site)
+    - we get 10x more KanR colonies in the CRISPR resistant strain than the susceptible strain  
+    - due to recombination effects, able to repair CRISPR susceptible strain about 1 in 100 times; we can amplify resistant locus to replace susceptible locus, more KanR colonies
+  - use of mutant PAM sequences ($4^5$ combinations), only non-targeted PAM sequences survive and gain chloramphenicol resistance; resulting lines are sequences  
+  - two distinct PAM bindings were possible NGG or NNG
+
+#### 11/04/2020
+- KanR occurs if CRISPR integrated into target strain, but tranformant SortA is not excised 
+ - certain protospacer sites are more important for CRISPR binding than others (certain bases exhibit depleted sequence survival); bases 1-6 prior to PAM cannot have any mutations, otherwise no binding occurs 
+- Gibson assembly: segment contains two bidirectional primer sequences, producing tracr-cas9 and aphA segments by PCR; resection to single-stranded overhangs, ligation to create complete insertion sequence
+  - insertion results in recombination to introduce KanR and PAM binding mutation (CRISPR integration signaled by Kanamycin resistance, but only mutant PAM binding sequences survive)
+    - edited genome has form tracr-Cas9-Spacer-KanR-SortA, only mutant SortA survives 
+  - resistance loci can be swapped back and forth to sequentially edit multiple genes
+- gene editing proof: drug resistance to Kan or Clor (transformed sequence required or CRISPR kills cell), gel verification of fragment size, enzymatic activity (2-3 tests to validate editing)
+- Beta-galactosidase is a useful for assaying, due to clear color change
+  - mutate null to no function enyzme variant, also modifies the PAM site (first modify SrtA, then bGal)
+  - editing template in all treatments produces significantly more transformants than the control (point mutation, insertion frameshift, and large deletion)
+    - verification by gel electrophoresis shows characteristic sized fragments
+  - removing srtA shows a relative increase in supernatant enzymatic activity
+  - second edit for bGal reduces total level of enzymatic activity
+- an additional experiment was performed: attempt to integrate KanR, srtA and bgaA repeats, mutant srtA and bgaA in a single targeting step
+  - found to be possible, but gel verification shows relatively more escapees 
+- following gene editing, CRISPR locus must be excised
+
+#### 11/09/2020
+- we can use a plasmid with the CRISPR target sequence, used to verify whether the original sequence was properly used in homologous recombination 
+  - transforming plasmid contains bgaA protospacer and spectinomycin resistance, select for plasmid; can then use a temperature sensitive plasmid to remove it 
+- CRISPR can aid the editing process in 2 synergistic ways:
+  - cause double-strand break to induce recombination with introduced template
+  - CRISPR can also kill unedited cells, selection for editing cells 
+- use CRISPR with KanR segment to restore normal erythromycin function, isolate in Kan Erm plates
+  - transformation removes PAM sequence to stop CRISPR activity
+  - Kan assays for CRISPR introduction, Erm assays for editing 
+- by comparing normal and random CRISPRs, we can determine the mechanism of editing
+  - both produce similar fractions of ermR colonies of total colonies 1 in 100 (frequency of homologous repair with erm locus)
+    - higher fraction of dummy CRISPR kanR colonies are ermR (1 in 10); actual CRISPR has nearly all kanR colonies also ermR (unedited ermR cells were likely killed by CRISPR)
+  - overall suggests that CRISPR aids editing by killing unediting cells, could also be small effect of double-strand break introduction 
+  - higher number of kanR colonies for dummy CRISPR; functional CRISPR kills non-erm-edited colonies, while non-functional leaves all colonies alive after conferring KanR
+    - when using no editing template, dummy CRISPR produces much less; difference is the ability of CRISPR to kill, remaining colonies are escapers (1 in 1000)
+  - while frequency of editing is only 1 in 100, CRISPR is able to kill enough unedited cells to raise the proportion of edited cells to 99%; hugely increases efficiency of transformation, reduces chances of observing escapers
+  - since homologous recombination can occur at the CRISPR Kan locus and the Erm Locus, we can get the total recombination frequency for CRISPR-containing cells: ErmR and KanR 
+    - higher for CRISPR than dummy ($2\times10^{-4}$ vs $9\times10^ {- 5}$); recombination frequency is raised by $\sim3$, smaller effect attributed to double-strand break causation in Pneumococcus 
+  
+
+#### 11/11/2020
+- difference between Pneumococucus and E Coli on efficiency of recombination 
+  - usually used with electroporation
+  - recombination will produce KanR in 1 of 200 Pneumococcus; CRISPR is able to kill unedited cells, reducing total number of colonies required for screening
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,79 @@
+---
+title: "BIO321G-HW7"
+author: "ArunK"
+date: "10/15/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+### Problem 1
+```{r}
+sequence = strsplit(paste0(
+"TTHHHHHTTTTTTTTTTTTTTTTTTTTTTTTTHHHHHTTTTTTHHTTTHT",
+"HTTTTTTTTTTTTTTHHHHHTTHTTHTTHTHHTHTHHHTHHHHTHTHHTT"
+), split="")[[1]]
+
+stateNames = c("Fair", "Biased")
+symbols = c("H", "T")
+
+transition = rbind(c(0.95, 0.05), c(0.10, 0.90))
+
+rownames(transition) = colnames(transition) = stateNames
+emission = rbind(c(0.5, 0.5), c(0.0, 1.0))
+
+rownames(emission) = stateNames
+colnames(emission) = symbols
+
+library(HMM)
+
+seqHmmGuess = initHMM(States = stateNames, 
+                      Symbols = symbols, 
+                      transProbs = transition, 
+                      emissionProbs = emission)
+
+seq_vit <- viterbi(seqHmmGuess, sequence)
+
+table(seq_vit)
+
+vit_bool <- seq_vit == "Fair"
+
+sum_vit <- c()
+for (i in 1:length(vit_bool)-1) {
+   sum_vit <- c(sum_vit, (vit_bool[i] + vit_bool[i+1]))
+}
+
+sum(sum_vit == 1)
+```
+
+A.  
+Based on this model, the gambler started with the Fair coin.  
+B.  
+Based on this model, the gambler also ended with the Fair coin.
+C.  
+It seems like the biased coin was used for 39% of the 100 flips.
+D.  
+We would estimate that the gambler switched between the Fair coin to the Biased coin twice; there are 4 total transitions, and we know the start and end was Fair Coin, so there must be an equal number of transitions to and from the Biased coin.
+
+### Problem 2
+A.  
+The cigar string for the given alignment would be 3D13M1I7M1I21M2D4M.
+B.  
+There are 38 matches present.
+C.  
+There are 7 mismatches present.
+D.  
+There are 5 deletions present.
+E.  
+There are 2 insertions present.
+F.  
+These two strings would have an edit distance of 14, which is the sum of mismatches, deletions, and insertions.
+
+### Problem 3
+A.  
+There should be a 2 at this position, since it corresponds to an edit from the prior value of 1 in the entry above.
+B.  
+This value results from a D operation. The prior operations are MMM, corresponding to 3 diagonal moves.

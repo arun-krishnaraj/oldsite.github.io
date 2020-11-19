@@ -122,6 +122,124 @@ hist(wraps)
   $$\rightarrow SD[\bar{X}] = \frac{SD[X]}{\sqrt{n}}$$
   - this gives us all the information we need to convert to Z-scores
   $\frac{\bar{X}- \mu_X}{\frac{\sigma_X}{\sqrt{n}}}$
+
+#### Lecture 10/09/2020
+- sample are iid random variables, $X \text{ ~ Normal(mean = }\mu_x \text{, sd = } \sigma_x) $
+  - we want to be able to perform statistical inference even when exact parameters are unknown
+  - converting $\bar{X}$ to Z-score results in the standard normal distribution
+- confidence intervals
+  - bounds set that contain a specified proportion $C$ of the distribution $\Phi^{-1}(\frac{1+C}{2})$
+
+#### Lecture 10/12/2020
+- each sample produces a different confidence interval, each of which contain the true parameter with probability C
+- $\bar{x} \pm z^* \times \frac{\sigma_x}{\sqrt{n}}$, where the second term is the margin of error
+
+#### Lecture 10/14/2020
+- we use contradictions to refute null hypotheses 
+  - alternative can be lower/upper tailed, or two-tailed
+
+#### Lecture 10/16/2020
+- we can calculate the probability of observing a given result under the null hypothesis
+  - probability that standard normal falls more extreme than observed z-score = p-value
+  - set $\alpha$ based on desired significance; generates lowest significance level for which the null hypothesis can be rejected
+  - $\mu < \mu_o$ corresponds to $z = \frac{\bar{x} - \mu_o}{\sigma/\sqrt{n}} \leq z_\alpha = \Phi^{-1}(\alpha)$
+  - $\mu > \mu_o$ corresponds to $z = \frac{\bar{x} - \mu_o}{\sigma/\sqrt{n}} \leq z{1-_\alpha} = \Phi^{-1}(\alpha)$
+
+#### Lecture 10/19/2020
+- p-value is the probability of seeing something as or more extreme under the null hypothesis; p-value is the lower bound of rejection 
+
+#### Lecture 10/21/2020
+- Type I and II errors occur when we reject the null and the null is actually true, or we  fail to reject the null and the null is actually false respectively
+  - probability of a Type I error is the significance level $\alpha$
+- probability of failing to reject is $\beta$; the power of the test is $1-\beta$
+  
+#### Lecture 10/23/2020
+- power of the test approaches $\alpha$ as the alternative mean approaches the null mean
+  - approaches 1 as the alternative mean diverges from the null mean
+- power is the probability that the sample mean lands in the RR under the particular alternative
+
+#### Lecture 10/26/2020
+- we can calculate variance for binomial distribution, which can be used to construct confidence intervals $SD[X] = \sqrt{np \ (1-p)}$
+  - $\lim_{n\to\infty} \frac{S_n - np}{\sqrt{np\ (1-p)}} = N(0,1)$
+  - for large enough n ($np \ge 10$ and $n(1-p) \ge 10$), $S_n \approx N(mean = np, sd = \sqrt{np\ (1-p)})$ to generate counts
+    - we can move from counts to proportion by $\hat{P}_n = \frac{S_n}{n} \approx N(mean = p, sd = \sqrt{\frac{p(1-p)}{n}})$
+
+#### Lecture 10/28/2020
+- we should use a continuity correction when using normal approximations for binomial to account for the change from discrete to continuous
+- let $p$ denote the probability that a chosen member of the population has a certain discrete property
+  - if we observe $X$ successes in a sample of size $n$, then $X \sim Binomial(n, p)$; $\hat{p}$ is the sample proportion or $\hat{p} = \frac{X}{n}$
+
+#### Lecture 11/2/2020
+- if $p$ denotes the probability of success in every trial (probability $p$ that a randomly chosen person has a trait of interest)
+  - we can observe counts in the sample of size $n$: $X \sim Binomial(n,p)$; $\hat{p}$ is the sample of interest (sample proportion)
+    - $X \sim Normal(mean =np,var= np(1-p))$, $\hat{p} \sim Normal(mean = p, var = \frac{p(1-p)}{n})$
+    - we can then construct a confidence interval as $\hat{p} \pm z^* \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ 
+      - if we don't have $\hat{p}$ we can either use an estimate of a prior study, or use 1/2 to maximize variance of the Bernoulli trials
+    
+#### Lecture 11/4/2020
+- for a large enough sample, $X \sim Normal(mean = np_o, var = np_o(1-p_o))$, leading to $\hat{P} \sim Normal(mean = p_o, var = \frac{p_o(1-p_o)}{n})$
+  - the z-statistic is $z = \frac{\hat{p}-p_o}{\sqrt{\frac{p_o(1-p_o)}{n}}}$, which can then be used as cutoffs in the standard normal
+- we can take parameters of interest $p_i$ for subpopulation $i$; assumption of independent samples 
+  - if large enough, we can say that they are both normally distributed:
+  $\hat{P_i} \sim Normal(mean = p_i, var = \frac{p_i(1-p_i)}{n_i})$
+  - we are interested inthe difference between populations $\hat{P_1} -\hat{P_2} \sim Normal\big{(}mean = p_1-p_2, var = \frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}\big{)}$$
+
+#### Lecture 11/6/2020
+- in order to use the normal approximation to the binomial, we need independent samples and sufficient successes and failures
+- we know that the proportion of two samples are normally distributed, so we can perform analysis of their difference
+- we can construct confidence intervals of the form $\hat{p}_1 -\hat{p}_2 \pm z^*\sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1}+\frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}$
+- we can have one-sided or two sided alternative hypotheses when testing two parameters
+  - the test statistic should be computed under the null hypothesis that $p_1 = p_2$
+  
+  $$\hat{P_1} - \hat{P_2} \sim Normal\bigg{(}mean = 0,\ var = \frac{p(1-p)}{n_1}+\frac{p(1-p)}{n_2}\bigg{)}$$
+  $$\hat{P_1} - \hat{P_2} \sim Normal\bigg{(}mean = 0,\ var = p(1-p) \bigg{(}\frac{1}{n_1}+\frac{1}{n_2}\bigg{)}\bigg{)}$$
+-where $\hat{p} = \frac{x_1+x_2}{n_1+n_2}$, pooled successes to obtain a reasonable estimate of the population proportion
+  - we can use this normal approximation to convert observed differences to z-scores 
+
+#### Lecture 11/9/2020
+- practice using confidence intervals and hypothesis testing for two samples (refer to last class notes)
+
+#### Lecture 11/11/2020
+- $\chi^2$ random variable can be extended to include non-integers, but we will use:
+  -If $Z_1, Z_2,...,Z_n$ are independent, standard normal random variables, then
+$$X = Z_1^2+Z_2^2+...+Z_n^2$$ is $\chi^2$ distributed with n degrees of freedom
+    - we write $Z\sim \chi^2$
+  - the distribution shifts from right-skew to more normal with higher degrees of freedom
+  - we can specify any value of r for the distribution, despite it being less nice to look at 
+  - always interested in right-tailed events, $\alpha$; columns are $\alpha$ or left tail, and rows are degrees of freedom
+  - since the distribution is continuous, we can use non-strict inequalities to calculate probabilities 
+- if we have $X_1,X_2,...X_n$ iid normal variables, then for all $i = 1,...,n$, $Z_i = \frac{X_i - \mu}{\sigma}$ all $Z_i$ are independent and standard normal
+
+$$Z_1^2+Z_2^2+...+Z_n^2 \sim \chi^2(df=n)$$
+  - if the mean is unknown, we have instead 
+  
+  $$\sum_{i=1}^n\bigg(\frac{X_i-\bar{X}}{\sigma}\bigg)^2 \sim \chi^2(df=n-1)$$
+$$\text{if we let } S^2 = \text{sample variance}$$
+$$\rightarrow \frac{(n-1)\ S^2}{\sigma^2} \sim \chi^2(df=n-1)$$
+
+#### Lecture 11/13/2020
+- goodness of fit: looking at a multinomial experiment, with mutually exclusive and exhaustive outcomes
+  - say that these categories are events $A_1,A_2,...,A_k$, where the parameters $p_i$ for $i=1...k$ which stand for $p_i = \mathbb{P}[A_i]$
+  - if we repeat the same multinomial experiment $n$ times, we can measure $X_i$ for $i = 1..k$ as the number of times that outcome $i$ happened
+  
+  $$Q^2 = \sum_{i=1}^k\frac{(X_i - np_i)^2}{np_i} \sim \chi^2(df = k-1)$$
+    - this works for $np_i \geq5$ for all $i=1...k$
+  - the null hypothesis is that the true population probabilities are equal to null, and the alternative is that at least one population probability is different from the null 
+  - using observed and expected notation, 
+  
+  $$q^2 = \sum_{i=1}^k\frac{(O_i - E_i)^2}{E_i} \sim \chi^2(df = k-1)$$
+  - if our statistic is greater than the value for the given degrees of freedom and significance level, then we can reject the null hypothesis 
+
+#### Lecture 11/16/2020
+- we can use the chi-squared test of independence to determine dependence of two categorical treatments
+
+$$X^2_{df} = \sum_{i=1}^k\frac{(O - E)^2}{E} \text{ where } df = (R-1)(C-1)$$
+- use joint probability mass functions to compare to observed 
+- letting $\mathbb{P}[X = x_i, Y=y_j] = p_{ij}$
+  - if X and Y are independent, for all $i,j$
+  
+  $$p_{ij} = \mathbb{P}[X = x_i] \times \mathbb{P}[Y=y_j]$$
+
 ### Reading notes
 
 Section 4.3 

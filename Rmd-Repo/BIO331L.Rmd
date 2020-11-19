@@ -1,14 +1,14 @@
 ---
 title: "BIO331L - Molecular Biology Lab"
 author: "ArunK"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-[`r knitr::asis_output("\U1F332")`](https://arun-krishnaraj.github.io/evergreen)
 
 ### Notes
 
@@ -83,9 +83,90 @@ kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femt
   
 #### Lab 9/30/2020
   
-#### Lab manual 
-- primer design with IDT, refer to pdf guide
-  - realtime qpcr assay entry with arabidopsis gene site
+#### Lecture 10/07/2020
+- AGP shows up in variety of food products, including gum; occurs as gooey sap from gum arabic trees
+- plant cell wall proteins have specific effects in development and in response to environmental conditions
+- AGP's consist of large carbohydrate chains in glycoproteins; many different classes of proteins can be bound, all consist of signal peptide + proline rich domain
+- CRU3 and other mRNAs are increased in the 6134 compared to Ler-0 WT
+
+#### Lab 10/07/2020
+- 6134 AGP31 mutant line experiences a large spice in CRU3 compared to wild type at the 13-15 day seedling mark, as well as other proteins like OLE1
+
+#### Lab 10/14/2020
+- we know that 6134 mutant has higher gene expression for CRU3, interested in seeing if protein concentration is the same 
+  - protein purification, concentration by Bradford assay
+  - protein gel (SDS-PAGE) and blotting 
+  - antibody incubation and antigen detection 
+- Bradford reagent dye experiences change in peak absorbance when bound to protein (465 to 595 nm)
+
+#### Lecture 10/21/2020
+- cruciferins are produced as precursors in seeds; can be in processed or unprocessed form in vegetative tissue
+  - seed storage protein happen relatively late in Arabidopsis seed development
+  - precursor cruciferins are cleaved during maturation
+    - $\alpha \text{ and } \beta$ subunits are 30-35 and 21-25 kD
+  - seed storage proteins are degradd during seedling growth; is the 6134 mutatnt Cru mRNA increase accompanied by a Cru protein subunit increase
+  - high number of storage proteins can provide useful storage reserves in cases of high environmental stress
+
+#### Lab 10/21/2020
+- after transfer to membrane, blocking with protein solution should occur to prevent unwanted binding
+  - primary antibody and secondary antibody are bound to target protein and detected with fluorescence or other method
+- treatment of Ler wild-type and 6134, separated into root and aerial parts
+  - calculate BSA absorbance values with standard curve (6x difference to BSA protein amount)
+  - use protein concentration to load a consistent amount of protein for each well
+- SDS PAGE is used to separate proteins based on molecular weight 
+  - SDS denatures protein hydrogen, ionic bonds, and hydrophobic interactions; beta-mercatoethanol breaks disulfide bonds; glycine and chloride ions are used to push proteins in a group through the stacking gel, and then spread the proteins into bands in the separating gel
+  
+#### Lecture 10/28/2020
+- SSP and oleosins are primarily found in cotyledons (become aerial green part) 
+  - upregulation in 6134 may be easier to see in root portions, low SSP presence
+  - similarity of legumin and cruciferins in Arabidopsis, somewhat homologous 
+
+#### Lab 10/28/2020
+- after transferring to membrane, add blocking buffer to prevent non-specific binding; incubation with primary and secondary antibodies (signal detection and amplification)
+  - PVDF membrane has a high capacity to bind to proteins, need blocking buffer 
+- experimental improvements: CRU specific antibody (instead of legumin), include CRU null line
+
+#### Lecture 11/4/2020
+- replication of Fall 2019 CRISPR experiment 
+- CRISPR systems protect prokaryotic cells from invading DNA (just look at microbial)
+
+#### Lab 11/4/2020
+- anneal constructed primers to target sequence, then allow ligation to the cut plasmid
+- use chemical transformation to insert plasmid to the E. Coli, select for KanR
+
+#### Lecture 11/11/2020
+- Core ABA response pathway: snRK2s activate ABI4 and ABI5 (possibly ABI3) by phosphorylation, which then bind to increase transcription 
+  - ABI5/ABFs-ABI3: formation of heterodimer, transcription factor is active during germination and seedling development 
+- Mehdy lab results: AGP31 null mutatnt 6134 shows up-regulation of certain SSP and OLE mRNAs during seedling development
+  - these genes are known to be transcriptionally controlled (ABA pathway)
+  - hypothesis: ABI5 and ABI3 are active in transcriptional activation of select SSP and OLE genes in 6134 seedlings
+    - AGP31 ABI3 homozygous mutant was constructed, and failed to exhibit SSP/OLE mRNA upregulation (ABI3 required for upregulation); ABA regulation pathway via ABI3/5 have primary effects during germination
+  - Fall 2019 work: WRKY41 regulates ABI3 transcript levels, directly binds to ABI3 promoter to increase gene transcription 
+  - plasmid used includes sgRNA, Cas9 sequence (splicing factor as promoter and terminator)
+    - restriction enzyme Bsa1 excises sgRNA (should be gel purified, linearized plasmid should not ligate to reform circular genome)
+    - use KanR to select for plasmid presence 
+    - Bsa1 Type IIs cleavage occurs outside recognition region, creation of 5' sticky overhangs; plasmid is engineered so overhangs are not complementary after excision 
+
+#### Lab 11/11/2020
+- molecular weight standard curve:
+  - made to determine size of bands of interest, make standard curve with distances and known sizes (15 to 75 kD, middle of band, x dist y molecular weight)
+- recombinant plasmids are made by bidirectional annealing of WRKY41 sense and antisense segments, ligation and transformation
+  - KanR colonies are selected and counted (separate samples based on oligio): uncut pHEE results in high colony number, random oligos result in some background colonies (review justification for why the cut pHEE results in lower background transformation than the random controls)
+    - include analysis of group and control colony counts in report 3 
+- plasmid purification and analysis
+  - colonies are grown, inoculation with oligos of interest; purify plasmids and measure purity (Nanodrop)
+    - concurrently perform colony PCR, detection of bands of interest; if validated, then send samples to sequencing 
+  - nanodrop results have same interpretation as the RNA experiment 
+- we design forward and reverse primer flanking the target sgRNA sequence, can use gels to determine if correct cassette is in the plasmid (large size difference)
+- typical PCR cycle: 1 cycle at high heat, 25 cycles of high-low-medium heat, then medium and cooling
+  - high heat steps create single strands, low heat anneals to oligo primers, medium allows polymerization and ligation
+  - PCR verifies that all sets produced correct plasmid, verified against positive control
+- gRNA design tutorial:
+  - find gene of interest in Arabidopsis site, download CDS sequence, BLAST
+  - search for PAM (5'N20NGG3'), use BLAST to verify gene only matches other genes 
+- RNA data for later classes; gene expression for 6134 line is too variable
+  - limited BRs with high variation, only 1 time treatment point
+  - new RNA experiment,
 
 Lab 2
 
@@ -103,46 +184,190 @@ Lab 2
   
 ```{r}
 #primer standardization curve should be aggregate
-m <- matrix(c(200,100,10,23.344,24.519,26.942,23.604,23.997,27.501,23.496,23.944,27.217), nrow = 3)
+m <- matrix(c(200,100,10,23.9517084757487, 24.5212860107421, 27.2934220631917, 23.481273651123, 24.1533749898275, 27.2198842366536, 27.4925855000814, 28.8062438964843, 30.2306162516276, 24.0163377126058, 24.6537246704101, 28.0144208272298), nrow = 3)
 m
 m[,1] <- log(m[,1], base = 10)
 m
-colnames(m) <- c("x","y1","y2","y3")
+colnames(m) <- c("x","y1","y2","y3","y4")
 m <- data.frame(m)
 m
-m$y <- (m$y1+m$y2+m$y3)/3
 
 lm(y1~x, data  = m)
 
 library(ggplot2)
-ggplot(m, aes(x=x)) + geom_point(aes(y=y1), col = "dodgerblue") + geom_point(aes(y=y2), col = "deeppink2") + 
-  geom_point(aes(y=y3), col = "chartreuse2") + geom_smooth(aes(y=y1), method = "lm",se= F, col = "dodgerblue") +
-  geom_smooth(aes(y=y2), col = "deeppink2", method = "lm",se= F) + geom_smooth(aes(y=y3), method = "lm",se= F,, col = "chartreuse2") +
-  xlab("Log 10 RNA (nanograms)") + ylab(expression('C'[T])) + xlim(1,2.5) + ggtitle("Standard Curve for Primers") +
+
+ggplot(m, aes(x=x)) +
+  geom_point(aes(y=y1), col = "dodgerblue") + geom_point(aes(y=y2), col = "deeppink2") + geom_point(aes(y=y3), col = "chartreuse2") + geom_point(aes(y=y4), col = "goldenrod2") + 
+  geom_smooth(aes(y=y1), method = "lm",se= F,col = "dodgerblue") +  geom_smooth(aes(y=y2), method = "lm",se= F, col = "deeppink2") + geom_smooth(aes(y=y3), method = "lm",se= F, col = "chartreuse2")+ geom_smooth(aes(y=y4), method = "lm",se= F, col = "goldenrod2")+ xlab("Log 10 [cDNA] (nanograms)") + ylab(expression('C'[T])) + xlim(1,2.5) + ylim(22,34) +ggtitle("Standard Curve for Primers") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
 
 one <- lm(y1~x, data = m)
 two <- lm(y2~x, data = m)
 three <- lm(y3~x, data = m)
+four <- lm(y4~x, data = m)
 
+summary(one)
+summary(two)
 summary(three)
-
-ggplot(m, aes(x=x)) + geom_point(aes(y=y), col = "dodgerblue") + geom_smooth(aes(y=y), method = "lm",se= F, col = "dodgerblue") +
-  xlab("Log 10 [cDNA] (nanograms)") + ylab(expression('C'[T])) + xlim(1,2.5) + ggtitle("Standard Curve for Primers") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-
-fin <- lm(y~x, data = m)
-summary(fin)
+summary(four)
 ```
 
-<div align="center"><span style="color:blue">Primer </span></div>
-$$y = -2.9221x+30.1149$$ 
+<div align="center"><span style="color:blue">Primer Set 1 </span></div>
+$$y = -2.6196x+29.8844$$ 
+$$\text{R}^2 = 0.9911$$
+<div align="center"><span style="color:pink">Primer Set  2</span></div>
+$$y = -2.9220x+30.1148$$ 
 $$\text{R}^2 = 0.9943$$
+
+<div align="center"><span style="color:green">Primer Set 3 </span></div>
+$$y = -1.9337x+32.26$$ 
+$$\text{R}^2 = 0.85$$
+<div align="center"><span style="color:yellow">Primer Set 4 </span></div>
+$$y = -3.1453x+31.1192$$ 
+$$\text{R}^2 = 0.98$$
+
   
-###  
+```{r}
+### relative expression plot
+### LER A AND LER ETH
+library(tidyverse)
+library(ggpubr)
+t <- matrix(c(1.11403189024852, 1.0140646013784, 169.490832162453, 1.10480500761417, 0.814039999061835, 0.876643070390131, 144.199260689955, 0.742900052059038, 1.4140237814352, 1.15148613236668, 194.782403634951, 1.46670996316929), 4)
+t
+
+t <- data.frame(t)
+
+rownames(t) <- c("OLE1 - LA", "OLE1 - LER", "RD29B - LA", "RD29B - LER")
+t <- rownames_to_column(t)
+
+colnames(t) <- c("Gene","expr1", "Lower", "Upper")
+t_ole <- t[1:2,]
+t_rd <- t[3:4,]
+
+olegg1 <- ggplot(t_ole, aes(Gene, expr1, fill = Gene)) + geom_col()  + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75) + xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#56B4E9","#999999","#E69F00"),name="Gene of Interest\n+ Treatment",
+                         breaks=c("OLE1 - LA", "OLE1 - LER"),
+                         labels=c("OLE1 - Ler ABA", "OLE1 - Ler Ethanol")) +theme_minimal() 
+olegg1
+
+rdgg1 <- ggplot(t_rd, aes(Gene, expr1,fill = Gene)) + geom_col()  + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75) + xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#E69F00","#7fbf7b","#999995"), name="Gene of Interest\n+ Treatment",
+                         breaks=c("RD29B - LA", "RD29B - LER"),
+                         labels=c("RD29B - Ler ABA", "RD29B - Ler Ethanol")) +theme_minimal() 
+rdgg1
+fig <- ggarrange(olegg1,rdgg1, labels = c("A","B"), nrow=1, ncol = 2,
+                 common.legend = TRUE, legend = "right")
+
+fig 
+
+ggplot(t, aes(Gene, expr1, fill = Gene)) + geom_col()  + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75) + xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#56B4E9","#999999","#E69F00","#7fbf7b"),name="Gene of Interest\n+ Treatment",
+                         breaks=c("OLE1 - LA", "OLE1 - LER","RD29B - LA", "RD29B - LER"),
+                         labels=c("OLE1 - Ler ABA", "OLE1 - Ler Ethanol","RD29B - Ler ABA", "RD29B - Ler Ethanol")) +theme_minimal() + ggtitle("Gene Expression for Wild-type line")
+
+```
+
+```{r}
+## relative expression
+## 6134 ABA AND 6134 ETH
+t <- matrix(c(0.977269186280336, 1.0444301621343, 129.789739009814, 2.09451616953587, 0.250437616778727, 0.798348382264434, 56.5040597263422, 0.591852316141458, 1.70410075578194, 1.29051194200417, 203.075418293286, 3.59718002293028), 4)
+t
+
+t <- data.frame(t)
+
+rownames(t) <- c("OLE1 - 6A", "OLE1 - 6E", "RD29B - 6A", "RD29B - 6E")
+t <- rownames_to_column(t)
+
+colnames(t) <- c("Gene","expr1", "Lower", "Upper")
+t_ole <- t[1:2,]
+t_rd <- t[3:4,]
+
+olegg1 <- ggplot(t_ole, aes(Gene, expr1, fill = Gene)) + geom_col()  + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75) + xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#56B4E9","#999999","#E69F00"),name="Gene of Interest\n+ Treatment",
+                         breaks=c("OLE1 - 6A", "OLE1 - 6E"),
+                         labels=c("OLE1 - 6134 ABA", "OLE1 - 6134 Ethanol")) +theme_minimal() 
+olegg1
+
+rdgg1 <- ggplot(t_rd, aes(Gene, expr1,fill = Gene)) + geom_col()  + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75) + xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#E69F00","#7fbf7b","#999995"), name="Gene of Interest\n+ Treatment",
+                         breaks=c("RD29B - 6A", "RD29B - 6E"),
+                         labels=c("RD29B - 6134 ABA", "RD29B - 6134 Ethanol")) +theme_minimal() 
+rdgg1
+fig <- ggarrange(olegg1,rdgg1, labels = c("A","B"), nrow=1, ncol = 2,
+                 common.legend = TRUE, legend = "right")
+
+fig 
+
+ggplot(t, aes(Gene, expr1, fill = Gene)) + geom_col()  + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75) + xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#56B4E9","#999999","#E69F00","#7fbf7b"),name="Gene of Interest\n+ Treatment",
+                         breaks=c("OLE1 - 6A", "OLE1 - 6E", "RD29B - 6A", "RD29B - 6E"),
+                         labels=c("OLE1 - 6134 ABA", "OLE1 - 6134 Ethanol","RD29B - 6134 ABA", "RD29B - 6134 Ethanol")) +theme_minimal() + ggtitle("Gene Expression for AGP31-mutant line")
+
+
+```
   
-  
+```{r}
+## REMAKING RESCUE LINE PLOTS
+t <- matrix(c(3.1241226911872, 1.60205112996825, 139.63573981855, 1.23105532903857, 1.67950402187815, 0.580102721931736, 94.8449991321303, 0.644826009201893, 4.56874136049624, 2.62399953800477, 184.42648050497, 1.81728464887524),4)
+t <- data.frame(t)
+
+rownames(t) <- c("OLE1 - RA", "OLE1 - RE", "RD29B - RA", "RD29B - RE")
+t <- rownames_to_column(t)
+colnames(t) <- c("Gene","expr1","Lower","Upper")
+
+t_ole <- t[1:2,]
+t_rd <- t[3:4,]
+
+olegg1 <- ggplot(t_ole, aes(Gene, expr1, fill = Gene)) + geom_col() + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75)+ xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#56B4E9","#999999","#E69F00"),name="Gene of Interest\n+ Treatment",
+                         breaks=c("OLE1 - RA", "OLE1 - RE"),
+                         labels=c("OLE1 - R2-4 ABA", "OLE1 - R2-4 Ethanol"))+theme_minimal() 
+olegg1
+
+rdgg1 <- ggplot(t_rd, aes(Gene, expr1,fill = Gene)) + geom_col()  + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75)+ xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#E69F00","#7fbf7b","#999995"), name="Gene of Interest\n+ Treatment",
+                         breaks=c("RD29B - RA", "RD29B - RE"),
+                         labels=c("RD29B - R2-4 ABA", "RD29B - R2-4 Ethanol")) +theme_minimal() 
+rdgg1
+
+fig <- ggarrange(olegg1,rdgg1, labels = c("A","B"), nrow=1, ncol = 2,
+                 common.legend = TRUE, legend = "right")
+
+fig 
+
+ggplot(t, aes(Gene, expr1, fill = Gene)) + geom_col() + geom_errorbar(aes(ymin = Lower, ymax = Upper), width = .75) + xlab("Gene - Treatment") + ylab("Relative Expression") + scale_fill_manual(values=c("#56B4E9","#999999","#E69F00","#7fbf7b"),name="Gene of Interest\n+ Treatment",
+                         breaks=c("OLE1 - RA", "OLE1 - RE", "RD29B - RA", "RD29B - RE"),
+                         labels=c("OLE1 - R2-4 ABA", "OLE1 - R2-4 Ethanol","RD29B - R2-4 ABA", "RD29B - R2-4 Ethanol")) +theme_minimal() + ggtitle("Gene Expression for AGP-rescue line")
+```
+
+
+#### report 2 figure generation
+```{r}
+library(knitr)
+kable(data.frame("Sample"= c("LG1","LG2","LR1","LR2","6G1","6G2","6R1","6R2"), "Total Weight (g)" = c(0.208,0.21,0.164,0.159,0.224,0.22,0.187,0.208)), col.names = c("Sample", "Total Weight (g)"))
+```
+```{r}
+library(tidyverse)
+bsa <- data.frame("conc" = c(0.0625,0.125,0.25,0.5,1), "abs" = c(0.014,0.049,0.0715,0.1465,0.223))
+
+bsa %>% ggplot(aes(x = conc, y = abs)) + geom_line(col = "dodgerblue", size = .6) + geom_point(col = "dodgerblue") + geom_smooth(method = "lm", se = F, col = "black", lty = 1, size = .5) + xlab("BSA Concentration (mg/mL)") + ylab("Absorbance at 595 nm ") + theme_minimal()
+
+lm(bsa$abs ~ bsa$conc) %>% summary()
+
+```
+$$y = 0.21647x+0.01692$$ 
+$$\text{R}^2 = 0.9592$$
+
+```{r}
+data.frame(a = c('LG1','LG2','LR1','LR2','6G1','6G2','6R1','6R2'), t = c(117,95,88,88,98,108,88,85), b = c(0.141,0.15,0.096,0.098,0.166,0.142,0.144,0.117), c = c(3.82995976554739,4.07941337174647,2.58269173455196,2.63812586926287,4.52288644943374,3.85767683290284,3.91311096761375,3.16475014901649), d = c(0.448105292569044,0.387544270315915,0.227276872640572,0.232155076495132,0.443242872044506,0.416629097953507,0.34435376515001,0.269003762666402), e = c(2.1543523681204,1.84544890626626,1.38583458927178,1.4600948207241,1.97876282162726,1.89376862706139,1.84146398475941,1.29328732051155)) %>% kable(col.names = c("Sample Name","Protein Sample Stock Volume (uL)", "Absorbance at 595 nm", "Sample Protein Concentration (mg/mL)", "Total Sample Protein (g)", "Yield (mg/g)"))
+```
+
+```{r}
+data.frame(a = c(15,20,25,37,50,75), b = c(10.477499868,19.04999976,27.51666632,41.01041615,53.97499932,75.776665712)) -> pp 
+pp %>% ggplot(aes(x = b, y = a)) + geom_point(col = "dodgerblue") + geom_line(col = "dodgerblue", size = 0.6) + geom_smooth(method = "lm", se = F, col = "black", lty = 1, size = .5) + ylab("Molecular Weight (kD)") + xlab("Distance from Gel Bottom (mm)") + theme_minimal()
+
+lm(pp$a~pp$b) %>% summary()
+```
+$$y = 0.9242x+1.9105$$ 
+$$\text{R}^2 = 0.9813$$
+```{r}
+data.frame(a = c('A','B','C','D','E','F','G','H'), b = c(7.38021785499206,20.8356474960431,22.8396476553486,54.3310787301489,19.6905045478685,5.66250343273023,17.1139329144758,35.149934348225)) %>% kable(col.names = c("Protein Marker", "Molecular Weight (kD)"))
+```
+
+
+
   
   

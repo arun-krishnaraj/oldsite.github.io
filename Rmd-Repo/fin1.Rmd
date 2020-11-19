@@ -1,0 +1,71 @@
+---
+title: "FinStats1 supplement"
+author: "ArunK"
+date: "11/3/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse);
+mtcars["Lotus Europa", ]$mpg <- 14.95
+mtcars$dum <- mtcars$mpg == 14.95
+mtcars %>% ggplot(aes(x = wt, y = mpg, color = dum)) + geom_point() + xlab("Weight (1000 lbs)") + ylab("MPG") + ggtitle("1974 Car Road Tests")+ scale_color_manual(values=c("#000000", "#ff0000"))+ theme_minimal() + theme(legend.position = "none") 
+```
+
+I'll be working through a sample regression for the mtcars dataset, which has performance and design data for 32 cars collected from the 1974 Motor Trends Magazine.   We're interested in exploring factors that might be useful in predicting miles per gallon for 1973-1974 cars; my first guess is that weight and mpg are somehow linearly related, and it looks like there is a such relationship, despite the presence of an outlier (in red).
+```{r}
+mtcars %>% ggplot(aes(x = wt, y = mpg, color = dum)) + geom_point() + xlab("Weight (1000 lbs)") + ylab("MPG") + ggtitle("1974 Car Road Tests")+ scale_color_manual(values=c("#000000", "#ff0000"))+ theme_minimal() + theme(legend.position = "none") + geom_smooth(method = "lm", color = "blue", se = F, lty =2) 
+```
+
+Let's quantify the fit of a single variable linear regression (Ordinary Least Squares):
+```{r}
+lm(mtcars$mpg~mtcars$wt) %>% summary
+```
+We can see that the slope coefficient is significant, that is there is a non-zero change in mpg for one unit change in car weight (in context +1000 lbs decreases the predicted mpg by 4.4573); there is less than 1E-06 chance of observing the given data if the null of no relationship was true. Looking at the model fit (R-squared and Adjusted-R-Squared), we interpret the following: the linear model explains .56 or .55 of the variation seen in the sample (adjusted R-squared penalizes higher model complexity, is usually lower and better to use to be conservative).
+
+What about if we were interested in how both weight and horsepower impact mpg?
+```{r}
+lm(mtcars$mpg~mtcars$wt+mtcars$hp) %>% summary
+```
+Both independent variables are significant again: as weight increases by 1 unit, holding horsepower constant, we predict a 2.60175 decrease in mpg; as horsepower increases by 1 unit, holding weight constant, we predict a 0.04020 decrease in mpg. This model explains 0.675 of the observed sample variation. 
+
+What about interaction?
+
+```{r}
+lm(mtcars$mpg~mtcars$wt*mtcars$hp) %>% summary
+```
+The model with interaction explains a bit more variation than the model without; an increase in weight by 1 unit holding horsepower constant decreases the predicted mpg by 6.12269. Increasing horsepower by 1 holding weight constant decreases predicted mpg by 0.11188. The interaction effect is interpreted something like this: as horsepower increases by 1 unit the slope effect of weight on mpg increases by 0.02260, meaning it becomes less severe. We can see this if we split the data into high and low horsepower groups.
+```{r}
+mtcars$highhp <- mtcars$hp >= mean(mtcars$hp)
+mtcars %>% ggplot(aes(x = wt, y = mpg, group = highhp, color = highhp, fill = highhp)) + geom_point() + xlab("Weight (1000 lbs)") + ylab("MPG") + ggtitle("1974 Car Road Tests")+ scale_color_manual(values=c("#000000", "#1500ff"))+ theme_minimal() + geom_smooth(method = "lm", se = F, lty =1)
+
+```
+
+The slope of the regression for the high hp group is less extreme than that for the low hp group (the coercion of continuous hp to discrete groups is common, and what happens under the hood; I picked 2 groups arbitrarily); now that I have a result that's interesting, I should validate my assumptions for the final model:
+
+  - Linearity: looks good at a glance + high model R-squared for linear regressions suggests that this is fine 
+  - Outliers: The outlier I mentioned could be a valid observation (that is a light car that has low mpg) and if it is we want to include it in our sample; but if it's not something we normally expect to happen (ie model was recalled, had major mechanical issues, etc) then we might want to remove it. In this case I introduced the outlier right at the bound of what should be included, so we'll keep it but recognize it changes our model fit.
+  - Homoskedastic: I'll use the Breusch-Pagan test here, but there's tons of other heteroskedasticity tests that may be better based on your needs (White's test, Levene's, etc. see [here](https://en.wikipedia.org/wiki/Heteroscedasticity))
+  
+```{r}
+suppressWarnings(library(lmtest))
+bptest(mtcars$mpg~mtcars$wt*mtcars$hp)
+```
+
+  The p-value of 0.1108 indicates that we can't reject the null hypothesis of homoskedasticity even at the 90% level, so we're ok with this assumption.
+  
+  - Multicollinearity: let's check if our two independent variable are associated at all:  
+```{r}
+cor.test(mtcars$wt, mtcars$hp)
+```
+   It looks like they are linearly correlated with high significance, meaning that we should go back and adjust our model to account for this.
+   
+### Note: We should have really done these assumptions before running any regressions, but I think this ordering is easier to follow. 
+
+

@@ -1,0 +1,56 @@
+---
+title: "BIO321G-HW8"
+author: "Arun Krishnaraj"
+date: "10/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+### Problem 1
+```{r}
+library(seqinr)
+seqs = read.fasta("hw8-1.fa", seqtype = "AA", as.string = FALSE)
+seqMat = do.call(rbind, seqs)
+
+aas = setdiff(LETTERS, c("B","J","O","U","X","Z"))
+names(aas) = aas
+
+aaPosCounts = matrix(NA, nrow = length(aas), ncol = ncol(seqMat))
+rownames(aaPosCounts) = aas
+colnames(aaPosCounts) = colnames(seqMat)
+
+for (i in aas) {
+  aaPosCounts[i,] <- apply(seqMat == i, 2, sum)
+}
+
+aaPosCounts["M", 8]
+```
+
+### Problem 2
+```{r}
+conservedPositions <- c()
+
+for(j in 1:ncol(aaPosCounts)){
+  if (max(aaPosCounts[,j]) == nrow(aaPosCounts)) {
+    conservedPositions <- c(conservedPositions, j)
+  }
+}
+
+```
+There are no completely conserved positions in the multiple sequence alignment given by `hw8-1.fa`.
+
+### Problem 3
+```{r}
+seq1AsString <- paste(seqs[[1]][seqs[[1]] != "-"], collapse = "")
+nchar(seq1AsString)
+```
+`nchar(seq1AsString)` returns 107, indicating the presence of 107 non-`"-"` characters.
+
+### Problem 4
+The BLAST search for `seq1AsString` returns the first sequence producing significant alignments as thioredoxin [*Danio rerio*], a type of Zebrafish.
+

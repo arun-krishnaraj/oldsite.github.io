@@ -1,0 +1,53 @@
+---
+title: "SDS Project 1"
+author: "ArunK"
+date: "10/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Introduction
+This project explores data related to drug and alcohol-related intoxication deaths in the state of Maryland, as well as aiming to draw comparisons with county-level youth risk behavior data. According to the CDC, a significant predictor of overall intoxication deaths is youth risk behavior; Maryland has had a significant increase in number of intoxication deaths since 2015, despite low total number of drug prescriptions per 100 persons; Maryland also has high expenditure on intoxication-related education and monitoring, resulting in very complete data. This high death rate combined with low prescription rate suggest that certain at risk populations may be improportionately impacted.
+
+The overdose data comes from https://www.cdc.gov/nchs/nvss/vsrr/drug-overdose-data.htm, while the youth risk survey data comes from https://nccd.cdc.gov/youthonline/App/Results.aspx?TT=J&OUT=0&SID=HS&QID=QQ&LID=MD&YID=YY&LID2=&YID2=&COL=T&ROW1=N&ROW2=N&HT=QQ&LCT=LL&FS=S1&FR=R1&FG=G1&FA=A1&FI=I1&FP=P1&FSL=S1&FRL=R1&FGL=G1&FAL=A1&FIL=I1&FPL=P1&PV=&TST=&C1=&C2=&QP=G&DP=1&VA=No&CS=Y&SYID=&EYID=&SC=DEFAULT&SO=ASC. The overdose data for all states was downloaded in long format, indexed by month and year; the unemployment data was wide, and indexed by a date row.
+
+```{r}
+intoxication <- read.csv("MD_overdose.csv")
+unemployment <- read.csv("MD_unemployment.csv")
+head(intoxication)
+head(unemployment)
+```
+Maryland intoxication data was selected from the initial dataset, and extraneous variables were dropped after renaming for clarity. Unemployment data was reshaped to be long, and the date variable was modified to match the format of the intoxication time identifiers; an inner join was perfomed using a temporary `Year_Month` variable in either dataset, with both in wide format, which was made long again.
+
+```{r}
+library(tidyverse)
+colnames(intoxication) <- c("State", "Year", "Month", "Period", "Indicator",
+                            "Value", "Percent_Complete", "Percent_Pending", "State Name")
+MD_intox <- intoxication %>% select(c(State, Year, Month, Indicator, Value, Percent_Complete, Percent_Pending)) %>% filter(State == "MD")
+MD_intox$Value <- as.numeric(MD_intox$Value)
+
+MD_unemp <- unemployment %>% pivot_longer(c(colnames(unemployment)[2:ncol(unemployment)]), names_to = "Date", values_to = "Value")
+
+MD_unemp  <- MD_unemp %>% mutate(Date = as.Date(Date, format = "X%m.%d.%Y")) %>% mutate(Year = format(Date, "%Y"), Month = format(Date, "%B"))
+
+MD_unemp %>% pivot_wider(names_from = "Series.title", values_from = "Value") -> MD_unemp_wide
+MD_intox %>% pivot_wider(names_from = "Indicator", values_from = "Value") -> MD_intox_wide
+MD_intox_wide
+
+MD_unemp_wide %>% mutate(Year_Month = paste(Year, Month, sep = "-")) -> MD_unemp_cl
+MD_intox_wide %>% mutate(Year_Month = paste(Year, Month, sep = "-")) -> MD_intox_cl
+
+MD_dat <- inner_join(MD_intox_cl, MD_unemp_cl, by = "Year_Month")
+
+MD_dat %>% select(1:17,22:25) -> MD_dat
+glimpse(MD_dat)
+```
+The joined dataset has observations for intoxication deaths and unemployment information each month between April 2015 and March 2020, totaling 63 months of data; after removing redundant variables, the data has 21 variables.
+
+```{r}
+MD_dat %>% select(2, 10) %>% group_by(Year.x) %>% summarize(mean_overdose_deaths = mean(`Number of Drug Overdose Deaths`, na.rm = T))
+```
+

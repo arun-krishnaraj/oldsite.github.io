@@ -44,11 +44,12 @@ sa = as.integer(readLines("ecoli_suffix_array.txt.gz"))
 lengths(regmatches(seqAsString, gregexpr("[CG]", seqAsString)))/lengths(regmatches(seqAsString, gregexpr("[CGAT]", seqAsString)))
 ```
 
-The **E. Coli** genome has a 0.508 proportion of either C or G bases.
+The __E. Coli__ genome has a 0.508 proportion of either C or G bases.
 
 ### Problem 2
 ```{r}
 sdPwm
+bestKmer(sdPwm)
 ```
 
 A.   
@@ -105,4 +106,4 @@ sum((genesForward$start + d) %in% unlist(hitsForward))
 qplot(x = distToStart, y = nHitsAtDistFromStart)
 ```
 
-Its somewhat consistent, though its a bit earlier than the 8 base pairs cited on the link.
+These results are consistent with the discussion of Shine-Dalgarno sequence in that they occur somewhat upstream of the start of coding regions; however, it seems like these Shine-Dalgarno sequence hits occur a few bases ahead of the commonly accepted 8 base upstream region. 
