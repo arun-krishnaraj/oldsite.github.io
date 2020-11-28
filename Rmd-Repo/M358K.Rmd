@@ -240,6 +240,48 @@ $$X^2_{df} = \sum_{i=1}^k\frac{(O - E)^2}{E} \text{ where } df = (R-1)(C-1)$$
   
   $$p_{ij} = \mathbb{P}[X = x_i] \times \mathbb{P}[Y=y_j]$$
 
+#### Lecture 11/18/2020
+- we have previously done inference for numerical data for normal distribution with known standard deviation
+  - what if $\sigma$ is not known?
+  - we can use the following statistic
+  
+  $$\frac{\bar{X}-\mu}{\frac{S}{\sqrt{n}}} \sim t(df=n-1)$$
+  $$\text{where } S^2 =\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2$$
+  - by definition we have
+  
+  $$Y\sim \chi^2(df=n)$$
+  $$Z\sim N(0,1)$$
+$$T = \frac{Z}{\sqrt{\frac{Y}{n}}}$$
+  - so we have that for a normal population distribution
+  
+  $$Z = \frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}\sim N(0,1)$$
+  $$Y = \frac{S^2(n-1)}{\sigma^2}\sim \chi^2(df=n-1)$$
+  $$T = \frac{\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}}{\sqrt{\frac{S^2}{\sigma^2}}} = \frac{\bar{X}-\mu}{\frac{S}{\sqrt{n}}} \sim t(df=n-1)$$
+  - t distribution has higher probability density in the tails, overlap with the normal increases as degrees of freedom increases 
+  - small sample t procedures requires normal population distribution for small samples
+    - can check with histogram, box plot, or qq plot 
+    - confidence interval is constructed as 
+    
+    $$\bar{x} \pm t^*(df=n-1)\times\frac{S}{\sqrt{n}}$$
+
+#### Lecture 11/20/2020
+- we are still interested in normal population distribution with unknown $\mu$ and $\sigma$
+- hypothesis testing
+  - if the sample is large ($n \ge 30$) then use the z-procedure with s substituted for $\sigma$
+  - if the sample is small, then we test $H_o: \mu = \mu_o$ vs $H_A: \mu < \mu_o; \mu \neq \mu_o;\mu > \mu_o$
+   
+    $$T = \frac{\bar{X}-\mu}{\frac{S}{\sqrt{n}}} \sim t(df=n-1)$$
+    - with a significance level $\alpha$, we have rejection region:
+      - left-sided alternative: $t< -t_{\alpha,n-1}$
+      - two-sided alternative: $|t| > t_{\alpha/2, n-1}$
+      - right-sided alternative: $t> t_{\alpha,n-1}$
+    - if the observed test statistic falls in the rejection region, then we reject the null hypothesis; otherwise we fail to reject the null 
+
+#### Lecture 10/23/2020
+- t-test procedure practice problem set
+- paired observations occur when observations between groups result from measuring the same sample groups (student reading & writing scores)
+  - samples are not independent, so we have to use paired test; we frame the hypotheses the same as the difference between two groups
+
 ### Reading notes
 
 Section 4.3 

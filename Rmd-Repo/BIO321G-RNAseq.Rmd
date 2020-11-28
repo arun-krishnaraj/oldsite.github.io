@@ -1,0 +1,101 @@
+---
+title: 'BIO321G: Final Project (Code File)'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+## Settings for better PDF formatting
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  fig.align="center",
+  fig.pos="t",
+  strip.white = TRUE
+)
+source("bio321g_rnaseq_utils.R")
+```
+
+```{r, message = FALSE}
+library(DESeq2)
+
+## DESeq object creation and testing
+dds = DESeqDataSetFromMatrix(countData = rnaCounts, colData = sampleAnnotation, 
+                             design = ~ time + genotype + time:genotype)
+
+dds = DESeq(dds, parallel = FALSE, test = "LRT", reduced = ~ time + genotype)
+results(dds, alpha = 0.1) -> ddsresults
+
+## FDR calculation
+which(!is.na(ddsresults$padj)) -> testedGenes
+sum(ddsresults[testedGenes, "padj"] <= .1)
+```
+
+```{r}
+## Count normalization and transformation 
+lgNorm = log2(counts(dds, normalized = TRUE)+1)
+
+## PCA on log normalized counts, all genes 
+pca = prcomp(t(lgNorm))
+
+pca.data <- data.frame(pca$x[,1:2])
+pca.data$group  = sampleAnnotation[rownames(pca.data), "group"]
+pca.data$sample = rownames(pca.data)
+
+library(ggplot2); library(tidyverse)
+
+pca.data %>% ggplot(aes(x = PC1, y = PC2, color = group, label = sample)) + geom_point() + scale_color_manual(values=groupColors) + theme_minimal() + ggtitle("PCA Plot for all Genes") + labs(color = "Group") -> pca1
+pca1
+```
+
+```{r}
+## Subset to include assigned genes
+geneset <- read.table("gene_sets.tsv.gz", 
+           sep="\t", row.names=NULL, header=TRUE, quote="", comment.char = "")
+geneset[geneset$gene_ontology_primary_id == "GO:0006865",]$gene -> gene_vec
+
+## Assigned geneset information, tsv creation
+geneNamesAndDescriptions[geneNamesAndDescriptions$gene %in% gene_vec, 1:3] %>% data.frame() -> gene_df
+rownames(gene_df) <- NULL
+
+write.table(gene_df, "Final-Project-Gene-desc.tsv",
+            sep = "\t", row.names = FALSE, quote = FALSE)
+```
+
+```{r}
+## Filtering counts for assigned geneset
+lgNorm[rownames(lgNorm) %in% gene_vec,] %>% data.frame(check.names = FALSE) -> lgGo
+
+## PCA on log normalized counts, assigned genes
+pca_lggo <- prcomp(t(lgGo))
+
+pca_lggo_dat  <- data.frame(pca_lggo$x[,1:2])
+pca_lggo_dat$group <- sampleAnnotation[rownames(pca_lggo_dat), "group"]
+pca_lggo_dat$sample <- rownames(pca_lggo_dat)
+
+pca_lggo_dat %>% ggplot(aes(x = PC1, y = PC2, color = group, label = sample)) + geom_point() + scale_color_manual(values=groupColors) + ggtitle("PCA Plot for Gene Set") + labs(color = "Group") + theme_minimal()
+
+```
+
+```{r, figure.height = 2}
+## Clustered heatmap, assigned genes
+library(pheatmap)
+heatData <- lgGo -rowMeans(lgGo)
+heatData[heatData > 2] = 2
+heatData[heatData < -2] = -2
+
+pheatmap(heatData, color = heatPalette, clustering_method = "average", labels_row = geneNamesAndDescriptions[rownames(heatData), "symbol"], cutree_cols = 2, fontsize_row = 6, main = "Clustered Heatmap")
+```
+
+```{r}
+## Expression stripchart, assigned genes 
+data.frame(results(dds)[5]) -> pmat
+
+subset(pmat, rownames(pmat) %in% gene_vec) %>% arrange(pvalue) %>% head(9) %>% rownames -> top_9_exp
+
+lgGo[rownames(lgGo) %in% top_9_exp,] -> lll
+stripchart321g(data = lll, sampleAnnotation = sampleAnnotation) -> stripgg
+stripgg + ggtitle("Gene Expression by Genotype and Time") + xlab("Genotype") + ylab("Expression") + labs(color = "Group", shape = "Time")
+```
+

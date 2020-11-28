@@ -1,0 +1,269 @@
+---
+title: "SDS348-Project 2: Beauty in the Classroom"
+author: Arun Krishnaraj - ak37738
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+class_diag <- function(probs,truth){
+  tab<-table(factor(probs>.5,levels=c("FALSE","TRUE")),truth)
+  acc=sum(diag(tab))/sum(tab)
+  sens=tab[2,2]/colSums(tab)[2]
+  spec=tab[1,1]/colSums(tab)[1]
+  ppv=tab[2,2]/rowSums(tab)[2]
+  f1=2*(sens*ppv)/(sens+ppv)
+  if(is.numeric(truth)==FALSE & is.logical(truth)==FALSE) truth<-as.numeric(truth)-1
+  
+  ord<-order(probs, decreasing=TRUE)
+  probs <- probs[ord]; truth <- truth[ord]
+  TPR=cumsum(truth)/max(1,sum(truth))
+  FPR=cumsum(!truth)/max(1,sum(!truth))
+  dup<-c(probs[-1]>=probs[-length(probs)], FALSE)
+  TPR<-c(0,TPR[!dup],1); FPR<-c(0,FPR[!dup],1)
+  n <- length(TPR)
+  auc<- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+  data.frame(acc,sens,spec,ppv,f1,auc)
+}
+library(tidyverse)
+library(rstatix)
+library(sandwich)
+library(lmtest)
+library(glmnet)
+library(vegan)
+```
+
+Physical appearance is known to effect professional outcomes: certain people may be passed up for a job or promotion based on the elusive 'first-impression', of which physical attractiveness plays no small part. That begs the question: in a profession that's supposedly meritocratic and rewards excellence, does beauty matter? In order to investigate this question, I found a dataset of 2013 UT faculty student course evaluations and beauty ratings. I'll be looking into how much beauty matters compared to other variables in determining course evaluations and faculty rank. My initial hypothesis is that beauty rankings will go hand-in-hand with course evaluations. Why else would *Rate My Professor* have a separate section for 'hotness'?
+
+```{r}
+evals <- read.csv("evals.csv")
+colnames(evals) <- c("Evaluation.Score", "Rank", "Ethnicity", "Gender", "Language.Of.Education", "Age",
+                     "Pct.Eval.Completion", "Number.Eval.Completion", "Class.Size", "Class.Level", 
+                     "Num.Profs.Teaching", "Class.Credits", "Lower.Female1.Rating", "Upper.Female1.Rating",
+                     "Upper.Female2.Rating", "Lower.Male1.Rating", "Upper.Male1.Rating", "Upper.Male2.Rating",
+                     "Avg.Rating", "Picture.Formality", "Picture.Color")
+head(evals) %>% t %>% knitr::kable()
+```
+
+This dataset contains demographic and teaching information on 463 faculty at UT, as well as ratings of beauty; faculty images were shown to 6 students, who then rated the physical appearance of the faculty member. According to some sources, physical attractiveness and other non-meritocratic attributes often sway student evaluations, which may have negative impacts on employability and professional attainment. Evaluation scores refer to the average score of student evaluations across all courses taught in the semester of survey: (1) very unsatisfactory - (5) excellent. Rank of professor describes whether the faculty was tenured, tenure track, or teaching at time of survey. Ethnicity, gender, age and language of instruction all have to deal with the specific social attributes of a faculty.
+Additional metrics for amount of course survey completion, and course details like division and size are also included. Finally, various individual and average student attractiveness ratings, as well as details of picture shown are given; student reviewers come from both genders and student-divisional standings. 
+
+Diving right into analysis, I'm first interested in the existence of differences in numeric variables across levels of a categorical of interest; we can use MANOVA to achieve this, the assumptions of which are checked here:
+
+```{r}
+group <- evals$Rank
+DVs <- evals %>% select(Evaluation.Score, Age, Lower.Female1.Rating, Upper.Female1.Rating, Upper.Female2.Rating, Lower.Male1.Rating, Upper.Male1.Rating, Upper.Male2.Rating)
+
+#Test multivariate normality for each group (null: assumption met)
+sapply(split(DVs,group), mshapiro_test)
+```
+
+After checking the MANOVA assumptions, I found that the primary assumptions weren't met for the any of the 7 categorical groups; all 7 groupings fail at the multivariate normality step. I chose to analyze mean difference of numeric variables of interest across levels of tenure, since this categorical has the most groups; all other categoricals are broken into binary groupings. 
+
+```{r}
+man1 <- manova(cbind(Evaluation.Score, Age, Lower.Female1.Rating, Upper.Female1.Rating, Upper.Female2.Rating, Lower.Male1.Rating, Upper.Male1.Rating, Upper.Male2.Rating) ~ Rank, data = evals)
+
+summary(man1)
+summary.aov(man1)[c(2,4,5,6,7,8)] #Only showing 6 of 8 ANOVAs to conserve space
+
+pairwise.t.test(evals$Age,
+                evals$Rank, p.adj = "none")[3] 
+pairwise.t.test(evals$Upper.Female1.Rating,
+                evals$Rank, p.adj = "none")[3]
+pairwise.t.test(evals$Upper.Female2.Rating,
+                evals$Rank, p.adj = "none")[3]
+pairwise.t.test(evals$Lower.Male1.Rating,
+                evals$Rank, p.adj = "none")[3]
+pairwise.t.test(evals$Upper.Male1.Rating,
+                evals$Rank, p.adj = "none")[3]
+pairwise.t.test(evals$Upper.Male2.Rating,
+                evals$Rank, p.adj = "none")[3]
+```
+
+Running a MANOVA test on evaluation score, age, and beauty ratings, we obtain a p-value of $2.2\times10^{-16}$, allowing rejection of the null hypothesis that there is no mean difference across ranking categories. After performing univariate ANOVAs, age, both upper-division female and all male beauty rankings were found to show a mean difference across groups. Post-hoc t tests were performed on these numeric variables: age, upper-division female, and lower-division male beauty rankings differed highly between tenure track and both other ranks. One upper-division male's beauty rankings differed between tenure track and tenured groups, while another's differed between teaching and tenured groups. At this point, 1 MANOVA, 8 ANOVAs, and 6 pairwise t-tests have been performed, for a total of 15 tests. At a significance level of $\alpha = 0.05$, we have the probability of observing at least 1 Type 1 error as
+
+$$\mathbb{P}[\text{At least one Type 1 error}] = 1 - .95^{15} = 0.5367$$
+Since we are interested in limiting the number of Type 1 errors, we can adjust the significance level to $\alpha\prime= \frac{0.05}{15} = 0.00\bar{3}$. At this significance level, the original MANOVA result is still significant. Of the ANOVAs performed, lower-division male and one upper-division male beauty ranking are no longer significant. Lower-division male beauty ranking is now significant only between tenure track and tenured groups, and one upper-division male no longer had significant differences in beauty rating between groups; all other t-tests remained significant for the between-group differences noted in the prior paragraph. As mentioned, the MANOVA preliminary assumption of multivariate normality is failed; this is hardly surprising, since many of the numeric variables, such as age or beauty ranking, are expected to be non-normal for a sample of UT faculty. 
+
+To expand on the MANOVA results, we can perform a randomization version (PERMANOVA) to address the violated assumptions; I'll include all variables from the original MANOVA.
+
+```{r}
+dists <- evals %>% select(Evaluation.Score, Age, Lower.Female1.Rating, Upper.Female1.Rating, Upper.Female2.Rating, Lower.Male1.Rating, Upper.Male1.Rating, Upper.Male2.Rating) %>% dist(method = "canberra")
+
+adonis(dists~Rank, data = evals) ->ad
+ad
+```
+
+We formulate the hypotheses for the PERMANOVA as 
+
+$$H_o: \text{Centroids and dispersion of the groups are equivalent for all groups}$$
+$$H_A: \text{Centroids and/or dispersion of groups is different between groups}$$
+The PERMANOVA using Canberra distnace returns an F-statistic of 13.932, corresponding to a p-value of 0.001; Canberra distance was chosen due to high centrality expected from numerical variables. We reject the null hypothesis that centroids and dispersion are equivalent across groups. While we could also repeat univariate randomization tests instead of the previous univariate ANOVAs, doing so would require significant adjustments to significance level used.
+
+```{r}
+hist(ad$f.perms, prob = T, xlab = "Fs", ylab = "Density", main = "Histogram of Fs"); abline(v = 13.932, col = "red")
+```
+
+We can now move to predicting student evaluation score obtained from other variables using a linear regression.
+```{r}
+evals1 <- evals %>% mutate(Avg.Rating_c = Avg.Rating - mean(Avg.Rating), Age_c = Age - mean(Age))
+fit1 <- lm(Evaluation.Score ~ Gender * Avg.Rating_c * Age_c , data = evals1)
+summary(fit1)
+```
+
+A linear regression of mean-centered average beauty rating, age and gender on evaluation score was run. Female professors of average age who received average beafuty ratings are predicted to have evaluation score of 4.028; male professors of average age who received average beauty ratings are predicted to have an evaluation score of 4.301. Each unit increase of average beauty rating decreases predicted evaluation score by 0.014, holding age and gender constant. Each year increase in age decreases predicted evaluation score by 0.017, holding average beauty rating and gender constant. The slope effect of average beauty rating increases by 0.0988 for males compared to females, and the slope effect of age increases by 0.0185 for males compared to females. The slope effect of average beauty rating decreases by 0.0038 per year increase in age; the interaction effect of average beauty rating and age increases by 0.0145 for males compared to females. 
+
+```{r}
+mean(evals1$Avg.Rating_c) -> mu_ranking
+sd(evals1$Avg.Rating_c) -> sig_ranking
+
+evals1 %>% mutate(rank_cat = ifelse(Avg.Rating_c < mu_ranking - sig_ranking, "minus.sd", ifelse(Avg.Rating_c > mu_ranking + sig_ranking, "plus.sd", "mean"))) -> evals2
+evals2 %>% ggplot(aes(x = Age_c, y = Evaluation.Score, group = rank_cat)) + geom_point(aes(color = rank_cat), alpha = 0.7, shape = 1) + geom_smooth(method = "lm", se = F, aes(color = rank_cat)) + facet_grid(~Gender, labeller = labeller(Gender = c("female" = "Female", "male" = "Male"))) + xlab("Age (Mean-centered, Years)") + ylab("Evaluation Score") + scale_color_manual(values = c("#00AFBB","#E7B800","#FC4E07"), name = "Average Beauty Rating", labels = c("Within 1 SD of average", "Less than 1 SD below average", "Greater than 1 SD above average"))
+```
+
+```{r}
+# Linearity for numeric predictors
+evals2 %>% ggplot(aes(x = Age_c, y = Evaluation.Score)) + geom_point(alpha = 0.7) + facet_grid(~Gender, labeller = labeller(Gender = c("female" = "Female", "male" = "Male")))+ xlab("Age (Mean-centered, Years)") + ylab("Evaluation Score")
+evals2 %>% ggplot(aes(x = Avg.Rating_c, y = Evaluation.Score)) + geom_point(alpha = 0.7) + facet_grid(~Gender, labeller = labeller(Gender = c("female" = "Female", "male" = "Male")))+ xlab("Average Beauty Rating") + ylab("Evaluation Score")
+
+# Normality
+resids <- fit1$residuals
+fitvals <- fit1$fitted.values
+
+shapiro.test(resids)
+# homoskedasticity
+ggplot() +geom_point(aes(x = fitvals, y= resids)) +geom_hline(yintercept = 0, color = "red") + xlab("Fitted Value") + ylab("Residual") + theme_minimal()
+```
+
+Now checking the assumptions for the linear regression: We don't see visual evidence of linearity between the response variable and both of the numeric variables. The Shapiro test was performed on model residuals, producing a p-value of 6.67E-7; we thus reject the null hypothesis that the true distribution of residuals is normal. Finally, the plot of model residuals versus fitted value shows a strongly conical point cloud, indicating that homoskedasticity assumptions have also been violated. The linearity, normal distribution of residuals, and homoskedasticity assumptions for a linear regression are violated by the selected model. We can first address the heteroskedasticity by recalculating model significance with robust standard errors.
+
+```{r}
+coeftest(fit1, vcov = vcovHC(fit1))
+```
+
+After using robust standard errors, the linear regression model produces significant effects for gender and age, as well as significant interaction effects for gender and average beauty rating, and gender and age; the effect of gender on the average beauty rating-age interaction effect is also significant. The use of robust standard errors does not change the significance of any results. This model explains 15.1% of observed variation in evaluation score, as obtained from the R$^2$. We can now address the violation of the normal residuals assumption by rerunning the model with bootstrapped standard errors.
+
+```{r}
+resid_resamp <- replicate(5000, {
+  new_resids <- sample(resids, replace = TRUE)
+  evals2$new_eval <- fitvals + new_resids
+  fit2 <- lm(new_eval ~ Gender * Avg.Rating_c * Age_c, data = evals2)
+  coef(fit2)
+})
+
+resid_resamp %>% t %>% as.data.frame %>% summarise_all(sd) 
+coef(summary(fit1))[,2] %>% t %>% as.data.frame 
+
+```
+
+After computing bootstrapped standard errors by resampling residuals, we notice that standard errors remain nearly unchanged from the originals. Correspondingly, p-values for all regression terms will be equivalent to the originals. This indicates that despite the violated assumptions of normal residuals and homoskedasticity, the regression effects of gender, age, gender-beauty interaction, gender-age interaction, and the effect of gender on beauty rating-age interaction are statistically significant. Since using non-robust SEs, robust SEs, and bootstrapped SEs all produced the same significant effects, we can conclude that these regression terms do have a significant effect on evaluation scores; it's worth reiterating that the linearity assumption is still grossly violated, and as a result the linear model only explains 15% of observed variation in evaluation scores.
+
+Moving on from predicting evaluation scores, we can now build and evaluate binary classification models. In this section, I'm interested in whether we can accurately classify faculty into tenured vs non-tenured groups based on the variables present in the dataset. For my purposes, I'll categorize both currently teaching and tenure track faculty as non-tenure, and perform binary classification to predict tenure status; since tenure track faculty vary in time spent before tenure, as well as in tenure attainment, I felt that it would be more conservative to classify them as non-tenured. This choice also helps equalize observations, since there are 253 tenured faculty observations, and 102 teaching and 108 tenure track observations; this equalization across groups avoids any issues with imbalanced classification later.
+
+```{r}
+# Binary classification of tenure
+evals_logit <- evals %>% mutate(Rank = (ifelse(Rank == "tenured", 1, 0)))
+fit2 <- glm(Rank ~ Evaluation.Score + Ethnicity + Gender + Language.Of.Education + Age + Class.Credits + Avg.Rating, data = evals_logit, family = "binomial")
+summary(fit2)
+exp(coef(summary(fit2))[,1])
+
+# Confusion matrix
+probs <- predict(fit2, type = "response")
+table(predict = as.numeric(probs > 0.5), truth = evals_logit$Rank) %>% addmargins()
+
+# Classification Diagnostics
+class_diag(probs = probs, truth = evals_logit$Rank)
+
+# Density logit plots
+evals_logit$logit <- predict(fit2, type = "link")
+
+evals_logit %>% ggplot() + geom_density(aes(x = logit, group = factor(Rank), color = factor(Rank), fill = factor(Rank)), alpha = 0.4) + xlab("Predictor (logit)") + ylab("Density") + scale_fill_manual(values = c("#00AFBB","#E7B800"), name = "Rank", labels = c("Untenured", "Tenured")) + scale_color_manual(values =  c("#00AFBB","#E7B800"), guide = NULL) + theme_minimal()
+
+evals_logit$logit <- NULL
+# ROC plot and AUC
+library(plotROC)
+ROC.dat <- data.frame(y = evals_logit$Rank, pred = probs)
+ROCplot <- ggplot(ROC.dat) + geom_roc(aes(d=y, m = pred), n.cuts = 0)
+ROCplot
+calc_auc(ROCplot)
+```
+
+A logistic model was fit to the binary outcome of tenure, with explanatory variables evaluation score, ethnicity, gender, language of education, age, class credits, and average beauty rating; these explanatory factors are believed to be intimately related to tenure attainment, and were thus included in the classification model. We can now interpret the logistic regression coefficients, without discussing significance: holding other variables constant, increasing evaluation score by 1 multiplies odds of tenure by a factor of 1.04. Holding other variables constant, a non-minority faculty has odds of tenure multiplied by a factor of 0.628 compared to minority faculty. Controlling for other variables, a male faculty member has tenure-odds 2.715 times that of a female faculty. Holding other variables constant, a non-english educated faculty has tenure-odds 0.323 times that of an english-educated faculty. Holding other variables constant, increasing age by 1 year multiplies odds of tenure by a factor of 1.085. Controlling for other variables, a faculty teaching a one-credit course has tenure-odds 9.74E-9 times that of a faculty teaching a multi-credit course. Finally, holding other variables constant, increasing average beauty rating by 1 multiplies odds of tenure by 0.862. Overall, this model suggests that the faculty most likely to hold tenure are older, English-educated, minority males, who had recieved high student evaluation scores for multi-credit courses and low average beauty ratings.
+
+This model correctly classifies 182 of 253 tenured faculty, and 124 of 210 non-tenured faculty. The model has 0.66 classification accuracy, 0.72 sensitivity, 0.59 specificity, 0.68 precision, and AUC of 0.79. Overall, this suggests that while the model has moderate detection of tenured outcomes, the assignment to tenured group is not very exact; the model is also not very accurate in its overall and positive classifications. From our model, there is a 79% chance of a random tenured faculty being positioned higher than a random non-tenured faculty; this suggests that the model's performance is somewhat fair. From the density plot of log-odds by rank, we notice that a significant overlap between ranks; the large amount of density overlap near 0 log-odds indicates that certain key factors in predicting tenure are absent from the model. The ROC curve shows fair performance, indicated by its trend away from the 45-degree diagonal. Overall, the fair binary classification performance is expected, given that a number of important attributes like number of publications, g-index for work impact, time spent at the university, and funding received are all excluded from this model; these excluded attributes reflect research impact, which should contribute the most to tenure attainment under an assumption of meritocracy. The fair performance of the model overall and the provided interpretation of coefficients does seem to suggest that certain characteristics make a faculty more likely to be holding tenure; further work may explore tenure awarding behavior at the university to potentially decouple historical and modern tenuring practices.
+
+We can now validate the selection of explanatory variables in the previous binary classification by running a logistic regression with all variables.
+
+```{r}
+fit3 <- glm(Rank ~ ., data = evals_logit, family = "binomial")
+
+probs <- predict(fit3, type = "response")
+table(predict = as.numeric(probs > 0.5), truth = evals_logit$Rank) %>% addmargins()
+
+class_diag(probs = probs, truth = evals_logit$Rank)
+```
+For the binary classification model with all variables, the model successfully classifies 193 of 253 tenured faculty, and 150 of 210 untenured faculty. This model has 0.74 classification accuracy, 0.76 sensitivity, 0.71 specificity, 0.76 precision, and AUC of 0.85. Overall, this model seems to out-perform the initial classification model in all aspects; this model is more exact and accurate in overall and positive classifications. For this model, there is a 85% chance of a random tenured faculty being positioned higher than a random non-tenured faculty; in order to evaluate the full model for overfitting, we can apply 10-fold cross-validation.
+
+```{r}
+# 10-fold CV of full model
+set.seed(1234)
+k = 10
+
+data <- evals_logit[sample(nrow(evals_logit)),]
+folds <- cut(seq(1:nrow(evals_logit)), breaks = k, labels = F)
+
+diags <- NULL
+for (i in 1:k) {
+  train <- data[folds !=i,]
+  test <- data[folds ==i,]
+  truth_cv <- test$Rank
+  
+  fit_cv <- glm(Rank~., data = train, family = "binomial")
+  probs_cv <- predict(fit_cv, newdata = test, type = "response")
+  diags <- rbind(diags, class_diag(probs_cv, truth_cv))
+}
+
+summarise_all(diags, mean)
+```
+
+The full model performs somewhat worse in out-of-sample 10-fold cross-validation than in-sample; this model has 0.71 classification accuracy, 0.73 sensitivity, 0.67 specificity, 0.72 precision, and AUC of 0.82. While the classification diagnostics are all slightly worse, the small difference in AUC suggests that this model only shows mild signs of overfitting; this suggests that there are variables not included in the initial binary classification model that are highly useful in classifying faculty by tenure. We can further investigate which predictor variables are most important using LASSO.
+
+```{r}
+# LASSO
+y <- as.matrix(evals_logit$Rank)
+x <- model.matrix(Rank~., data = evals_logit)[,-1]
+
+cv <- cv.glmnet(x,y, family = "binomial")
+lasso <- glmnet(x,y, family = "binomial", lambda = cv$lambda.1se)
+coef(lasso)
+
+# 10-fold CV of LASSO-reduced model
+set.seed(1234)
+k = 10
+
+data <- evals_logit[sample(nrow(evals_logit)),]
+folds <- cut(seq(1:nrow(evals_logit)), breaks = k, labels = F)
+
+diags <- NULL
+for (i in 1:k) {
+  train <- data[folds !=i,]
+  test <- data[folds ==i,]
+  truth_cv <- test$Rank
+  
+  fit_cv <- glm(Rank~ Gender + Language.Of.Education + Age + Number.Eval.Completion + Class.Level + Class.Credits + Upper.Female1.Rating + Picture.Formality , data = train, family = "binomial")
+  probs_cv <- predict(fit_cv, newdata = test, type = "response")
+  diags <- rbind(diags, class_diag(probs_cv, truth_cv))
+}
+
+summarise_all(diags, mean)
+```
+
+LASSO performed on the data with cutoff 1 SE above suggests that gender, language of education, age, class level and credits taught, picture formality, and two students' beauty ratings are the most important predictors of tenure; of these variables, only gender, language of education, age, and class credits were included in my preliminary classification model. Using 10-fold CV to measure out-of-sample performance, this model has 0.66 classification accuracy, 0.69 sensitivity, 0.62 specificity, 0.68 precision, and AUC of 0.802. This model performs significantly better than the initial logistic regression, suggesting that some important predictors were left out. This model also performs somewhat worse than the out-of-sample performance for the full-variable model; this seems to suggest that while not all variables contain significant predictive ability on their own, adding them together results in meaningful model improvement. In light of this, further iterations of this tenure binary classification project may include models with more variables to improve performance.
+
+Sources for data/inspiration:
+
+- https://www.openintro.org/book/statdata/?data=evals
+- https://www.upstate.edu/ume/pdf/teacher_evaluations.pdf 
+- https://chance.amstat.org/2013/04/looking-good/
+

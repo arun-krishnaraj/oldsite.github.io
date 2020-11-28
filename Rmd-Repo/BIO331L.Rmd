@@ -168,6 +168,32 @@ kable(data.frame("prefix" = c("deci","centi","milli","micro","nano","pico","femt
   - limited BRs with high variation, only 1 time treatment point
   - new RNA experiment,
 
+#### Lecture 11/18/2020
+- usage of NHEJ repair-mediated repair for CRISPR type II system
+- insertion of cas9 + sgRNA to knockout WRK41 into a single cell embryo; creation of homozygous mutant in all subsequent cells
+  - we might want CRISPR to stop after initial edit is made to reduce off-target effects 
+- pHEE401E is set up with hybrid promoter (originally used to promote cell-fusion of egg and sperm cells) to drive synthetic Cas9 gene; helps pHEE401E Cas9 protein create knockouts to edit egg locus, high Cas9 concentration in initial cell allows targeting of sperm locus after fusion 
+- natural plant pathogen has been modified to insert DNA into target plants
+  - genes between RB and LB include genes relevant for creation of transgenic plants 
+  - BsaI restriction site allows integration of annealed oligonucleotide
+  - hybrid egg cell promoters drive Cas9, which is terminated by rbc
+  - HygR is driven by the CaMV promoter 
+- drawbacks of pHEE401E system
+  - creation of GMO, introduction of herbicide resistance marker 
+  - continued Cas9 expression may produce generational off-targets
+  - other methods can result in gene editing without integration of foreign DNA 
+- we use WRKY41, an important transcriptional regulator of ABI3 gene
+  - ABI3 aids in ABA gene regulation and response, modifying WRKY41 adds a complementary line of evidence to what we know of the 6134 line and ABA response
+
+#### Lab 11/18/2020
+- use of Sanger sequencing to analyze plasmids of interest (use of a single direction primer)
+  - dNTPs and fluorescently labeled ddNTPs, result in primer elongation and termination at many sequences to produce measures of base fluoresence at each sequence position 
+- use of ncbi blast site to analyze homology of olgionucleotide sets, include in report 3 
+  - use expasy site to generate protein sequence from oligo DNA sequence, then use protein blast 
+
+#### Nancy Wahl speaker session
+
+
 Lab 2
 
 - drought historically has limited ecosystems, agriculture

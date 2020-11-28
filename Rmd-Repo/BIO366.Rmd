@@ -181,7 +181,7 @@ Models of Recombination
   - variable expression of 2 flagellum tail proteins 
 - selfish yeast plasmid: maintains number of copies per daughter cell via amplification
   - bifurcated rolling circle spin-off mechanism to reach 60 copies per cell
-  ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\plasmid_amp.JPG)
+  ![](/Users/arunk/Documents/GitHub/arun-krishnaraj.github.io/images/plasmid_amp.JPG)
     
 #### Section 2 Reading
 Site-specific recombination
@@ -191,11 +191,11 @@ Site-specific recombination
 - conservative site-specific recombination retains the high energy held in the bonds, by using a transesterification mechanism; present almost exclusively in prokaryotes
   - invertase family (serine family): name based on mediation DNA inversion or resolution
     - aligns target sites in parallel geometry, double strand cuts sites and become covalently linked; subunit rotation and resolution
-    ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\invertase.JPG)
+    ![](/Users/arunk/Documents/GitHub/arun-krishnaraj.github.io/images/invertase.JPG)
     - resolvase target site has 3 sub-sites, 2 of which are used to pull one site into proper conformation
   - lambda integrase family (tyrosine family): name based on mediation genome integration
     - creates single strand breaks, forms intermediate Holliday junction; antiparallel arrangement of segments
-      ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\tyrosine.JPG)
+      ![](/Users/arunk/Documents/GitHub/arun-krishnaraj.github.io/images/tyrosine.JPG)
   - both use two subunits flanking each site (head-head)
 
 Structural support of Recombination Mechanism
@@ -208,7 +208,7 @@ Biological consequences of site-specific recombination
 - site-specific recombination can occur between sites on two separate DNA molecules, or sites on a single DNA molecule
 - recombination between direct sites results in excision; recombination between inverted sites will result in DNA inversion (both only act on sites on a single DNA molecule)
 - lambda can integrate and excise using the same tyrosine recombinase in conjuction with host IHF and Fis; determines whether phage remains lysogenic or enters lytic phase
-      ![](C:\Users\arunk\Documents\GitHub\arun-krishnaraj.github.io\images\lambda.JPG)
+      ![](/Users/arunk/Documents/GitHub/arun-krishnaraj.github.io/images/lambda.JPG)
 - Salmonella uses site-specific recombination to avoid host antibodies attacking flagellum
   - phase variation: switching between flagellin subunit displayed
   - mediated by serine recombinase switching on and off repressor segments
@@ -410,16 +410,156 @@ CRISPR
   - since homologous recombination can occur at the CRISPR Kan locus and the Erm Locus, we can get the total recombination frequency for CRISPR-containing cells: ErmR and KanR 
     - higher for CRISPR than dummy ($2\times10^{-4}$ vs $9\times10^ {- 5}$); recombination frequency is raised by $\sim3$, smaller effect attributed to double-strand break causation in Pneumococcus 
   
-
 #### 11/11/2020
-- difference between Pneumococucus and E Coli on efficiency of recombination 
-  - usually used with electroporation
-  - recombination will produce KanR in 1 of 200 Pneumococcus; CRISPR is able to kill unedited cells, reducing total number of colonies required for screening
+- difference between Pneumococucus and E Coli on efficiency of recombination (E. Coli recombination is usually accomplished by mating) 
+  - usually used with electroporation, increases recombination frequency (weaker than Pneumococcus in DNA uptake and recombination)
+  - recombination will produce KanR in 1 of 200 Pneumococcus; CRISPR is able to kill unedited cells, reducing total number of colonies required for screening (useful in non-rate limiting organisms)
+  - CRISPR must be brought into E. Coli as a plasmid (linear DNA can only be amplified/stable if homologously incorporated into DNA), which can be stable outside chromosomes
+- CRISPR introduced in the plasmid, editing of ribosomal protein
+  - ribosome will become resistant to Streptomycin, primary assay of StrpR; editing template chosen confers StrpR, has a mutation in the seed sequence to prevent incorporated PAM sequence from being targeted by CRISPR
+    - we can prevent PAM recognition after incorporation by either excluding PAM or modifying the seed sequence near the PAM to prevent binding 
+  - electroporation plus addition of edting template kills the cell unless recombination occurs, select for StrpR
+  - any cell that has taken up the plasmid will have KanR, only those that have StrpR underwent recombination with plasmid
+  - no targeting CRISPR has no strepR, while targeting CRISPR has strepR frequency of $1 \times 10^{-7}$
+  - dummy CRISPR produces $8 \times 10^{-2}$ kanR frequency, while targeting CRISPR produces $1.4\times 10^{-5}$ kanR frequency
+    - electroporation can introduce plasmid into 1 in 10 cells, but the targeting CRISPR kills some of the cells it is introduced to
+    - escapees seem to outnumber editees by a large factor; editing is on par with random mutation, and large number of escapees indicate that CRISPR is not a suitable editing technology 
+- in order to effectively use CRISPR in E. Coli, we must create recombinering E. Coli; E. Coli that can easily be engineered at multiple genomic locations, introduction of a more homologous recombination system (borrowed from phage, commonly used $\lambda$ phage's red recombination system)
+  - includes a method for inhibiting endogenous recombination systems
+  - recombinering E. Coli shows higher recombination frequency than prior (100-1000 fold), slight increase in recombination for targeting CRISPR (3-10 fold)
+    - still significantly worse than Pneumococcus, but significantly better than non-recombineering E. Coli
+  - adding CRISPR to recombineering colonies, one in 2-3 colonies appear to be editing by the targeting CRISPR system
+  - editing frequency for targeting CRISPR is justified by killing of unedited cells, but non-targeting CRISPR also shows an increase in edting frequency 
+    - we don't know the full answer, but likely has to do with the tendency of competent cells to take up and recombine compared to baseline
+- dummy CRISPR doesn't show any difference in number of transformants across editing template
+  - targeting CRISPR shows lower number of cells when editing template is not present; non-zero number of recombinants when editing template is not present suggests 1 in 2000 escapee frequency
+- presence of kanR and strepR frequency shows a 6-10 fold increase in homologous recombination frequency for targeting CRISPR on recombineering E. Coli
+  - selection mechanism is primarily killing of unedited colonies, but effect of double-strand cut stimulated homologous recombination is more significant in E. Coli
 
+#### 11/16/2020
+- Long et al. CRISPR to correct muscular dystrophy
+  - Duchenne muscular dystropy: x-linked disease, mutations in the dystrophin gene result in muscle and organ degradtion; no treatment, 20-30 year life span for affected boys
+  - interested in using CRISPR to fix stop codon introduced into large dystrophin gene
+  - double-strand breaks in eukaryotes is more likely to result in NHEJ, introduction of errors and nonfunctional proteins
+    - NHEJ may be useful in correcting Duchenne muscular dystrophy by shifting stop codon in and out of frame, could result in conserved protein structure
+  - multiple exons are processed by splicing into a single protein; exon protein has a mutation from 5'CAA3' to 5'TAA3'
+  - PAM (TGG) was found directly next to the target sequence, with editing template modifying several bases in the seed sequence (TseI restriction enzyme can be used on the introduced sites to determine if editing has occurred; prevents CRISPR hybridization since PAM codon is part of the functional Dys protein)
+  - primer amplification of segment of interest can show either HDR or NHEJ (only HDR shows a corrected gene that can be cut with TseI, NHEJ may be able to be cut with TseI)
+  - mdx zygote is formed from mdx/Y and mdx/mdx donors, then injected with Cas9 + sgRNA + ssODN and implanted to produce corrected mice if repair did occur
+  - CRISPR was tried on wild-type mouse, editing was assayed with restriction site and sequencing s
+    - wild-type pups show most bands of same size (1 is slightly larger, indicating NHEJ); but most show no cutting by TseI (3 of 17 show varying levels of cutting success), indicating that DNA might not be edited 
+    - editing is possible, but variable between zygotes (ranges between strong-medium-weak-no editing)
+    - zygote may have CRISPR working in certain cells, creation of mosaic organisms 
+    - by mixing original and new loci, we can recognize mismatches by denaturing and annealing; small number of base mismatches produce looped out segments, which can be tagged by T7 endonuclease 
+      - gel after T7 digestion shows that while alot of CRISPR repair did occur, most of it was repaired by NHEJ; CRISPR acts efficiently, NHEJ is just more common than HDR in eukaryotes 
+      - HDR sequencing shows homologous DNA repair at most positions (we see mixed bases at the 4 seed sequence modifications, indicating that incomplete HDR has occurred; unedited cells give original sequence)
+      - NHEJ shows lack of edits to seed sequence, after Cas9 cutting the sequence is random (insertions and deletions occur differently in cells as a result of NHEJ)
+  - library can be cloned into a plasmid vector, and then conferred to bacterial colonies; each colony represents a single repair event, which can then be selected for and further analyzed
 
+#### 11/18/2020
+- sequences clones showed the following patterns; differing patterns of insertions and deletions owe to NHEJ and mosaic organisms 
+  - 2x WT + 5x HDR
+  - 10x WT + 5x IF+45ins
+  - 8x WT + 2x -4del + 3x -5del + 1x +2ins
+  - 9x WT + 2x IF-3del + 2x point mutations
+- using the mdx zygotes, we can run gels of undigested, +TseI, +T7E1 to determine how much NHEJ is occuring
+  - corrected samples have TseI restriction, and T7E1 determination of mismatches; complete correction should show complete digestion by TseI and no evidence of NHEJ by +T7E1 digestion
+  - possibly corrected mice show variable proportions of HDR and unedited DNA; ranges from 1:23 to 6:0, seems like HDR partially or completely repairs the sequences
+  - wide amount of variation in NHEJ-mediated corrections, includes large deletions and point mutations, also in variable frequency compared to wild 
+- we can also amplify DNA in off-targets to determine if any inaccurate or unspecific changes CRISPR has (should be unchanged with a perfectly targeting CRISPR system)
+  - in target, mdx and wild type controls both show low frequency of HDR and NHEJ
+    - mdx + Cas9 shows mostly HDR, but WT + Cas9 shows same frequency of HDR to mdx, but much higher frequency of NHEJ
+  - most off-target loci show no effect, some have small offtargets effects when comparing Cas9 samples to control samples 
+- we can enzyme assay for creatine kinase in blood (high in muscular dystropy samples)
+  - enzyme activity in most repair samples have improvements in CK blood concentration
+  - even the NHEJ 83% pup saw a more significant repair to the disease than the fully HDR pup
+- we can also test mouse muscle strength 
+  - mice that had been corrected showed higher muscle strength levels (near wild-type measurements)
+  - indicates that 100% correction is not needed to obtain good level of restoration of wild-type enzyme concentration and strength
+  - 17% HDR, 41% HDR, and 53% NHEJ corrections all show improvements to CK blood concentration, muscular strength, and histopathology of muscle tissues 
+  - muscle strength was found to show progressive improvements as the mice aged; explained by multinucleated satellite muscle cells 
+    - fusion produces corrected, uncorrected, and mixed tissue nuclei; adequate amount of dystrophin can be made by mixed tissue, as mice age the corrected nuclei mix with previously uncorrected tissues 
 
+#### Section 4 Readings
 
+Jiang et al. paper
 
+- CRISPR experiments carried out in Streptococcus pneumonia (known to be competent for DNA uptake; also was first experimental organism to show DNA as genetic material)
+- first set of experiments: CRISPR-Cas9 introduction to cells with a susceptible targeting locus causes death; some escapers occurred, where susceptible locus was replaced by wild type locus from transforming DNA
+  - gene replacement was enhanced by the presence of the CRISPR-Cas9 
+- PAM sequence was randomized, then used to determine the resistance to CRISPR editing; analysis shows PAM of 5'NNG3'
+  - similar randomization performed on the seed sequence: first 3-5 PAM proximal positions found to require complementarity to crRNA
+- sequential loci editing + simultaneous multi loci editing shown in next experiment set
+- in less robust homologous recombination bacteria (E. Coli or Salmonella), CRISPR in basic form is less useful
+  - editing frequency compared to escape frequency is not sufficient
+  - homologous recombination systems can be improved by generating recombineeering strains with phage lambda 'red' system
+  
+- Experiment 1
+  - null hypothesis: when genome has appropriate target DNA, CRISPR-Cas9 will cleave the target, which will result in cell lethality
+  - cell line with appropriate target shows transformants, but somewhat less efficient than cell line without appropriate target site
+    - transformants from susceptible cell line arose by transformation to wild-type
+  - conclusion: CRISPR promotes editing of genome via replacement by homologous repair from external source
+- Experiment 2
+  - will increasing the frequency of editing cassette in transforming DNA increase recombination frequency?
+- Experiment 3
+  - how to optimize PAM sequence for editing a genome?
+  - consensus for PAM is 5'NGG3'
+- Experiment 4
+  - what requirements exist for the seed-sequence?
+  - protospacer seems to have high degeneracy at most points, easier to mutate PAM + first 2/3 seed sequence positions
+- Experiment 5
+  - engineer strain to which spacers can be easily introduced 
+  - use of Gibson assembly + directional PCR to create a cassette with spacer and antibiotic marker
+  - editing DNA is introduced to another strain, 2 recombination events
+    - introduce spacer and new antibiotic marker to target 
+    - replace edited gene where target parental gene is 
+- Experiment 6
+  - test practicality of genome editing
+  - mutate endogenous LacZ gene (easily assayed) with 3 types of editing cassette
+    - inactivation of active site residue (modification of seed sequence)
+    - two mutations inactivate the enzyme (PAM sequence modification)
+    - large deletion creates mini-LacZ which is inactive
+  - compared to wild type LacZ editor, modified editors produced 10 fold more transformants
+  - transformant lines showed no noticeable LacZ enzyme activity 
+- Experiment 7
+  - test sequential editing of genes
+  - by switching back and forth for drug markers, we can perform sequential editing
+  - first experiment modifies srtA gene, results in LacZ escaping from cell surface into supernatant
+  - next experiment modifies LacZ, double deletion mutants show no cellular LacZ activity
+- Experiment 8
+  - test simultaneous editing of multiple genes
+  - introduce spacers and editing cassettes for both srtA and bgaA in a single step + kanR
+  - majority of the transformants show the double deletion, though a couple show single deletions only
+- Experiment 9
+ - background level of editing, limitations of method
+ - assay for editing is restoration of wild type ermAM; currently has ermAM(stop) which has an artificial PAM
+  - expect that KanR transformants will be ErmR as well
+  - first use non-targeting CRISPR
+    - look for ermR colonies first without selecting for kanR: $10^{-2}$ of total colonies
+    - look for ermR colonies as a fraction of KanR colonies: $10^{-1}$ of kanR colonies
+  - now use targeting CRISPR
+    - frequency of KanR transformants that are also ermR is 99%; unedited ermAM(Stop) gene is targeted by CRISPR which kills it
+      - by measuring fraction of KanR produced with each CRISPR targeting system: functional CRISPR results in 5 to 6 times more KanR colonies than nonfunctional; CRISPR causes lethality to cells containing target DNA unless target gene is edited
+      - not all unedited cells are killed; potentially due to CRISPR inactiving mutation or escaper mutation in target strain
+        - test escaper frequency by applying both CRISPR systems without editing strain: $3\times10^{-3}$ escaper frequency
+      - CRISPR found to have only a modest effect on recombination mediated repair (repair strain + either CRISPR type only shows 2-3 times difference in ermR + kanR colonies)
+- Experiment 10
+  - usage of CRISPR systems in less strongly recombinant bacteria
+  - use of CRISPR Cas systems in plasmids with chlorampehnicol resistance, along with targeting sequence on a separate plasmid (kanR)
+  - transformation of E. coli containing tracR-Cas9 plasmid with spacer plasmid, selection for srmR
+  - lots of KanR cells escape CRISPR action even though they remain unedited; if edited gene can't be selected for, screening for drug transformants only is not effective
+- Experiment 11
+  - increase bacterial editing frequency
+  - use of recombineering E. Coli strains: express phage lambda 'red' recombination system
+    - targeting CRISPR produces 10 times more recombinants than nontargeting CRISPR as a fraction of all cells
+    - nearly two-thirds of kanR transformants also contain the edited gene
+  - both in the presence and absence of editing oligo, targeting CRISPR has higher proportion of kanR cells
+    - CRISPR kills cells with unedited rpsL, driving fraction of edited cells up
+    - some kanR cells survive targeting CRISPR by escaping, mutation or other CRISPR resistance gain
+    - roughly 5 times more escapees than editees (of kanR, 4/5 are unedited, 1/5 is edited) in theory
+      - since we saw 65% of kanR cells to be edited, there is some unaccounted for effect boosting selection
+      - CRISPR might boost recombination 
+        - verified to be a roughly 6 fold increase in recombination; possibly due to CRISPR assisted DNA breaks
 
 
 
